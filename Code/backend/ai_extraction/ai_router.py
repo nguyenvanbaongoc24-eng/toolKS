@@ -4,6 +4,9 @@ from openai import OpenAI
 
 class AIRouterService:
     def __init__(self):
+        # AI Mode: 'local' (tries local first) or 'cloud' (skips local)
+        self.ai_mode = os.environ.get("AI_MODE", "cloud").lower()
+
         # Configure the local Ollama client (compatible with OpenAI)
         base_url = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434/v1")
         self.ollama_client = OpenAI(
@@ -26,35 +29,36 @@ class AIRouterService:
 
     def _call_model_with_fallback(self, messages, models_to_try, response_format=None, temperature=0.1):
         """
-        Attempts to call local models. If all fail, falls back to Cloud AI.
+        Attempts to call AI based on self.ai_mode.
         Returns the content of the response.
         """
         last_exception = None
         
-        # STAGE 1: LOCAL OLLAMA ATTEMPTS
-        for model in models_to_try:
-            print(f"[AIRouter] Stage 1 (Local): Attempting {model}...")
-            try:
-                kwargs = {
-                    "model": model,
-                    "messages": messages,
-                    "temperature": temperature,
-                    "timeout": 30.0 
-                }
-                if response_format:
-                    kwargs["response_format"] = response_format
-                
-                response = self.ollama_client.chat.completions.create(**kwargs)
-                print(f"[AIRouter] Success with local model: {model}")
-                return response.choices[0].message.content
-                
-            except Exception as e:
-                print(f"[AIRouter] Local model {model} failed: {e}")
-                last_exception = e
-                continue
+        # STAGE 1: LOCAL OLLAMA ATTEMPTS (Only if mode is not 'cloud')
+        if self.ai_mode != "cloud":
+            for model in models_to_try:
+                print(f"[AIRouter] Stage 1 (Local): Attempting {model}...")
+                try:
+                    kwargs = {
+                        "model": model,
+                        "messages": messages,
+                        "temperature": temperature,
+                        "timeout": 15.0 # Shorter timeout for faster failover
+                    }
+                    if response_format:
+                        kwargs["response_format"] = response_format
+                    
+                    response = self.ollama_client.chat.completions.create(**kwargs)
+                    print(f"[AIRouter] Success with local model: {model}")
+                    return response.choices[0].message.content
+                    
+                except Exception as e:
+                    print(f"[AIRouter] Local model {model} failed: {e}")
+                    last_exception = e
+                    continue
         
-        # STAGE 2: CLOUD FALLBACK (LAST RESORT)
-        print(f"[AIRouter] STAGE 2: Local AI unreachable. Switching to Cloud ({self.cloud_model})...")
+        # STAGE 2: CLOUD ATTEMPT
+        print(f"[AIRouter] STAGE 2 (Cloud): Using {self.cloud_model}...")
         try:
             kwargs = {
                 "model": self.cloud_model,
@@ -66,11 +70,11 @@ class AIRouterService:
                 kwargs["response_format"] = response_format
                 
             response = self.cloud_client.chat.completions.create(**kwargs)
-            print(f"[AIRouter] Success with Cloud Fallback!")
+            print(f"[AIRouter] Success with Cloud!")
             return response.choices[0].message.content
         except Exception as cloud_e:
-            print(f"[AIRouter] CRITICAL: Cloud fallback also failed: {cloud_e}")
-            raise Exception(f"All AI providers (Local & Cloud) are unreachable. Last error: {cloud_e}")
+            print(f"[AIRouter] CRITICAL: Cloud attempt failed: {cloud_e}")
+            raise Exception(f"AI Provider (Cloud) unreachable. Last error: {cloud_e}")
 
     def clean_ocr_text(self, raw_ocr_text: str) -> str:
         """
