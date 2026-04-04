@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 import Sidebar from "@/components/Sidebar";
-import { FileText, Plus, TrendingUp, Users, Server, Wifi, Clock, ArrowRight, Edit3, Check, X } from "lucide-react";
+import { FileText, Plus, TrendingUp, Users, Server, Wifi, Clock, ArrowRight, Edit3, Check, X, Share2, Download, ExternalLink } from "lucide-react";
 
 export default function Home() {
   const [records, setRecords] = useState([
@@ -22,6 +24,50 @@ export default function Home() {
   const saveEdit = () => {
     setRecords(records.map(r => r.id === editingId ? { ...editForm } : r));
     setEditingId(null);
+  };
+
+  const router = useRouter();
+
+  const handleOpenSurvey = (rec: any) => {
+    const mockData = {
+      ten_don_vi: rec.ten_don_vi,
+      nguoi_thuc_hien: rec.doer,
+      he_thong_thong_tin: "Hệ thống Demo từ Dashboard"
+    };
+    localStorage.setItem("survey_profiler_draft", JSON.stringify(mockData));
+    router.push("/survey/new");
+  };
+
+  const handleDownloadWord = async (rec: any) => {
+     try {
+       const mockData = { ten_don_vi: rec.ten_don_vi, nguoi_thuc_hien: rec.doer, he_thong_thong_tin: "Hệ thống Demo" };
+       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+       const response = await axios.post(`${apiUrl}/api/generate-report`, { data: mockData }, { responseType: 'blob' });
+       const url = window.URL.createObjectURL(new Blob([response.data]));
+       const link = document.createElement('a');
+       link.href = url;
+       link.setAttribute('download', `HoSoATTT_${rec.ten_don_vi.replace(/\s+/g, '')}.docx`);
+       document.body.appendChild(link);
+       link.click();
+       document.body.removeChild(link);
+     } catch (e) {
+       alert("Lỗi tải báo cáo Word trên máy chủ từ xa!");
+     }
+  };
+
+  const handleShare = async (rec: any) => {
+      const shareData = {
+        title: 'Hồ sơ Khảo sát ATTT',
+        text: `Hồ sơ: ${rec.ten_don_vi}\nTrạng thái: ${rec.status}\nNgười phụ trách: ${rec.doer}\n\nChi tiết tại Cổng quản lý:`,
+        url: window.location.origin
+      };
+      if (navigator.share) {
+         try {
+           await navigator.share(shareData);
+         } catch (err) {}
+      } else {
+         alert("Trình duyệt không hỗ trợ Web Share API. Bạn sử dụng trên điện thoại để có hiệu quả tốt nhất.");
+      }
   };
 
   return (
@@ -106,8 +152,11 @@ export default function Home() {
                             {rec.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-right">
-                          <button onClick={() => startEdit(rec)} className="text-gray-400 hover:text-indigo-400 transition-colors p-1"><Edit3 className="w-4 h-4"/></button>
+                        <td className="px-6 py-4 text-right flex justify-end gap-1">
+                          <button onClick={() => handleShare(rec)} className="text-gray-400 hover:text-blue-400 transition-colors p-1" title="Chia sẻ nền tảng"><Share2 className="w-4 h-4"/></button>
+                          <button onClick={() => handleDownloadWord(rec)} className="text-gray-400 hover:text-emerald-400 transition-colors p-1" title="Tải & Xem bản Word"><Download className="w-4 h-4"/></button>
+                          <button onClick={() => handleOpenSurvey(rec)} className="text-gray-400 hover:text-indigo-400 transition-colors p-1" title="Vào trang sửa Full Data"><ExternalLink className="w-4 h-4"/></button>
+                          <button onClick={() => startEdit(rec)} className="text-gray-400 hover:text-amber-400 transition-colors p-1 border-l border-gray-700 ml-1 pl-2" title="Sửa nhanh thông tin tĩnh"><Edit3 className="w-4 h-4"/></button>
                         </td>
                       </>
                     )}
@@ -150,9 +199,16 @@ export default function Home() {
                       </span>
                       <span className="text-xs px-2 py-1 bg-indigo-500/10 text-indigo-300 rounded-md border border-indigo-500/30 font-medium">@ {rec.doer}</span>
                     </div>
-                    <div className="flex justify-between text-xs text-gray-400 border-t border-gray-800/50 pt-3 mt-2">
-                       <span className="flex items-center gap-1"><Clock className="w-3 h-3"/> {rec.date}</span>
-                       <span className="flex items-center gap-1"><Server className="w-3 h-3"/> {rec.devices}</span>
+                    <div className="flex justify-between items-center text-xs text-gray-400 border-t border-gray-800/50 pt-3 mt-2">
+                       <div className="flex gap-3">
+                         <span className="flex items-center gap-1"><Clock className="w-3 h-3"/> {rec.date}</span>
+                         <span className="flex items-center gap-1"><Server className="w-3 h-3"/> {rec.devices}</span>
+                       </div>
+                       <div className="flex gap-2">
+                         <button onClick={() => handleShare(rec)} className="text-gray-400 active:text-blue-400 p-1 bg-black/30 rounded-md"><Share2 className="w-4 h-4"/></button>
+                         <button onClick={() => handleDownloadWord(rec)} className="text-gray-400 active:text-emerald-400 p-1 bg-black/30 rounded-md"><Download className="w-4 h-4"/></button>
+                         <button onClick={() => handleOpenSurvey(rec)} className="text-gray-400 active:text-indigo-400 p-1 bg-black/30 rounded-md"><ExternalLink className="w-4 h-4"/></button>
+                       </div>
                     </div>
                   </>
                 )}
