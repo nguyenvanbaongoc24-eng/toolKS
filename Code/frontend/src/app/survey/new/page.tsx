@@ -133,10 +133,9 @@ export default function NewSurveyPage() {
                 type="file" 
                 accept="image/*" 
                 multiple
-                capture="environment"
                 onChange={handleDevicePhotos}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
-                title="Chụp ảnh tem thiết bị"
+                title="Chụp ảnh hoặc chọn từ thư viện"
               />
               <div className="w-16 h-16 rounded-2xl bg-rose-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Camera className="w-8 h-8 text-rose-400" />
