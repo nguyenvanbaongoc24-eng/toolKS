@@ -21,7 +21,8 @@ export default function NewSurveyPage() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/upload", formData, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const response = await axios.post(`${apiUrl}/api/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("AI Extraction success:", response.data);
