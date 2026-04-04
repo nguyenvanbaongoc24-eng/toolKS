@@ -5,12 +5,18 @@ from openai import OpenAI
 class AIRouterService:
     def __init__(self):
         # Configure the local Ollama client (compatible with OpenAI)
-        # Port 11434 is the default Ollama API port that serves the OpenAI-compatible endpoints
         base_url = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434/v1")
         self.ollama_client = OpenAI(
             api_key="ollama", # dummy key for local
             base_url=base_url
         )
+        
+        # Configure the Cloud Fallback client (Llama-API)
+        self.cloud_client = OpenAI(
+            api_key=os.environ.get("OPENAI_API_KEY"),
+            base_url=os.environ.get("OPENAI_BASE_URL", "https://api.llama-api.com")
+        )
+        self.cloud_model = os.environ.get("OPENAI_MODEL", "llama3.1-70b")
         
         # Load model preferences from environment
         self.primary_model = os.environ.get("PRIMARY_MODEL", "llama3")
@@ -20,34 +26,51 @@ class AIRouterService:
 
     def _call_model_with_fallback(self, messages, models_to_try, response_format=None, temperature=0.1):
         """
-        Attempts to call models in the specified order.
+        Attempts to call local models. If all fail, falls back to Cloud AI.
         Returns the content of the response.
         """
         last_exception = None
         
+        # STAGE 1: LOCAL OLLAMA ATTEMPTS
         for model in models_to_try:
-            print(f"[AIRouter] Attempting inference with model: {model}...")
+            print(f"[AIRouter] Stage 1 (Local): Attempting {model}...")
             try:
                 kwargs = {
                     "model": model,
                     "messages": messages,
                     "temperature": temperature,
-                    "timeout": 45.0  # Optional fallback timeout to prevent infinite hanging
+                    "timeout": 30.0 
                 }
-                
                 if response_format:
                     kwargs["response_format"] = response_format
                 
                 response = self.ollama_client.chat.completions.create(**kwargs)
-                print(f"[AIRouter] Success with model: {model}")
+                print(f"[AIRouter] Success with local model: {model}")
                 return response.choices[0].message.content
                 
             except Exception as e:
-                print(f"[AIRouter] Model {model} failed. Error: {e}")
+                print(f"[AIRouter] Local model {model} failed: {e}")
                 last_exception = e
                 continue
+        
+        # STAGE 2: CLOUD FALLBACK (LAST RESORT)
+        print(f"[AIRouter] STAGE 2: Local AI unreachable. Switching to Cloud ({self.cloud_model})...")
+        try:
+            kwargs = {
+                "model": self.cloud_model,
+                "messages": messages,
+                "temperature": temperature,
+                "timeout": 60.0
+            }
+            if response_format:
+                kwargs["response_format"] = response_format
                 
-        raise Exception(f"All fallback models failed. Last error: {last_exception}")
+            response = self.cloud_client.chat.completions.create(**kwargs)
+            print(f"[AIRouter] Success with Cloud Fallback!")
+            return response.choices[0].message.content
+        except Exception as cloud_e:
+            print(f"[AIRouter] CRITICAL: Cloud fallback also failed: {cloud_e}")
+            raise Exception(f"All AI providers (Local & Cloud) are unreachable. Last error: {cloud_e}")
 
     def clean_ocr_text(self, raw_ocr_text: str) -> str:
         """
