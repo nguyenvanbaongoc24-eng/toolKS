@@ -46,6 +46,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const cameraFields = useFieldArray({ control, name: "camera" });
   const ungDungFields = useFieldArray({ control, name: "ung_dung" });
   const ipTinhFields = useFieldArray({ control, name: "ip_tinh" });
+  const daoTaoFields = useFieldArray({ control, name: "dao_tao" });
+  const kiemTraFields = useFieldArray({ control, name: "kiem_tra_attt" });
 
   const formData = useWatch({ control });
   
@@ -231,9 +233,29 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         )}
       </div>
 
-      {/* 3. APP & BẢO MẬT */}
+      {/* 3. DỊCH VỤ & ỨNG DỤNG */}
       <div>
-        <AccordionHeader id="bao_mat" label="III. Bảo mật & Ứng dụng" icon={ShieldAlert} />
+        <AccordionHeader id="ung_dung" label="III. Dịch vụ & Ứng dụng" icon={MonitorPlay} />
+        {expandedSection === "ung_dung" && (
+          <div className="p-4 bg-black/20 rounded-xl mb-4 space-y-4 border border-white/5">
+            <div className="flex justify-between items-center mb-4">
+              <label className="form-label font-bold mb-0 text-white">Phần mềm / Ứng dụng</label>
+              <button type="button" onClick={() => ungDungFields.append({ ten_ung_dung: "", chuc_nang: "" })} className="btn-add py-2"><Plus className="w-4 h-4" /></button>
+            </div>
+             {ungDungFields.fields.map((field, idx) => (
+               <div key={field.id} className="relative p-4 bg-gray-800/50 rounded-lg mb-3 border border-white/5 space-y-3">
+                  <div><label className="form-label">Tên Ứng dụng</label><input {...register(`ung_dung.${idx}.ten_ung_dung`)} className="form-input min-h-[44px]" /></div>
+                  <div><label className="form-label">Chức năng</label><input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input min-h-[44px]" /></div>
+                  <button type="button" onClick={() => ungDungFields.remove(idx)} className="absolute top-2 right-2 p-2 text-rose-500 rounded-lg bg-rose-500/10"><Trash2 className="w-4 h-4"/></button>
+               </div>
+             ))}
+          </div>
+        )}
+      </div>
+
+      {/* 4. AN TOÀN BẢO MẬT */}
+      <div>
+        <AccordionHeader id="bao_mat" label="IV. An toàn Bảo mật" icon={ShieldAlert} />
         {expandedSection === "bao_mat" && (
           <div className="p-4 bg-black/20 rounded-xl mb-4 space-y-4 border border-white/5">
             <div>
@@ -256,6 +278,41 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
               <input {...register("tuong_lua_loai")} className="form-input min-h-[44px]" />
             </div>
           </div>
+        )}
+      </div>
+
+      {/* 5. ĐÁNH GIÁ & KHÁC */}
+      <div>
+        <AccordionHeader id="danh_gia" label="V. Đánh giá & Sơ đồ" icon={LayoutPanelLeft} />
+        {expandedSection === "danh_gia" && (
+           <div className="p-4 bg-black/20 rounded-xl mb-4 space-y-4 border border-white/5">
+             <div className="flex justify-between items-center mb-4">
+              <label className="form-label font-bold mb-0 text-white">Chương trình đào tạo ATTT</label>
+              <button type="button" onClick={() => daoTaoFields.append({ chu_de: "", nam: "" })} className="btn-add py-2"><Plus className="w-4 h-4" /></button>
+             </div>
+             {daoTaoFields.fields.map((field, idx) => (
+                <div key={field.id} className="relative p-2 pl-4 bg-gray-800/50 rounded-lg mb-2 flex items-center gap-2">
+                   <input {...register(`dao_tao.${idx}.chu_de`)} placeholder="Chủ đề..." className="form-input min-h-[44px] flex-1" />
+                   <button type="button" onClick={() => daoTaoFields.remove(idx)} className="p-3 text-rose-500 rounded-lg bg-rose-500/10"><Trash2 className="w-4 h-4"/></button>
+                </div>
+             ))}
+
+             <div className="flex justify-between items-center mt-6 mb-4">
+              <label className="form-label font-bold mb-0 text-white">Kiểm tra Đánh giá ATTT</label>
+              <button type="button" onClick={() => kiemTraFields.append({ don_vi_thuc_hien: "", nam: "" })} className="btn-add py-2"><Plus className="w-4 h-4" /></button>
+             </div>
+             {kiemTraFields.fields.map((field, idx) => (
+                <div key={field.id} className="relative p-2 pl-4 bg-gray-800/50 rounded-lg mb-2 flex items-center gap-2">
+                   <input {...register(`kiem_tra_attt.${idx}.don_vi_thuc_hien`)} placeholder="Đơn vị kiểm tra..." className="form-input min-h-[44px] flex-1" />
+                   <button type="button" onClick={() => kiemTraFields.remove(idx)} className="p-3 text-rose-500 rounded-lg bg-rose-500/10"><Trash2 className="w-4 h-4"/></button>
+                </div>
+             ))}
+
+             <div className="mt-6">
+                <label className="form-label text-white font-bold">Ghi chú thêm</label>
+                <textarea {...register("ghi_chu")} className="form-input min-h-[100px]" placeholder="Nhập thêm ghi chú..."></textarea>
+             </div>
+           </div>
         )}
       </div>
 
