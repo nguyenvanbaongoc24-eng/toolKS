@@ -48,6 +48,7 @@ export default function Home() {
             <thead>
               <tr>
                 <th>Tên đơn vị</th>
+                <th>Người thực hiện</th>
                 <th>Ngày tạo</th>
                 <th>Thiết bị</th>
                 <th>Trạng thái</th>
@@ -56,12 +57,14 @@ export default function Home() {
             <tbody>
               <tr>
                 <td className="font-medium">Sở Thông tin và Truyền thông</td>
+                <td><span className="text-xs px-2 py-1 bg-indigo-500/20 text-indigo-300 rounded-md">Bảo Ngọc</span></td>
                 <td>03/04/2026</td>
                 <td>12 thiết bị</td>
                 <td><span className="badge badge-success">Hoàn thành</span></td>
               </tr>
               <tr>
                 <td className="font-medium">UBND Quận 1</td>
+                <td><span className="text-xs px-2 py-1 bg-indigo-500/20 text-indigo-300 rounded-md">Minh Hùng</span></td>
                 <td>02/04/2026</td>
                 <td>8 thiết bị</td>
                 <td><span className="badge badge-pending">Đang chờ</span></td>

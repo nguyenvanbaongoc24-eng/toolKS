@@ -3,14 +3,19 @@
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import SurveyForm from "@/components/SurveyForm";
-import { UploadCloud, PenLine, ArrowLeft, Loader2 } from "lucide-react";
+import MobileSurveyForm from "@/components/MobileSurveyForm";
+import { UploadCloud, PenLine, ArrowLeft, Loader2, Camera } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { getSavedDraft } from "@/hooks/useAutoSave";
 
 export default function NewSurveyPage() {
   const [mode, setMode] = useState<"select" | "upload" | "manual">("select");
   const [isLoading, setIsLoading] = useState(false);
   const [extractedData, setExtractedData] = useState<any>(null);
+  const isMobile = useIsMobile(768);
+
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -26,7 +31,8 @@ export default function NewSurveyPage() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("AI Extraction success:", response.data);
-      setExtractedData(response.data.extracted_data);
+      const mergedData = deepMerge(getSavedDraft() || {}, response.data.extracted_data);
+      setExtractedData(mergedData);
       setMode("manual");
     } catch (err) {
       console.error(err);
@@ -35,6 +41,58 @@ export default function NewSurveyPage() {
       setIsLoading(false);
     }
   };
+
+  const handleDevicePhotos = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setIsLoading(true);
+    const formData = new FormData();
+    Array.from(files).forEach(file => {
+      formData.append("files", file);
+    });
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const response = await axios.post(`${apiUrl}/api/extract-devices`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("Device Extraction:", response.data);
+      
+      const newDevices = response.data.extracted_data;
+      const currentDraft = getSavedDraft() || {};
+      
+      // Merge arrays
+      const mergedData = {
+        ...currentDraft,
+        thiet_bi_mang: [...(currentDraft.thiet_bi_mang || []), ...(newDevices.thiet_bi_mang || [])],
+        may_chu: [...(currentDraft.may_chu || []), ...(newDevices.may_chu || [])],
+        camera: [...(currentDraft.camera || []), ...(newDevices.camera || [])],
+      };
+      
+      setExtractedData(mergedData);
+      setMode("manual");
+    } catch (err) {
+      console.error(err);
+      alert("Lỗi nhận diện thiết bị.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deepMerge = (target: any, source: any) => {
+    for (const key of Object.keys(source)) {
+      if (source[key] instanceof Object && !Array.isArray(source[key])) {
+        Object.assign(source[key], deepMerge(target[key] || {}, source[key]));
+      } else if (Array.isArray(source[key])) {
+        target[key] = [...(target[key] || []), ...source[key]];
+      } else {
+        if (!target[key]) target[key] = source[key]; // Do not overwrite if manual exists
+      }
+    }
+    return target;
+  };
+
 
   return (
     <div className="min-h-screen">
@@ -51,33 +109,61 @@ export default function NewSurveyPage() {
         </div>
 
         {mode === "select" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-card p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="glass-card p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-indigo-500/50 transition-colors">
               <input 
                 type="file" 
                 accept="image/*,.pdf" 
                 onChange={handleFileUpload}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
-                title="Nhấp để tải lên"
+                title="Nhấp để tải lên bài ghi chép"
               />
               <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <UploadCloud className="w-8 h-8 text-indigo-400" />
               </div>
-              <h3 className="text-lg font-bold mb-2">Tải lên ảnh phiếu khảo sát</h3>
-              <p className="text-sm text-gray-400 mb-6">Hệ thống sẽ tự động quét bằng AI Llama và điền form.</p>
+              <h3 className="text-lg font-bold mb-2">Quét Phiếu Ghi Chép</h3>
+              <p className="text-sm text-gray-400 mb-6">Tự động trích xuất thông tin từ giấy nháp ghi tay.</p>
               <button className="btn-primary w-full justify-center pointer-events-none">
-                Bắt đầu Tải lên
+                Bắt đầu
               </button>
             </div>
             
-            <div className="glass-card p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-cyan-500/50 transition-colors" onClick={() => setMode("manual")}>
+            <div className="glass-card p-8 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-rose-500/50 transition-colors">
+              <input 
+                type="file" 
+                accept="image/*" 
+                multiple
+                capture="environment"
+                onChange={handleDevicePhotos}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                title="Chụp ảnh tem thiết bị"
+              />
+              <div className="w-16 h-16 rounded-2xl bg-rose-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Camera className="w-8 h-8 text-rose-400" />
+              </div>
+              <h3 className="text-lg font-bold mb-2">Chụp Ảnh Thiết Bị</h3>
+              <p className="text-sm text-gray-400 mb-6">Tự động đọc nhãn dán, Serial, Model từ hình chụp.</p>
+              <button className="btn-danger w-full justify-center pointer-events-none">
+                Mở Camera
+              </button>
+            </div>
+            
+            <div className="glass-card p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-cyan-500/50 transition-colors" onClick={() => {
+              const draft = getSavedDraft();
+              if (draft) {
+                 if (confirm("Tìm thấy bản nháp đang lưu. Bạn có muốn tiếp tục chỉnh sửa bản nháp này không?")) {
+                    setExtractedData(draft);
+                 }
+              }
+              setMode("manual");
+            }}>
               <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
                 <PenLine className="w-8 h-8 text-cyan-400" />
               </div>
-              <h3 className="text-lg font-bold mb-2">Điền trực tiếp</h3>
-              <p className="text-sm text-gray-400 mb-6">Không dĩ nhiên có ảnh? Hệ thống sẽ tạo một form trống.</p>
+              <h3 className="text-lg font-bold mb-2">Điền Thủ Công</h3>
+              <p className="text-sm text-gray-400 mb-6">Tiếp tục bản nháp hoặc tạo một Form trống tinh tươm.</p>
               <button className="btn-secondary w-full justify-center pointer-events-none">
-                Bắt đầu Điền Form
+                Vào Form
               </button>
             </div>
           </div>
@@ -93,8 +179,11 @@ export default function NewSurveyPage() {
 
         {mode === "manual" && !isLoading && (
           <div className="max-w-4xl">
-            {/* If extractedData is completely empty or we clicked manual, it loads an empty form */}
-            <SurveyForm prefilledData={extractedData || undefined} />
+            {isMobile ? (
+              <MobileSurveyForm prefilledData={extractedData || undefined} />
+            ) : (
+              <SurveyForm prefilledData={extractedData || undefined} />
+            )}
           </div>
         )}
       </div>

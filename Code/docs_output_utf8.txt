@@ -1,0 +1,717 @@
+﻿================================================================================
+FILE 1: HSDXCDAT LY NHAN
+================================================================================
+
+=== PARAGRAPHS ===
+[P0] Normal | ß╗ªY BAN NH├éN D├éN
+[P1] Normal | ß╗ªY BAN NH├éN D├éN X├â L├¥ NH├éN
+[P5] Normal | Hß╗Æ S╞á ─Éß╗Ç XUß║ñT Cß║ñP ─Éß╗ÿ AN TO├ÇN
+[P6] Normal | Hß╗å THß╗ÉNG TH├öNG TIN
+[P7] Normal | Cß║ñP ─Éß╗ÿ 2
+[P10] Normal | Hß╗å THß╗ÉNG TH├öNG TIN PHß╗ñC Vß╗ñ HOß║áT ─Éß╗ÿNG
+[P11] Normal | Cß╗ªA ß╗ªY BAN NH├éN D├éN X├â L├¥ NH├éN
+[P19] Normal | Ninh B├¼nh, n─âm 2026
+[P20] Normal | THUß║¼T NGß╗«, Tß╗¬ VIß║╛T Tß║«T
+[P22] Heading 1 | PHß║ªN I. TH├öNG TIN Tß╗öNG QUAN Vß╗Ç Hß╗å THß╗ÉNG TH├öNG TIN
+[P23] Heading 2 | 1. Th├┤ng tin Chß╗º quß║ún hß╗ç thß╗æng th├┤ng tin
+[P24] Normal | Chß╗º quß║ún hß╗ç thß╗æng th├┤ng tin l├á c╞í quan nh├á n╞░ß╗¢c trß╗▒c tiß║┐p quß║ún l├╜ hß╗ç thß╗æng th├┤ng tin. ─Éß╗æi vß╗¢i Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa UBND x├ú L├╜ Nh├ón, Chß╗º quß║ún hß╗ç thß╗æng th├┤ng tin l├á ß╗ªy ban nh├ón d├ón x
+[P27] Heading 2 | 2. Th├┤ng tin ─É╞ín vß╗ï vß║¡n h├ánh
+[P28] Normal | ─É╞ín vß╗ï vß║¡n h├ánh hß╗ç thß╗æng th├┤ng tin l├á ß╗ªy ban nh├ón d├ón x├ú L├╜ Nh├ón. C├ín bß╗Ö phß╗Ñ tr├ích CNTT/ATTT l├á ├┤ng ─Éß╗ù V─ân H├ón ΓÇô Chuy├¬n vi├¬n v─ân h├│a ki├¬m nhiß╗çm phß╗Ñ tr├ích c├┤ng nghß╗ç th├┤ng tin.
+[P31] Heading 2 | 3. M├┤ tß║ú phß║ím vi, quy m├┤ cß╗ºa hß╗ç thß╗æng
+[P32] Normal | Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa UBND x├ú L├╜ Nh├ón hoß║ít ─æß╗Öng trong phß║ím vi trß╗Ñ sß╗ƒ UBND x├ú tß║íi Th├┤n 5, x├ú L├╜ Nh├ón, tß╗ënh Ninh B├¼nh. Hß╗ç thß╗æng phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng h├ánh ch├¡nh cß╗ºa UBND x├ú bao gß╗ôm: xß╗¡ l├╜
+[P34] Normal | ─Éß╗æi t╞░ß╗úng phß╗Ñc vß╗Ñ:
+[P35] List Paragraph | C├ín bß╗Ö, c├┤ng chß╗⌐c x├ú: 33 ng╞░ß╗¥i (nß╗Öi bß╗Ö).
+[P36] List Paragraph | Ng╞░ß╗¥i d├ón ─æß║┐n giao dß╗ïch mß╗Öt cß╗¡a: khoß║úng 600 l╞░ß╗út/th├íng.
+[P37] List Paragraph | C╞í quan cß║Ñp tr├¬n: kß║┐t nß╗æi Cß╗òng DVCTT tß╗ënh Ninh B├¼nh, hß╗ç thß╗æng eCabinet.
+[P39] Normal | Loß║íi dß╗» liß╗çu xß╗¡ l├╜/l╞░u trß╗»:
+[P40] List Paragraph | Dß╗» liß╗çu c├í nh├ón th├┤ng th╞░ß╗¥ng: CMND/CCCD, ─æß╗ïa chß╗ë, sß╗æ ─æiß╗çn thoß║íi cß╗ºa ng╞░ß╗¥i d├ón.
+[P41] List Paragraph | Dß╗» liß╗çu c├í nh├ón nhß║íy cß║úm: hß╗ô s╞í hß╗Ö tß╗ïch (khai sinh, kß║┐t h├┤n, khai tß╗¡), hß╗ô s╞í ─æß║Ñt ─æai.
+[P42] List Paragraph | V─ân bß║ún h├ánh ch├¡nh: v─ân bß║ún ─æß║┐n/─æi, v─ân bß║ún ─æiß╗üu h├ánh (kh├┤ng thuß╗Öc danh mß╗Ñc b├¡ mß║¡t nh├á n╞░ß╗¢c).
+[P43] List Paragraph | Dß╗» liß╗çu kß║┐ to├ín: ng├ón s├ích x├ú, thu chi t├ái ch├¡nh.
+[P45] Normal | Danh mß╗Ñc hß╗ç thß╗æng th├┤ng tin th├ánh phß║ºn v├á dß╗ïch vß╗Ñ:
+[P49] Heading 2 | 4. M├┤ tß║ú cß║Ñu tr├║c cß╗ºa hß╗ç thß╗æng
+[P50] Heading 3 | 4.1. M├┤ h├¼nh logic tß╗òng thß╗â
+[P55] Normal | C├íc v├╣ng mß║íng ─æ╞░ß╗úc thiß║┐t kß║┐ nh╞░ sau:
+[P56] Normal | V├╣ng mß║íng bi├¬n ─æ╞░ß╗úc ─æ─â╠út ca╠üc thi├¬╠üt bi╠ú Router, Firewall ─æß╗â kß║┐t nß╗æi hß╗ç thß╗æng ra c├íc mß║íng b├¬n ngo├ái v├á mß║íng Internet.
+[P57] List Paragraph | To├án bß╗Ö thiß║┐t bß╗ï (m├íy t├¡nh c├ín bß╗Ö, router WiFi, ─æß║ºu ghi camera) ─æß╗üu nß║▒m trong c├╣ng mß╗Öt dß║úi mß║íng LAN 192.168.11.0/24. Kß║┐t nß╗æi Internet th├┤ng qua 2 ─æ╞░ß╗¥ng truyß╗ün c├íp quang VNPT (150 Mbps d├╣ng cho khu nh├á
+[P58] List Paragraph | Dß╗▒ ph├▓ng cho t╞░╞íng lai ( ch╞░a ─æß║ºu t╞░ giai ─æoß║ín n├áy)
+[P59] Normal | + V├╣ng DMZ ─æß║╖t c├íc m├íy chß╗º c├┤ng cß╗Öng, cung cß║Ñp dß╗ïch vß╗Ñ ra b├¬n ngo├ái Internet.
+[P60] Normal | + V├╣ng m├íy chß╗º nß╗Öi bß╗Ö (Server Farm) ─æß║╖t c├íc m├íy chß╗º nß╗Öi bß╗Ö, ma╠üy chu╠ë c╞í s╞í╠ë d╞░╠â li├¬╠úu, cung cß║Ñp c├íc dß╗ïch vß╗Ñ/chuy├¬n ng├ánh cho ng╞░ß╗¥i sß╗¡ dß╗Ñng trong hß╗ç thß╗æng.
+[P65] Heading 3 | 4.2. M├┤ h├¼nh kß║┐t nß╗æi vß║¡t l├╜
+[P69] Normal | M├┤ tß║ú kß║┐t nß╗æi vß║¡t l├╜ cß╗ºa hß╗ç thß╗æng:
+[P70] List Paragraph | Kß║┐t nß╗æi ra internet qua 2 ─æ╞░ß╗¥ng c├íp quang FTTx  VNPT v├á Viettel ─æß║╖t tß║íi Tß║ºng 1, Ph├▓ng 104. Tß╗æc ─æß╗Ö 200Mbps mß╗ùi ─æ╞░ß╗¥ng truyß╗ün trß╗ƒ l├¬n.
+[P71] List Paragraph | C├ón bß║▒ng tß║úi: Sß╗¡ dß╗Ñng thiß║┐t bß╗ï c├ón bß║▒ng tß║úi ─æß╗â tß╗▒ ─æß╗Öng chuyß╗ân sang ─æ╞░ß╗¥ng truyß╗ün backup internet khi c├│ sß╗▒ cß╗æ
+[P72] List Paragraph | Thiß║┐t bß╗ï Switch trung t├óm: L├á Switch layer 3, cisco,24 cß╗òng ─æß╗â  kß║┐t nß╗æi tß║Ñt cß║ú c├íc switch tß║íi c├íc tß║ºng kh├íc v├á kß║┐t nß╗æi vß╗¢i hß╗ç th├┤ng CCTV.
+[P73] List Paragraph | Thiß║┐t bß╗ï Switch tß╗½ng tß║ºng: c├íc thiß║┐t bß╗ï switch cisco:  phß╗Ñc vß╗Ñ kß║┐t nß╗æi c├íc m├íy t├¡nh c├ín bß╗Ö tß║íi tß╗½ng tß║ºng, kß║┐t nß╗æi hß╗ç thß╗æng Wifi, m├íy in tß║íi tß╗½ng tß║ºng.
+[P74] List Paragraph | Rack v├á UPS: Tß║Ñt cß║ú c├íc thiß║┐t bß╗ï switch, bß╗Ö ghi CCTV, Wifi ─æß╗âu ─æ╞░ß╗úc kß║┐t nß╗æi vß╗¢i UPS 1000W, v├á ─æß║╖t trong tß╗º rack, c├│ kh├│a.
+[P76] Heading 3 | 4.2.1. Danh mß╗Ñc thiß║┐t bß╗ï mß║íng trong hß╗ç thß╗æng
+[P78] Heading 3 | 4.2.3. Danh mß╗Ñc ß╗⌐ng dß╗Ñng/dß╗ïch vß╗Ñ cung cß║Ñp bß╗ƒi hß╗ç thß╗æng
+[P79] Normal | To├án bß╗Ö ß╗⌐ng dß╗Ñng phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa UBND x├ú L├╜ Nh├ón ─æß╗üu do c╞í quan cß║Ñp tr├¬n (tß╗ënh, bß╗Ö) cung cß║Ñp v├á quß║ún l├╜ hß║í tß║ºng. UBND x├ú chß╗ë l├á ─æ╞ín vß╗ï sß╗¡ dß╗Ñng (kh├┤ng tß╗▒ vß║¡n h├ánh m├íy chß╗º ß╗⌐ng dß╗Ñng).
+[P82] Heading 3 | 4.2.4. Quy hoß║ích ─æß╗ïa chß╗ë IP c├íc v├╣ng mß║íng trong hß╗ç thß╗æng
+[P84] Heading 1 | PHß║ªN II. THUYß║╛T MINH Cß║ñP ─Éß╗ÿ ─Éß╗Ç XUß║ñT
+[P85] Heading 2 | 1. Danh mß╗Ñc hß╗ç thß╗æng th├┤ng tin v├á cß║Ñp ─æß╗Ö ─æß╗ü xuß║Ñt
+[P87] Heading 2 | 2. Thuyß║┐t minh ─æß╗ü xuß║Ñt cß║Ñp ─æß╗Ö ─æß╗æi vß╗¢i hß╗ç thß╗æng th├┤ng tin
+[P88] Normal | Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa UBND x├ú L├╜ Nh├ón ─æ╞░ß╗úc x├óy dß╗▒ng ─æß╗â phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng nß╗Öi bß╗Ö cß╗ºa c╞í quan v├á c├│ xß╗¡ l├╜ th├┤ng tin c├í nh├ón cß╗ºa ng╞░ß╗¥i d├ón (hß╗Ö tß╗ïch, ─æß║Ñt ─æai, CMND/CCCD) v├á th├┤ng tin c├í
+[P89] Normal | C─ân cß╗⌐ theo quy ─æß╗ïnh tß║íi Khoß║ún 1 ─Éiß╗üu 8 Nghß╗ï ─æß╗ïnh 85/2016/N─É-CP ng├áy 01/7/2016 cß╗ºa Ch├¡nh phß╗º: "Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng nß╗Öi bß╗Ö cß╗ºa c╞í quan, tß╗ò chß╗⌐c v├á c├│ xß╗¡ l├╜ th├┤ng tin ri├¬ng, th├┤ng tin c
+[P91] Heading 2 | 3. T├ái liß╗çu thiß║┐t kß║┐ cß╗ºa hß╗ç thß╗æng th├┤ng tin
+[P92] Normal | Tham chiß║┐u Phß║ºn III cß╗ºa Hß╗ô s╞í n├áy (m├┤ tß║ú quy m├┤, phß║ím vi, cß║Ñu tr├║c hß╗ç thß╗æng)
+[P94] Heading 1 | PHß║ªN III. THUYß║╛T MINH PH╞»╞áNG ├üN Bß║óO ─Éß║óM AN TO├ÇN Hß╗å THß╗ÉNG TH├öNG TIN
+[P95] Heading 2 | I. Thuyß║┐t minh ph╞░╞íng ├ín vß╗ü quß║ún l├╜
+[P96] Normal | 1. Thiß║┐t lß║¡p ch├¡nh s├ích an to├án th├┤ng tin
+[P97] Normal | UBND x├ú L├╜ Nh├ón sß║╜ ban h├ánh Quy chß║┐ bß║úo ─æß║úm an to├án, an ninh th├┤ng tin mß║íng trong v├▓ng 06 th├íng kß╗â tß╗½ khi Hß╗ô s╞í ─æß╗ü xuß║Ñt cß║Ñp ─æß╗Ö ─æ╞░ß╗úc ph├¬ duyß╗çt. Quy chß║┐ sß║╜ quy ─æß╗ïnh ─æß║ºy ─æß╗º c├íc nß╗Öi dung vß╗ü quß║ún l├╜ an to├á
+[P99] Normal | 2. Tß╗ò chß╗⌐c bß║úo ─æß║úm an to├án th├┤ng tin
+[P100] Normal | UBND x├ú L├╜ Nh├ón giao ├┤ng ─Éß╗ù V─ân H├ón ΓÇô Chuy├¬n vi├¬n v─ân h├│a ki├¬m nhiß╗çm vai tr├▓ c├ín bß╗Ö phß╗Ñ tr├ích CNTT/ATTT, l├á ─æß║ºu mß╗æi li├¬n hß╗ç vß╗¢i c├íc c╞í quan c├│ thß║⌐m quyß╗ün vß╗ü ATTT. ─É╞ín vß╗ï vß║¡n h├ánh th╞░ß╗¥ng xuy├¬n kiß╗âm tra
+[P102] Normal | 3. Bß║úo ─æß║úm nguß╗ôn nh├ón lß╗▒c
+[P103] Normal | UBND x├ú L├╜ Nh├ón c├│ kß║┐ hoß║ích cß╗¡ c├ín bß╗Ö tham gia c├íc lß╗¢p ─æ├áo tß║ío, tß║¡p huß║Ñn vß╗ü an to├án th├┤ng tin do Sß╗ƒ TT&TT tß╗ënh Ninh B├¼nh hoß║╖c UBND  tß╗ò chß╗⌐c. ─Éß╗ïnh kß╗│ h├áng n─âm tß╗ò chß╗⌐c phß╗ò biß║┐n, tuy├¬n truyß╗ün n├óng cao nh
+[P105] Normal | 4. Quß║ún l├╜ thiß║┐t kß║┐, x├óy dß╗▒ng hß╗ç thß╗æng
+[P106] Normal | UBND x├ú L├╜ Nh├ón l╞░u giß╗» ─æß║ºy ─æß╗º t├ái liß╗çu m├┤ tß║ú thiß║┐t kß║┐, quy m├┤, phß║ím vi, ─æß╗æi t╞░ß╗úng sß╗¡ dß╗Ñng hß╗ç thß╗æng. Khi c├│ thay ─æß╗òi vß╗ü thiß║┐t kß║┐ hoß║╖c cß║Ñu h├¼nh hß╗ç thß╗æng sß║╜ ─æ├ính gi├í lß║íi t├¡nh ph├╣ hß╗úp vß╗¢i c├íc y├¬u cß║ºu an 
+[P108] Normal | 5. Quß║ún l├╜ vß║¡n h├ánh hß╗ç thß╗æng
+[P109] List Paragraph | Quß║ún l├╜ an to├án mß║íng: Thiß║┐t lß║¡p ch├¡nh s├ích kiß╗âm so├ít truy cß║¡p tr├¬n c├íc thiß║┐t bß╗ï Router/Switch; ─æß╗ïnh kß╗│ kiß╗âm tra cß║Ñu h├¼nh thiß║┐t bß╗ï mß║íng.
+[P110] List Paragraph | Quß║ún l├╜ an to├án thiß║┐t bß╗ï ─æß║ºu cuß╗æi: C├ái ─æß║╖t phß║ºn mß╗üm diß╗çt virus tr├¬n to├án bß╗Ö m├íy t├¡nh (26 PC + 01 laptop); thiß║┐t lß║¡p ch├¡nh s├ích mß║¡t khß║⌐u thß╗æng nhß║Ñt.
+[P111] List Paragraph | Quß║ún l├╜ an to├án dß╗» liß╗çu: Thß╗▒c hiß╗çn sao l╞░u dß╗» liß╗çu ─æß╗ïnh kß╗│ (h├áng tuß║ºn) ra thiß║┐t bß╗ï l╞░u trß╗» rß╗¥i; l╞░u trß╗» bß║ún sao tß║íi vß╗ï tr├¡ kh├íc trß╗Ñ sß╗ƒ.
+[P112] List Paragraph | Quß║ún l├╜ sß╗▒ cß╗æ ATTT: X├óy dß╗▒ng quy tr├¼nh xß╗¡ l├╜ sß╗▒ cß╗æ; phß╗æi hß╗úp vß╗¢i VNPT v├á Sß╗ƒ TT&TT tß╗ënh khi xß║úy ra sß╗▒ cß╗æ.
+[P113] List Paragraph | Quß║ún l├╜ an to├án ng╞░ß╗¥i sß╗¡ dß╗Ñng ─æß║ºu cuß╗æi: Ban h├ánh quy ─æß╗ïnh sß╗¡ dß╗Ñng m├íy t├¡nh, Internet, email c├┤ng vß╗Ñ; tuy├¬n truyß╗ün ph├▓ng tr├ính lß╗½a ─æß║úo trß╗▒c tuyß║┐n, phishing.
+[P115] Normal | ─Éß╗æi vß╗¢i nhß╗»ng y├¬u cß║ºu quß║ún l├╜ ch╞░a ─æ├íp ß╗⌐ng trong Thuyß║┐t minh n├áy, ─É╞ín vß╗ï vß║¡n h├ánh sß║╜ cß║¡p nhß║¡t, bß╗ò sung v├á tr├¼nh Chß╗º quß║ún hß╗ç thß╗æng ban h├ánh trong v├▓ng 6 th├íng, kß╗â tß╗½ khi HS─ÉXC─É ─æ╞░ß╗úc ph├¬ duyß╗çt.
+[P117] Heading 2 | II. Thuyß║┐t minh ph╞░╞íng ├ín vß╗ü kß╗╣ thuß║¡t
+[P118] Normal | 1. Bß║úo ─æß║úm an to├án mß║íng
+[P119] List Paragraph | 1.1. Thiß║┐t kß║┐ hß╗ç thß╗æng: Ph├ón t├ích v├╣ng mß║íng LAN nß╗Öi bß╗Ö, WiFi, Camera th├ánh c├íc VLAN ri├¬ng sau khi bß╗ò sung Switch Layer 2 c├│ hß╗ù trß╗ú VLAN.
+[P120] List Paragraph | 1.2. Kiß╗âm so├ít truy cß║¡p tß╗½ b├¬n ngo├ái: Cß║Ñu h├¼nh Firewall ─æß╗â chß║╖n truy cß║¡p kh├┤ng hß╗úp lß╗ç tß╗½ Internet v├áo mß║íng nß╗Öi bß╗Ö.
+[P121] List Paragraph | 1.3. Kiß╗âm so├ít truy cß║¡p tß╗½ b├¬n trong: Cß║Ñu h├¼nh ch├¡nh s├ích kiß╗âm so├ít truy cß║¡p ra Internet, chß║╖n c├íc trang web ─æß╗Öc hß║íi.
+[P122] List Paragraph | 1.4. Nhß║¡t k├╜ hß╗ç thß╗æng: Bß║¡t t├¡nh n─âng ghi log tr├¬n Router/Switch; l╞░u trß╗» log tß╗æi thiß╗âu 01 th├íng.
+[P123] List Paragraph | 1.5. Ph├▓ng chß╗æng x├óm nhß║¡p: Cß║Ñu h├¼nh t╞░ß╗¥ng lß╗¡a theo ch├¡nh s├ích "Default Deny"; cß║¡p nhß║¡t firmware thiß║┐t bß╗ï mß║íng ─æß╗ïnh kß╗│.
+[P124] List Paragraph | 1.6. Bß║úo vß╗ç thiß║┐t bß╗ï: Thay ─æß╗òi t├ái khoß║ún/mß║¡t khß║⌐u mß║╖c ─æß╗ïnh; cß║Ñu h├¼nh x├íc thß╗▒c quß║ún trß╗ï thiß║┐t bß╗ï qua giao thß╗⌐c an to├án.
+[P126] Normal | 2. Bß║úo ─æß║úm an to├án m├íy chß╗º/thiß║┐t bß╗ï
+[P127] Normal | Hß╗ç thß╗æng kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜. Dß╗» liß╗çu l╞░u tr├¬n m├íy t├¡nh c├ín bß╗Ö. ├üp dß╗Ñng c├íc biß╗çn ph├íp bß║úo mß║¡t sau:
+[P128] List Paragraph | Thiß║┐t lß║¡p ch├¡nh s├ích mß║¡t khß║⌐u thß╗æng nhß║Ñt: tß╗æi thiß╗âu 8 k├╜ tß╗▒, gß╗ôm chß╗» hoa, chß╗» th╞░ß╗¥ng, sß╗æ v├á k├╜ tß╗▒ ─æß║╖c biß╗çt; thay ─æß╗òi ─æß╗ïnh kß╗│ 3 th├íng/lß║ºn.
+[P129] List Paragraph | C├ái ─æß║╖t v├á duy tr├¼ phß║ºn mß╗üm diß╗çt virus bß║ún quyß╗ün tr├¬n to├án bß╗Ö m├íy t├¡nh; thiß║┐t lß║¡p tß╗▒ ─æß╗Öng cß║¡p nhß║¡t.
+[P130] List Paragraph | Bß║¡t Windows Firewall v├á cß║Ñu h├¼nh chß║╖n c├íc kß║┐t nß╗æi kh├┤ng cß║ºn thiß║┐t.
+[P131] List Paragraph | V├┤ hiß╗çu h├│a t├ái khoß║ún v├á quyß╗ün truy cß║¡p khi c├ín bß╗Ö th├┤i viß╗çc hoß║╖c chuyß╗ân c├┤ng t├íc.
+[P133] Normal | 3. Bß║úo ─æß║úm an to├án ß╗⌐ng dß╗Ñng
+[P134] Normal | C├íc ß╗⌐ng dß╗Ñng DVCTT, eCabinet, email.gov.vn do c╞í quan cß║Ñp tr├¬n quß║ún l├╜ hß║í tß║ºng. UBND x├ú thß╗▒c hiß╗çn:
+[P135] List Paragraph | X├íc thß╗▒c ng╞░ß╗¥i d├╣ng tr├¬n tß║Ñt cß║ú ß╗⌐ng dß╗Ñng; kh├┤ng d├╣ng chung t├ái khoß║ún.
+[P136] List Paragraph | Thay ─æß╗òi mß║¡t khß║⌐u ß╗⌐ng dß╗Ñng ─æß╗ïnh kß╗│ 3 th├íng/lß║ºn.
+[P137] List Paragraph | Thiß║┐t lß║¡p timeout phi├¬n ─æ─âng nhß║¡p (20 ph├║t kh├┤ng hoß║ít ─æß╗Öng tß╗▒ ─æ─âng xuß║Ñt).
+[P138] List Paragraph | Chß╗ë truy cß║¡p ß╗⌐ng dß╗Ñng qua giao thß╗⌐c HTTPS; kh├┤ng truy cß║¡p qua HTTP kh├┤ng m├ú h├│a.
+[P140] Normal | 4. Bß║úo ─æß║úm an to├án dß╗» liß╗çu
+[P141] List Paragraph | 4.1. Bß║úo mß║¡t dß╗» liß╗çu: M├ú h├│a c├íc file dß╗» liß╗çu c├í nh├ón nhß║íy cß║úm (hß╗Ö tß╗ïch, ─æß║Ñt ─æai) tr╞░ß╗¢c khi l╞░u trß╗» bß║▒ng c├┤ng cß╗Ñ m├ú h├│a t├¡ch hß╗úp Windows (BitLocker) hoß║╖c phß║ºn mß╗üm t╞░╞íng ─æ╞░╞íng.
+[P142] List Paragraph | 4.2. Sao l╞░u dß╗▒ ph├▓ng: Sao l╞░u dß╗» liß╗çu h├áng tuß║ºn ra ß╗ò cß╗⌐ng di ─æß╗Öng; l╞░u trß╗» ß╗ò cß╗⌐ng dß╗▒ ph├▓ng tß║íi vß╗ï tr├¡ kh├íc trß╗Ñ sß╗ƒ (v├¡ dß╗Ñ tß║íi nh├á c├ín bß╗Ö phß╗Ñ tr├ích CNTT); kiß╗âm tra khß║ú n─âng phß╗Ñc hß╗ôi dß╗» liß╗çu ├¡t nhß║Ñt 06 
+[P144] Normal | ─Éß╗æi vß╗¢i c├íc y├¬u cß║ºu kß╗╣ thuß║¡t ch╞░a ─æ├íp ß╗⌐ng trong Thuyß║┐t minh n├áy, ─É╞ín vß╗ï vß║¡n h├ánh sß║╜ triß╗ân khai n├óng cß║Ñp, thiß║┐t lß║¡p cß║Ñu h├¼nh hß╗ç thß╗æng ─æß╗â ─æ├íp ß╗⌐ng y├¬u cß║ºu trong v├▓ng 6 th├íng, kß╗â tß╗½ khi HS─ÉXC─É ─æ╞░ß╗úc ph├¬ du
+[P147] Heading 1 | PHß╗ñ Lß╗ñC I. THUYß║╛T MINH PH╞»╞áNG ├üN Bß║óO ─Éß║óM AN TO├ÇN TH├öNG TIN Vß╗Ç QUß║óN L├¥ Vß╗ÜI Cß║ñP ─Éß╗ÿ 2
+[P148] Heading 2 | 6.1.1. Thiß║┐t lß║¡p ch├¡nh s├ích an to├án th├┤ng tin
+[P149] Heading 3 | 6.1.1.1. Ch├¡nh s├ích an to├án th├┤ng tin
+[P151] Heading 3 | 6.1.1.2. X├óy dß╗▒ng v├á c├┤ng bß╗æ
+[P153] Heading 3 | 6.1.1.3. R├á so├ít, sß╗¡a ─æß╗òi
+[P155] Heading 2 | 6.1.2. Tß╗ò chß╗⌐c bß║úo ─æß║úm an to├án th├┤ng tin
+[P156] Heading 3 | 6.1.2.1. ─É╞ín vß╗ï chuy├¬n tr├ích vß╗ü an to├án th├┤ng tin
+[P158] Heading 3 | 6.1.2.2. Phß╗æi hß╗úp vß╗¢i c╞í quan/tß╗ò chß╗⌐c c├│ thß║⌐m quyß╗ün
+[P159] Heading 4 | 6.1.2.2.a. C├│ ─æß║ºu mß╗æi li├¬n hß╗ç, phß╗æi hß╗úp vß╗¢i c├íc c╞í quan, tß╗ò chß╗⌐c c├│ thß║⌐m quyß╗ün quß║ún l├╜ vß╗ü an to├án th├┤ng tin
+[P163] Heading 4 | 6.1.2.2.b. C├│ ─æß║ºu mß╗æi li├¬n hß╗ç, phß╗æi hß╗úp vß╗¢i c├íc c╞í quan, tß╗ò chß╗⌐c trong c├┤ng t├íc hß╗ù trß╗ú ─æiß╗üu phß╗æi xß╗¡ l├╜ sß╗▒ cß╗æ an to├án th├┤ng tin
+[P166] Heading 4 | 6.1.2.2.c. Tham gia c├íc hoß║ít ─æß╗Öng, c├┤ng t├íc bß║úo ─æß║úm an to├án th├┤ng tin khi c├│ y├¬u cß║ºu cß╗ºa tß╗ò chß╗⌐c c├│ thß║⌐m quyß╗ün
+[P170] Heading 2 | 6.1.3. Bß║úo ─æß║úm nguß╗ôn nh├ón lß╗▒c
+[P171] Heading 3 | 6.1.3.1. Tuyß╗ân dß╗Ñng
+[P174] Heading 3 | 6.1.3.2. Trong qu├í tr├¼nh l├ám viß╗çc
+[P175] Heading 4 | 6.1.3.2.a. C├│ quy ─æß╗ïnh vß╗ü viß╗çc thß╗▒c hiß╗çn nß╗Öi quy, quy chß║┐ bß║úo ─æß║úm an to├án th├┤ng tin cho ng╞░ß╗¥i sß╗¡ dß╗Ñng, c├ín bß╗Ö quß║ún l├╜ v├á vß║¡n h├ánh hß╗ç thß╗æng
+[P178] Heading 4 | 6.1.3.2.b. C├│ kß║┐ hoß║ích v├á ─æß╗ïnh kß╗│ h├áng n─âm tß╗ò chß╗⌐c phß╗ò biß║┐n, tuy├¬n truyß╗ün n├óng cao nhß║¡n thß╗⌐c vß╗ü an to├án th├┤ng tin cho ng╞░ß╗¥i sß╗¡ dß╗Ñng
+[P181] Heading 3 | 6.1.3.3. Chß║Ñm dß╗⌐t hoß║╖c thay ─æß╗òi c├┤ng viß╗çc
+[P183] Normal | a) C├ín bß╗Ö chß║Ñm dß╗⌐t hoß║╖c thay ─æß╗òi c├┤ng viß╗çc phß║úi thu hß╗ôi thß║╗ truy cß║¡p, th├┤ng tin ─æ╞░ß╗úc l╞░u tr├¬n c├íc ph╞░╞íng tiß╗çn l╞░u trß╗», c├íc trang thiß║┐t bß╗ï m├íy m├│c, phß║ºn cß╗⌐ng, phß║ºn mß╗üm v├á c├íc t├ái sß║ún kh├íc (nß║┐u c├│) thuß╗Ö
+[P184] Normal | b) C├│ quy tr├¼nh v├á thß╗▒c hiß╗çn v├┤ hiß╗çu h├│a tß║Ñt cß║ú c├íc quyß╗ün ra, v├áo, truy cß║¡p t├ái nguy├¬n, quß║ún trß╗ï hß╗ç thß╗æng sau khi c├ín bß╗Ö th├┤i viß╗çc.
+[P186] Heading 2 | 6.1.4. Quß║ún l├╜ thiß║┐t kß║┐, x├óy dß╗▒ng hß╗ç thß╗æng th├┤ng tin
+[P187] Heading 3 | 6.1.4.1. Thiß║┐t kß║┐ an to├án hß╗ç thß╗æng
+[P188] Heading 4 | 6.1.4.1.a. C├│ t├ái liß╗çu m├┤ tß║ú quy m├┤, phß║ím vi v├á ─æß╗æi t╞░ß╗úng sß╗¡ dß╗Ñng, khai th├íc, quß║ún l├╜ vß║¡n h├ánh hß╗ç thß╗æng th├┤ng tin
+[P190] Heading 4 | 6.1.4.1.b. C├│ t├ái liß╗çu m├┤ tß║ú thiß║┐t kß║┐ v├á c├íc th├ánh phß║ºn cß╗ºa hß╗ç thß╗æng th├┤ng tin
+[P192] Heading 4 | 6.1.4.1.c. C├│ t├ái liß╗çu m├┤ tß║ú ph╞░╞íng ├ín bß║úo ─æß║úm an to├án th├┤ng tin theo cß║Ñp ─æß╗Ö
+[P194] Heading 4 | 6.1.4.1.d. C├│ t├ái liß╗çu m├┤ tß║ú ph╞░╞íng ├ín lß╗▒a chß╗ìn giß║úi ph├íp c├┤ng nghß╗ç bß║úo ─æß║úm an to├án th├┤ng tin
+[P195] Heading 4 | 6.1.4.1.─æ. Khi c├│ thay ─æß╗òi thiß║┐t kß║┐, ─æ├ính gi├í lß║íi t├¡nh ph├╣ hß╗úp cß╗ºa ph╞░╞íng ├ín thiß║┐t kß║┐ ─æß╗æi vß╗¢i c├íc y├¬u cß║ºu an to├án ─æß║╖t ra ─æß╗æi vß╗¢i hß╗ç thß╗æng
+[P197] Heading 3 | 6.1.4.2. Ph├ít triß╗ân phß║ºn mß╗üm thu├¬ kho├ín
+[P198] Heading 4 | 6.1.4.2.a. C├│ bi├¬n bß║ún, hß╗úp ─æß╗ông v├á c├íc cam kß║┐t ─æß╗æi vß╗¢i b├¬n thu├¬ kho├ín c├íc nß╗Öi dung li├¬n quan ─æß║┐n viß╗çc ph├ít triß╗ân phß║ºn mß╗üm thu├¬ kho├ín
+[P199] Heading 4 | 6.1.4.2.b. Y├¬u cß║ºu c├íc nh├á ph├ít triß╗ân cung cß║Ñp m├ú nguß╗ôn phß║ºn mß╗üm
+[P201] Heading 3 | 6.1.4.3. Thß╗¡ nghiß╗çm v├á nghiß╗çm thu hß╗ç thß╗æng
+[P202] Heading 4 | 6.1.4.3.a. Thß╗▒c hiß╗çn kiß╗âm thß╗¡ hß╗ç thß╗æng tr╞░ß╗¢c khi ─æ╞░a v├áo vß║¡n h├ánh, khai th├íc sß╗¡ dß╗Ñng
+[P203] Heading 4 | 6.1.4.3.b. C├│ nß╗Öi dung, kß║┐ hoß║ích, quy tr├¼nh thß╗¡ nghiß╗çm v├á nghiß╗çm thu hß╗ç thß╗æng
+[P204] Heading 4 | 6.1.4.3.c. C├│ bß╗Ö phß║¡n c├│ tr├ích nhiß╗çm thß╗▒c hiß╗çn thß╗¡ nghiß╗çm v├á nghiß╗çm thu hß╗ç thß╗æng
+[P206] Heading 2 | 6.1.5. Quß║ún l├╜ vß║¡n h├ánh hß╗ç thß╗æng th├┤ng tin
+[P207] Heading 3 | 6.1.5.1. Quß║ún l├╜ an to├án mß║íng
+[P208] Heading 3 | 6.1.5.1. Quß║ún l├╜ an to├án mß║íng
+[P209] Heading 3 | D╞░╠ú tha╠ëo quy ch├¬╠ü ─æ╞░a ra quy ─æi╠únh v├¬╠Ç chi╠ünh sa╠üch, ch╞░a ─æa╠üp ╞░╠üng y├¬u c├ó╠Çu v├¬╠Ç quy tri╠Çnh quß║ún l├╜ an to├án mß║íng. ─É╞ín vi╠ú v├ó╠ún ha╠Çnh se╠â x├óy d╞░╠úng va╠Ç b├┤╠ë sung va╠Ço quy ch├¬╠ü va╠Ç ban ha╠Çnh trong vo╠Çng
+[P210] Heading 4 | 6.1.5.1.a. Quß║ún l├╜, vß║¡n h├ánh hoß║ít ─æß╗Öng b├¼nh th╞░ß╗¥ng cß╗ºa hß╗ç thß╗æng
+[P214] Heading 4 | 6.1.5.1.b. Cß║¡p nhß║¡t; sao l╞░u dß╗▒ ph├▓ng c├íc tß║¡p tin cß║Ñu h├¼nh hß╗ç thß╗æng v├á kh├┤i phß╗Ñc hß╗ç thß╗æng sau khi xß║úy ra sß╗▒ cß╗æ
+[P216] Heading 3 | 6.1.5.2. Quß║ún l├╜ an to├án m├íy chß╗º v├á ß╗⌐ng dß╗Ñng
+[P217] Normal | D╞░╠ú tha╠ëo quy ch├¬╠ü ─æ╞░a ra quy ─æi╠únh v├¬╠Ç chi╠ünh sa╠üch, ch╞░a ─æa╠üp ╞░╠üng y├¬u c├ó╠Çu v├¬╠Ç quy tri╠Çnh quß║ún l├╜ an to├án m├íy chß╗º v├á ß╗⌐ng dß╗Ñng. ─É╞ín vi╠ú v├ó╠ún ha╠Çnh se╠â x├óy d╞░╠úng va╠Ç b├┤╠ë sung va╠Ço quy ch├¬╠ü va╠Ç ban ha
+[P218] Normal | Ch├¡nh s├ích, quy tr├¼nh quß║ún l├╜ an to├án m├íy chß╗º v├á ß╗⌐ng dß╗Ñng bao gß╗ôm:
+[P219] Heading 4 | 6.1.5.2.a. Quß║ún l├╜, vß║¡n h├ánh hoß║ít ─æß╗Öng b├¼nh th╞░ß╗¥ng cß╗ºa hß╗ç thß╗æng m├íy chß╗º v├á dß╗ïch vß╗Ñ
+[P220] Heading 4 | 6.1.5.2.b. Truy cß║¡p mß║íng cß╗ºa m├íy chß╗º
+[P221] Heading 4 | 6.1.5.2.c. Truy cß║¡p v├á quß║ún trß╗ï m├íy chß╗º v├á ß╗⌐ng dß╗Ñng
+[P222] Heading 4 | 6.1.5.2.d. Cß║¡p nhß║¡t, sao l╞░u dß╗▒ ph├▓ng v├á kh├┤i phß╗Ñc sau khi xß║úy ra sß╗▒ cß╗æ
+[P224] Heading 3 | 6.1.5.3. Quß║ún l├╜ an to├án dß╗» liß╗çu
+[P225] Normal | D╞░╠ú tha╠ëo quy ch├¬╠ü ─æ╞░a ra quy ─æi╠únh v├¬╠Ç chi╠ünh sa╠üch, ch╞░a ─æa╠üp ╞░╠üng y├¬u c├ó╠Çu v├¬╠Ç quy tri╠Çnh quß║ún l├╜ an to├án dß╗» liß╗çu. ─É╞ín vi╠ú v├ó╠ún ha╠Çnh se╠â x├óy d╞░╠úng va╠Ç b├┤╠ë sung va╠Ço quy ch├¬╠ü va╠Ç ban ha╠Çnh trong vo
+[P226] Heading 4 | 6.1.5.3.a. Ch├¡nh s├ích, quy tr├¼nh dß╗▒ ph├▓ng v├á kh├┤i phß╗Ñc dß╗» liß╗çu
+[P228] Heading 4 | 6.1.5.3.b. ─Éß╗ïnh kß╗│ hoß║╖c khi c├│ thay ─æß╗òi cß║Ñu h├¼nh tr├¬n hß╗ç thß╗æng thß╗▒c hiß╗çn quy tr├¼nh sao l╞░u dß╗▒ ph├▓ng: tß║¡p tin cß║Ñu h├¼nh hß╗ç thß╗æng, bß║ún dß╗▒ ph├▓ng hß╗ç ─æiß╗üu h├ánh m├íy chß╗º, c╞í sß╗ƒ dß╗» liß╗çu; dß╗» liß╗çu, th├┤ng tin ngh
+[P230] Heading 3 | 6.1.5.4. Quß║ún l├╜ sß╗▒ cß╗æ an to├án th├┤ng tin
+[P231] Heading 4 | 6.1.5.4.a. Ph├ón nh├│m sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng
+[P233] Heading 4 | 6.1.5.4.b. Ph╞░╞íng ├ín tiß║┐p nhß║¡n, ph├ít hiß╗çn, ph├ón loß║íi v├á xß╗¡ l├╜ ban ─æß║ºu sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng
+[P234] Heading 4 | 6.1.5.4.c. Kß║┐ hoß║ích ß╗⌐ng ph├│ sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng
+[P235] Heading 4 | 6.1.5.4.d. Gi├ím s├ít, ph├ít hiß╗çn v├á cß║únh b├ío sß╗▒ cß╗æ an to├án th├┤ng tin
+[P236] Heading 4 | 6.1.5.4.─æ. Quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng th├┤ng th╞░ß╗¥ng
+[P237] Heading 4 | 6.1.5.4.e. Quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng nghi├¬m trß╗ìng
+[P238] Heading 4 | 6.1.5.4.g. C╞í chß║┐ phß╗æi hß╗úp vß╗¢i c╞í quan chß╗⌐c n─âng, c├íc nh├│m chuy├¬n gia, b├¬n cung cß║Ñp dß╗ïch vß╗Ñ hß╗ù trß╗ú trong viß╗çc xß╗¡ l├╜, khß║»c phß╗Ñc sß╗▒ cß╗æ an to├án th├┤ng tin
+[P240] Heading 3 | 6.1.5.5. Quß║ún l├╜ an to├án ng╞░ß╗¥i sß╗¡ dß╗Ñng ─æß║ºu cuß╗æi
+[P241] Normal | D╞░╠ú tha╠ëo quy ch├¬╠ü ─æ╞░a ra quy ─æi╠únh v├¬╠Ç chi╠ünh sa╠üch, ch╞░a ─æa╠üp ╞░╠üng y├¬u c├ó╠Çu v├¬╠Ç quy tri╠Çnh quß║ún l├╜ an to├án ng╞░ß╗¥i sß╗¡ dß╗Ñng ─æß║ºu cuß╗æi. ─É╞ín vi╠ú v├ó╠ún ha╠Çnh se╠â x├óy d╞░╠úng va╠Ç b├┤╠ë sung va╠Ço quy ch├¬╠ü va╠Ç ban
+[P242] Heading 4 | 6.1.5.5.a. Quß║ún l├╜ truy cß║¡p, sß╗¡ dß╗Ñng t├ái nguy├¬n nß╗Öi bß╗Ö
+[P244] Heading 4 | 6.1.5.5.b. Quß║ún l├╜ truy cß║¡p mß║íng v├á t├ái nguy├¬n tr├¬n Internet
+[P246] Heading 3 | 6.1.5.6. Ph╞░╞íng ├ín Quß║ún l├╜ rß╗ºi ro an to├án th├┤ng tin
+[P247] Normal | D╞░╠ú tha╠ëo quy ch├¬╠ü ─æ╞░a ra quy ─æi╠únh v├¬╠Ç chi╠ünh sa╠üch, ch╞░a ─æa╠üp ╞░╠üng y├¬u c├ó╠Çu v├¬╠Ç quy tri╠Çnh Quß║ún l├╜ rß╗ºi ro an to├án th├┤ng tin. ─É╞ín vi╠ú v├ó╠ún ha╠Çnh se╠â x├óy d╞░╠úng va╠Ç b├┤╠ë sung va╠Ço quy ch├¬╠ü va╠Ç ban ha╠Çnh
+[P250] Heading 3 | 6.1.5.7. Ph╞░╞íng ├ín Kß║┐t th├║c vß║¡n h├ánh, khai th├íc, thanh l├╜, hß╗ºy bß╗Å
+[P251] Normal | D╞░╠ú tha╠ëo quy ch├¬╠ü ─æ╞░a ra quy ─æi╠únh v├¬╠Ç chi╠ünh sa╠üch, ch╞░a ─æa╠üp ╞░╠üng y├¬u c├ó╠Çu v├¬╠Ç quy tri╠Çnh Kß║┐t th├║c vß║¡n h├ánh, khai th├íc, thanh l├╜, hß╗ºy bß╗Å hß╗ç thß╗æng th├┤ng tin. ─É╞ín vi╠ú v├ó╠ún ha╠Çnh se╠â x├óy d╞░╠úng va╠Ç b├┤╠ë
+[P254] Heading 1 | PHß╗ñ Lß╗ñC II. THUYß║╛T MINH PH╞»╞áNG ├üN Kß╗╕ THUß║¼T ─Éß╗ÉI Vß╗ÜI Hß╗å THß╗ÉNG TH├ÇNH PHß║ªN Cß║ñP ─Éß╗ÿ 2
+[P255] Normal | Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa UBND x├ú L├╜ Nh├ón ─æ╞░ß╗úc ─æß╗ü xuß║Ñt l├á cß║Ñp ─æß╗Ö 2. Hß╗ç thß╗æng kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ri├¬ng; to├án bß╗Ö ß╗⌐ng dß╗Ñng do c╞í quan cß║Ñp tr├¬n cung cß║Ñp qua Internet. Thuyß║┐t minh kß╗╣ th
+[P257] Heading 2 | 6.2.1. Bß║úo ─æß║úm an to├án mß║íng
+[P258] Heading 3 | 6.2.1.1. Thiß║┐t kß║┐ hß╗ç thß╗æng
+[P259] Normal | a) C├íc v├╣ng mß║íng trong hß╗ç thß╗æng:
+[P261] Normal | b) Ph╞░╞íng ├ín bß║úo ─æß║úm an to├án th├┤ng tin:
+[P263] Heading 3 | 6.2.1.2. Kiß╗âm so├ít truy cß║¡p tß╗½ b├¬n ngo├ái mß║íng
+[P265] Heading 3 | 6.2.1.3. Kiß╗âm so├ít truy cß║¡p tß╗½ b├¬n trong mß║íng
+[P267] Heading 3 | 6.2.1.4. Nhß║¡t k├╜ hß╗ç thß╗æng
+[P269] Heading 3 | 6.2.1.5. Ph├▓ng chß╗æng x├óm nhß║¡p
+[P271] Heading 3 | 6.2.1.6. Bß║úo vß╗ç thiß║┐t bß╗ï hß╗ç thß╗æng
+[P273] Heading 2 | 6.2.2. Bß║úo ─æß║úm an to├án m├íy chß╗º
+[P274] Normal | 6.2.2.1. X├íc thß╗▒c
+[P275] Normal | 6.2.2.2. Kiß╗âm so├ít truy cß║¡p
+[P276] Normal | 6.2.2.3. Nhß║¡t k├╜ hß╗ç thß╗æng
+[P277] Normal | 6.2.2.4. Ph├▓ng chß╗æng x├óm nhß║¡p
+[P278] Normal | 6.2.2.5. Ph├▓ng chß╗æng phß║ºn mß╗üm ─æß╗Öc hß║íi
+[P279] Normal | 6.2.2.6. Xß╗¡ l├╜ m├íy chß╗º khi chuyß╗ân giao
+[P281] Heading 2 | 6.2.3. Bß║úo ─æß║úm an to├án ß╗⌐ng dß╗Ñng
+[P282] Normal | To├án bß╗Ö ß╗⌐ng dß╗Ñng (DVCTT, eCabinet, email.gov.vn, MISA) ─æß╗üu do c╞í quan cß║Ñp tr├¬n hoß║╖c nh├á cung cß║Ñp quß║ún l├╜ hß║í tß║ºng. UBND x├ú l├á ─æ╞ín vß╗ï sß╗¡ dß╗Ñng. Thuyß║┐t minh kß╗╣ thuß║¡t ├íp dß╗Ñng cho phß║ºn UBND x├ú c├│ thß╗â kiß╗âm s
+[P284] Heading 3 | 6.2.3.1. X├íc thß╗▒c v├á kiß╗âm so├ít truy cß║¡p ß╗⌐ng dß╗Ñng
+[P286] Heading 2 | 6.2.4. Bß║úo ─æß║úm an to├án dß╗» liß╗çu
+[P287] Heading 3 | 6.2.4.1. Bß║úo mß║¡t dß╗» liß╗çu
+[P289] Heading 3 | 6.2.4.2. Sao l╞░u dß╗▒ ph├▓ng
+[P291] Heading 1 | PHß╗ñ Lß╗ñC III. DANH S├üCH THIß║╛T Bß╗è ─Éß╗Ç XUß║ñT ─Éß║ªU T╞»
+[P292] Normal | C─ân cß╗⌐ v├áo hiß╗çn trß║íng hß╗ç thß╗æng c├▓n nhiß╗üu thiß║┐u hß╗Ñt so vß╗¢i y├¬u cß║ºu kß╗╣ thuß║¡t cß║Ñp ─æß╗Ö 2, UBND x├ú L├╜ Nh├ón ─æß╗ü xuß║Ñt ─æß║ºu t╞░ bß╗ò sung c├íc thiß║┐t bß╗ï v├á giß║úi ph├íp sau ─æß╗â ─æ├íp ß╗⌐ng ─æß║ºy ─æß╗º c├íc y├¬u cß║ºu an to├án th├┤ng ti
+[P294] Heading 2 | 1. Danh mß╗Ñc thiß║┐t bß╗ï ─æß╗ü xuß║Ñt
+[P296] Heading 1 | Kß║╛T LUß║¼N V├Ç CAM Kß║╛T
+[P297] Normal | Tr├¬n c╞í sß╗ƒ khß║úo s├ít hiß╗çn trß║íng hß╗ç thß╗æng th├┤ng tin tß║íi UBND x├ú L├╜ Nh├ón,  tß╗ënh Ninh B├¼nh, Hß╗ô s╞í ─æß╗ü xuß║Ñt cß║Ñp ─æß╗Ö 2 cho Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa UBND x├ú L├╜ Nh├ón ─æ├ú ─æ╞░ß╗úc lß║¡p theo quy ─æß╗ïnh tß║í
+[P298] Normal | Hiß╗çn trß║íng hß╗ç thß╗æng c├▓n nhiß╗üu hß║ín chß║┐ vß╗ü bß║úo mß║¡t so vß╗¢i y├¬u cß║ºu cß║Ñp ─æß╗Ö 2: ch╞░a c├│ Firewall chuy├¬n dß╗Ñng, ch╞░a c├│ phß║ºn mß╗üm diß╗çt virus, ch╞░a c├│ quy tr├¼nh sao l╞░u ─æß╗ïnh kß╗│, ch╞░a c├│ v─ân bß║ún ph├íp l├╜ vß╗ü ATTT.
+[P301] Normal | L├╜ Nh├ón, ng├áy        th├íng        n─âm 2026
+[P302] Normal | TM. ß╗ªY BAN NH├éN D├éN X├â L├¥ NH├éN
+[P303] Normal | CHß╗ª Tß╗èCH
+[P306] Normal | Tr╞░╞íng Tuß║Ñn Lß╗▒c
+
+=== TABLES ===
+
+--- Table 0 (14r x 3c) ---
+  R0: ['STT', 'Tß╗½ viß║┐t tß║»t', 'Ngh─⌐a ─æß║ºy ─æß╗º']
+  R1: ['1', 'ATTT', 'An to├án th├┤ng tin']
+  R2: ['2', 'CNTT', 'C├┤ng nghß╗ç th├┤ng tin']
+  R3: ['3', 'CSDL', 'C╞í sß╗ƒ dß╗» liß╗çu']
+  R4: ['4', 'DVCTT', 'Dß╗ïch vß╗Ñ c├┤ng trß╗▒c tuyß║┐n']
+  R5: ['5', '─ÉVVH', '─É╞ín vß╗ï vß║¡n h├ánh']
+  R6: ['6', 'HS─ÉXC─É', 'Hß╗ô s╞í ─æß╗ü xuß║Ñt cß║Ñp ─æß╗Ö']
+  R7: ['7', 'ISP', 'Nh├á cung cß║Ñp dß╗ïch vß╗Ñ Internet (Internet Service Pr']
+  R8: ['8', 'LAN', 'Mß║íng nß╗Öi bß╗Ö (Local Area Network)']
+  R9: ['9', 'NVR', '─Éß║ºu ghi h├¼nh camera (Network Video Recorder)']
+  R10: ['10', 'UBND', 'ß╗ªy ban nh├ón d├ón']
+  R11: ['11', 'VPN', 'Mß║íng ri├¬ng ß║úo (Virtual Private Network)']
+  R12: ['12', 'WAN', 'Mß║íng diß╗çn rß╗Öng (Wide Area Network)']
+  R13: ['13', 'WiFi', 'Mß║íng kh├┤ng d├óy chuß║⌐n IEEE 802.11']
+
+--- Table 1 (7r x 2c) ---
+  R0: ['Hß║íng mß╗Ñc', 'Th├┤ng tin']
+  R1: ['Chß╗º quß║ún hß╗ç thß╗æng th├┤ng tin', 'ß╗ªy ban nh├ón d├ón x├ú L├╜ Nh├ón']
+  R2: ['Ng╞░ß╗¥i ─æß║íi diß╗çn', '├öng Tr╞░╞íng Tuß║Ñn Lß╗▒c ΓÇô Chß╗º tß╗ïch ß╗ªy ban nh├ón d├ón x├ú ']
+  R3: ['─Éß╗ïa chß╗ë', 'Th├┤n 5, x├ú L├╜ Nh├ón, tß╗ënh Ninh B├¼nh']
+  R4: ['Sß╗æ ─æiß╗çn thoß║íi', '0919.958.456']
+  R5: ['Email', 'handv.xalynhan@ninhbinh.gov.vn']
+  R6: ['C─ân cß╗⌐ ph├íp l├╜', 'Luß║¡t sß╗æ 77/2015/QH13 - Luß║¡t Tß╗ò chß╗⌐c ch├¡nh quyß╗ün ─æß╗ï']
+
+--- Table 2 (6r x 2c) ---
+  R0: ['Hß║íng mß╗Ñc', 'Th├┤ng tin']
+  R1: ['T├¬n tß╗ò chß╗⌐c', 'ß╗ªy ban nh├ón d├ón x├ú L├╜ Nh├ón']
+  R2: ['Ng╞░ß╗¥i ─æß║íi diß╗çn', '├öng Tr╞░╞íng Tuß║Ñn Lß╗▒c ΓÇô Chß╗º tß╗ïch UBND x├ú L├╜ Nh├ón']
+  R3: ['─Éß╗ïa chß╗ë', 'Th├┤n 5, x├ú L├╜ Nh├ón, tß╗ënh Ninh B├¼nh']
+  R4: ['C├ín bß╗Ö phß╗Ñ tr├ích CNTT/ATTT', '├öng ─Éß╗ù V─ân H├ón ΓÇô Chuy├¬n vi├¬n v─ân h├│a Sß╗æ ─æiß╗çn thoß║íi']
+  R5: ['─É╞ín vß╗ï hß╗ù trß╗ú kß╗╣ thuß║¡t tß╗½ b├¬n ngo├ái', 'Kh├┤ng c├│ ΓÇô Khi c├│ sß╗▒ cß╗æ li├¬n hß╗ç VNPT hß╗ù trß╗ú']
+
+--- Table 3 (6r x 6c) ---
+  R0: ['STT', 'T├¬n ß╗⌐ng dß╗Ñng/Dß╗ïch vß╗Ñ', 'Chß╗⌐c n─âng ch├¡nh', '─É╞ín vß╗ï cung cß║Ñp', 'Kß║┐t nß╗æi Internet', 'Sß╗æ ng╞░ß╗¥i d├╣ng']
+  R1: ['1', 'Cß╗òng Dß╗ïch vß╗Ñ c├┤ng trß╗▒c tuyß║┐n tß╗ënh (DVCTT)', 'Tiß║┐p nhß║¡n v├á trß║ú kß║┐t quß║ú hß╗ô s╞í trß╗▒c tuyß║┐n', 'Sß╗ƒ TTTT Ninh B├¼nh (v3.2)', 'C├│ (HTTPS) dichvucong.ninhbinh.gov.vn', '~50 l╞░ß╗út/ng├áy']
+  R2: ['2', 'Hß╗ç thß╗æng quß║ún l├╜ v─ân bß║ún ─æiß╗üu h├ánh (eCabinet)', 'Xß╗¡ l├╜ v─ân bß║ún ─æß║┐n/─æi, ─æiß╗üu h├ánh', 'VNPT (v2.1)', 'C├│ (nß╗Öi bß╗Ö)', '15 c├ín bß╗Ö']
+  R3: ['3', 'Phß║ºn mß╗üm kß║┐ to├ín MISA Mimosa 2023', 'Kß║┐ to├ín ng├ón s├ích nh├á n╞░ß╗¢c', 'MISA JSC', 'Kh├┤ng (nß╗Öi bß╗Ö)', '1ΓÇô3 c├ín bß╗Ö']
+  R4: ['4', 'Email c├┤ng vß╗Ñ (@xalynhan.gov.vn)', 'Trao ─æß╗òi th├┤ng tin ch├¡nh thß╗⌐c', 'Bß╗Ö TTTT (email.gov.vn)', 'C├│ (HTTPS)', '33 c├ín bß╗Ö']
+  R5: ['5', 'Hß╗ç thß╗æng Camera gi├ím s├ít (CCTV)', 'Gi├ím s├ít an ninh trß╗Ñ sß╗ƒ UBND x├ú', 'Dahua (5 camera)', 'Kh├┤ng', 'Nß╗Öi bß╗Ö']
+
+--- Table 4 (6r x 4c) ---
+  R0: ['STT', 'T├¬n thiß║┐t bß╗ï/ Chß╗ºng loß║íi', 'Vß╗ï tr├¡ triß╗ân khai', 'Mß╗Ñc ─æ├¡ch sß╗¡ dß╗Ñng']
+  R1: ['1', 'Modem GPON Interner', 'V├╣ng mß║íng bi├¬n', 'Thiß║┐t bß╗ï kß║┐t nß╗æi ─æß╗ïnh tuyß║┐n v├á kß║┐t nß╗æi ra mß║íng Int']
+  R2: ['2', 'Generic Firewall/ Checkpoint 12600', 'V├╣ng mß║íng bi├¬n', 'Quß║ún l├╜ truy cß║¡p v├áo/ra v├á bß║úo vß╗ç v├╣ng DMZ; V├╣ng m']
+  R3: ['3', 'SWL3/Cisco 3560', 'Core Switch', 'Thiß║┐t bß╗ï ─æß╗ïnh tuyß║┐n k├¬╠üt n├┤╠üi mß║íng nß╗Öi bß╗Ö']
+  R4: ['4', 'SWL2/ Cisco2960', 'Switch c├íc tß║ºng, ph├▓ng hß╗ìp', 'Thiß║┐t bß╗ï ─æß╗ïnh tuyß║┐n v├╣ng mß║íng nß╗Öi bß╗Ö']
+  R5: ['5', 'Thiß║┐t bß╗ï c├ón bß║▒ng tß║úi', 'V├╣ng mß║íng bi├¬n', '']
+
+--- Table 5 (5r x 4c) ---
+  R0: ['STT', 'T├¬n dß╗ïch vß╗Ñ', 'M├íy chß╗º/Hß║í tß║ºng', 'Mß╗Ñc ─æ├¡ch sß╗¡ dß╗Ñng']
+  R1: ['1', 'Cß╗òng DVCTT tß╗ënh Ninh B├¼nh (dichvucong.ninhbinh.gov', 'M├íy chß╗º tß║íi Sß╗ƒ TTTT Ninh B├¼nh Kß║┐t nß╗æi qua HTTPS/In', 'Tiß║┐p nhß║¡n v├á trß║ú kß║┐t quß║ú hß╗ô s╞í dß╗ïch vß╗Ñ c├┤ng trß╗▒c t']
+  R2: ['2', 'eCabinet ΓÇô Quß║ún l├╜ v─ân bß║ún (VNPT v2.1)', 'M├íy chß╗º cß╗ºa VNPT Kß║┐t nß╗æi qua Internet', 'Xß╗¡ l├╜ v─ân bß║ún ─æß║┐n/─æi, quß║ún l├╜ ─æiß╗üu h├ánh nß╗Öi bß╗Ö']
+  R3: ['3', 'MISA Mimosa 2023 (Kß║┐ to├ín ng├ón s├ích)', 'M├íy t├¡nh c├ín bß╗Ö kß║┐ to├ín (c├ái ─æß║╖t cß╗Ñc bß╗Ö)', 'Quß║ún l├╜ kß║┐ to├ín ng├ón s├ích nh├á n╞░ß╗¢c x├ú']
+  R4: ['4', 'Email c├┤ng vß╗Ñ @xalynhan.gov.vn (email.gov.vn)', 'M├íy chß╗º Bß╗Ö TTTT Kß║┐t nß╗æi qua HTTPS', 'Trao ─æß╗òi v─ân bß║ún, th├┤ng tin c├┤ng viß╗çc']
+
+--- Table 6 (4r x 5c) ---
+  R0: ['STT', 'V├╣ng mß║íng', 'IP Private', 'IP Public', 'Ghi ch├║']
+  R1: ['1', 'V├╣ng mß║íng nß╗Öi bß╗Ö (LAN duy nhß║Ñt)', '192.168.11.1 ΓÇô 192.168.11.254/24', 'IP ri├¬ng, ─æß╗Öng', 'Mß║íng phß║│ng ΓÇô to├án bß╗Ö thiß║┐t bß╗ï c├╣ng subnet. Kh├┤ng c']
+  R2: ['2', 'Gateway/Router ch├¡nh', '192.168.1.1', 'I IP ri├¬ng, ─æß╗Öng', 'GPON ONT VNPT tß║íi Tß║ºng 1 ΓÇô P104']
+  R3: ['3', 'V├╣ng WiFi (kh├┤ng t├ích biß╗çt)', 'C├╣ng dß║úi 192.168.11.x', 'IP ri├¬ng, ─æß╗Öng', 'WiFi c├╣ng dß║úi IP vß╗¢i mß║íng c├│ d├óy (ch╞░a ph├ón v├╣ng)']
+
+--- Table 7 (2r x 4c) ---
+  R0: ['STT', 'Hß╗ç thß╗æng', 'Cß║Ñp ─æß╗Ö ─æß╗ü xuß║Ñt', 'C─ân cß╗⌐ ─æß╗ü xuß║Ñt']
+  R1: ['1', 'Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ hoß║ít ─æß╗Öng cß╗ºa ß╗ªy ban nh', '2', 'Khoß║ún 1 ─Éiß╗üu 8 Nghß╗ï ─æß╗ïnh 85/2016/N─É-CP ng├áy 01/7/2']
+
+--- Table 8 (3r x 4c) ---
+  R0: ['STT', 'Hß╗ç thß╗æng', 'Cß║Ñp ─æß╗Ö ─æß╗ü xuß║Ñt', 'Nß╗Öi dung thuyß║┐t minh']
+  R1: ['1', 'Thuyß║┐t minh ph╞░╞íng ├ín ─æ├íp ß╗⌐ng y├¬u cß║ºu quß║ún l├╜', '2', 'Phß╗Ñ lß╗Ñc I']
+  R2: ['2', 'Thuyß║┐t minh ph╞░╞íng ├ín ─æ├íp ß╗⌐ng y├¬u cß║ºu kß╗╣ thuß║¡t', '2', 'Phß╗Ñ lß╗Ñc II']
+
+--- Table 9 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'X├óy dß╗▒ng ch├¡nh s├ích an to├án th├┤ng tin']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. UBND x├ú L├╜ Nh├ón ch╞░a ban h├ánh Quy ch']
+  R2: ['Ph╞░╞íng ├ín', 'Quß║ún l├╜ an to├án mß║íng: Hß╗ç thß╗æng mß║íng phß║úi ─æ╞░ß╗úc thiß║┐']
+
+--- Table 10 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'Quy ─æß╗ïnh vß╗ü x├óy dß╗▒ng v├á c├┤ng bß╗æ Quy chß║┐ bß║úo ─æß║úm an']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng.  Sß║╜ ban h├ánh Quy chß║┐ bß║úo ─æß║úm an to├án']
+  R2: ['Ph╞░╞íng ├ín', 'X├óy dß╗▒ng v├á c├┤ng bß╗æ Quy chß║┐ bß║úo ─æß║úm an to├án th├┤ng ']
+
+--- Table 11 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü viß╗çc r├á so├ít, sß╗¡a ─æß╗òi Quy chß║┐ bß║úo ─æ']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng.  Sß║╜ quy ─æß╗ïnh trong Quy chß║┐ ATTT ban ']
+  R2: ['Ph╞░╞íng ├ín', 'R├á so├ít, sß╗¡a ─æß╗òi Quy chß║┐ bß║úo ─æß║úm an to├án th├┤ng tin']
+
+--- Table 12 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'Th├ánh lß║¡p hoß║╖c chß╗ë ─æß╗ïnh bß╗Ö phß║¡n chuy├¬n tr├ích vß╗ü an']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng mß╗Öt phß║ºn.  UBND x├ú giao ├┤ng ─Éß╗ù V─ân H├ón ΓÇô C']
+  R2: ['Ph╞░╞íng ├ín', 'UBND x├ú L├╜ Nh├ón giao ├┤ng ─Éß╗ù V─ân H├ón (S─ÉT: 03954696']
+
+--- Table 13 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ ─æß║ºu mß╗æi li├¬n hß╗ç, phß╗æi hß╗úp vß╗¢i c├íc c╞í quan, tß╗ò c']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng mß╗Öt phß║ºn. Khi xß║úy ra sß╗▒ cß╗æ (mß║Ñt kß║┐t nß╗æi In']
+  R2: ['Ph╞░╞íng ├ín', 'a) C├ín bß╗Ö phß╗Ñ tr├ích CNTT l├á ─æß║ºu mß╗æi li├¬n hß╗ç vß╗¢i Sß╗ƒ']
+
+--- Table 14 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ ─æß║ºu mß╗æi li├¬n hß╗ç, phß╗æi hß╗úp vß╗¢i c├íc c╞í quan, tß╗ò c']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng']
+  R2: ['Ph╞░╞íng ├ín', 'a) C├ín bß╗Ö phß╗Ñ tr├ích CNTT  l├ám ─æß║ºu mß╗æi, tß╗ò chß╗⌐c thß╗▒']
+
+--- Table 15 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'Tham gia c├íc hoß║ít ─æß╗Öng, c├┤ng t├íc bß║úo ─æß║úm an to├án t']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng']
+  R2: ['Ph╞░╞íng ├ín', 'Tham gia c├íc hoß║ít ─æß╗Öng, c├┤ng t├íc bß║úo ─æß║úm an to├án t']
+
+--- Table 16 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü tuyß╗ân dß╗Ñng c├ín bß╗Ö v├á ─æiß╗üu kiß╗çn tuyß╗â']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng .']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh vß╗ü tuyß╗ân dß╗Ñng c├ín bß╗Ö v├á ─æiß╗üu kiß╗çn tuyß╗ân d']
+
+--- Table 17 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü viß╗çc thß╗▒c hiß╗çn nß╗Öi quy, quy chß║┐ bß║úo']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Sß║╜ quy ─æß╗ïnh trong Quy chß║┐ ATTT ban h']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh vß╗ü viß╗çc thß╗▒c hiß╗çn bß║úo ─æß║úm an to├án th├┤ng t']
+
+--- Table 18 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ kß║┐ hoß║ích v├á ─æß╗ïnh kß╗│ h├áng n─âm tß╗ò chß╗⌐c phß╗ò biß║┐n, ']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ban h├ánh. Sß║╜ quy ─æß╗ïnh trong Quy chß║┐ ATTT ban ']
+  R2: ['Ph╞░╞íng ├ín', 'Kß║┐ hoß║ích v├á tß╗ò chß╗⌐c ─æß╗ïnh kß╗│ h├áng n─âm: Kß║┐ hoß║ích v├á ']
+
+--- Table 19 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh ─æß╗æi vß╗¢i c├ín bß╗Ö nghß╗ë hoß║╖c thay ─æß╗òi c├┤ng']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Ch╞░a c├│ quy tr├¼nh ch├¡nh thß╗⌐c. Sß║╜ bß╗ò ']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh ─æß╗æi vß╗¢i c├ín bß╗Ö nghß╗ë hoß║╖c thay ─æß╗òi c├┤ng vi']
+
+--- Table 20 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy tr├¼nh v├á thß╗▒c hiß╗çn v├┤ hiß╗çu h├│a tß║Ñt cß║ú c├íc q']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Ch╞░a c├│ quy tr├¼nh ch├¡nh thß╗⌐c. Sß║╜ bß╗ò ']
+  R2: ['Ph╞░╞íng ├ín', 'C├ín bß╗Ö quß║ún trß╗ï phß║úi v├┤ hiß╗çu h├│a tß║Ñt cß║ú c├íc quyß╗ün ']
+
+--- Table 21 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ t├ái liß╗çu m├┤ tß║ú quy m├┤, phß║ím vi v├á ─æß╗æi t╞░ß╗úng sß╗¡ ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng (Tham chiß║┐u Phß║ºn I, Mß╗Ñc 3 cß╗ºa Hß╗ô s╞í n├áy).']
+  R2: ['Ph╞░╞íng ├ín', 'C├│ t├ái liß╗çu m├┤ tß║ú quy m├┤, phß║ím vi v├á ─æß╗æi t╞░ß╗úng sß╗¡ ']
+
+--- Table 22 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ t├ái liß╗çu m├┤ tß║ú thiß║┐t kß║┐ v├á c├íc th├ánh phß║ºn cß╗ºa h']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng (Tham chiß║┐u Phß║ºn I, Mß╗Ñc 4 cß╗ºa Hß╗ô s╞í n├áy).']
+  R2: ['Ph╞░╞íng ├ín', 'C├│ t├ái liß╗çu m├┤ tß║ú thiß║┐t kß║┐ v├á c├íc th├ánh phß║ºn hß╗ç th']
+
+--- Table 23 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ t├ái liß╗çu m├┤ tß║ú ph╞░╞íng ├ín bß║úo ─æß║úm an to├án th├┤ng ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng (Tham chiß║┐u Phß║ºn III v├á Phß╗Ñ lß╗Ñc I, II cß╗ºa ']
+  R2: ['Ph╞░╞íng ├ín', 'C├│ t├ái liß╗çu m├┤ tß║ú ph╞░╞íng ├ín ATTT theo cß║Ñp ─æß╗Ö tß║íi P']
+
+--- Table 24 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ t├ái liß╗çu lß╗▒a chß╗ìn giß║úi ph├íp c├┤ng nghß╗ç bß║úo ─æß║úm a']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng (Tham chiß║┐u Phß║ºn I, Mß╗Ñc 4 cß╗ºa Hß╗ô s╞í n├áy).']
+  R2: ['Ph╞░╞íng ├ín', 'C├│ t├ái liß╗çu m├┤ tß║ú thiß║┐t kß║┐ v├á c├íc th├ánh phß║ºn hß╗ç th']
+
+--- Table 25 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh khi c├│ thay ─æß╗òi thiß║┐t kß║┐, ─æ├ính gi├í lß║íi']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng']
+  R2: ['Ph╞░╞íng ├ín', 'Thiß║┐t kß║┐ an to├án hß╗ç thß╗æng th├┤ng tin Khi c├│ thay ─æß╗ò']
+
+--- Table 26 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ bi├¬n bß║ún, hß╗úp ─æß╗ông v├á c├íc cam kß║┐t ─æß╗æi vß╗¢i b├¬n t']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng  X├ú kh├┤ng tß╗▒ ph├ít triß╗ân phß║ºn mß╗üm hay c├│ se']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh ─æß╗æi vß╗¢i viß╗çc ph├ít triß╗ân phß║ºn mß╗üm thu├¬ kho']
+
+--- Table 27 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh y├¬u cß║ºu c├íc nh├á ph├ít triß╗ân cung cß║Ñp m├ú']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng  (X├ú kh├┤ng tß╗▒ ph├ít triß╗ân phß║ºn mß╗üm hay c├│ s']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh ─æß╗æi vß╗¢i viß╗çc ph├ít triß╗ân phß║ºn mß╗üm thu├¬ kho']
+
+--- Table 28 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü viß╗çc thß╗▒c hiß╗çn kiß╗âm thß╗¡ hß╗ç thß╗æng tr']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng (X├ú kh├┤ng tß╗▒ ph├ít triß╗ân phß║ºn mß╗üm hay c├│ se']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh ─æß╗æi vß╗¢i viß╗çc thß╗¡ nghiß╗çm v├á nghi├¬╠úm thu h├¬']
+
+--- Table 29 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ y├¬u cß║ºu vß╗ü nß╗Öi dung, kß║┐ hoß║ích, quy tr├¼nh thß╗¡ ng']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng (X├ú kh├┤ng tß╗▒ ph├ít triß╗ân phß║ºn mß╗üm hay c├│ se']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh ─æß╗æi vß╗¢i viß╗çc thß╗¡ nghiß╗çm v├á nghi├¬╠úm thu h├¬']
+
+--- Table 30 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ bß╗Ö phß║¡n c├│ tr├ích nhiß╗çm thß╗▒c hiß╗çn thß╗¡ nghiß╗çm v├á ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng  (X├ú kh├┤ng tß╗▒ ph├ít triß╗ân phß║ºn mß╗üm hay c├│ s']
+  R2: ['Ph╞░╞íng ├ín', 'Quy ─æß╗ïnh ─æß╗æi vß╗¢i viß╗çc thß╗¡ nghiß╗çm v├á nghi├¬╠úm thu h├¬']
+
+--- Table 31 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü quß║ún l├╜, vß║¡n h├ánh hoß║ít ─æß╗Öng b├¼nh th']
+  R1: ['Hiß╗çn trß║íng', 'Hß╗ç thß╗æng mß╗¢i sß║╜ ─É├íp ß╗⌐ng Sß║╜ ban han h├ánh quy chß║┐ sa']
+  R2: ['Ph╞░╞íng ├ín', '1) Bß║úo ─æß║úm 2 ─æ╞░ß╗¥ng Internet VNPT hoß║ít ─æß╗Öng ß╗òn ─æß╗ïnh']
+
+--- Table 32 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü cß║¡p nhß║¡t, sao l╞░u dß╗▒ ph├▓ng v├á kh├┤i ']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng.  Sß║╜ ban han h├ánh quy chß║┐ sau 6 th├íng']
+  R2: ['Ph╞░╞íng ├ín', '1) Sao l╞░u dß╗» liß╗çu h├áng tuß║ºn ra ß╗ò cß╗⌐ng di ─æß╗Öng (tß╗æ']
+
+--- Table 33 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü cß║¡p nhß║¡t; sao l╞░u dß╗▒ ph├▓ng c├íc tß║¡p ']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng.  Sß║╜ ban han h├ánh quy chß║┐ sau 6 th├íng']
+  R2: ['Ph╞░╞íng ├ín', 'Cß║¡p nhß║¡t, sao l╞░u dß╗▒ ph├▓ng v├á kh├┤i phß╗Ñc sau khi xß║ú']
+
+--- Table 34 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü quß║ún l├╜, vß║¡n h├ánh hoß║ít ─æß╗Öng b├¼nh th']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'Quß║ún l├╜, vß║¡n h├ánh hoß║ít ─æß╗Öng b├¼nh th╞░ß╗¥ng cß╗ºa hß╗ç thß╗æ']
+
+--- Table 35 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh quß║ún l├╜ truy cß║¡p mß║íng cß╗ºa m├íy chß╗º']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'Truy cß║¡p mß║íng cß╗ºa m├íy chß╗º: Bß║úo ─æß║úm c├íc kß║┐t nß╗æi mß║ín']
+
+--- Table 36 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh quß║ún l├╜ truy cß║¡p v├á quß║ún trß╗ï m├íy chß╗º v']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'Truy cß║¡p v├á quß║ún trß╗ï m├íy chß╗º v├á ß╗⌐ng dß╗Ñng: a) Thay ']
+
+--- Table 37 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü cß║¡p nhß║¡t, sao l╞░u dß╗▒ ph├▓ng v├á kh├┤i ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'Cß║¡p nhß║¡t, sao l╞░u dß╗▒ ph├▓ng v├á kh├┤i phß╗Ñc sau khi xß║ú']
+
+--- Table 38 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ ch├¡nh s├ích, quy tr├¼nh dß╗▒ ph├▓ng v├á kh├┤i phß╗Ñc dß╗» ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', '1. X├óy dß╗▒ng v├á ├íp dß╗Ñng quy ─æß╗ïnh sao l╞░u dß╗» liß╗çu: t']
+
+--- Table 39 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh ─æß╗ïnh kß╗│ hoß║╖c khi c├│ thay ─æß╗òi cß║Ñu h├¼nh ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'B├┤╠ë sung ─Éß╗ïnh kß╗│ 3 n─âm hoß║╖c khi c├│ thay ─æß╗òi cß║Ñu h├¼']
+
+--- Table 40 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ ph╞░╞íng ├ín tiß║┐p nhß║¡n, ph├ít hiß╗çn, ph├ón loß║íi v├á xß╗¡']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', '1. Ph├ón nh├│m sß╗▒ cß╗æ theo quy ─æß╗ïnh tß║íi Quyß║┐t ─æß╗ïnh sß╗æ']
+
+--- Table 41 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ ph╞░╞íng ├ín tiß║┐p nhß║¡n, ph├ít hiß╗çn, ph├ón loß║íi v├á xß╗¡']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'X├óy dß╗▒ng quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin']
+
+--- Table 42 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'X├óy dß╗▒ng kß║┐ hoß║ích ß╗⌐ng ph├│ sß╗▒ cß╗æ an to├án th├┤ng tin ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'X├óy dß╗▒ng v├á triß╗ân khai kß║┐ hoß║ích ß╗⌐ng ph├│ sß╗▒ cß╗æ an t']
+
+--- Table 43 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü quß║ún l├╜ gi├ím s├ít, ph├ít hiß╗çn v├á cß║únh']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'C├│ ph╞░╞íng ├ín v├á ─æiß╗üu ─æß╗Öng nh├ón lß╗▒c c├│ kinh nghiß╗çm ']
+
+--- Table 44 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'X├óy dß╗▒ng quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin']
+
+--- Table 45 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin mß║íng ']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'X├óy dß╗▒ng quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ an to├án th├┤ng tin']
+
+--- Table 46 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü c╞í chß║┐ phß╗æi hß╗úp vß╗¢i c╞í quan chß╗⌐c n─â']
+  R1: ['Hiß╗çn trß║íng', '─É├íp ß╗⌐ng X├ú kh├┤ng c├│ m├íy chß╗º hay ß╗⌐ng dß╗Ñng ri├¬ng']
+  R2: ['Ph╞░╞íng ├ín', 'Phß╗æi hß╗úp vß╗¢i  c╞í quan chß╗⌐c n─âng, c├íc nh├│m chuy├¬n g']
+
+--- Table 47 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü quß║ún l├╜ truy cß║¡p, sß╗¡ dß╗Ñng t├ái nguy├¬']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Ch╞░a c├│ quy ─æß╗ïnh thß╗æng nhß║Ñt. Sß║╜ bß╗ò s']
+  R2: ['Ph╞░╞íng ├ín', '1) Mß╗ùi c├ín bß╗Ö sß╗¡ dß╗Ñng t├ái khoß║ún ri├¬ng tr├¬n tß║Ñt cß║ú ']
+
+--- Table 48 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh vß╗ü quß║ún l├╜ truy cß║¡p mß║íng v├á t├ái nguy├¬n']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Ch╞░a c├│ quy ─æß╗ïnh thß╗æng nhß║Ñt. Sß║╜ bß╗ò s']
+  R2: ['Ph╞░╞íng ├ín', 'Quß║ún l├╜ truy cß║¡p mß║íng v├á t├ái nguy├¬n tr├¬n Internet:']
+
+--- Table 49 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ ch├¡nh s├ích, quy tr├¼nh quß║ún l├╜ rß╗ºi ro an to├án th']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Sß║╜ x├óy dß╗▒ng v├á ─æ╞░a v├áo Quy chß║┐ ATTT ']
+  R2: ['Ph╞░╞íng ├ín', '1. X├íc ─æß╗ïnh mß╗⌐c rß╗ºi ro: mß║Ñt dß╗» liß╗çu (do hß╗Ång ß╗ò cß╗⌐n']
+
+--- Table 50 (3r x 2c) ---
+  R0: ['Y├¬u cß║ºu', 'C├│ quy ─æß╗ïnh, quy tr├¼nh vß╗ü kß║┐t th├║c vß║¡n h├ánh, khai ']
+  R1: ['Hiß╗çn trß║íng', 'Ch╞░a ─æ├íp ß╗⌐ng. Sß║╜ bß╗ò sung trong Quy chß║┐ ATTT.']
+  R2: ['Ph╞░╞íng ├ín', '1. Khi thanh l├╜ m├íy t├¡nh/thiß║┐t bß╗ï: x├│a sß║ích to├án b']
+
+--- Table 51 (6r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'V├╣ng mß║íng nß╗Öi bß╗Ö (LAN)', 'C├│', 'Dß║úi IP 192.168.11.0/24 ΓÇô']
+  R2: ['2', 'V├╣ng mß║íng bi├¬n', 'C├│', 'Kß║┐t nß╗æi Internet qua GPON ONT VNPT (2 ─æ╞░ß╗¥ng 150Mbp']
+  R3: ['3', 'V├╣ng DMZ', 'C├│', 'Sß║╜ bß╗ò sung khi triß╗ân khai thiß║┐t bß╗ï Firewall chuy├¬n']
+  R4: ['4', 'V├╣ng Camera', 'C├│', 'Camera Dahua v├á NVR hiß╗çn nß║▒m c├╣ng mß║íng LAN. Sß║╜ bß╗ò ']
+  R5: ['5', 'V├╣ng WiFi', 'C├│', 'Hiß╗çn V├╣ng Wifi c├╣ng v├╣ng Vlan ng╞░ß╗¥i dung, sß║╜ t├ích ']
+
+--- Table 52 (7r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'Ph╞░╞íng ├ín quß║ún l├╜ truy cß║¡p, quß║ún trß╗ï hß╗ç thß╗æng tß╗½ x', 'Ch╞░a c├│', 'Hiß╗çn kh├┤ng c├│ nhu cß║ºu truy c├óp tß╗½ xa.']
+  R2: ['2', 'Ph╞░╞íng ├ín ph├▓ng chß╗æng x├óm nhß║¡p (IDS/IPS)', 'Ch╞░a c├│', 'Sß║╜ bß╗ò sung khi triß╗ân khai thiß║┐t bß╗ï Firewall chuy├¬n']
+  R3: ['3', 'Ph╞░╞íng ├ín ph├▓ng chß╗æng m├ú ─æß╗Öc tr├¬n mß║íng v├á thiß║┐t bß╗ï', 'Ch╞░a c├│', 'Sß╗¡ dß╗Ñng sß║ún phß║⌐m Ph├▓ng chß╗æng m├ú ─æß╗Öc hoß║╖c ph╞░╞íng ├ín']
+  R4: ['4', 'Ph╞░╞íng ├ín ph├▓ng chß╗æng tß║Ñn c├┤ng mß║íng cho ß╗⌐ng dß╗Ñng w', '', 'Sß╗¡ dß╗Ñng sß║ún phß║⌐m T╞░ß╗¥ng lß╗¡a ß╗⌐ng dß╗Ñng web (WAF) ─æ╞░ß╗úc']
+  R5: ['5', 'Ph╞░╞íng ├ín bß║úo ─æß║úm an to├án th├┤ng tin cho hß╗ç thß╗æng t', '', 'Thuyß║┐t minh sß╗¡ dß╗Ñng sß║ún phß║⌐m Bß║úo ─æß║úm an to├án th├┤ng']
+  R6: ['6', 'Ph╞░╞íng ├ín dß╗▒ ph├▓ng cho c├íc thiß║┐t bß╗ï mß║íng ch├¡nh', 'C├│', 'Ca╠üc thi├¬╠üt bi╠ú ma╠úng chi╠ünh: Router, Firewall, Sw']
+
+--- Table 53 (4r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'Thiß║┐t lß║¡p chß╗ë cho ph├⌐p sß╗¡ dß╗Ñng kß║┐t nß╗æi mß║íng an to├á', 'C├│', 'Kß║┐t nß╗æi ß╗⌐ng dß╗Ñng cß║Ñp tr├¬n (DVCTT, eCabinet) ─æß╗üu qu']
+  R2: ['2', 'Kiß╗âm so├ít truy cß║¡p tß╗½ b├¬n ngo├ái theo tß╗½ng dß╗ïch vß╗Ñ;', '─Éß╗ü xuß║Ñt', 'T╞░╞í╠Çng l╞░╠ëa Generic Firewall ─æ╞░ß╗úc thiß║┐t lß║¡p chß╗ë ch']
+  R3: ['3', 'Thiß║┐t lß║¡p giß╗¢i hß║ín thß╗¥i gian chß╗¥ (timeout) ─æß╗â ─æ├│ng', 'C├│', 'Thi├¬╠üt l├ó╠úp giß╗¢i hß║ín thß╗¥i gian chß╗¥ (timeout) ─æß╗â ─æ├│']
+
+--- Table 54 (2r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'Chß╗ë cho ph├⌐p truy cß║¡p c├íc ß╗⌐ng dß╗Ñng, dß╗ïch vß╗Ñ b├¬n ng', '─Éß╗ü xuß║Ñt', 'Ch├¡nh s├ích kiß╗âm so├ít truy cß║¡p tß╗½ c├íc v├╣ng mß║íng tro']
+
+--- Table 55 (4r x 3c) ---
+  R0: ['Thiß║┐t bß╗ï', 'Ghi nhß║¡t k├╜ hß╗ç thß╗æng', '─Éß╗ông bß╗Ö thß╗¥i gian NTP']
+  R1: ['GPON ONT GW020-H (Router/Modem VNPT)', 'Kh├┤ng cß║ºn', 'Kh├┤ng cß║ºn']
+  R2: ['Switch lß╗¢p 2 v├á 3', 'Kh├┤ng cß║ºn', 'Kh├┤ng cß║ºn']
+  R3: ['Firewall', 'Kh├┤ng cß║ºn', 'Kh├┤ng cß║ºn']
+
+--- Table 56 (3r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'C├│ ph╞░╞íng ├ín ph├▓ng chß╗æng x├óm nhß║¡p bß║úo vß╗ç hß╗ç thß╗æng ', '─Éa╠üp ╞░╠üng', 'Sß╗¡ dß╗Ñng T╞░╞í╠Çng l╞░╠ëa Generic Firewall c├│ t├¡ch hß╗úp c']
+  R2: ['2', '─Éß╗ïnh kß╗│ cß║¡p nhß║¡t c╞í sß╗ƒ dß╗» liß╗çu dß║Ñu hiß╗çu tß║Ñn c├┤ng m', '─Éa╠üp ╞░╠üng', 'Th╞░╠úc hi├¬╠ún ─æi╠únh ky╠Ç cß║¡p nhß║¡t c╞í sß╗ƒ dß╗» liß╗çu dß║Ñu h']
+
+--- Table 57 (4r x 4c) ---
+  R0: ['Thiß║┐t bß╗ï', 'Cß║Ñu h├¼nh chß╗⌐c n─âng x├íc thß╗▒c tr├¬n c├íc thiß║┐t bß╗ï', 'Chß╗ë cho ph├⌐p sß╗¡ dß╗Ñng c├íc kß║┐t nß╗æi mß║íng an to├án khi ', 'Hß║ín chß║┐ c├íc ─æß╗ïa chß╗ë mß║íng c├│ thß╗â kß║┐t nß╗æi, quß║ún trß╗ï ']
+  R1: ['GPON ONT GW020-H (Router/Modem VNPT)', '─É├íp ß╗⌐ng', '─É├íp ß╗⌐ng', '─É├íp ß╗⌐ng']
+  R2: ['Switch lß╗¢p 2 v├á 3', '─É├íp ß╗⌐ng', '─É├íp ß╗⌐ng', '─É├íp ß╗⌐ng']
+  R3: ['Firewall', '─É├íp ß╗⌐ng', '─É├íp ß╗⌐ng', '─É├íp ß╗⌐ng']
+
+--- Table 58 (4r x 4c) ---
+  R0: ['Y├¬u cß║ºu', 'Thiß║┐t lß║¡p ch├¡nh s├ích x├íc thß╗▒c tr├¬n m├íy chß╗º', 'Thay ─æß╗òi c├íc t├ái khoß║ún mß║╖c ─æß╗ïnh tr├¬n hß╗ç thß╗æng hoß║╖c', 'Thiß║┐t lß║¡p ch├¡nh s├ích mß║¡t khß║⌐u an to├án: Y├¬u cß║ºu tha']
+  R1: ['M├íy chß╗º', 'Thiß║┐t lß║¡p ch├¡nh s├ích x├íc thß╗▒c tr├¬n m├íy chß╗º', 'Thay ─æß╗òi c├íc t├ái khoß║ún mß║╖c ─æß╗ïnh tr├¬n hß╗ç thß╗æng hoß║╖c', 'Thiß║┐t lß║¡p ch├¡nh s├ích mß║¡t khß║⌐u an to├án: Y├¬u cß║ºu tha']
+  R2: ['Web Server (ma╠üy a╠ëo)/C├ái ─æß║╖t Web-App/Vu╠Çng DMZ/ W', '+', '+', '+']
+  R3: ['Database Server (ma╠üy a╠ëo)/ C├ái ─æß║╖t SQL server 201', '+', '+', '+']
+
+--- Table 59 (4r x 3c) ---
+  R0: ['Y├¬u cß║ºu', 'Chß╗ë cho ph├⌐p sß╗¡ dß╗Ñng c├íc kß║┐t nß╗æi mß║íng an to├án khi ', 'Thiß║┐t lß║¡p giß╗¢i hß║ín thß╗¥i gian chß╗¥ (timeout)']
+  R1: ['M├íy chß╗º', 'Chß╗ë cho ph├⌐p sß╗¡ dß╗Ñng c├íc kß║┐t nß╗æi mß║íng an to├án khi ', 'Thiß║┐t lß║¡p giß╗¢i hß║ín thß╗¥i gian chß╗¥ (timeout)']
+  R2: ['Web Server (ma╠üy a╠ëo)/C├ái ─æß║╖t Web-App/Vu╠Çng DMZ/ W', '+', '+']
+  R3: ['Database Server (ma╠üy a╠ëo)/ C├ái ─æß║╖t SQL server 201', '+', '+']
+
+--- Table 60 (4r x 4c) ---
+  R0: ['Y├¬u cß║ºu', 'Thiß║┐t lß║¡p lß║¡p chß╗⌐c n─âng ghi nhß║¡t k├╜ hß╗ç thß╗æng tr├¬n ', '─Éß╗ông bß╗Ö thß╗¥i gian giß╗»a m├íy chß╗º vß╗¢i m├íy chß╗º thß╗¥i gi', 'L╞░u nhß║¡t k├╜ hß╗ç thß╗æng trong khoß║úng thß╗¥i gian tß╗æi th']
+  R1: ['M├íy chß╗º', 'Thiß║┐t lß║¡p lß║¡p chß╗⌐c n─âng ghi nhß║¡t k├╜ hß╗ç thß╗æng tr├¬n ', '─Éß╗ông bß╗Ö thß╗¥i gian giß╗»a m├íy chß╗º vß╗¢i m├íy chß╗º thß╗¥i gi', 'L╞░u nhß║¡t k├╜ hß╗ç thß╗æng trong khoß║úng thß╗¥i gian tß╗æi th']
+  R2: ['Web Server (ma╠üy a╠ëo)/C├ái ─æß║╖t Web-App/Vu╠Çng DMZ/ W', '+', '+', '+']
+  R3: ['Database Server (ma╠üy a╠ëo)/ C├ái ─æß║╖t SQL server 201', '+', '+', '+']
+
+--- Table 61 (4r x 5c) ---
+  R0: ['Y├¬u cß║ºu', 'Loß║íi bß╗Å c├íc t├ái khoß║ún kh├┤ng sß╗¡ dß╗Ñng, c├íc t├ái khoß║ún', 'Sß╗¡ dß╗Ñng t╞░ß╗¥ng lß╗¡a cß╗ºa hß╗ç ─æiß╗üu h├ánh v├á hß╗ç thß╗æng ─æß╗â ', 'V├┤ hiß╗çu h├│a c├íc giao thß╗⌐c mß║íng kh├┤ng an to├án, c├íc ', 'Thß╗▒c hiß╗çn n├óng cß║Ñp, xß╗¡ l├╜ ─æiß╗âm yß║┐u an to├án th├┤ng t']
+  R1: ['M├íy chß╗º', 'Loß║íi bß╗Å c├íc t├ái khoß║ún kh├┤ng sß╗¡ dß╗Ñng, c├íc t├ái khoß║ún', 'Sß╗¡ dß╗Ñng t╞░ß╗¥ng lß╗¡a cß╗ºa hß╗ç ─æiß╗üu h├ánh v├á hß╗ç thß╗æng ─æß╗â ', 'V├┤ hiß╗çu h├│a c├íc giao thß╗⌐c mß║íng kh├┤ng an to├án, c├íc ', 'Thß╗▒c hiß╗çn n├óng cß║Ñp, xß╗¡ l├╜ ─æiß╗âm yß║┐u an to├án th├┤ng t']
+  R2: ['Web Server (ma╠üy a╠ëo)/C├ái ─æß║╖t Web-App/Vu╠Çng DMZ/ W', '+', '+', '+', '+']
+  R3: ['Database Server (ma╠üy a╠ëo)/ C├ái ─æß║╖t SQL server 201', '+', '+', '+', '+']
+
+--- Table 62 (4r x 3c) ---
+  R0: ['Y├¬u cß║ºu', 'C├ái ─æß║╖t phß║ºn mß╗üm ph├▓ng chß╗æng m├ú ─æß╗Öc v├á thiß║┐t lß║¡p c', 'Kiß╗âm tra, d├▓ qu├⌐t, xß╗¡ l├╜ phß║ºn mß╗üm ─æß╗Öc hß║íi cho c├íc ']
+  R1: ['M├íy chß╗º', 'C├ái ─æß║╖t phß║ºn mß╗üm ph├▓ng chß╗æng m├ú ─æß╗Öc v├á thiß║┐t lß║¡p c', 'Kiß╗âm tra, d├▓ qu├⌐t, xß╗¡ l├╜ phß║ºn mß╗üm ─æß╗Öc hß║íi cho c├íc ']
+  R2: ['Web Server (ma╠üy a╠ëo)/C├ái ─æß║╖t Web-App/Vu╠Çng DMZ/ W', '+', '+']
+  R3: ['Database Server (ma╠üy a╠ëo)/ C├ái ─æß║╖t SQL server 201', '+', '+']
+
+--- Table 63 (2r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'C├│ ph╞░╞íng ├ín x├│a sß║ích th├┤ng tin, dß╗» liß╗çu tr├¬n m├íy ', '─É├íp ß╗⌐ng', 'Hiß╗çn tß║íi ch╞░a c├│ ph╞░╞íng ├ín chuyß╗ân giao cho ─æ╞ín vß╗ï ']
+
+--- Table 64 (5r x 4c) ---
+  R0: ['ß╗¿ng dß╗Ñng', 'X├íc thß╗▒c ng╞░ß╗¥i d├╣ng', 'Timeout (phi├¬n ─æ─âng nhß║¡p)', 'Chß╗ë d├╣ng HTTPS']
+  R1: ['Cß╗òng DVCTT tß╗ënh (dichvucong.ninhbinh.gov.vn)', 'T├ái khoß║ún ri├¬ng tß╗½ng c├ín bß╗Ö', 'C├│ (do Sß╗ƒ TT&TT cß║Ñu h├¼nh)', 'C├│ (HTTPS bß║»t buß╗Öc)']
+  R2: ['eCabinet VNPT', 'T├ái khoß║ún ri├¬ng 15 ng╞░ß╗¥i d├╣ng', 'C├│ (timeout 20 ph├║t)', 'C├│ (HTTPS)']
+  R3: ['MISA Mimosa 2023 (c├ái ─æß║╖t cß╗Ñc bß╗Ö)', 'T├ái khoß║ún ─æ─âng nhß║¡p phß║ºn mß╗üm', 'Cß║ºn cß║Ñu h├¼nh timeout', 'Kh├┤ng ├íp dß╗Ñng (phß║ºn mß╗üm cß╗Ñc bß╗Ö)']
+  R4: ['Email @xalynhan.gov.vn', 'T├ái khoß║ún ri├¬ng tß╗½ng c├ín bß╗Ö', 'C├│', 'C├│ (HTTPS)']
+
+--- Table 65 (2r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'L╞░u trß╗» c├│ m├ú h├│a c├íc th├┤ng tin, dß╗» liß╗çu c├í nh├ón n', 'X├ú kh├┤ng quß║ún l├╜ server h├úy dß╗» liß╗çu ri├¬ng n├¬n kh├┤n', 'Dß╗» liß╗çu hß╗Ö tß╗ïch, ─æß║Ñt ─æai, kß║┐ to├ín hiß╗çn l╞░u tr├¬n ß╗ò ']
+
+--- Table 66 (2r x 4c) ---
+  R0: ['STT', 'Y├¬u cß║ºu', 'P/A', 'Ghi ch├║/M├┤ tß║ú']
+  R1: ['1', 'Thß╗▒c hiß╗çn sao l╞░u dß╗▒ ph├▓ng dß╗» liß╗çu c╞í bß║ún: c╞í sß╗ƒ d', 'X├ú kh├┤ng quß║ún l├╜ server h├úy dß╗» liß╗çu ri├¬ng n├¬n kh├┤n', 'Hiß╗çn sao l╞░u thß╗º c├┤ng kh├┤ng ─æß╗ïnh kß╗│ ra ß╗ò cß╗⌐ng tß║íi ']
+
+--- Table 67 (9r x 6c) ---
+  R0: ['STT', 'T├¬n thiß║┐t bß╗ï/Giß║úi ph├íp', 'Sß╗æ l╞░ß╗úng', 'Mß╗Ñc ─æ├¡ch ─æß║ºu t╞░', 'Y├¬u cß║ºu kß╗╣ thuß║¡t ─æ├íp ß╗⌐ng', '╞»u ti├¬n']
+  R1: ['1', 'Firewall', '01', 'Kiß╗âm so├ít truy cß║¡p Internet; Firewall SPI; VPN cho', '', 'Cao']
+  R2: ['2', 'Switch Layer 2 c├│ hß╗ù trß╗ú VLAN (16ΓÇô24 port)', '06', 'Ph├ón t├ích v├╣ng mß║íng: LAN c├ín bß╗Ö, WiFi, Camera v├áo ', '', 'Cao']
+  R3: ['3', 'Switch Layer 3 c├│ hß╗ù trß╗ú VLAN (16ΓÇô24 port)', '02', 'Lam switch core v├á c├│ dß╗▒ ph├▓ng 1+1', '', 'Cao']
+  R4: ['3', 'Phß║ºn mß╗üm diß╗çt virus bß║ún quyß╗ün (AV/Endpoint Securit', '01 g├│i (30 m├íy)', 'Ph├▓ng chß╗æng m├ú ─æß╗Öc tr├¬n 26 PC + 01 laptop; quß║ún l├╜', '', 'Cao']
+  R5: ['4', 'ß╗ö cß╗⌐ng di ─æß╗Öng 1TB (─æß╗â sao l╞░u dß╗» liß╗çu)', '02 chiß║┐c', 'Sao l╞░u ─æß╗ïnh kß╗│ dß╗» liß╗çu; lu├ón phi├¬n 02 ß╗ò; 01 ß╗ò l╞░u', '', 'Cao']
+  R6: ['5', 'UPS (Bß╗Ö l╞░u ─æiß╗çn dß╗▒ ph├▓ng cho ph├▓ng mß║íng tß║ºng 1)', '01', 'Bß║úo vß╗ç Switch, Router, NVR Camera khß╗Åi mß║Ñt ─æiß╗çn ─æß╗Ö', '', 'Cao']
+  R7: ['6', 'Rack server', '01', '', '', 'Cao']
+  R8: ['7', 'Thiß║┐t bß╗ï c├ón bß║▒ng tß║úi', '01', '', '', 'Cao']
+
+--- Table 68 (9r x 4c) ---
+  R0: ['STT', 'Nß╗Öi dung cam kß║┐t', 'Thß╗¥i hß║ín thß╗▒c hiß╗çn', '─É╞ín vß╗ï chß╗ïu tr├ích nhiß╗çm']
+  R1: ['1', 'Ban h├ánh Quy chß║┐ bß║úo ─æß║úm an to├án, an ninh th├┤ng ti', 'Trong v├▓ng 06 th├íng kß╗â tß╗½ khi HS─ÉXC─É ─æ╞░ß╗úc ph├¬ duyß╗ç', 'UBND x├ú L├╜ Nh├ón']
+  R2: ['2', 'Ban h├ánh Quyß║┐t ─æß╗ïnh ph├ón c├┤ng c├ín bß╗Ö phß╗Ñ tr├ích CNT', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R3: ['3', 'X├óy dß╗▒ng quy tr├¼nh sao l╞░u dß╗» liß╗çu v├á quy tr├¼nh ß╗⌐n', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R4: ['4', 'Tß╗ò chß╗⌐c tß║¡p huß║Ñn/phß╗ò biß║┐n ATTT cho c├íc c├ín bß╗Ö, c├┤n', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R5: ['5', 'Mua sß║»m v├á triß╗ân khai phß║ºn mß╗üm diß╗çt virus cho 26 P', 'Trong v├▓ng 12 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R6: ['6', 'Mua sß║»m Router/Firewall c├│ t├¡ch hß╗úp SPI Firewall, ', 'Trong v├▓ng 18 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R7: ['7', 'Triß╗ân khai ph├ón v├╣ng VLAN (LAN, WiFi, Camera t├ích ', 'Trong v├▓ng 18 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R8: ['8', 'Mua sß║»m ß╗ò cß╗⌐ng dß╗▒ ph├▓ng v├á thß╗▒c hiß╗çn sao l╞░u ─æß╗ïnh ', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+
+=== IMAGES ===
+  Img: media/image2.png
+  Img: media/image1.png
+Total: 2
+
+================================================================================
+FILE 2: BAO CAO HSDX
+================================================================================
+
+=== PARAGRAPHS ===
+[P1] Normal | V/v b├ío c├ío khß║úo s├ít thß╗▒c trß║íng, nhu cß║ºu chuyß╗ân ─æß╗òi sß╗æ
+[P3] Normal | K├¡nh gß╗¡i: ß╗ªy ban nh├ón d├ón x├ú L├╜ Nh├ón
+[P5] Normal | MobiFone Tß╗ënh Ninh B├¼nh ΓÇô chi nh├ính Tß╗òng C├┤ng ty viß╗àn th├┤ng MobiFone (MobiFone) xin gß╗¡i lß╗¥i ch├áo tr├ón trß╗ìng ─æß║┐n Qu├╜ ß╗ªy ban nh├ón d├ón x├ú L├╜ Nh├ón (Qu├╜ ß╗ªy ban).
+[P6] Normal | C─ân cß╗⌐ v├áo buß╗òi l├ám viß╗çc trß╗▒c tiß║┐p vß╗¢i Qu├╜ ß╗ªy ban vß╗ü viß╗çc t╞░ vß║Ñn ─æ├ính gi├í vß╗ü an to├án th├┤ng tin (ATTT) theo cß║Ñp ─æß╗Ö ─æß╗â nß║»m bß║»t nhu cß║ºu t╞░ vß║Ñn x├óy dß╗▒ng hß╗ô s╞í cß║Ñp ─æß╗Ö bß║úo ─æß║úm ATTT cß╗ºa Qu├╜ ß╗ªy ban, MobiFone ─æ├ú tiß║┐n h├ánh khß║úo s├ít v├á xin ─æ╞░ß╗úc b├ío c├ío nh╞░ sau:
+[P8] Normal | I. C─éN Cß╗¿ PH├üP L├¥
+[P9] Normal | - C─ân cß╗⌐ Luß║¡t An to├án th├┤ng tin mß║íng ng├áy 19 th├íng 11 n─âm 2015;
+[P10] Normal | - C─ân cß╗⌐ Luß║¡t An ninh mß║íng ng├áy 12/6/2018;
+[P11] Normal | - C─ân cß╗⌐ Nghß╗ï ─æß╗ïnh sß╗æ 85/2016/N─É-CP ng├áy 01/7/2016 cß╗ºa Ch├¡nh phß╗º vß╗ü bß║úo ─æß║úm an to├án hß╗ç thß╗æng th├┤ng tin theo cß║Ñp ─æß╗Ö;
+[P12] Normal | - C─ân cß╗⌐ Th├┤ng t╞░ sß╗æ 12/2022/TT-BTTTT ng├áy 12/8/2022 cß╗ºa Bß╗Ö Th├┤ng tin v├á Truyß╗ün th├┤ng vß╗ü viß╗çc Quy ─æß╗ïnh chi tiß║┐t v├á h╞░ß╗¢ng dß║½n mß╗Öt sß╗æ ─æiß╗üu cß╗ºa Nghß╗ï ─æß╗ïnh sß╗æ 85/2016/N─É-CP ng├áy 01/7/2016 cß╗ºa Ch├¡nh phß╗º vß╗ü bß║úo ─æß║úm an to├án hß╗ç thß╗æng th├┤ng tin theo cß║Ñp ─æß╗Ö;
+[P13] Normal | - C─ân cß╗⌐ Quyß║┐t ─æß╗ïnh sß╗æ 2223/Q─É-UBND ng├áy 14/4/2023 cß╗ºa UBND Tß╗ënh Ninh B├¼nh ban h├ánh Quy chß║┐ bß║úo ─æß║úm an to├án th├┤ng tin mß║íng trong hoß║ít ─æß╗Öng cß╗ºa c╞í quan nh├á n╞░ß╗¢c Tß╗ënh Ninh B├¼nh;
+[P14] Normal | - C─ân cß╗⌐ Quyß║┐t ─æß╗ïnh sß╗æ 3614/Q─É-UBND ng├áy 01/7/2025 cß╗ºa UBND Tß╗ënh Ninh B├¼nh vß╗ü viß╗çc ph├ón c├┤ng ─æ╞ín vß╗ï chuy├¬n tr├ích an to├án th├┤ng tin mß║íng cß╗ºa UBND Tß╗ënh Ninh B├¼nh.
+[P17] Normal | II. Mß╗ñC ─É├ìCH, Y├èU Cß║ªU, PHß║áM VI KHß║óO S├üT
+[P19] Normal | 1. Mß╗Ñc ─æ├¡ch
+[P20] Normal | - ─É├ính gi├í hiß╗çn trß║íng bß║úo ─æß║úm an to├án th├┤ng tin cß╗ºa hß╗ç thß╗æng th├┤ng tin ─æang ─æ╞░ß╗úc quß║ún l├╜, vß║¡n h├ánh.
+[P21] Normal | - X├íc ─æß╗ïnh mß╗⌐c ─æß╗Ö ─æ├íp ß╗⌐ng c├íc y├¬u cß║ºu vß╗ü an to├án th├┤ng tin theo cß║Ñp ─æß╗Ö quy ─æß╗ïnh tß║íi Nghß╗ï ─æß╗ïnh sß╗æ 85/2016/N─É-CP cß╗ºa Ch├¡nh phß╗º.
+[P22] Normal | - L├ám c╞í sß╗ƒ x├íc ─æß╗ïnh cß║Ñp ─æß╗Ö an to├án th├┤ng tin ─æß╗æi vß╗¢i hß╗ç thß╗æng th├┤ng tin theo quy ─æß╗ïnh cß╗ºa ph├íp luß║¡t.
+[P23] Normal | - Ph├ít hiß╗çn c├íc nguy c╞í, lß╗ù hß╗òng, rß╗ºi ro mß║Ñt an to├án th├┤ng tin trong qu├í tr├¼nh vß║¡n h├ánh hß╗ç thß╗æng.
+[P24] Normal | - ─Éß╗ü xuß║Ñt c├íc biß╗çn ph├íp, giß║úi ph├íp kß╗╣ thuß║¡t, quß║ún l├╜ nhß║▒m n├óng cao mß╗⌐c ─æß╗Ö bß║úo ─æß║úm an to├án th├┤ng tin ph├╣ hß╗úp vß╗¢i cß║Ñp ─æß╗Ö ─æ╞░ß╗úc x├íc ─æß╗ïnh.
+[P25] Normal | - Phß╗Ñc vß╗Ñ c├┤ng t├íc lß║¡p hß╗ô s╞í, thß║⌐m ─æß╗ïnh, ph├¬ duyß╗çt v├á tß╗ò chß╗⌐c triß╗ân khai ph╞░╞íng ├ín bß║úo ─æß║úm an to├án th├┤ng tin theo cß║Ñp ─æß╗Ö.
+[P27] Normal | 2. Y├¬u cß║ºu
+[P28] Normal | - Viß╗çc khß║úo s├ít phß║úi ─æß║ºy ─æß╗º, kh├ích quan, ─æ├║ng thß╗▒c tß║┐, phß║ún ├ính ch├¡nh x├íc hiß╗çn trß║íng hß╗ç thß╗æng th├┤ng tin;
+[P29] Normal | - Nß╗Öi dung khß║úo s├ít phß║úi tu├ón thß╗º c├íc quy ─æß╗ïnh cß╗ºa ph├íp luß║¡t vß╗ü bß║úo ─æß║úm an to├án th├┤ng tin mß║íng, ─æß║╖c biß╗çt l├á Nghß╗ï ─æß╗ïnh sß╗æ 85/2016/N─É-CP v├á c├íc v─ân bß║ún h╞░ß╗¢ng dß║½n li├¬n quan;
+[P30] Normal | - ─É├ính gi├í phß║úi b├ím s├ít c├íc ti├¬u ch├¡ kß╗╣ thuß║¡t, quß║ún l├╜ v├á tß╗ò chß╗⌐c theo tß╗½ng cß║Ñp ─æß╗Ö an to├án th├┤ng tin;
+[P31] Normal | - Kß║┐t quß║ú khß║úo s├ít phß║úi c├│ sß╗æ liß╗çu, minh chß╗⌐ng r├╡ r├áng, l├ám c─ân cß╗⌐ cho viß╗çc x├íc ─æß╗ïnh cß║Ñp ─æß╗Ö v├á ─æß╗ü xuß║Ñt giß║úi ph├íp;
+[P32] Normal | - Bß║úo ─æß║úm kh├┤ng l├ám gi├ín ─æoß║ín hoß║ít ─æß╗Öng cß╗ºa hß╗ç thß╗æng th├┤ng tin trong qu├í tr├¼nh khß║úo s├ít;
+[P33] Normal | - Viß╗çc khß║úo s├ít v├á ─æ├ính gi├í phß║úi bß║úo ─æß║úm ph├╣ hß╗úp vß╗¢i m├┤ h├¼nh vß║¡n h├ánh thß╗▒c tß║┐ cß╗ºa hß╗ç thß╗æng th├┤ng tin, khß║ú n─âng ─æß║ºu t╞░, lß╗Ö tr├¼nh triß╗ân khai v├á y├¬u cß║ºu quß║ún l├╜ nh├á n╞░ß╗¢c cß╗ºa ─æ╞ín vß╗ï.
+[P35] Normal | 3. Phß║ím vi khß║úo s├ít
+[P36] Normal | Phß║ím vi khß║úo s├ít phß╗Ñc vß╗Ñ viß╗çc lß║¡p hß╗ô s╞í x├íc ─æß╗ïnh cß║Ñp ─æß╗Ö an to├án th├┤ng tin ─æß╗æi vß╗¢i hß╗ç thß╗æng th├┤ng tin cß╗ºa ß╗ªy ban nh├ón d├ón x├ú L├╜ Nh├ón (UBND x├ú L├╜ Nh├ón), Tß╗ënh Ninh B├¼nh, bao gß╗ôm:
+[P37] Normal | + Hß╗ç thß╗æng th├┤ng tin phß╗Ñc vß╗Ñ c├┤ng t├íc quß║ún l├╜, ─æiß╗üu h├ánh v├á giß║úi quyß║┐t thß╗º tß╗Ñc h├ánh ch├¡nh tß║íi UBND x├ú L├╜ Nh├ón.
+[P38] Normal | + Hß║í tß║ºng kß╗╣ thuß║¡t c├┤ng nghß╗ç th├┤ng tin phß╗Ñc vß╗Ñ vß║¡n h├ánh hß╗ç thß╗æng th├┤ng tin, bao gß╗ôm: Hß║í tß║ºng mß║íng nß╗Öi bß╗Ö (LAN), kß║┐t nß╗æi Internet; Thiß║┐t bß╗ï mß║íng, thiß║┐t bß╗ï bß║úo mß║¡t (Router, Switch, Firewall, thiß║┐t bß╗ï truy cß║¡p mß║íng); M├íy chß╗º, thiß║┐t bß╗ï l╞░u trß╗», thiß║┐t bß╗ï 
+[P39] Normal | + Hß╗ç thß╗æng m├íy trß║ím, thiß║┐t bß╗ï ─æß║ºu cuß╗æi cß╗ºa c├ín bß╗Ö, c├┤ng chß╗⌐c x├ú.
+[P40] Normal | + C├íc phß║ºn mß╗üm hß╗ç thß╗æng, phß║ºn mß╗üm nß╗ün tß║úng phß╗Ñc vß╗Ñ vß║¡n h├ánh hß╗ç thß╗æng th├┤ng tin.
+[P41] Normal | + C├íc biß╗çn ph├íp, giß║úi ph├íp bß║úo ─æß║úm an to├án th├┤ng tin hiß╗çn ─æang ─æ╞░ß╗úc triß╗ân khai, bao gß╗ôm: Biß╗çn ph├íp kß╗╣ thuß║¡t; Biß╗çn ph├íp quß║ún l├╜; Biß╗çn ph├íp tß╗ò chß╗⌐c, nh├ón sß╗▒.
+[P42] Normal | + C├┤ng t├íc quß║ún l├╜, vß║¡n h├ánh, khai th├íc v├á bß║úo ─æß║úm an to├án th├┤ng tin ─æß╗æi vß╗¢i hß╗ç thß╗æng th├┤ng tin.
+[P44] Normal | Phß║ím vi v├á ─æß╗æi t╞░ß╗úng khß║úo s├ít n├¬u tr├¬n l├ám c─ân cß╗⌐ ─æß╗â ─æ├ính gi├í hiß╗çn trß║íng, x├íc ─æß╗ïnh cß║Ñp ─æß╗Ö an to├án th├┤ng tin cß╗ºa hß╗ç thß╗æng th├┤ng tin theo quy ─æß╗ïnh tß║íi Nghß╗ï ─æß╗ïnh sß╗æ 85/2016/N─É-CP v├á c├íc v─ân bß║ún h╞░ß╗¢ng dß║½n c├│ li├¬n quan, ph├╣ hß╗úp vß╗¢i quy m├┤, chß╗⌐c n─âng, nhiß╗ç
+[P46] Normal | III. PH╞»╞áNG PH├üP KHß║óO S├üT
+[P47] Normal | Gß╗ôm 03 ph╞░╞íng ph├íp: Khß║úo s├ít thß╗▒c tß║┐ tß║íi hiß╗çn tr╞░ß╗¥ng; Phß╗Ång vß║Ñn c├ín bß╗Ö phß╗Ñ tr├ích CNTT; Kiß╗âm tra cß║Ñu h├¼nh, th├┤ng sß╗æ kß╗╣ thuß║¡t hß╗ç thß╗æng.
+[P49] Normal | IV. Kß║╛T QUß║ó KHß║óO S├üT HIß╗åN TRß║áNG Hß║á Tß║ªNG CNTT
+[P50] Normal | Kß║┐t quß║ú thß╗▒c hiß╗çn khß║úo s├ít nh╞░ sau:
+[P52] Normal | Danh s├ích trang thiß║┐t bß╗ï CNTT Tß║áI TRß╗ñ Sß╗₧ UBND X├â L├¥ NH├éN
+[P55] Normal | Trang bß╗ï Firewall phß║ºn cß╗⌐ng chuy├¬n dß╗Ñng kh├┤ng? (*)
+[P56] Normal | ΓÿÉ C├│ (─æ├ú liß╗çt k├¬ ß╗ƒ bß║úng tr├¬n)     ΓÿÆ Kh├┤ng ΓÇô Sß╗¡ dß╗Ñng t├¡nh n─âng firewall t├¡ch hß╗úp tr├¬n Router/Switch     ΓÿÉ Kh├┤ng ΓÇô Sß╗¡ dß╗Ñng phß║ºn mß╗üm firewall tr├¬n m├íy chß╗º
+[P59] Normal | V. ─É├üNH GI├ü CHUNG
+[P60] Normal | Sau khi khß║úo s├ít v├á ─æ├ính gi├í tr├¬n kß║┐t quß║ú khß║úo s├ít th├¼ hß╗ç thß╗æng cß╗ºa ─æ╞ín vß╗ï ─æang c├▓n tß╗ôn tß║íi c├íc vß║Ñn ─æß╗ü nh╞░ sau:
+[P61] Normal | + Hß╗ç thß╗æng mß║íng ch╞░a ─æ╞░ß╗úc ph├ón v├╣ng mß║íng
+[P62] Normal | + Ch╞░a c├│ s╞í ─æß╗ô mß║íng tß╗òng thß╗â.
+[P63] Normal | + Ch╞░a c├│ thiß║┐t bß╗ï t╞░ß╗¥ng lß╗¡a ─æß╗â kiß╗âm so├ít truy cß║¡p giß╗»a c├íc v├╣ng mß║íng;
+[P64] Normal | + C├íc m├íy t├¡nh ng╞░ß╗¥i d├╣ng ch╞░a ─æ╞░ß╗úc c├ái ─æß║╖t c├íc biß╗çn ph├íp ─æß║úm bß║úo an to├án th├┤ng tin nh╞░ phß║ºn mß╗üm diß╗çt virus, c├íc phß║ºn mß╗üm kiß╗âm so├ít an to├án th├┤ng tin.
+[P65] Normal | + Ch╞░a ban h├ánh c├íc quy ─æß╗ïnh, quy chß║┐ vß╗ü ATTT, ph├ón c├┤ng c├ín bß╗Ö phß╗Ñ tr├ích CNTT, ATTT, quy tr├¼nh sao l╞░u dß╗» liß╗çu v├á quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ cß╗æ ATTT, tß║¡p huß║Ñn/phß╗ò biß║┐n ATTT cho c├íc c├ín bß╗Ö, c├┤ng chß╗⌐c x├ú.
+[P66] Normal | Kß║┐t luß║¡n chung: Hß╗ç thß╗æng c╞í sß╗ƒ hß║í tß║ºng c├┤ng nghß╗ç th├┤ng tin cß╗ºa ─æ╞ín vß╗ï ch╞░a ─æ├íp ß╗⌐ng y├¬u cß║ºu vß╗ü hß╗ç thß╗æng th├┤ng tin cß║Ñp ─æß╗Ö 2.
+[P68] Normal | VI. ─Éß╗Ç XUß║ñT
+[P69] Normal | 1. ─Éß║ºu t╞░ c├íc trang thiß║┐t bß╗ï ─æß║úm bß║úo an to├án th├┤ng tin theo cß║Ñp ─æß╗Ö nh╞░ sau
+[P72] Normal | 2. Danh s├ích c├íc trang thiß║┐t bß╗ï cß║ºn trang bß╗ï
+[P75] Normal | Tr├¬n ─æ├óy l├á b├ío c├ío khß║úo s├ít thß╗▒c trß║íng hß╗ç thß╗æng ATTT cß╗ºa Qu├╜ ß╗ªy ban v├á t╞░ vß║Ñn x├óy dß╗▒ng hß╗ô s╞í cß║Ñp ─æß╗Ö bß║úo ─æß║úm ATTT tß╗½ MobiFone./.
+[P77] Normal | Tr├ón trß╗ìng!
+
+=== TABLES ===
+
+--- Table 0 (1r x 2c) ---
+  R0: ['TCT VIß╗äN TH├öNG MOBIFONE MOBIFONE Tß╗êNH NINH B├îNH  Sß╗æ:ΓÇª.0/MBF.', 'Cß╗ÿNG H├ÆA X├â Hß╗ÿI CHß╗ª NGH─¿A VIß╗åT NAM ─Éß╗Öc lß║¡p - Tß╗▒ do - Hß║ính ph']
+
+--- Table 1 (11r x 8c) ---
+  R0: ['STT', 'Loß║íi thiß║┐t bß╗ï (*)', 'H├úng sß║ún xuß║Ñt (*)', 'Model (*)', 'Sß╗æ serial (S/N) (*)', 'Vß╗ï tr├¡ lß║»p ─æß║╖t (*) (Tß║ºng ΓÇô Ph├▓ng)', 'N─âm mua / N─âm lß║»p', 'Ghi ch├║']
+  R1: ['1', 'Switch 24 port', 'TP link', 'TLSF1024D', '2196438002541', 'Tß║ºng 1', '2024', 'Ph├▓ng 104']
+  R2: ['2', 'Switch 5 port', 'TP link', 'TLSF1005D', '22292T6023070', 'Tß║ºng 1', '2024', 'Ph├▓ng 104']
+  R3: ['3', '─Éß║ºu ghi\xa0h├¼nh\xa0Dahua', '', '', '9B07732PCF9E8FE', 'Tß║ºng 1', '2024', 'Ph├▓ng 104']
+  R4: ['4', 'Router wifi', 'Imou', 'HR300', 'HCN300000137811', 'Tß║ºng 1', '2024', 'Ph├▓ng 104']
+  R5: ['5', 'Router Wifi', 'Tenda', 'N301', 'E0682015516000', 'Tß║ºng 2', '2024', 'Ph├▓ng 201']
+  R6: ['6', 'Router Wifi', 'mercusys', 'MW8325R', '22233K6001366', 'Tß║ºng 2', '2024', 'Ph├▓ng 205']
+  R7: ['7', 'Router Wifi', 'Imou', 'HR300', 'HCN300000137608', 'Tß║ºng 3', '2024', 'Ph├▓ng 305']
+  R8: ['8', 'Router Wifi', 'ruijie', 'RG-EW300pro', 'G1RP2JL019831', 'Tß║ºng 3', '2024', 'Ph├▓ng 303']
+  R9: ['9', 'Router Wifi', 'ruijie', 'RG-EW300pro', 'G1RP2JL015575', 'Tß║ºng 3', '2024', 'Ph├▓ng 304']
+  R10: ['10', 'Router Wifi', 'Imou', 'HR300', 'HCN300000139973', 'Tß║ºng 3', '2024', 'Ph├▓ng 308']
+
+--- Table 2 (2r x 8c) ---
+  R0: ['STT', 'Vai tr├▓ (*) (File server, WebΓÇª)', 'H├úng / Model (*)', 'Sß╗æ serial (S/N) (*)', 'RAM (GB)', 'ß╗ö cß╗⌐ng (TB)', 'Hß╗ç ─æiß╗üu h├ánh (*)', 'Vß╗ï tr├¡ (*) (Tß║ºng ΓÇô Ph├▓ng)']
+  R1: ['1', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph', 'Kh├┤ng c├│ m├íy chß╗º vß║¡t l├╜ ΓÇô Dß╗» liß╗çu l╞░u tr├¬n ß╗ò cß╗⌐ng tß║íi V─ân ph']
+
+--- Table 3 (6r x 7c) ---
+  R0: ['STT', 'H├úng sß║ún xuß║Ñt (*)', 'Model (*)', 'Sß╗æ serial (S/N) (*)', '─Éß╗Ö ph├ón giß║úi', 'Vß╗ï tr├¡ lß║»p ─æß║╖t (*)', 'Ghi ch├║ (g├│c quay, ngo├ái trß╗¥iΓÇª)']
+  R1: ['1', 'Dahua', 'HDW1230DT', '', '2MP', 'Tß║ºng 1 h╞░ß╗¢ng nh├á xe', '90 ─æß╗Ö']
+  R2: ['2', 'Dahua', 'HDW1230DT', '', '2MP', 'Tß║ºng 1 h╞░ß╗¢ng ra cß╗òng ch├¡nh', '90 ─æß╗Ö']
+  R3: ['3', 'Dahua', 'HDW1230DT', '', '2MP', 'Tß║ºng 1 quay h├ánh lang', '90 ─æß╗Ö']
+  R4: ['4', 'Dahua', 'HDW1230DT', '', '2MP', 'Tß║ºng 2 quay h├ánh lang', '90 ─æß╗Ö']
+  R5: ['5', 'Dahua', 'HDW1230DT', '', '2MP', 'Tß║ºng 2 quay g├│c h├ánh lang', '90 ─æß╗Ö']
+
+--- Table 4 (9r x 4c) ---
+  R0: ['STT', 'Nß╗Öi dung cam kß║┐t', 'Thß╗¥i hß║ín thß╗▒c hiß╗çn', '─É╞ín vß╗ï chß╗ïu tr├ích nhiß╗çm']
+  R1: ['1', 'Ban h├ánh Quy chß║┐ bß║úo ─æß║úm an to├án, an ninh th├┤ng tin mß║íng', 'Trong v├▓ng 06 th├íng kß╗â tß╗½ khi HS─ÉXC─É ─æ╞░ß╗úc ph├¬ duyß╗çt', 'UBND x├ú L├╜ Nh├ón']
+  R2: ['2', 'Ban h├ánh Quyß║┐t ─æß╗ïnh ph├ón c├┤ng c├ín bß╗Ö phß╗Ñ tr├ích CNTT/ATTT ch├¡', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R3: ['3', 'X├óy dß╗▒ng quy tr├¼nh sao l╞░u dß╗» liß╗çu v├á quy tr├¼nh ß╗⌐ng cß╗⌐u sß╗▒ c', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R4: ['4', 'Tß╗ò chß╗⌐c tß║¡p huß║Ñn/phß╗ò biß║┐n ATTT cho c├íc c├ín bß╗Ö, c├┤ng chß╗⌐c x├ú', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R5: ['5', 'Mua sß║»m v├á triß╗ân khai phß║ºn mß╗üm diß╗çt virus cho 26 PC + 01 lap', 'Trong v├▓ng 12 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R6: ['6', 'Mua sß║»m Router/Firewall c├│ t├¡ch hß╗úp SPI Firewall, Dual WAN, ', 'Trong v├▓ng 18 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R7: ['7', 'Triß╗ân khai ph├ón v├╣ng VLAN (LAN, WiFi, Camera t├ích biß╗çt)', 'Trong v├▓ng 18 th├íng', 'UBND x├ú L├╜ Nh├ón']
+  R8: ['8', 'Mua sß║»m ß╗ò cß╗⌐ng dß╗▒ ph├▓ng v├á thß╗▒c hiß╗çn sao l╞░u ─æß╗ïnh kß╗│', 'Trong v├▓ng 06 th├íng', 'UBND x├ú L├╜ Nh├ón']
+
+--- Table 5 (9r x 6c) ---
+  R0: ['STT', 'T├¬n thiß║┐t bß╗ï/Giß║úi ph├íp', 'Sß╗æ l╞░ß╗úng', 'Mß╗Ñc ─æ├¡ch ─æß║ºu t╞░', 'Y├¬u cß║ºu kß╗╣ thuß║¡t ─æ├íp ß╗⌐ng', '╞»u ti├¬n']
+  R1: ['1', 'Firewall', '01', 'Kiß╗âm so├ít truy cß║¡p Internet; Firewall SPI; VPN cho quß║ún trß╗ï ', '', 'Cao']
+  R2: ['2', 'Switch Layer 2 c├│ hß╗ù trß╗ú VLAN (16ΓÇô24 port)', '06', 'Ph├ón t├ích v├╣ng mß║íng: LAN c├ín bß╗Ö, WiFi, Camera v├áo c├íc VLAN r', '', 'Cao']
+  R3: ['3', 'Switch Layer 3 c├│ hß╗ù trß╗ú VLAN (16ΓÇô24 port)', '02', 'Lam switch core v├á c├│ dß╗▒ ph├▓ng 1+1', '', 'Cao']
+  R4: ['3', 'Phß║ºn mß╗üm diß╗çt virus bß║ún quyß╗ün (AV/Endpoint Security) ΓÇô g├│i 3', '01 g├│i (30 m├íy)', 'Ph├▓ng chß╗æng m├ú ─æß╗Öc tr├¬n 26 PC + 01 laptop; quß║ún l├╜ tß║¡p trung', '', 'Cao']
+  R5: ['4', 'ß╗ö cß╗⌐ng di ─æß╗Öng 1TB (─æß╗â sao l╞░u dß╗» liß╗çu)', '02 chiß║┐c', 'Sao l╞░u ─æß╗ïnh kß╗│ dß╗» liß╗çu; lu├ón phi├¬n 02 ß╗ò; 01 ß╗ò l╞░u ngo├ái trß╗Ñ', '', 'Cao']
+  R6: ['5', 'UPS (Bß╗Ö l╞░u ─æiß╗çn dß╗▒ ph├▓ng cho ph├▓ng mß║íng tß║ºng 1)', '01', 'Bß║úo vß╗ç Switch, Router, NVR Camera khß╗Åi mß║Ñt ─æiß╗çn ─æß╗Öt ngß╗Öt; ─æß║ú', '', 'Cao']
+  R7: ['6', 'Rack server 24', '01', '', '', 'Cao']
+  R8: ['7', 'Thiß║┐t bß╗ï c├ón bß║▒ng tß║úi', '01', '', '', 'Cao']
+
+--- Table 6 (1r x 2c) ---
+  R0: ['N╞íi nhß║¡n: - Nh╞░ tr├¬n; -  - P.KDGPS; - L╞░u: VT, KDT.', 'NG╞»ß╗£I THß╗░C HIß╗åN B├üO C├üO']

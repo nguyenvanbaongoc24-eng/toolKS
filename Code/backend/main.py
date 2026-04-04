@@ -7,8 +7,9 @@ from typing import List, Optional, Any, Dict
 from fastapi.responses import FileResponse
 
 from ocr_service.tesseract_runner import perform_ocr
-from ai_extraction.extractor import extract_structured_data
+from ai_extraction.extractor import extract_structured_data, extract_device_data
 from document_generation.generator import generate_report_docx
+from document_generation.report_generator import generate_survey_report
 
 app = FastAPI(title="Survey Profiler API - Khảo sát ATTT")
 
@@ -62,6 +63,34 @@ async def upload_and_extract(file: UploadFile = File(...)):
         if os.path.exists(file_path):
             os.remove(file_path)
 
+@app.post("/api/extract-devices")
+async def extract_devices(files: List[UploadFile] = File(...)):
+    texts = []
+    tmp_dir = os.path.join(tempfile.gettempdir(), "survey_profiler_devices")
+    os.makedirs(tmp_dir, exist_ok=True)
+    
+    try:
+        for file in files:
+            if not file.filename:
+                continue
+            
+            file_path = os.path.join(tmp_dir, file.filename)
+            with open(file_path, "wb") as f:
+                content = await file.read()
+                f.write(content)
+                
+            ocr_text = perform_ocr(file_path)
+            texts.append(ocr_text)
+            
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                
+        extracted_data = extract_device_data(texts)
+        return {"status": "success", "extracted_data": extracted_data}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/api/generate-docx")
 async def generate_docx(req: GenerateDocxRequest):
     try:
@@ -83,6 +112,24 @@ async def generate_docx(req: GenerateDocxRequest):
         
     except HTTPException:
         raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/generate-report")
+async def generate_report(req: GenerateDocxRequest):
+    """Generate a BAO CAO HSDX-style survey report from form data."""
+    try:
+        tmp_dir = os.path.join(tempfile.gettempdir(), "survey_profiler")
+        os.makedirs(tmp_dir, exist_ok=True)
+        output_path = os.path.join(tmp_dir, "BaoCaoKhaoSat_ATTT.docx")
+        
+        result_path = generate_survey_report(req.data, output_path)
+        
+        return FileResponse(
+            result_path, 
+            filename="BaoCaoKhaoSat_ATTT.docx", 
+            media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
