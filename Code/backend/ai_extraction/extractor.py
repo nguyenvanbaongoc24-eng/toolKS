@@ -1,16 +1,10 @@
 import os
 import json
-from openai import OpenAI
-
-# Set up client. Defaults to OpenAI, but can be overridden for Local LLM or Groq via env vars.
-client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY", "dummy_key_if_using_local"),
-    base_url=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-)
+from .ai_router import ai_router
 
 def extract_structured_data(ocr_text: str) -> dict:
     """
-    Use LLM to extract structured data from OCR text.
+    Use AIRouterService to clean and extract structured data from OCR text.
     Return a dictionary matching the Survey Profile schema for 20 sections (A-T).
     """
     
@@ -96,18 +90,12 @@ def extract_structured_data(ocr_text: str) -> dict:
     """
     
     try:
-        response = client.chat.completions.create(
-            model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Trích xuất JSON từ đoạn text sau:\n\n{ocr_text}"}
-            ],
-            response_format={ "type": "json_object" },
-            temperature=0.1
-        )
+        # Tầng Router 1: Dùng mô hình OCR Cleanup (Gemma) để sửa chính tả
+        cleaned_text = ai_router.clean_ocr_text(ocr_text)
         
-        result_text = response.choices[0].message.content
-        return json.loads(result_text)
+        # Tầng Router 2: Dùng mô hình Extract JSON (Llama3) để trả về Cấu trúc
+        result_json = ai_router.extract_json(cleaned_text, system_prompt)
+        return result_json
         
     except Exception as e:
         print(f"AI Extraction Error: {e}")
@@ -175,18 +163,9 @@ def extract_device_data(texts: list) -> list:
     """
     
     try:
-        response = client.chat.completions.create(
-            model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Trích xuất JSON từ các đoạn văn bản OCR chụp từ thiết bị sau:\n\n{combined_text}"}
-            ],
-            response_format={ "type": "json_object" },
-            temperature=0.1
-        )
-        
-        result_text = response.choices[0].message.content
-        return json.loads(result_text)
+        # Tầng Router 3: Phân tích tham số Thiết bị (Mistral)
+        result_json = ai_router.analyze_device_specs(combined_text, system_prompt)
+        return result_json
         
     except Exception as e:
         print(f"AI Device Extraction Error: {e}")
