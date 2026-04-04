@@ -1,0 +1,17 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Changes to be committed:
+#	modified:   package-lock.json
+#	modified:   package.json
+#	modified:   src/app/globals.css
+#	modified:   src/app/layout.tsx
+#	modified:   src/app/page.tsx
+#	new file:   src/app/survey/new/page.tsx
+#	new file:   src/components/NetworkDiagram.tsx
+#	new file:   src/components/Sidebar.tsx
+#	new file:   src/components/SurveyForm.tsx
+#	new file:   src/lib/supabase.ts
+#
