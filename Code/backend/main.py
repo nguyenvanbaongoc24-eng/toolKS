@@ -26,7 +26,13 @@ if not supabase_url or not supabase_key:
     print("Warning: Supabase credentials not found. DB sync will be disabled.")
     supabase: Client = None
 else:
-    supabase: Client = create_client(supabase_url, supabase_key)
+    try:
+        supabase: Client = create_client(supabase_url, supabase_key)
+        print("Supabase client initialized successfully.")
+    except Exception as e:
+        print(f"Error initializing Supabase client: {e}")
+        print("Warning: DB sync will be disabled due to invalid credentials.")
+        supabase: Client = None
 
 app.add_middleware(
     CORSMiddleware,
