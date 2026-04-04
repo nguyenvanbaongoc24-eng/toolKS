@@ -225,6 +225,14 @@ select.form-input option {
   .sidebar.mobile-open {
     transform: translateX(0);
   }
+
+  /* Chặn auto-zoom trên iOS bằng cách giữ font-size >= 16px */
+  input, 
+  textarea, 
+  select,
+  .input-field {
+    font-size: 16px !important;
+  }
 }
 
 

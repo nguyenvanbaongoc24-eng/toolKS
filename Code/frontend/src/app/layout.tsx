@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Khảo sát ATTT - Hệ thống Quản lý Hồ sơ",
   description: "Hệ thống nội bộ hỗ trợ khảo sát an toàn thông tin với OCR và AI",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1, // Chặn hoàn toàn hành vi tự động phóng to của iOS trên input
 };
 
 export default function RootLayout({
