@@ -1,3 +1,10 @@
+import os
+import tempfile
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional, Any, Dict
+from fastapi.responses import FileResponse
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
