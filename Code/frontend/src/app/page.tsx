@@ -119,20 +119,32 @@ export default function Home() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
           <div className="stat-card indigo">
-            <div className="stat-value">3</div>
+            <div className="stat-value">{records.length}</div>
             <div className="stat-label">Tổng hồ sơ</div>
           </div>
           <div className="stat-card cyan">
-            <div className="stat-value">44</div>
+            <div className="stat-value">
+              {records.reduce((acc, rec) => {
+                const data = rec.data || {};
+                const mc = Array.isArray(data.may_chu) ? data.may_chu.length : 0;
+                const cam = Array.isArray(data.camera) ? data.camera.length : 0;
+                const net = Array.isArray(data.thiet_bi_mang) ? data.thiet_bi_mang.length : 0;
+                return acc + mc + cam + net;
+              }, 0)}
+            </div>
             <div className="stat-label">Thiết bị quản lý</div>
           </div>
           <div className="stat-card emerald">
-            <div className="stat-value">2</div>
+            <div className="stat-value">
+              {records.filter(r => r.status === "Hoàn thành").length}
+            </div>
             <div className="stat-label">Hoàn thành</div>
           </div>
           <div className="stat-card rose">
-            <div className="stat-value">1</div>
-            <div className="stat-label">Đang chờ</div>
+            <div className="stat-value">
+              {records.filter(r => r.status !== "Hoàn thành").length}
+            </div>
+            <div className="stat-label">Đang xử lý</div>
           </div>
         </div>
 
@@ -155,51 +167,57 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                {records.map((rec) => (
-                  <tr key={rec.id} className="border-b border-gray-800/50 hover:bg-white/5 transition-colors">
-                    {editingId === rec.id ? (
-                      <>
-                        <td className="px-6 py-4 font-medium"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full" value={editForm.ten_don_vi} onChange={e => setEditForm({...editForm, ten_don_vi: e.target.value})} /></td>
-                        <td className="px-6 py-4">
-                          <select className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.doer} onChange={e => setEditForm({...editForm, doer: e.target.value})}>
-                            <option value="">-- Chọn --</option>
-                            {availableStaff.map(s => <option key={s} value={s}>{s}</option>)}
-                          </select>
-                        </td>
-                        <td className="px-6 py-4"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.date} onChange={e => setEditForm({...editForm, date: e.target.value})} /></td>
-                        <td className="px-6 py-4">{rec.devices}</td>
-                        <td className="px-6 py-4">
-                           <select className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500" value={editForm.status} onChange={e => setEditForm({...editForm, status: e.target.value})}>
-                             <option value="Hoàn thành">Hoàn thành</option>
-                             <option value="Đang chờ">Đang chờ</option>
-                           </select>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <button onClick={saveEdit} className="text-emerald-400 hover:text-emerald-300 p-1"><Check className="w-5 h-5"/></button>
-                          <button onClick={() => setEditingId(null)} className="text-rose-400 hover:text-rose-300 p-1"><X className="w-5 h-5"/></button>
-                        </td>
-                      </>
-                    ) : (
-                      <>
-                        <td className="px-6 py-4 font-medium">{rec.ten_don_vi}</td>
-                        <td className="px-6 py-4"><span className="text-xs px-2 py-1 bg-indigo-500/20 text-indigo-300 rounded-md border border-indigo-500/30">{rec.doer}</span></td>
-                        <td className="px-6 py-4">{rec.date}</td>
-                        <td className="px-6 py-4">{rec.devices}</td>
-                        <td className="px-6 py-4">
-                          <span className={`badge ${rec.status === 'Hoàn thành' ? 'badge-success' : 'badge-pending'}`}>
-                            {rec.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-right flex justify-end gap-1">
-                          <button onClick={() => handleShare(rec)} className="text-gray-400 hover:text-blue-400 transition-colors p-1" title="Chia sẻ nền tảng"><Share2 className="w-4 h-4"/></button>
-                          <button onClick={() => handleDownloadWord(rec)} className="text-gray-400 hover:text-emerald-400 transition-colors p-1" title="Tải & Xem bản Word"><Download className="w-4 h-4"/></button>
-                          <button onClick={() => handleOpenSurvey(rec)} className="text-gray-400 hover:text-indigo-400 transition-colors p-1" title="Vào trang sửa Full Data"><ExternalLink className="w-4 h-4"/></button>
-                          <button onClick={() => startEdit(rec)} className="text-gray-400 hover:text-amber-400 transition-colors p-1 border-l border-gray-700 ml-1 pl-2" title="Sửa nhanh thông tin tĩnh"><Edit3 className="w-4 h-4"/></button>
-                        </td>
-                      </>
-                    )}
-                  </tr>
-                ))}
+                {records.map((rec) => {
+                  const data = rec.data || {};
+                  const deviceCount = (Array.isArray(data.may_chu) ? data.may_chu.length : 0) + 
+                                     (Array.isArray(data.camera) ? data.camera.length : 0) + 
+                                     (Array.isArray(data.thiet_bi_mang) ? data.thiet_bi_mang.length : 0);
+                  return (
+                    <tr key={rec.id} className="border-b border-gray-800/50 hover:bg-white/5 transition-colors">
+                      {editingId === rec.id ? (
+                        <>
+                          <td className="px-6 py-4 font-medium"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full" value={editForm.ten_don_vi} onChange={e => setEditForm({...editForm, ten_don_vi: e.target.value})} /></td>
+                          <td className="px-6 py-4">
+                            <select className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.doer} onChange={e => setEditForm({...editForm, doer: e.target.value})}>
+                              <option value="">-- Chọn --</option>
+                              {availableStaff.map(s => <option key={s} value={s}>{s}</option>)}
+                            </select>
+                          </td>
+                          <td className="px-6 py-4"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.date} onChange={e => setEditForm({...editForm, date: e.target.value})} /></td>
+                          <td className="px-6 py-4 text-gray-400">{deviceCount} thiết bị</td>
+                          <td className="px-6 py-4">
+                             <select className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500" value={editForm.status} onChange={e => setEditForm({...editForm, status: e.target.value})}>
+                               <option value="Hoàn thành">Hoàn thành</option>
+                               <option value="Đang chờ">Đang chờ</option>
+                             </select>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <button onClick={saveEdit} className="text-emerald-400 hover:text-emerald-300 p-1"><Check className="w-5 h-5"/></button>
+                            <button onClick={() => setEditingId(null)} className="text-rose-400 hover:text-rose-300 p-1"><X className="w-5 h-5"/></button>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className="px-6 py-4 font-medium">{rec.ten_don_vi}</td>
+                          <td className="px-6 py-4"><span className="text-xs px-2 py-1 bg-indigo-500/20 text-indigo-300 rounded-md border border-indigo-500/30">{rec.doer}</span></td>
+                          <td className="px-6 py-4 text-gray-400">{rec.date || "N/A"}</td>
+                          <td className="px-6 py-4 text-gray-300 font-medium">{deviceCount} thiết bị</td>
+                          <td className="px-6 py-4">
+                            <span className={`badge ${rec.status === 'Hoàn thành' ? 'badge-success' : 'badge-pending'}`}>
+                              {rec.status}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-right flex justify-end gap-1">
+                            <button onClick={() => handleShare(rec)} className="text-gray-400 hover:text-blue-400 transition-colors p-1" title="Chia sẻ nền tảng"><Share2 className="w-4 h-4"/></button>
+                            <button onClick={() => handleDownloadWord(rec)} className="text-gray-400 hover:text-emerald-400 transition-colors p-1" title="Tải & Xem bản Word"><Download className="w-4 h-4"/></button>
+                            <button onClick={() => handleOpenSurvey(rec)} className="text-gray-400 hover:text-indigo-400 transition-colors p-1" title="Vào trang sửa Full Data"><ExternalLink className="w-4 h-4"/></button>
+                            <button onClick={() => startEdit(rec)} className="text-gray-400 hover:text-amber-400 transition-colors p-1 border-l border-gray-700 ml-1 pl-2" title="Sửa nhanh thông tin tĩnh"><Edit3 className="w-4 h-4"/></button>
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -245,8 +263,13 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between items-center text-xs text-gray-400 border-t border-gray-800/50 pt-3 mt-2">
                        <div className="flex gap-3">
-                         <span className="flex items-center gap-1"><Clock className="w-3 h-3"/> {rec.date}</span>
-                         <span className="flex items-center gap-1"><Server className="w-3 h-3"/> {rec.devices}</span>
+                         <span className="flex items-center gap-1"><Clock className="w-3 h-3"/> {rec.date || "N/A"}</span>
+                         <span className="flex items-center gap-1 text-emerald-400 font-medium">
+                           <Server className="w-3 h-3"/> 
+                           {(Array.isArray(rec.data?.may_chu) ? rec.data.may_chu.length : 0) + 
+                            (Array.isArray(rec.data?.camera) ? rec.data.camera.length : 0) + 
+                            (Array.isArray(rec.data?.thiet_bi_mang) ? rec.data.thiet_bi_mang.length : 0)} tb
+                         </span>
                        </div>
                        <div className="flex gap-2">
                          <button onClick={() => handleShare(rec)} className="text-gray-400 active:text-blue-400 p-1 bg-black/30 rounded-md"><Share2 className="w-4 h-4"/></button>
