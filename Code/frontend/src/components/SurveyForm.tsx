@@ -23,12 +23,18 @@ const TABS = [
 export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [activeTab, setActiveTab] = useState("don_vi");
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
   useEffect(() => {
-    const saved = localStorage.getItem("survey_doers");
-    if (saved) {
-      setAvailableStaff(JSON.parse(saved));
-    }
+    const fetchStaff = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/staff`);
+        setAvailableStaff(res.data);
+      } catch (err) {
+        console.error("Error fetching staff:", err);
+      }
+    };
+    fetchStaff();
   }, []);
 
   const defaultVals = prefilledData || {
@@ -152,9 +158,20 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     if (exportType) executeExport(exportType);
   };
 
-  const onSubmit = (data: any) => {
-    console.log("Saving...", data);
-    alert("Hồ sơ đã được lưu tạm. Dữ liệu form cập nhật thành công.");
+  const onSubmit = async (data: any) => {
+    console.log("Saving to DB...", data);
+    try {
+      await axios.post(`${API_URL}/api/surveys`, {
+        ten_don_vi: data.ten_don_vi,
+        doer: data.nguoi_thuc_hien,
+        status: "Đang xử lý",
+        data: data
+      });
+      alert("Hồ sơ đã được lưu vào Database thành công!");
+    } catch (err) {
+      console.error(err);
+      alert("Lỗi lưu hồ sơ vào Database!");
+    }
   };
 
   return (

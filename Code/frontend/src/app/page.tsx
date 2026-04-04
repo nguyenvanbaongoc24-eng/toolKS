@@ -8,31 +8,55 @@ import Sidebar from "@/components/Sidebar";
 import { FileText, Plus, TrendingUp, Users, Server, Wifi, Clock, ArrowRight, Edit3, Check, X, Share2, Download, ExternalLink } from "lucide-react";
 
 export default function Home() {
-  const [records, setRecords] = useState([
-    { id: 1, ten_don_vi: "Sở Thông tin và Truyền thông", doer: "Bảo Ngọc", date: "03/04/2026", devices: "12 thiết bị", status: "Hoàn thành" },
-    { id: 2, ten_don_vi: "UBND Quận 1", doer: "Minh Hùng", date: "02/04/2026", devices: "8 thiết bị", status: "Đang chờ" },
-  ]);
-
+  const [records, setRecords] = useState<any[]>([]);
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
-  
-  useEffect(() => {
-    const saved = localStorage.getItem("survey_doers");
-    if (saved) {
-      setAvailableStaff(JSON.parse(saved));
-    }
-  }, []);
+  const [loading, setLoading] = useState(true);
 
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<any>({});
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const [recRes, staffRes] = await Promise.all([
+        axios.get(`${API_URL}/api/surveys`),
+        axios.get(`${API_URL}/api/staff`)
+      ]);
+      setRecords(recRes.data);
+      setAvailableStaff(staffRes.data);
+    } catch (err) {
+      console.error("Error fetching dashboard data:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const startEdit = (rec: any) => {
     setEditingId(rec.id);
     setEditForm({ ...rec });
   };
 
-  const saveEdit = () => {
-    setRecords(records.map(r => r.id === editingId ? { ...editForm } : r));
-    setEditingId(null);
+  const saveEdit = async () => {
+    try {
+      await axios.post(`${API_URL}/api/surveys`, {
+        id: editingId,
+        ten_don_vi: editForm.ten_don_vi,
+        doer: editForm.doer,
+        status: editForm.status,
+        date: editForm.date,
+        data: editForm.data || {}
+      });
+      setEditingId(null);
+      fetchData(); // Refresh list
+    } catch (err) {
+      alert("Lỗi lưu hồ sơ!");
+    }
   };
 
   const router = useRouter();

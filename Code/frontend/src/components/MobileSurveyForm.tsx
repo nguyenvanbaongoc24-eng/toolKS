@@ -16,12 +16,18 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const [expandedSection, setExpandedSection] = useState<string | null>("don_vi");
   const [showNetworkModal, setShowNetworkModal] = useState(false);
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
   useEffect(() => {
-    const saved = localStorage.getItem("survey_doers");
-    if (saved) {
-      setAvailableStaff(JSON.parse(saved));
-    }
+    const fetchStaff = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/staff`);
+        setAvailableStaff(res.data);
+      } catch (err) {
+        console.error("Theo dõi lỗi staff:", err);
+      }
+    };
+    fetchStaff();
   }, []);
 
   const defaultVals = prefilledData || {
@@ -119,8 +125,18 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     handleExportReport();
   };
 
-  const onSubmit = (data: any) => {
-    alert("Hồ sơ đã được lưu tạm. Dữ liệu form cập nhật thành công.");
+  const onSubmit = async (data: any) => {
+    try {
+      await axios.post(`${API_URL}/api/surveys`, {
+        ten_don_vi: data.ten_don_vi,
+        doer: data.nguoi_thuc_hien,
+        status: "Đang xử lý",
+        data: data
+      });
+      alert("Hồ sơ đã được lưu vào Database thành công!");
+    } catch (err) {
+      alert("Lỗi lưu hồ sơ vào Database!");
+    }
   };
 
   const toggleSection = (id: string) => {

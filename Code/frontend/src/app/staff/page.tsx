@@ -2,31 +2,45 @@
 
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
-import { Users, Plus, Trash2, Edit3, Check, X, ArrowLeft } from "lucide-react";
+import { Users, Plus, Trash2, Edit3, Check, X, ArrowLeft, RefreshCw } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
 
 export default function StaffPage() {
   const [staff, setStaff] = useState<string[]>([]);
   const [newStaff, setNewStaff] = useState("");
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // Load from localStorage on mount
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+  // Load from API on mount
   useEffect(() => {
-    const saved = localStorage.getItem("survey_doers");
-    if (saved) {
-      setStaff(JSON.parse(saved));
-    } else {
-      // Default initial list
-      const defaults = ["Bảo Ngọc", "Anh Tuấn", "Minh Hùng", "Trung Kiên", "Duy Khánh", "Văn Phương", "Đức Thắng"];
-      setStaff(defaults);
-      localStorage.setItem("survey_doers", JSON.stringify(defaults));
-    }
+    fetchStaff();
   }, []);
 
-  const saveToLocal = (newList: string[]) => {
-    setStaff(newList);
-    localStorage.setItem("survey_doers", JSON.stringify(newList));
+  const fetchStaff = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${API_URL}/api/staff`);
+      setStaff(res.data);
+    } catch (err) {
+      console.error("Error fetching staff:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveToBackend = async (newList: string[]) => {
+    try {
+      await axios.post(`${API_URL}/api/staff`, newList);
+      setStaff(newList);
+      localStorage.setItem("survey_doers", JSON.stringify(newList));
+    } catch (err) {
+      alert("Lỗi đồng bộ với Database!");
+      console.error(err);
+    }
   };
 
   const addStaff = () => {
@@ -36,14 +50,14 @@ export default function StaffPage() {
       return;
     }
     const newList = [...staff, newStaff.trim()];
-    saveToLocal(newList);
+    saveToBackend(newList);
     setNewStaff("");
   };
 
   const deleteStaff = (idx: number) => {
     if (confirm(`Bạn có chắc muốn xóa nhân sự "${staff[idx]}"?`)) {
       const newList = staff.filter((_, i) => i !== idx);
-      saveToLocal(newList);
+      saveToBackend(newList);
     }
   };
 
@@ -56,7 +70,7 @@ export default function StaffPage() {
     if (!editValue.trim()) return;
     const newList = [...staff];
     newList[editingIdx!] = editValue.trim();
-    saveToLocal(newList);
+    saveToBackend(newList);
     setEditingIdx(null);
   };
 
@@ -64,16 +78,21 @@ export default function StaffPage() {
     <div className="min-h-screen">
       <Sidebar />
       <div className="main-content max-w-4xl">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/" className="p-2 hover:bg-white/5 rounded-full transition-colors text-gray-400 hover:text-white">
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold flex items-center gap-2">
-              <Users className="w-6 h-6 text-indigo-400" /> Quản lý Nhân sự
-            </h1>
-            <p className="text-sm text-gray-400 mt-1">Quản lý danh sách cán bộ thực hiện (Doers) hồ sơ</p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Link href="/" className="p-2 hover:bg-white/5 rounded-full transition-colors text-gray-400 hover:text-white">
+              <ArrowLeft className="w-5 h-5" />
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold flex items-center gap-2">
+                <Users className="w-6 h-6 text-indigo-400" /> Quản lý Nhân sự
+              </h1>
+              <p className="text-sm text-gray-400 mt-1">Đồng bộ dữ liệu Máy tính & Điện thoại</p>
+            </div>
           </div>
+          <button onClick={fetchStaff} className="p-2 hover:bg-white/5 rounded-lg text-gray-400" title="Làm mới">
+            <RefreshCw className={`w-5 h-5 ${loading ? "animate-spin" : ""}`} />
+          </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -97,7 +116,8 @@ export default function StaffPage() {
                 </div>
                 <button 
                   onClick={addStaff}
-                  className="btn-primary w-full justify-center py-3"
+                  disabled={loading}
+                  className="btn-primary w-full justify-center py-3 disabled:opacity-50"
                 >
                   <Plus className="w-4 h-4" /> Thêm vào danh sách
                 </button>
@@ -108,8 +128,9 @@ export default function StaffPage() {
           {/* Danh sách */}
           <div className="lg:col-span-2">
             <div className="glass-card overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-800 bg-white/5 font-semibold text-sm">
-                Danh sách cán bộ ({staff.length})
+              <div className="px-6 py-4 border-b border-gray-800 bg-white/5 font-semibold text-sm flex justify-between">
+                <span>Danh sách cán bộ ({staff.length})</span>
+                {loading && <span className="text-indigo-400 animate-pulse">Đang tải...</span>}
               </div>
               <div className="divide-y divide-gray-800">
                 {staff.map((name, idx) => (
@@ -130,12 +151,12 @@ export default function StaffPage() {
                     ) : (
                       <>
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs">
-                            {name.split(" ").pop()?.charAt(0).toUpperCase()}
+                          <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-xs uppercase">
+                            {name.split(" ").pop()?.charAt(0)}
                           </div>
                           <span className="font-medium text-gray-200">{name}</span>
                         </div>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-1 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                           <button 
                             onClick={() => startEdit(idx)}
                             className="p-2 text-gray-400 hover:text-indigo-400 hover:bg-indigo-500/10 rounded-lg transition-all"
@@ -155,7 +176,7 @@ export default function StaffPage() {
                     )}
                   </div>
                 ))}
-                {staff.length === 0 && (
+                {!loading && staff.length === 0 && (
                   <div className="px-6 py-12 text-center text-gray-500 italic text-sm">
                     Chưa có nhân sự nào trong danh sách.
                   </div>

@@ -1,17 +1,25 @@
-import os
-import tempfile
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import List, Optional, Any, Dict
-from fastapi.responses import FileResponse
+from supabase import create_client, Client
+from dotenv import load_dotenv
 
 from ocr_service.tesseract_runner import perform_ocr
 from ai_extraction.extractor import extract_structured_data, extract_device_data
 from document_generation.generator import generate_report_docx
 from document_generation.report_generator import generate_survey_report
 
+# Load environment variables
+load_dotenv()
+
 app = FastAPI(title="Survey Profiler API - Khảo sát ATTT")
+
+# Initialize Supabase
+supabase_url = os.environ.get("SUPABASE_URL")
+supabase_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_ANON_KEY")
+
+if not supabase_url or not supabase_key:
+    print("Warning: Supabase credentials not found. DB sync will be disabled.")
+    supabase: Client = None
+else:
+    supabase: Client = create_client(supabase_url, supabase_key)
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,12 +36,95 @@ class ExtractionResponse(BaseModel):
 class GenerateDocxRequest(BaseModel):
     data: Dict[str, Any]
 
+class StaffItem(BaseModel):
+    name: str
+
+class SurveyRecord(BaseModel):
+    id: Optional[int] = None
+    ten_don_vi: str
+    doer: str
+    status: str
+    date: Optional[str] = None
+    data: Optional[Dict[str, Any]] = None
+
 @app.get("/")
 def read_root():
-    return {"status": "ok", "message": "Survey Profiler API is running"}
+    return {"status": "ok", "message": "Survey Profiler API is running", "sync": bool(supabase)}
+
+# === STAFF ENDPOINTS ===
+
+@app.get("/api/staff")
+async def get_staff():
+    if not supabase:
+        # Fallback for dev without DB
+        return ["Bảo Ngọc", "Anh Tuấn", "Minh Hùng", "Trung Kiên", "Duy Khánh", "Văn Phương", "Đức Thắng"]
+    
+    try:
+        response = supabase.table("staff").select("*").execute()
+        return [item["name"] for item in response.data]
+    except Exception as e:
+        print(f"Error fetching staff: {e}")
+        return []
+
+@app.post("/api/staff")
+async def save_staff(names: List[str]):
+    if not supabase:
+        return {"status": "error", "message": "No Database Connection"}
+    
+    try:
+        # Simplest approach: Delete all and re-insert for 100% sync
+        supabase.table("staff").delete().neq("id", -1).execute()
+        to_insert = [{"name": n} for n in names]
+        if to_insert:
+            supabase.table("staff").insert(to_insert).execute()
+        return {"status": "success"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# === SURVEY ENDPOINTS ===
+
+@app.get("/api/surveys", response_model=List[SurveyRecord])
+async def get_surveys():
+    if not supabase:
+        return []
+    
+    try:
+        response = supabase.table("surveys").select("id, ten_don_vi, doer, status, date, data").order("id", desc=True).execute()
+        return response.data
+    except Exception as e:
+        print(f"Error fetching surveys: {e}")
+        return []
+
+@app.post("/api/surveys")
+async def save_survey(survey: SurveyRecord):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Database not configured")
+    
+    try:
+        payload = {
+            "ten_don_vi": survey.ten_don_vi,
+            "doer": survey.doer,
+            "status": survey.status,
+            "date": survey.date or "N/A",
+            "data": survey.data or {}
+        }
+        
+        if survey.id:
+            # Update
+            response = supabase.table("surveys").update(payload).eq("id", survey.id).execute()
+        else:
+            # Insert
+            response = supabase.table("surveys").insert(payload).execute()
+            
+        return {"status": "success", "id": response.data[0]["id"] if response.data else None}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# === EXISTING ENDPOINTS (OCR/TRANSCRIPTION/DOCX) ===
 
 @app.post("/api/upload", response_model=ExtractionResponse)
 async def upload_and_extract(file: UploadFile = File(...)):
+    # ... (rest of the file stays the same) ...
     if not file.filename:
         raise HTTPException(status_code=400, detail="No file uploaded")
     
