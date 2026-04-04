@@ -34,12 +34,29 @@ export default function StaffPage() {
 
   const saveToBackend = async (newList: string[]) => {
     try {
-      await axios.post(`${API_URL}/api/staff`, newList);
+      setLoading(true);
+      const res = await axios.post(`${API_URL}/api/staff`, newList);
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
       setStaff(newList);
       localStorage.setItem("survey_doers", JSON.stringify(newList));
-    } catch (err) {
-      alert("Lỗi đồng bộ với Database!");
-      console.error(err);
+    } catch (err: any) {
+      console.error("Full error:", err);
+      const status = err.response?.status;
+      const msg = err.response?.data?.detail || err.message || "Unknown Error";
+      alert(`Lỗi đồng bộ với Database!\n\nChi tiết: [${status || 'Network Error'}] ${msg}\n\n- Kiểm tra xem Backend đã khởi động chưa.\n- Kiểm tra xem đã chạy SQL tạo bảng chưa.`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const testConnection = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/`);
+      alert(`Kết nối Backend: OK!\nĐồng bộ DB: ${res.data.sync ? "SẴN SÀNG" : "CHƯA CẤU HÌNH"}`);
+    } catch (err: any) {
+      alert(`Lỗi kết nối Backend tại: ${API_URL}\nChi tiết: ${err.message}`);
     }
   };
 
@@ -90,9 +107,17 @@ export default function StaffPage() {
               <p className="text-sm text-gray-400 mt-1">Đồng bộ dữ liệu Máy tính & Điện thoại</p>
             </div>
           </div>
-          <button onClick={fetchStaff} className="p-2 hover:bg-white/5 rounded-lg text-gray-400" title="Làm mới">
-            <RefreshCw className={`w-5 h-5 ${loading ? "animate-spin" : ""}`} />
-          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={testConnection} 
+              className="text-xs px-3 py-1.5 border border-indigo-500/30 text-indigo-400 rounded-lg hover:bg-indigo-500/10 transition-all font-medium"
+            >
+              Kiểm tra Kết nối
+            </button>
+            <button onClick={fetchStaff} className="p-2 hover:bg-white/5 rounded-lg text-gray-400" title="Làm mới">
+              <RefreshCw className={`w-5 h-5 ${loading ? "animate-spin" : ""}`} />
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
