@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import NetworkDiagram from "./NetworkDiagram";
 import { 
@@ -22,6 +22,14 @@ const TABS = [
 
 export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [activeTab, setActiveTab] = useState("don_vi");
+  const [availableStaff, setAvailableStaff] = useState<string[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("survey_doers");
+    if (saved) {
+      setAvailableStaff(JSON.parse(saved));
+    }
+  }, []);
 
   const defaultVals = prefilledData || {
     // Internal
@@ -183,13 +191,9 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <label className="form-label text-indigo-400">Người phụ trách hồ sơ (Lưu nội bộ, không xuất file)</label>
                 <select {...register("nguoi_thuc_hien")} className="form-input">
                   <option value="">-- Chọn cán bộ thực hiện (Doer) --</option>
-                  <option value="Bảo Ngọc">Bảo Ngọc</option>
-                  <option value="Anh Tuấn">Anh Tuấn</option>
-                  <option value="Minh Hùng">Minh Hùng</option>
-                  <option value="Trung Kiên">Trung Kiên</option>
-                  <option value="Duy Khánh">Duy Khánh</option>
-                  <option value="Văn Phương">Văn Phương</option>
-                  <option value="Đức Thắng">Đức Thắng</option>
+                  {availableStaff.map(name => (
+                    <option key={name} value={name}>{name}</option>
+                  ))}
                 </select>
               </div>
               <div className="md:col-span-2">

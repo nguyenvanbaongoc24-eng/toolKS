@@ -9,6 +9,7 @@ import {
   Network,
   Settings,
   HelpCircle,
+  Users,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -17,6 +18,7 @@ export default function Sidebar() {
   const navItems = [
     { href: "/", label: "Tổng quan", icon: LayoutDashboard },
     { href: "/survey/new", label: "Tạo Hồ sơ", icon: FilePlus },
+    { href: "/staff", label: "Quản lý Nhân sự", icon: Users },
     { href: "#", label: "Sơ đồ mạng", icon: Network },
   ];
 

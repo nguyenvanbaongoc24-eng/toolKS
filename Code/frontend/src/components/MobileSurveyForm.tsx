@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import NetworkDiagram from "./NetworkDiagram";
 import { 
@@ -15,6 +15,14 @@ import { useAutoSave } from "@/hooks/useAutoSave";
 export default function MobileSurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [expandedSection, setExpandedSection] = useState<string | null>("don_vi");
   const [showNetworkModal, setShowNetworkModal] = useState(false);
+  const [availableStaff, setAvailableStaff] = useState<string[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("survey_doers");
+    if (saved) {
+      setAvailableStaff(JSON.parse(saved));
+    }
+  }, []);
 
   const defaultVals = prefilledData || {
     nguoi_thuc_hien: "",
@@ -146,13 +154,9 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
               <label className="form-label text-indigo-400">Cán bộ thực hiện (Doer)</label>
               <select {...register("nguoi_thuc_hien")} className="form-input min-h-[44px]">
                 <option value="">-- Chọn người làm hồ sơ --</option>
-                <option value="Bảo Ngọc">Bảo Ngọc</option>
-                <option value="Anh Tuấn">Anh Tuấn</option>
-                <option value="Minh Hùng">Minh Hùng</option>
-                <option value="Trung Kiên">Trung Kiên</option>
-                <option value="Duy Khánh">Duy Khánh</option>
-                <option value="Văn Phương">Văn Phương</option>
-                <option value="Đức Thắng">Đức Thắng</option>
+                {availableStaff.map(name => (
+                  <option key={name} value={name}>{name}</option>
+                ))}
               </select>
             </div>
             <div><label className="form-label">Tên cơ quan (*) <Indicator name="ten_don_vi" required /></label><input {...register("ten_don_vi")} className="form-input min-h-[44px]" /></div>

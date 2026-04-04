@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -12,6 +12,15 @@ export default function Home() {
     { id: 1, ten_don_vi: "Sở Thông tin và Truyền thông", doer: "Bảo Ngọc", date: "03/04/2026", devices: "12 thiết bị", status: "Hoàn thành" },
     { id: 2, ten_don_vi: "UBND Quận 1", doer: "Minh Hùng", date: "02/04/2026", devices: "8 thiết bị", status: "Đang chờ" },
   ]);
+
+  const [availableStaff, setAvailableStaff] = useState<string[]>([]);
+  
+  useEffect(() => {
+    const saved = localStorage.getItem("survey_doers");
+    if (saved) {
+      setAvailableStaff(JSON.parse(saved));
+    }
+  }, []);
 
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<any>({});
@@ -127,7 +136,12 @@ export default function Home() {
                     {editingId === rec.id ? (
                       <>
                         <td className="px-6 py-4 font-medium"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full" value={editForm.ten_don_vi} onChange={e => setEditForm({...editForm, ten_don_vi: e.target.value})} /></td>
-                        <td className="px-6 py-4"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.doer} onChange={e => setEditForm({...editForm, doer: e.target.value})} /></td>
+                        <td className="px-6 py-4">
+                          <select className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.doer} onChange={e => setEditForm({...editForm, doer: e.target.value})}>
+                            <option value="">-- Chọn --</option>
+                            {availableStaff.map(s => <option key={s} value={s}>{s}</option>)}
+                          </select>
+                        </td>
                         <td className="px-6 py-4"><input className="bg-black/50 border border-white/20 rounded px-2 py-1 outline-none focus:border-indigo-500 w-full max-w-[120px]" value={editForm.date} onChange={e => setEditForm({...editForm, date: e.target.value})} /></td>
                         <td className="px-6 py-4">{rec.devices}</td>
                         <td className="px-6 py-4">
@@ -179,7 +193,13 @@ export default function Home() {
                   <div className="space-y-3">
                      <div><label className="text-xs text-gray-500 mb-1 block">Tên đơn vị</label><input className="bg-black/50 border border-white/20 rounded px-2 py-2 outline-none focus:border-indigo-500 w-full" value={editForm.ten_don_vi} onChange={e => setEditForm({...editForm, ten_don_vi: e.target.value})} /></div>
                      <div className="grid grid-cols-2 gap-3">
-                        <div><label className="text-xs text-gray-500 mb-1 block">Người thực hiện</label><input className="bg-black/50 border border-white/20 rounded px-2 py-2 outline-none focus:border-indigo-500 w-full" value={editForm.doer} onChange={e => setEditForm({...editForm, doer: e.target.value})} /></div>
+                        <div>
+                          <label className="text-xs text-gray-500 mb-1 block">Người thực hiện</label>
+                          <select className="bg-black/50 border border-white/20 rounded px-2 py-2 outline-none focus:border-indigo-500 w-full" value={editForm.doer} onChange={e => setEditForm({...editForm, doer: e.target.value})}>
+                            <option value="">-- Chọn --</option>
+                            {availableStaff.map(s => <option key={s} value={s}>{s}</option>)}
+                          </select>
+                        </div>
                         <div><label className="text-xs text-gray-500 mb-1 block">Trạng thái</label><select className="bg-black/50 border border-white/20 rounded px-2 py-2 outline-none focus:border-indigo-500 w-full" value={editForm.status} onChange={e => setEditForm({...editForm, status: e.target.value})}><option value="Hoàn thành">Hoàn thành</option><option value="Đang chờ">Đang chờ</option></select></div>
                      </div>
                      <div className="flex gap-2 pt-2">
