@@ -85,12 +85,15 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     k1_quy_che: "", k2_ke_hoach_ht: "", k3_ke_hoach_tr: "", k4_qd_can_bo: "",
     K5_qd_phe_duyet_httt: "", K6_ung_pho_su_co: "", K7_bien_ban_kiem_tra: "",
 
-    // Tab 5: Đánh giá & Xác nhận (Mục M, N, BC)
+    // Tab 5: Đánh giá & Xác nhận (Mục M, N, BC, R, S)
+    dao_tao: [],
+    kiem_tra_attt: [],
     ...Array.from({ length: 14 }, (_, i) => ({ [`M${i+1}_status`]: false })).reduce((a, b) => ({ ...a, ...b }), {}),
     n_nguoi_lap: "", n_chuc_vu_lap: "", n_ngay_lap: new Date().toISOString().split('T')[0],
     N_nguoi_kiem_tra_ho_ten: "", N_nguoi_kiem_tra_chuc_vu: "", N_ngay_kiem_tra: "",
     N_thu_truong_ho_ten: "", N_thu_truong_chuc_vu: "", N_ngay_ky: "",
-    BC_so_bao_cao: "", BC_ngay_bao_cao: "", BC_don_vi_thuc_hien: "", BC_ten_tinh: "Lâm Đồng",
+    BC_so_bao_cao: "", BC_ngay_bao_cao: "", BC_don_vi_thuc_hien: "", 
+    BC_qd_ubnd_tinh_so_attt: "", BC_qd_ubnd_tinh_phan_cong: "", BC_ten_tinh: "Lâm Đồng",
     ghi_chu: ""
   };
 
@@ -104,6 +107,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const ungDungFields = useFieldArray({ control, name: "ung_dung" });
   const ipTinhFields = useFieldArray({ control, name: "ip_tinh" });
   const viTriFields = useFieldArray({ control, name: "T5_vi_tri" });
+  const daoTaoFields = useFieldArray({ control, name: "dao_tao" });
+  const kiemTraFields = useFieldArray({ control, name: "kiem_tra_attt" });
 
   const formData = watch();
   
@@ -292,7 +297,10 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                               <input {...register(`can_bo_phu_trach.${idx}.email`)} placeholder="Email" className="form-input text-xs" />
                            </div>
                         </div>
-                        <input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} placeholder="Trình độ chuyên môn" className="form-input text-xs" />
+                        <div className="grid grid-cols-2 gap-2 mt-1">
+                           <input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} placeholder="Trình độ" className="form-input text-xs h-8" />
+                           <input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} placeholder="Chứng chỉ ATTT" className="form-input text-xs h-8" />
+                        </div>
                      </div>
                   </div>
                 ))}
@@ -452,27 +460,27 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
 
              {/* T. Topology */}
              <div className="pt-4 border-t border-white/5 space-y-4">
-                 <h4 className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">T. Đặc tả mạng & Vật lý</h4>
-                 <div className="grid grid-cols-2 gap-3">
-                    <div><label className="form-label text-[9px]">DMZ (T1.1)</label>
-                       <select {...register("T1_1_co_dmz")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                    </div>
-                    <div><label className="form-label text-[9px]">WiFi tách biệt? (T1.2)</label>
-                       <select {...register("T1_2_wifi_tach_rieng")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                    </div>
-                 </div>
-                 <div><label className="form-label text-[9px]">Loại cáp chính (T4.1)</label>
-                    <select {...register("T4_1_loai_cap")} className="form-input h-8 py-0">
-                       <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat6)</option>
-                       <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
-                    </select>
-                 </div>
-                 <div className="grid grid-cols-2 gap-3">
-                    <div><label className="form-label text-[9px]">Tủ Rack (T3)</label>
-                       <select {...register("T3_1_co_rack")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                    </div>
-                    {formData.T3_1_co_rack === "Có" && <div><label className="form-label text-[9px]">Số U</label><input {...register("T3_1_rack_u")} className="form-input h-8 text-xs" /></div>}
-                 </div>
+                  <h4 className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">T. Đặc tả mạng & Vật lý</h4>
+                  <div className="grid grid-cols-2 gap-3">
+                     <div><label className="form-label text-[9px]">DMZ (T1.1)</label>
+                        <select {...register("T1_1_co_dmz")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                     </div>
+                     <div><label className="form-label text-[9px]">WiFi tách biệt? (T1.2)</label>
+                        <select {...register("T1_2_wifi_tach_rieng")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                     </div>
+                  </div>
+                  <div><label className="form-label text-[9px]">Loại cáp chính (T4.1)</label>
+                     <select {...register("T4_1_loai_cap")} className="form-input h-8 py-0">
+                        <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat6)</option>
+                        <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
+                     </select>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                     <div><label className="form-label text-[9px]">Tủ Rack (T3)</label>
+                        <select {...register("T3_1_co_rack")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                     </div>
+                     {formData.T3_1_co_rack === "Có" && <div><label className="form-label text-[9px]">Số U</label><input {...register("T3_1_rack_u")} className="form-input h-8 text-xs" /></div>}
+                  </div>
              </div>
            </div>
          )}
@@ -533,9 +541,64 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
          )}
        </div>
 
-       {/* 4. AN TOÀN BẢO MẬT */}
+       {/* 4. ĐÀO TẠO & KIỂM TRA (NEW v2.7) */}
        <div>
-         <AccordionHeader id="bao_mat" label="IV. An toàn Bảo mật" icon={ShieldAlert} />
+         <AccordionHeader id="dao_tao" label="IV. Đào tạo & Kiểm tra" icon={GraduationCap} />
+         {expandedSection === "dao_tao" && (
+            <div className="animate-fade-in p-4 bg-black/40 rounded-xl mb-4 space-y-6 border border-white/5 shadow-inner">
+               {/* R. Đào tạo */}
+               <div>
+                 <div className="flex justify-between items-center mb-3">
+                   <label className="form-label font-bold text-emerald-400 uppercase text-[10px]">R. Hoạt động đào tạo ATTT</label>
+                   <button type="button" onClick={() => daoTaoFields.append({ hinh_thuc: "", don_vi_to_chuc: "", thoi_gian: "", so_can_bo: "" })} className="bg-emerald-500/20 text-emerald-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
+                 </div>
+                 {daoTaoFields.fields.map((field, idx) => (
+                   <div key={field.id} className="p-3 bg-white/5 rounded-lg mb-2 border border-white/5">
+                     <div className="flex justify-between mb-2">
+                        <span className="text-[9px] text-gray-500">KHOẢ #{idx+1}</span>
+                        <button type="button" onClick={() => daoTaoFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
+                     </div>
+                     <input {...register(`dao_tao.${idx}.hinh_thuc`)} placeholder="Hình thức (Tập huấn, Hội thảo...)" className="form-input text-xs h-8 mb-2" />
+                     <div className="grid grid-cols-2 gap-2">
+                        <input {...register(`dao_tao.${idx}.don_vi_to_chuc`)} placeholder="Đơn vị tổ chức" className="form-input text-xs h-8" />
+                        <input {...register(`dao_tao.${idx}.thoi_gian`)} placeholder="Thời gian" className="form-input text-xs h-8" />
+                     </div>
+                     <div className="grid grid-cols-2 gap-2 mt-2">
+                        <input {...register(`dao_tao.${idx}.so_can_bo`)} placeholder="Số cán bộ" className="form-input text-xs h-8" type="number" />
+                        <input {...register(`dao_tao.${idx}.chung_chi_so_vb`)} placeholder="Số văn bản/CC" className="form-input text-xs h-8" />
+                     </div>
+                   </div>
+                 ))}
+               </div>
+ 
+               {/* S. Kiểm tra */}
+               <div className="pt-4 border-t border-white/5">
+                 <div className="flex justify-between items-center mb-3">
+                   <label className="form-label font-bold text-blue-400 uppercase text-[10px]">S. Kiểm tra, đánh giá định kỳ</label>
+                   <button type="button" onClick={() => kiemTraFields.append({ loai_kiem_tra: "", don_vi_thuc_hien: "", thoi_gian: "", ket_qua_so_vb: "" })} className="bg-blue-500/20 text-blue-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
+                 </div>
+                 {kiemTraFields.fields.map((field, idx) => (
+                   <div key={field.id} className="p-3 bg-white/5 rounded-lg mb-2 border border-white/5">
+                     <div className="flex justify-between mb-2">
+                        <span className="text-[9px] text-gray-500">LẦN #{idx+1}</span>
+                        <button type="button" onClick={() => kiemTraFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
+                     </div>
+                     <input {...register(`kiem_tra_attt.${idx}.loai_kiem_tra`)} placeholder="Loại (Pentest, Rà soát...)" className="form-input text-xs h-8 mb-2" />
+                     <div className="grid grid-cols-2 gap-2">
+                        <input {...register(`kiem_tra_attt.${idx}.don_vi_thuc_hien`)} placeholder="Đơn vị thực hiện" className="form-input text-xs h-8" />
+                        <input {...register(`kiem_tra_attt.${idx}.thoi_gian`)} placeholder="Thời gian" className="form-input text-xs h-8" />
+                     </div>
+                     <input {...register(`kiem_tra_attt.${idx}.ket_qua_so_vb`)} placeholder="Kết quả / Số văn bản" className="form-input text-xs h-8 mt-2" />
+                   </div>
+                 ))}
+               </div>
+            </div>
+         )}
+       </div>
+ 
+       {/* 5. AN TOÀN BẢO MẬT */}
+       <div>
+         <AccordionHeader id="bao_mat" label="V. An toàn Bảo mật" icon={ShieldAlert} />
          {expandedSection === "bao_mat" && (
            <div className="animate-fade-in p-4 bg-black/40 rounded-xl mb-4 space-y-5 border border-white/5 shadow-inner">
              
@@ -621,9 +684,9 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
          )}
        </div>
 
-      {/* 5. ĐÁNH GIÁ & HỒ SƠ */}
+      {/* 6. ĐÁNH GIÁ & HỒ SƠ */}
       <div>
-        <AccordionHeader id="danh_gia" label="V. Đánh giá & Hồ sơ" icon={LayoutPanelLeft} />
+        <AccordionHeader id="danh_gia" label="VI. Đánh giá & Hồ sơ" icon={LayoutPanelLeft} />
         {expandedSection === "danh_gia" && (
            <div className="animate-fade-in p-4 bg-black/40 rounded-xl mb-4 space-y-6 border border-white/5 shadow-inner">
              {/* K. Hồ sơ pháp lý */}
@@ -664,9 +727,13 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
              <div className="pt-4 border-t border-white/5 space-y-3">
                 <h4 className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">BC. Metadata Báo cáo</h4>
                 <div className="grid grid-cols-2 gap-2">
-                   <input {...register("BC_so_bao_cao")} placeholder="Số báo cáo" className="form-input" />
-                   <input {...register("BC_ten_tinh")} placeholder="Tại tỉnh" className="form-input" />
-                </div>
+                    <input {...register("BC_so_bao_cao")} placeholder="Số báo cáo" className="form-input text-xs h-9" />
+                    <input {...register("BC_ten_tinh")} placeholder="Tại tỉnh" className="form-input text-xs h-9" />
+                 </div>
+                 <div className="space-y-2 mt-2">
+                    <input {...register("BC_qd_ubnd_tinh_so_attt")} placeholder="Số QĐ UBND tỉnh về ATTT" className="form-input text-xs h-9" />
+                    <input {...register("BC_qd_ubnd_tinh_phan_cong")} placeholder="Số QĐ UBND tỉnh phân công" className="form-input text-xs h-9" />
+                 </div>
              </div>
 
              <div className="pt-4 border-t border-white/5">

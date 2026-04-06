@@ -282,7 +282,7 @@ class DocumentExporter:
             'can_bo': data.get('can_bo_phu_trach', []),
             'ip_tinh': data.get('ip_tinh', []),
             'dao_tao': data.get('dao_tao', []),
-            'kiem_tra': data.get('kiem_tra', []),
+            'kiem_tra': data.get('kiem_tra_attt', []),
             'D1_duong_truyen': data.get('ket_noi_internet', []),
             'T2_port_mapping': data.get('port_switch', []),
             'T5_vi_tri': data.get('T5_vi_tri', []),

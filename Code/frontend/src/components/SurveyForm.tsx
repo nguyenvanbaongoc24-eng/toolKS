@@ -118,6 +118,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const ungDungFields = useFieldArray({ control, name: "ung_dung" });
   const ipTinhFields = useFieldArray({ control, name: "ip_tinh" });
   const daoTaoFields = useFieldArray({ control, name: "dao_tao" });
+  const kiemTraFields = useFieldArray({ control, name: "kiem_tra_attt" });
   const portSwitchFields = useFieldArray({ control, name: "port_switch" });
 
   const formData = useWatch({ control });
@@ -911,6 +912,45 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
               </div>
             </div>
 
+            {/* MỤC R: ĐÀO TẠO (v2.7) */}
+            <div className="section-card">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="section-title mb-0"><span className="section-badge bg-emerald-500">R</span> Mục R. Hoạt động đào tạo, tập huấn</h2>
+                <button type="button" onClick={() => daoTaoFields.append({ hinh_thuc: "", don_vi_to_chuc: "", thoi_gian: "", so_can_bo: "", chung_chi_so_vb: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm khóa</button>
+              </div>
+              <div className="space-y-3">
+                {daoTaoFields.fields.map((field, idx) => (
+                  <div key={field.id} className="grid grid-cols-1 md:grid-cols-4 gap-3 bg-black/20 p-3 rounded-lg border border-white/5 relative">
+                    <div className="md:col-span-2 text-xs"><label className="form-label text-[10px]">Hình thức (Tập huấn, hội thảo...)</label><input {...register(`dao_tao.${idx}.hinh_thuc`)} className="form-input h-8" /></div>
+                    <div className="text-xs"><label className="form-label text-[10px]">Thời gian</label><input {...register(`dao_tao.${idx}.thoi_gian`)} className="form-input h-8" /></div>
+                    <div className="text-xs"><label className="form-label text-[10px]">Số cán bộ</label><input {...register(`dao_tao.${idx}.so_can_bo`)} className="form-input h-8" type="number" /></div>
+                    <div className="md:col-span-2 text-xs"><label className="form-label text-[10px]">Đơn vị tổ chức</label><input {...register(`dao_tao.${idx}.don_vi_to_chuc`)} className="form-input h-8" /></div>
+                    <div className="md:col-span-2 text-xs"><label className="form-label text-[10px]">Chứng chỉ / Số văn bản</label><input {...register(`dao_tao.${idx}.chung_chi_so_vb`)} className="form-input h-8" /></div>
+                    <button type="button" onClick={() => daoTaoFields.remove(idx)} className="absolute top-2 right-2 text-rose-500"><Trash2 className="w-4 h-4" /></button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* MỤC S: KIỂM TRA (v2.7) */}
+            <div className="section-card">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="section-title mb-0"><span className="section-badge bg-blue-500">S</span> Mục S. Hoạt động kiểm tra, đánh giá định kỳ</h2>
+                <button type="button" onClick={() => kiemTraFields.append({ loai_kiem_tra: "", don_vi_thuc_hien: "", thoi_gian: "", ket_qua_so_vb: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm lần</button>
+              </div>
+              <div className="space-y-3">
+                {kiemTraFields.fields.map((field, idx) => (
+                  <div key={field.id} className="grid grid-cols-1 md:grid-cols-4 gap-3 bg-black/20 p-3 rounded-lg border border-white/5 relative">
+                    <div className="md:col-span-2 text-xs"><label className="form-label text-[10px]">Loại (Pentest, Rà soát, ATTT...)</label><input {...register(`kiem_tra_attt.${idx}.loai_kiem_tra`)} className="form-input h-8" /></div>
+                    <div className="text-xs"><label className="form-label text-[10px]">Thời gian</label><input {...register(`kiem_tra_attt.${idx}.thoi_gian`)} className="form-input h-8" /></div>
+                    <div className="md:col-span-2 text-xs"><label className="form-label text-[10px]">Đơn vị thực hiện</label><input {...register(`kiem_tra_attt.${idx}.don_vi_thuc_hien`)} className="form-input h-8" /></div>
+                    <div className="md:col-span-2 text-xs"><label className="form-label text-[10px]">Kết quả / Số văn bản</label><input {...register(`kiem_tra_attt.${idx}.ket_qua_so_vb`)} className="form-input h-8" /></div>
+                    <button type="button" onClick={() => kiemTraFields.remove(idx)} className="absolute top-2 right-2 text-rose-500"><Trash2 className="w-4 h-4" /></button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* MỤC M: DANH MỤC ẢNH CHỤP */}
             <div className="section-card">
               <h2 className="section-title"><span className="section-badge bg-emerald-600">M</span> Mục M. Hồ sơ ảnh chụp (Checklist)</h2>
@@ -968,11 +1008,13 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           {/* MỤC BC: THÔNG TIN BÁO CÁO (Metadata) */}
           <div className="section-card border-dashed border-gray-700">
             <h2 className="section-title"><span className="section-badge bg-gray-500">BC</span> Metadata Báo cáo (Dành cho Văn bản)</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div><label className="form-label text-[10px]">Số báo cáo</label><input {...register("BC_so_bao_cao")} className="form-input text-xs h-8" placeholder="Số: .../BC-PH-ATTT" /></div>
               <div><label className="form-label text-[10px]">Ngày báo cáo</label><input {...register("BC_ngay_bao_cao")} className="form-input text-xs h-8" /></div>
               <div><label className="form-label text-[10px]">Đơn vị thực hiện báo cáo</label><input {...register("BC_don_vi_thuc_hien")} className="form-input text-xs h-8" /></div>
               <div><label className="form-label text-[10px]">Tại tỉnh/thành</label><input {...register("BC_ten_tinh")} className="form-input text-xs h-8" placeholder="Tỉnh Lâm Đồng" /></div>
+              <div className="md:col-span-1"><label className="form-label text-[10px]">Số QĐ UBND tỉnh về ATTT</label><input {...register("BC_qd_ubnd_tinh_so_attt")} className="form-input text-xs h-8" /></div>
+              <div className="md:col-span-2"><label className="form-label text-[10px]">Số QĐ UBND tỉnh về việc phân công/ủy quyền</label><input {...register("BC_qd_ubnd_tinh_phan_cong")} className="form-input text-xs h-8" /></div>
             </div>
           </div>
 
