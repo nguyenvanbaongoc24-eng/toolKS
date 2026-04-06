@@ -46,7 +46,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     can_bo_phu_trach: [],
     
     // Tab 2
-    ket_noi_internet: [], // Mảng kết nối
+    ket_noi_internet: [], 
     thiet_bi_mang: [],
     may_chu: [],
     camera: [],
@@ -55,10 +55,17 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     // Tab 3
     ung_dung: [],
     ma_hoa_du_lieu: "Không", vpn: "Không", email_bao_mat: "Không",
+    p1_protocol: "HTTP (không mã hóa)",
+    p2_vpn: "Không có VPN", p2_vpn_type: "",
     
     // Tab 4
-    chinh_sach_mat_khau: "Không", anti_virus: "Không", sao_luu: "Không", 
-    tuong_lua_loai: "", tuong_lua_chinh_sach: "",
+    l1_phys_key: "Không có kiểm soát riêng",
+    l2_pass_policy: "Không có chính sách thống nhất", l2_pass_len: "", l2_pass_time: "",
+    l3_av_has: "Không", l3_av_name: "",
+    l4_bak_has: "Không sao lưu", l4_bak_freq: "",
+    l5_log_enabled: "Không", l5_log_retention: "Không lưu", l5_siem_has: "Không", l5_siem_name: "",
+    l6_incident_has: "Không có sự cố nào", l6_incident_desc: "", l6_incident_resolution: "",
+    l7_type: "Tường lửa tích hợp (SPI)", l7_policy_default: "Không biết / Chưa cấu hình", l7_remote_access: "Không",
     cap_nhat_he_dieu_hanh: "Không",
     
     // Tab 5
@@ -87,16 +94,19 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   useAutoSave(formData, 10000);
   
   const [showValidationModal, setShowValidationModal] = useState(false);
-  const [exportType, setExportType] = useState<"phieu" | "baocao" | null>(null);
+  const [exportType, setExportType] = useState<"phieu" | "hsdx" | "baocao" | null>(null);
 
   const calculateProgress = () => {
      const fields = ["ten_don_vi", "he_thong_thong_tin", "nguoi_dung_dau", "dia_chi"];
+     //@ts-ignore
      const filled = fields.filter(f => !!formData[f]).length;
      return { percent: Math.round((filled / fields.length) * 100), missing: fields.length - filled };
   };
 
   const Indicator = ({ name, required }: { name: string, required?: boolean }) => {
+    //@ts-ignore
     const val = formData[name];
+    //@ts-ignore
     const conf = formData.confidence_scores?.[name];
     
     if (!val && required) return <span title="Bắt buộc nhập"><AlertCircle className="w-4 h-4 text-rose-500 inline ml-2" /></span>;
@@ -105,7 +115,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     return null;
   };
 
-  const triggerExport = (type: "phieu" | "baocao") => {
+  const triggerExport = (type: "phieu" | "hsdx" | "baocao") => {
+    //@ts-ignore
     const missingRequired = ["ten_don_vi", "he_thong_thong_tin"].filter(f => !formData[f]);
     if (missingRequired.length > 0) {
        setShowValidationModal(true);
@@ -115,42 +126,38 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     executeExport(type);
   };
 
-  const executeExport = async (type: "phieu" | "baocao") => {
+  const executeExport = async (type: "phieu" | "hsdx" | "baocao") => {
     setShowValidationModal(false);
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const response = await axios.post(`${apiUrl}/api/generate-docx`, {
+      let endpoint = "";
+      let filename = "";
+
+      if (type === "phieu") {
+        endpoint = "/export/phieu-khao-sat";
+        filename = "Phieu_Khao_Sat_ATTT.docx";
+      } else if (type === "hsdx") {
+        endpoint = "/export/ho-so-de-xuat";
+        filename = "Ho_So_De_Xuat_Cap_Do.docx";
+      } else if (type === "baocao") {
+        endpoint = "/export/bao-cao";
+        filename = "Bao_Cao_HSDX.docx";
+      }
+
+      const response = await axios.post(`${apiUrl}${endpoint}`, {
         data: formData
       }, { responseType: 'blob' });
+      
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'Phieu_Khao_Sat_ATTT.docx');
+      link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } catch (err) {
       console.error(err);
       alert("Lỗi xuất file Word!");
-    }
-  };
-
-  const handleExportReport = async () => {
-    try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const response = await axios.post(`${apiUrl}/api/generate-report`, {
-        data: formData
-      }, { responseType: 'blob' });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'BaoCaoKhaoSat_ATTT.docx');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (err) {
-      console.error(err);
-      alert("Lỗi xuất Báo cáo Khảo sát!");
     }
   };
 
@@ -255,7 +262,6 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       {/* TAB 2: HẠ TẦNG & MẠNG */}
       {activeTab === "ha_tang" && (
         <div className="space-y-6 animate-fade-in">
-          
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
               <h2 className="section-title mb-0"><span className="section-badge bg-cyan-500">D</span> Mục D. Kết nối Internet</h2>
@@ -397,19 +403,26 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             <h2 className="section-title"><span className="section-badge bg-orange-500">P</span> Mục P. Mã hóa / Chứng thư số</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="form-label">Kết nối sử dụng VPN không?</label>
-                <select {...register("vpn")} className="form-input py-2">
-                  <option value="Có">Có (SSL VPN / IPSec)</option>
-                  <option value="Không">Không</option>
+                <label className="form-label">Giao thức ứng dụng Web (HTTPS/HTTP)</label>
+                <select {...register("p1_protocol")} className="form-input py-2">
+                  <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
+                  <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
+                  <option value="Cả hai">Cả hai</option>
                 </select>
               </div>
               <div>
-                <label className="form-label">Dữ liệu lưu trữ có mã hóa?</label>
-                <select {...register("ma_hoa_du_lieu")} className="form-input py-2">
-                  <option value="Có">Có mã hóa lưu trữ</option>
-                  <option value="Không">Không mã hóa</option>
+                <label className="form-label">Sử dụng VPN kết nối từ xa?</label>
+                <select {...register("p2_vpn")} className="form-input py-2">
+                  <option value="Có">Có sử dụng</option>
+                  <option value="Không có VPN">Không sử dụng</option>
                 </select>
               </div>
+              {formData.p2_vpn === "Có" && (
+                <div className="md:col-span-2">
+                  <label className="form-label">Loại VPN (VD: SSL VPN, IPSec...)</label>
+                  <input {...register("p2_vpn_type")} className="form-input" placeholder="Nhập loại VPN" />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -418,33 +431,165 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       {/* TAB 4: AN TOÀN BẢO MẬT */}
       {activeTab === "bao_mat" && (
         <div className="space-y-6 animate-fade-in">
+          
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-red-500">L</span> Mục L. Hiện trạng bảo mật & Tường lửa</h2>
+            <h2 className="section-title"><span className="section-badge bg-rose-500">L1</span> Kiểm soát truy cập vật lý</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="form-label">Chính sách mật khẩu mạnh</label>
-                <select {...register("chinh_sach_mat_khau")} className="form-input py-2">
-                  <option value="Có">Có áp dụng định kỳ</option>
-                  <option value="Không">Không áp dụng, tự do</option>
-                </select>
-              </div>
-              <div>
-                <label className="form-label">Phần mềm Anti-virus (Endpoint)</label>
-                <select {...register("anti_virus")} className="form-input py-2">
-                  <option value="Có - Có bản quyền">Có mua bản quyền</option>
-                  <option value="Có - Miễn phí">Dùng bản miễn phí</option>
-                  <option value="Không">Không cài đặt</option>
-                </select>
-              </div>
               <div className="md:col-span-2">
-                <label className="form-label">Loại Tường lửa (Firewall)</label>
-                <input {...register("tuong_lua_loai")} className="form-input" placeholder="Tường lửa phần cứng chuyên dụng / Tích hợp Router" />
+                <label className="form-label">Hình thức kiểm soát ra vào phòng máy chủ/thiết bị</label>
+                <select {...register("l1_phys_key")} className="form-input py-2">
+                  <option value="Có khóa cửa (chìa khóa thường)">Có khóa cửa (chìa khóa thường)</option>
+                  <option value="Có khóa cửa + camera giám sát">Có khóa cửa + Camera giám sát</option>
+                  <option value="Có thẻ từ / kiểm soát điện tử">Có thẻ từ / Kiểm soát điện tử</option>
+                  <option value="Không có kiểm soát riêng">Không có kiểm soát riêng</option>
+                </select>
               </div>
             </div>
           </div>
 
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-violet-500">Q</span> Mục Q. Quản lý lỗ hổng & Vá lỗi</h2>
+            <h2 className="section-title"><span className="section-badge bg-blue-500">L2</span> Kiểm soát truy cập logic</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="form-label">Chính sách mật khẩu (Password Policy)</label>
+                <select {...register("l2_pass_policy")} className="form-input py-2">
+                  <option value="Có chính sách mật khẩu">Có chính sách mật khẩu thống nhất</option>
+                  <option value="Không có chính sách thống nhất">Không có chính sách (tự do)</option>
+                </select>
+              </div>
+              {formData.l2_pass_policy === "Có chính sách mật khẩu" && (
+                <>
+                  <div>
+                     <label className="form-label">Độ dài tối thiểu (ký tự)</label>
+                     <input {...register("l2_pass_len")} type="number" className="form-input" placeholder="8" />
+                  </div>
+                  <div>
+                     <label className="form-label">Thời gian đổi mật khẩu (tháng)</label>
+                     <input {...register("l2_pass_time")} type="number" className="form-input" placeholder="3" />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-emerald-500">L3</span> Phần mềm bảo vệ (Antivirus)</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="form-label">Đơn vị có sử dụng Antivirus không?</label>
+                <select {...register("l3_av_has")} className="form-input py-2">
+                  <option value="Có">Có sử dụng</option>
+                  <option value="Không">Không sử dụng</option>
+                </select>
+              </div>
+              {formData.l3_av_has === "Có" && (
+                <div>
+                  <label className="form-label">Tên phần mềm (VD: Kaspersky, BKAV...)</label>
+                  <input {...register("l3_av_name")} className="form-input" placeholder="Nhập tên phần mềm" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-amber-500">L4</span> Sao lưu dữ liệu (Backup)</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="form-label">Quy trình sao lưu dữ liệu</label>
+                <select {...register("l4_bak_has")} className="form-input py-2">
+                  <option value="Có">Có quy trình định kỳ</option>
+                  <option value="Thủ công">Thực hiện thủ công khi nhớ</option>
+                  <option value="Không sao lưu">Không thực hiện sao lưu</option>
+                </select>
+              </div>
+              {formData.l4_bak_has === "Có" && (
+                <div>
+                  <label className="form-label">Tần suất sao lưu (Ghi rõ)</label>
+                  <input {...register("l4_bak_freq")} className="form-input" placeholder="VD: Hàng ngày, Hàng tuần..." />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-indigo-500">L5</span> Giám sát & Nhật ký hệ thống</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="form-label">Trạng thái ghi Log thiết bị mạng</label>
+                <select {...register("l5_log_enabled")} className="form-input py-2">
+                  <option value="Có">Đang bật (Có)</option>
+                  <option value="Không">Đang tắt (Không)</option>
+                  <option value="Không biết / Chưa kiểm tra">Chưa kiểm tra / Không biết</option>
+                </select>
+              </div>
+              <div>
+                <label className="form-label">Thời gian lưu trữ Log</label>
+                <select {...register("l5_log_retention")} className="form-input py-2">
+                  <option value="< 3 tháng">&lt; 3 tháng</option>
+                  <option value="3 – 6 tháng">Từ 3 - 6 tháng</option>
+                  <option value="> 6 tháng">&gt; 6 tháng</option>
+                  <option value="Không lưu">Không lưu trữ</option>
+                </select>
+              </div>
+              <div>
+                <label className="form-label">Sử dụng hệ thống SIEM tập trung?</label>
+                <select {...register("l5_siem_has")} className="form-input py-2">
+                  <option value="Có">Có sử dụng</option>
+                  <option value="Không">Không có</option>
+                </select>
+              </div>
+              {formData.l5_siem_has === "Có" && (
+                <div className="animate-slide-down">
+                  <label className="form-label">Tên hệ thống SIEM (VD: Wazuh, ELK...)</label>
+                  <input {...register("l5_siem_name")} className="form-input" placeholder="Nhập tên hệ thống SIEM" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-rose-500">L6</span> Lịch sử sự cố An toàn thông tin</h2>
+            <div className="grid grid-cols-1 gap-4">
+              <div>
+                <label className="form-label">Sự cố ATTT trong 2 năm qua</label>
+                <select {...register("l6_incident_has")} className="form-input py-2">
+                  <option value="Không có sự cố nào">Không có sự cố nào</option>
+                  <option value="Có">Có xảy ra sự cố</option>
+                  <option value="Không biết / Không ghi nhận">Không rõ / Không ghi nhận</option>
+                </select>
+              </div>
+              
+              {formData.l6_incident_has === "Có" && (
+                <div className="space-y-4 animate-slide-down">
+                  <div>
+                    <label className="form-label">Mô tả ngắn gọn sự cố</label>
+                    <textarea {...register("l6_incident_desc")} className="form-input" placeholder="VD: Nhiễm mã độc tống tiền (Ransomware)..." />
+                  </div>
+                  <div>
+                    <label className="form-label">Cách thức xử lý & khắc phục</label>
+                    <textarea {...register("l6_incident_resolution")} className="form-input" placeholder="VD: Khôi phục từ bản sao lưu, cài lại hệ điều hành..." />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-violet-500">L7</span> Tường lửa & Truy cập từ xa</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="md:col-span-2">
+                <label className="form-label">Phân loại Tường lửa (Firewall)</label>
+                <select {...register("l7_type")} className="form-input py-2">
+                  <option value="Tường lửa tích hợp (SPI)">Tường lửa tích hợp trên Router (SPI)</option>
+                  <option value="Tường lửa phần cứng chuyên dụng">Tường lửa phần cứng chuyên dụng (Appliance)</option>
+                  <option value="Tường lửa phần mềm trên máy chủ">Tường lửa phần mềm trên máy chủ (Host-based)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-gray-500">Q</span> Mục Q. Quản lý lỗ hổng & Vá lỗi</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
                 <label className="form-label">Có quy trình cập nhật Hệ điều hành không?</label>
@@ -492,15 +637,18 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
              <span className="text-xs text-gray-400 font-medium">{calculateProgress().percent}% Complete</span>
           </div>
 
-          <div className="flex justify-end gap-3 flex-1">
-            <button type="submit" className="btn-primary">
+          <div className="flex justify-end gap-3 flex-1 overflow-x-auto pb-1 no-scrollbar">
+            <button type="submit" className="btn-primary whitespace-nowrap">
               <Save className="w-4 h-4" /> Lưu Form
             </button>
-            <button type="button" onClick={() => triggerExport("phieu")} className="btn-secondary">
-              <FileDown className="w-4 h-4 text-emerald-400" /> Xuất Phiếu KS
+            <button type="button" onClick={() => triggerExport("phieu")} className="btn-secondary whitespace-nowrap">
+              <FileDown className="w-4 h-4 text-indigo-400" /> Xuất Phiếu KS
             </button>
-            <button type="button" onClick={() => triggerExport("baocao")} className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 transition-all shadow-lg shadow-amber-500/20">
-              <FileText className="w-4 h-4" /> Xuất Báo cáo KS
+            <button type="button" onClick={() => triggerExport("hsdx")} className="btn-secondary whitespace-nowrap">
+              <Shield className="w-4 h-4 text-emerald-400" /> Xuất HSDX
+            </button>
+            <button type="button" onClick={() => triggerExport("baocao")} className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all shadow-lg shadow-indigo-500/20 whitespace-nowrap">
+              <FileText className="w-4 h-4 text-white" /> Xuất Báo cáo
             </button>
           </div>
         </div>

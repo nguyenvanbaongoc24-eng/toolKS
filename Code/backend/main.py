@@ -12,11 +12,13 @@ from ocr_service.tesseract_runner import perform_ocr
 from ai_extraction.extractor import extract_structured_data, extract_device_data
 from document_generation.generator import generate_report_docx
 from document_generation.report_generator import generate_survey_report
+from document_generation.document_exporter import DocumentExporter
 
 # Load environment variables
 load_dotenv()
 
 app = FastAPI(title="Survey Profiler API - Khảo sát ATTT")
+exporter = DocumentExporter()
 
 # Initialize Supabase
 supabase_url = os.environ.get("SUPABASE_URL")
@@ -234,6 +236,41 @@ async def generate_report(req: GenerateDocxRequest):
             filename="BaoCaoKhaoSat_ATTT.docx", 
             media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# === NEW OFFICIAL EXPORT ENDPOINTS ===
+
+@app.post("/export/phieu-khao-sat")
+async def export_phieu_khao_sat(req: GenerateDocxRequest):
+    try:
+        result_path = exporter.generate_phieu_khao_sat(req.data)
+        filename = f"Phieu_Khao_Sat_{req.data.get('ten_don_vi', 'Export')}.docx"
+        return FileResponse(result_path, filename=filename, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/export/ho-so-de-xuat")
+async def export_ho_so_de_xuat(req: GenerateDocxRequest):
+    try:
+        # Check for network diagram in extracted_images
+        # Assuming backend is in /Code/backend
+        diagram_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "extracted_images", "network_diagram.png")
+        if not os.path.exists(diagram_path):
+            diagram_path = None
+            
+        result_path = exporter.generate_hsdx(req.data, diagram_path=diagram_path)
+        filename = f"HSDX_{req.data.get('ten_don_vi', 'Export')}.docx"
+        return FileResponse(result_path, filename=filename, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/export/bao-cao")
+async def export_bao_cao_official(req: GenerateDocxRequest):
+    try:
+        result_path = exporter.generate_bao_cao(req.data)
+        filename = f"Bao_Cao_{req.data.get('ten_don_vi', 'Export')}.docx"
+        return FileResponse(result_path, filename=filename, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

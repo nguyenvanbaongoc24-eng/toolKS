@@ -1,5 +1,6 @@
 import docx
 import io
+import sys
 
 def read_docx_to_file(path, out_path):
     try:
@@ -20,4 +21,7 @@ def read_docx_to_file(path, out_path):
         print(f"Error: {e}")
 
 if __name__ == "__main__":
-    read_docx_to_file('d:/ToolKS/Code/Phieu_Khao_Sat_ATTT_Mau_1.docx.docx', 'd:/ToolKS/Code/docx_output.txt')
+    if len(sys.argv) > 2:
+        read_docx_to_file(sys.argv[1], sys.argv[2])
+    else:
+        read_docx_to_file('d:/ToolKS/Code/Phieu_Khao_Sat_ATTT_Mau_1.docx.docx', 'd:/ToolKS/Code/docx_output.txt')
