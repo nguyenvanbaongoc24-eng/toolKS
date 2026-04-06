@@ -238,30 +238,30 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
-                   <div><label className="form-label text-[10px]">Người dùng NB (C5.i)</label><input {...register("C5_noi_bo")} className="form-input h-9" type="number" /></div>
-                   <div><label className="form-label text-[10px]">Lượt GD ngoài (C5.ii)</label><input {...register("C5_ben_ngoai")} className="form-input h-9" type="number" /></div>
+                   <div><label className="form-label text-[10px]">Người dùng NB (C5.i)</label><input {...register("C5_noi_bo")} className="form-input h-11" type="number" /></div>
+                   <div><label className="form-label text-[10px]">Lượt GD ngoài (C5.ii)</label><input {...register("C5_ben_ngoai")} className="form-input h-11" type="number" /></div>
                 </div>
 
-                <div><label className="form-label text-[10px]">Năm hoạt động (C6)</label><input {...register("C6_nam_hoat_dong")} className="form-input h-9" type="number" /></div>
+                <div><label className="form-label text-[10px]">Năm hoạt động (C6)</label><input {...register("C6_nam_hoat_dong")} className="form-input h-11" type="number" /></div>
 
                 <div><label className="form-label">Hệ thống cấp trên (C7)</label>
                    <div className="flex gap-2">
-                      <select {...register("C7_ket_noi_cap_tren_has")} className="form-input flex-1 h-9 py-1">
+                      <select {...register("C7_ket_noi_cap_tren_has")} className="form-input flex-1 h-11">
                          <option value="Không">Không</option>
                          <option value="Có">Có</option>
                       </select>
-                      {formData.C7_ket_noi_cap_tren_has === "Có" && <input {...register("C7_ten_he_thong_cap_tren")} className="form-input flex-1 h-9" placeholder="Tên hệ thống..." />}
+                      {formData.C7_ket_noi_cap_tren_has === "Có" && <input {...register("C7_ten_he_thong_cap_tren")} className="form-input flex-1 h-11" placeholder="Tên hệ thống..." />}
                    </div>
                 </div>
 
                 <div><label className="form-label">Xử lý bí mật NN (C8)</label>
                    <div className="flex gap-2">
-                      <select {...register("C8_bi_mat_nha_nuoc_has")} className="form-input flex-1 h-9 py-1">
+                      <select {...register("C8_bi_mat_nha_nuoc_has")} className="form-input flex-1 h-11">
                          <option value="Không">Không</option>
                          <option value="Có">Có</option>
                       </select>
                       {formData.C8_bi_mat_nha_nuoc_has === "Có" && (
-                         <select {...register("C8_do_mat")} className="form-input flex-1 h-9 py-1">
+                         <select {...register("C8_do_mat")} className="form-input flex-1 h-11">
                             <option value="Mật">Mật</option>
                             <option value="Tối mật">Tối mật</option>
                             <option value="Tuyệt mật">Tuyệt mật</option>
@@ -298,8 +298,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                            </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2 mt-1">
-                           <input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} placeholder="Trình độ" className="form-input text-xs h-8" />
-                           <input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} placeholder="Chứng chỉ ATTT" className="form-input text-xs h-8" />
+                           <input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} placeholder="Trình độ" className="form-input text-xs h-11" />
+                           <input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} placeholder="Chứng chỉ ATTT" className="form-input text-xs h-11" />
                         </div>
                      </div>
                   </div>
@@ -328,16 +328,16 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                           <span className="text-[9px] text-gray-500">LINE #{idx+1}</span>
                           <button type="button" onClick={() => internetFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                        </div>
-                       <input {...register(`ket_noi_internet.${idx}.nha_cung_cap`)} placeholder="ISP (VNPT, Viettel...)" className="form-input text-xs mb-2 h-8" />
+                       <input {...register(`ket_noi_internet.${idx}.nha_cung_cap`)} placeholder="ISP (VNPT, Viettel...)" className="form-input text-xs mb-2 h-11" />
                        <div className="grid grid-cols-2 gap-2">
-                          <input {...register(`ket_noi_internet.${idx}.bang_thong`)} placeholder="Băng thông" className="form-input text-xs h-8" />
-                          <select {...register(`ket_noi_internet.${idx}.vai_tro`)} className="form-input text-xs h-8 py-0"><option value="Đường chính">Chính</option><option value="Dự phòng">Dự phòng</option></select>
+                          <input {...register(`ket_noi_internet.${idx}.bang_thong`)} placeholder="Băng thông" className="form-input text-xs h-11" />
+                          <select {...register(`ket_noi_internet.${idx}.vai_tro`)} className="form-input text-xs h-11"><option value="Đường chính">Chính</option><option value="Dự phòng">Dự phòng</option></select>
                        </div>
                     </div>
                   ))}
                </div>
-               <div><label className="form-label text-[10px]">Thiết bị Gateway (D2)</label><input {...register("D2_router_modem")} className="form-input h-9" placeholder="Hãng, Model..." /></div>
-               <div><label className="form-label text-[10px]">IP LAN Gateway (D3)</label><input {...register("D3_ip_lan_gateway")} className="form-input h-9" placeholder="192.168.1.1" /></div>
+               <div><label className="form-label text-[10px]">Thiết bị Gateway (D2)</label><input {...register("D2_router_modem")} className="form-input h-11" placeholder="Hãng, Model..." /></div>
+               <div><label className="form-label text-[10px]">IP LAN Gateway (D3)</label><input {...register("D3_ip_lan_gateway")} className="form-input h-11" placeholder="192.168.1.1" /></div>
              </div>
 
              {/* E. Firewall & Switch */}
@@ -348,7 +348,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                </div>
                <div className="mb-3">
                   <label className="form-label text-[10px]">Loại Firewall (E2)</label>
-                  <select {...register("E2_firewall_type")} className="form-input h-9 py-1">
+                  <select {...register("E2_firewall_type")} className="form-input h-11">
                      <option value="Dùng Firewall tích hợp">Dùng Firewall tích hợp (Router)</option>
                      <option value="Có (phần cứng chuyên dụng)">Có (phần cứng chuyên dụng)</option>
                      <option value="Dùng phần mềm Firewall">Dùng phần mềm Firewall</option>
@@ -361,10 +361,10 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                        <button type="button" onClick={() => tbMangFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                     </div>
                     <div className="space-y-2">
-                       <input {...register(`thiet_bi_mang.${idx}.loai_thiet_bi`)} placeholder="Loại (VD: Switch 24p)" className="form-input text-xs h-8" />
+                       <input {...register(`thiet_bi_mang.${idx}.loai_thiet_bi`)} placeholder="Loại (VD: Switch 24p)" className="form-input text-xs h-11" />
                        <div className="grid grid-cols-2 gap-2">
-                          <input {...register(`thiet_bi_mang.${idx}.hang`)} placeholder="Hãng" className="form-input text-xs h-8" />
-                          <input {...register(`thiet_bi_mang.${idx}.serial`)} placeholder="Serial" className="form-input text-xs h-8" />
+                          <input {...register(`thiet_bi_mang.${idx}.hang`)} placeholder="Hãng" className="form-input text-xs h-11" />
+                          <input {...register(`thiet_bi_mang.${idx}.serial`)} placeholder="Serial" className="form-input text-xs h-11" />
                        </div>
                     </div>
                  </div>
@@ -378,7 +378,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                    {["F1_pc_sl", "F1_laptop_sl", "F1_mayin_sl", "F1_dienthoai_sl"].map(f => (
                       <div key={f}>
                          <label className="form-label text-[9px] mb-1">{f.split('_')[1].toUpperCase()}</label>
-                         <input {...register(f)} className="form-input h-8 text-center" type="number" placeholder="SL" />
+                         <input {...register(f)} className="form-input h-11 text-center" type="number" placeholder="SL" />
                       </div>
                    ))}
                 </div>
@@ -394,10 +394,10 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                         <button type="button" onClick={() => mayChuFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                      </div>
                      <div className="space-y-2">
-                        <input {...register(`may_chu.${idx}.vai_tro`)} placeholder="Vai trò (AD, File...)" className="form-input text-xs h-8" />
+                        <input {...register(`may_chu.${idx}.vai_tro`)} placeholder="Vai trò (AD, File...)" className="form-input text-xs h-11" />
                         <div className="grid grid-cols-2 gap-2">
-                           <input {...register(`may_chu.${idx}.hang`)} placeholder="Hãng/Model" className="form-input text-xs h-8" />
-                           <input {...register(`may_chu.${idx}.ram`)} placeholder="RAM" className="form-input text-xs h-8" />
+                           <input {...register(`may_chu.${idx}.hang`)} placeholder="Hãng/Model" className="form-input text-xs h-11" />
+                           <input {...register(`may_chu.${idx}.ram`)} placeholder="RAM" className="form-input text-xs h-11" />
                         </div>
                      </div>
                   </div>
@@ -406,8 +406,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 <div className="mt-3">
                    <label className="form-label text-[10px]">Điện toán đám mây (F3)</label>
                    <div className="flex gap-2">
-                      <select {...register("F3_cloud_has")} className="form-input flex-1 h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                      {formData.F3_cloud_has === "Có" && <input {...register("F3_ten_cloud")} className="form-input flex-1 h-8" placeholder="AWS, VNPT..." />}
+                      <select {...register("F3_cloud_has")} className="form-input flex-1 h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
+                      {formData.F3_cloud_has === "Có" && <input {...register("F3_ten_cloud")} className="form-input flex-1 h-11" placeholder="AWS, VNPT..." />}
                    </div>
                 </div>
              </div>
@@ -419,14 +419,14 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   <button type="button" onClick={() => cameraFields.append({ hang: "", model: "", serial: "", vi_tri: "" })} className="bg-blue-500/20 text-blue-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
                 </div>
                 <div className="grid grid-cols-2 gap-2 mb-3">
-                   <div><label className="text-[9px] text-gray-500">Đầu ghi NVR (G2)</label><input {...register("G2_dau_ghi_nvr")} className="form-input h-8" /></div>
-                   <div><label className="text-[9px] text-gray-500">Lưu trữ (G3)</label><input {...register("G3_luu_tru_ngay")} className="form-input h-8" type="number" /></div>
+                   <div><label className="text-[9px] text-gray-500">Đầu ghi NVR (G2)</label><input {...register("G2_dau_ghi_nvr")} className="form-input h-11" /></div>
+                   <div><label className="text-[9px] text-gray-500">Lưu trữ (G3)</label><input {...register("G3_luu_tru_ngay")} className="form-input h-11" type="number" /></div>
                 </div>
                 {cameraFields.fields.map((field, idx) => (
                   <div key={field.id} className="p-2 bg-white/5 rounded-lg mb-2 flex items-center gap-2">
                      <span className="text-[8px] text-gray-500">#{idx+1}</span>
-                     <input {...register(`camera.${idx}.hang`)} placeholder="Hãng" className="form-input text-xs h-8 flex-1" />
-                     <input {...register(`camera.${idx}.vi_tri`)} placeholder="Vị trí" className="form-input text-xs h-8 flex-1" />
+                     <input {...register(`camera.${idx}.hang`)} placeholder="Hãng" className="form-input text-xs h-11 flex-1" />
+                     <input {...register(`camera.${idx}.vi_tri`)} placeholder="Vị trí" className="form-input text-xs h-11 flex-1" />
                      <button type="button" onClick={() => cameraFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3.5 h-3.5"/></button>
                   </div>
                 ))}
@@ -436,11 +436,11 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
              <div className="pt-4 border-t border-white/5 space-y-4">
                 <h4 className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">H. Quy hoạch IP LAN</h4>
                 <div className="grid grid-cols-2 gap-2">
-                   <div><label className="form-label text-[9px]">Dải IP (H1)</label><input {...register("H1_dai_ip_lan")} className="form-input h-8 text-xs" /></div>
-                   <div><label className="form-label text-[9px]">DNS (H3)</label><input {...register("H3_dns")} className="form-input h-8 text-xs" /></div>
+                   <div><label className="form-label text-[9px]">Dải IP (H1)</label><input {...register("H1_dai_ip_lan")} className="form-input h-11 text-xs" /></div>
+                   <div><label className="form-label text-[9px]">DNS (H3)</label><input {...register("H3_dns")} className="form-input h-11 text-xs" /></div>
                 </div>
                 <div><label className="form-label text-[10px]">Phân chia VLAN? (H4)</label>
-                   <select {...register("H4_co_vlan")} className="form-input h-8 py-0">
+                   <select {...register("H4_co_vlan")} className="form-input h-11 ">
                       <option value="Không">Không</option>
                       <option value="Có">Có</option>
                    </select>
@@ -450,8 +450,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                    <div className="flex justify-between items-center"><label className="text-[10px] text-indigo-300">IP Tĩnh (H5)</label><button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", ip_tinh: "" })} className="text-indigo-400 p-1"><Plus className="w-4 h-4"/></button></div>
                    {ipTinhFields.fields.map((field, idx) => (
                      <div key={field.id} className="flex gap-2">
-                        <input {...register(`ip_tinh.${idx}.ten_thiet_bi`)} placeholder="Thiết bị" className="form-input h-8 text-xs flex-1" />
-                        <input {...register(`ip_tinh.${idx}.ip_tinh`)} placeholder="IP" className="form-input h-8 text-xs flex-1" />
+                        <input {...register(`ip_tinh.${idx}.ten_thiet_bi`)} placeholder="Thiết bị" className="form-input h-11 text-xs flex-1" />
+                        <input {...register(`ip_tinh.${idx}.ip_tinh`)} placeholder="IP" className="form-input h-11 text-xs flex-1" />
                         <button type="button" onClick={() => ipTinhFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                      </div>
                    ))}
@@ -463,23 +463,23 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   <h4 className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">T. Đặc tả mạng & Vật lý</h4>
                   <div className="grid grid-cols-2 gap-3">
                      <div><label className="form-label text-[9px]">DMZ (T1.1)</label>
-                        <select {...register("T1_1_co_dmz")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                        <select {...register("T1_1_co_dmz")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                      </div>
                      <div><label className="form-label text-[9px]">WiFi tách biệt? (T1.2)</label>
-                        <select {...register("T1_2_wifi_tach_rieng")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                        <select {...register("T1_2_wifi_tach_rieng")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                      </div>
                   </div>
                   <div><label className="form-label text-[9px]">Loại cáp chính (T4.1)</label>
-                     <select {...register("T4_1_loai_cap")} className="form-input h-8 py-0">
+                     <select {...register("T4_1_loai_cap")} className="form-input h-11 ">
                         <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat6)</option>
                         <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
                      </select>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                      <div><label className="form-label text-[9px]">Tủ Rack (T3)</label>
-                        <select {...register("T3_1_co_rack")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                        <select {...register("T3_1_co_rack")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                      </div>
-                     {formData.T3_1_co_rack === "Có" && <div><label className="form-label text-[9px]">Số U</label><input {...register("T3_1_rack_u")} className="form-input h-8 text-xs" /></div>}
+                     {formData.T3_1_co_rack === "Có" && <div><label className="form-label text-[9px]">Số U</label><input {...register("T3_1_rack_u")} className="form-input h-11 text-xs" /></div>}
                   </div>
              </div>
            </div>
@@ -503,8 +503,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                         <span className="text-[9px] text-gray-500 uppercase">APP #{idx+1}</span>
                         <button type="button" onClick={() => ungDungFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                      </div>
-                     <input {...register(`ung_dung.${idx}.ten_ung_dung`)} placeholder="Tên ứng dụng (VD: MISA, Văn phòng số...)" className="form-input text-xs h-8 mb-2" />
-                     <input {...register(`ung_dung.${idx}.chuc_nang`)} placeholder="Chức năng chính" className="form-input text-xs h-8" />
+                     <input {...register(`ung_dung.${idx}.ten_ung_dung`)} placeholder="Tên ứng dụng (VD: MISA, Văn phòng số...)" className="form-input text-xs h-11 mb-2" />
+                     <input {...register(`ung_dung.${idx}.chuc_nang`)} placeholder="Chức năng chính" className="form-input text-xs h-11" />
                   </div>
                 ))}
              </div>
@@ -514,7 +514,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 <h4 className="text-[10px] uppercase font-bold text-orange-400 tracking-wider">P. Bảo mật kết nối & Mã hóa</h4>
                 <div>
                    <label className="form-label text-[10px]">Giao thức Web (P1)</label>
-                   <select {...register("p1_protocol")} className="form-input h-8 py-0">
+                   <select {...register("p1_protocol")} className="form-input h-11">
                       <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
                       <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
                    </select>
@@ -522,19 +522,19 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 <div>
                    <label className="form-label text-[10px]">VPN kết nối từ xa (P2)</label>
                    <div className="flex gap-2">
-                      <select {...register("p2_vpn")} className="form-input flex-1 h-8 py-0"><option value="Không có VPN">Không</option><option value="Có">Có</option></select>
-                      {formData.p2_vpn === "Có" && <input {...register("p2_vpn_type")} className="form-input flex-1 h-8" placeholder="Loại VPN..." />}
+                      <select {...register("p2_vpn")} className="form-input flex-1 h-11"><option value="Không có VPN">Không</option><option value="Có">Có</option></select>
+                      {formData.p2_vpn === "Có" && <input {...register("p2_vpn_type")} className="form-input flex-1 h-11" placeholder="Loại VPN..." />}
                    </div>
                 </div>
                 <div>
                    <label className="form-label text-[10px]">Mã hóa ổ đĩa (P4)</label>
                    <div className="flex gap-2">
-                      <select {...register("P4_ma_hoa_luu_tru_has")} className="form-input flex-1 h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                      {formData.P4_ma_hoa_luu_tru_has === "Có" && <input {...register("P4_phuong_phap")} className="form-input flex-1 h-8" placeholder="Bitlocker..." />}
+                      <select {...register("P4_ma_hoa_luu_tru_has")} className="form-input flex-1 h-11"><option value="Không">Không</option><option value="Có">Có</option></select>
+                      {formData.P4_ma_hoa_luu_tru_has === "Có" && <input {...register("P4_phuong_phap")} className="form-input flex-1 h-11" placeholder="Bitlocker..." />}
                    </div>
                 </div>
                 <div><label className="form-label text-[10px]">Email Security (P5)</label>
-                   <select {...register("P5_email_sec")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                   <select {...register("P5_email_sec")} className="form-input h-11"><option value="Không">Không</option><option value="Có">Có</option></select>
                 </div>
              </div>
            </div>
@@ -558,14 +558,14 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                         <span className="text-[9px] text-gray-500">KHOẢ #{idx+1}</span>
                         <button type="button" onClick={() => daoTaoFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                      </div>
-                     <input {...register(`dao_tao.${idx}.hinh_thuc`)} placeholder="Hình thức (Tập huấn, Hội thảo...)" className="form-input text-xs h-8 mb-2" />
+                     <input {...register(`dao_tao.${idx}.hinh_thuc`)} placeholder="Hình thức (Tập huấn, Hội thảo...)" className="form-input text-xs h-11 mb-2" />
                      <div className="grid grid-cols-2 gap-2">
-                        <input {...register(`dao_tao.${idx}.don_vi_to_chuc`)} placeholder="Đơn vị tổ chức" className="form-input text-xs h-8" />
-                        <input {...register(`dao_tao.${idx}.thoi_gian`)} placeholder="Thời gian" className="form-input text-xs h-8" />
+                        <input {...register(`dao_tao.${idx}.don_vi_to_chuc`)} placeholder="Đơn vị tổ chức" className="form-input text-xs h-11" />
+                        <input {...register(`dao_tao.${idx}.thoi_gian`)} placeholder="Thời gian" className="form-input text-xs h-11" />
                      </div>
                      <div className="grid grid-cols-2 gap-2 mt-2">
-                        <input {...register(`dao_tao.${idx}.so_can_bo`)} placeholder="Số cán bộ" className="form-input text-xs h-8" type="number" />
-                        <input {...register(`dao_tao.${idx}.chung_chi_so_vb`)} placeholder="Số văn bản/CC" className="form-input text-xs h-8" />
+                        <input {...register(`dao_tao.${idx}.so_can_bo`)} placeholder="Số cán bộ" className="form-input text-xs h-11" type="number" />
+                        <input {...register(`dao_tao.${idx}.chung_chi_so_vb`)} placeholder="Số văn bản/CC" className="form-input text-xs h-11" />
                      </div>
                    </div>
                  ))}
@@ -583,12 +583,12 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                         <span className="text-[9px] text-gray-500">LẦN #{idx+1}</span>
                         <button type="button" onClick={() => kiemTraFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button>
                      </div>
-                     <input {...register(`kiem_tra_attt.${idx}.loai_kiem_tra`)} placeholder="Loại (Pentest, Rà soát...)" className="form-input text-xs h-8 mb-2" />
+                     <input {...register(`kiem_tra_attt.${idx}.loai_kiem_tra`)} placeholder="Loại (Pentest, Rà soát...)" className="form-input text-xs h-11 mb-2" />
                      <div className="grid grid-cols-2 gap-2">
-                        <input {...register(`kiem_tra_attt.${idx}.don_vi_thuc_hien`)} placeholder="Đơn vị thực hiện" className="form-input text-xs h-8" />
-                        <input {...register(`kiem_tra_attt.${idx}.thoi_gian`)} placeholder="Thời gian" className="form-input text-xs h-8" />
+                        <input {...register(`kiem_tra_attt.${idx}.don_vi_thuc_hien`)} placeholder="Đơn vị thực hiện" className="form-input text-xs h-11" />
+                        <input {...register(`kiem_tra_attt.${idx}.thoi_gian`)} placeholder="Thời gian" className="form-input text-xs h-11" />
                      </div>
-                     <input {...register(`kiem_tra_attt.${idx}.ket_qua_so_vb`)} placeholder="Kết quả / Số văn bản" className="form-input text-xs h-8 mt-2" />
+                     <input {...register(`kiem_tra_attt.${idx}.ket_qua_so_vb`)} placeholder="Kết quả / Số văn bản" className="form-input text-xs h-11 mt-2" />
                    </div>
                  ))}
                </div>
@@ -607,7 +607,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 <h4 className="text-[10px] uppercase font-bold text-violet-400 tracking-wider">L. Kiểm soát & Giám sát</h4>
                 <div>
                    <label className="form-label text-[10px]">Kiểm soát vật lý (L1)</label>
-                   <select {...register("l1_phys_key")} className="form-input h-9 py-1">
+                   <select {...register("l1_phys_key")} className="form-input h-11">
                       <option value="Có khóa cửa (chìa khóa thường)">Có khóa cửa (chìa khóa thường)</option>
                       <option value="Có khóa cửa + camera giám sát">Có khóa cửa + camera giám sát</option>
                       <option value="Có thẻ từ / kiểm soát điện tử">Có thẻ từ / kiểm soát điện tử</option>
@@ -616,10 +616,10 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                    <div><label className="form-label text-[10px]">Ban hành Pass? (L2)</label>
-                      <select {...register("l2_pass_policy")} className="form-input h-8 py-0"><option value="Không có chính sách thống nhất">Không</option><option value="Có chính sách mật khẩu">Có</option></select>
+                      <select {...register("l2_pass_policy")} className="form-input h-11 "><option value="Không có chính sách thống nhất">Không</option><option value="Có chính sách mật khẩu">Có</option></select>
                    </div>
                    <div><label className="form-label text-[10px]">Yêu cầu 2FA? (L2.ii)</label>
-                      <select {...register("L2_2fa_has")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                      <select {...register("L2_2fa_has")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                    </div>
                 </div>
              </div>
@@ -630,16 +630,16 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   <div>
                      <label className="form-label text-[10px]">UPS (Nguồn dự phòng)? (L8.1)</label>
                      <div className="flex gap-2">
-                        <select {...register("L8_1_co_ups")} className="form-input flex-1 h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                        {formData.L8_1_co_ups === "Có" && <input {...register("L8_1_ups_hang_model")} className="form-input flex-1 h-8" placeholder="Hãng..." />}
+                        <select {...register("L8_1_co_ups")} className="form-input flex-1 h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
+                        {formData.L8_1_co_ups === "Có" && <input {...register("L8_1_ups_hang_model")} className="form-input flex-1 h-11" placeholder="Hãng..." />}
                      </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                      <div><label className="form-label text-[10px]">Điều hòa (L8.2)</label>
-                        <select {...register("L8_2_dieu_hoa")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có – 24/7">24/7</option><option value="Có – Giờ hành chính">Hành chính</option></select>
+                        <select {...register("L8_2_dieu_hoa")} className="form-input h-11 "><option value="Không">Không</option><option value="Có – 24/7">24/7</option><option value="Có – Giờ hành chính">Hành chính</option></select>
                      </div>
                      <div><label className="form-label text-[10px]">Bình PCCC (L8.3)</label>
-                        <select {...register("L8_3_bin_chua_chay_has")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                        <select {...register("L8_3_bin_chua_chay_has")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                      </div>
                   </div>
                </div>
@@ -648,36 +648,36 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
              <div className="space-y-4 pt-2">
                <div><label className="form-label text-[10px]">Phần mềm diệt Virus (L3)</label>
                   <div className="flex gap-2">
-                     <select {...register("l3_av_has")} className="form-input flex-1 h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
-                     {formData.l3_av_has === "Có" && <input {...register("l3_av_name")} placeholder="Tên..." className="form-input flex-1 h-8" />}
+                     <select {...register("l3_av_has")} className="form-input flex-1 h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
+                     {formData.l3_av_has === "Có" && <input {...register("l3_av_name")} placeholder="Tên..." className="form-input flex-1 h-11" />}
                   </div>
                </div>
                <div className="grid grid-cols-2 gap-3">
                   <div><label className="form-label text-[10px]">Sao lưu (L4)</label>
-                    <select {...register("l4_bak_has")} className="form-input h-8 py-0">
+                    <select {...register("l4_bak_has")} className="form-input h-11 ">
                        <option value="Có">Có (Tự động)</option>
                        <option value="Thủ công">Thủ công</option>
                        <option value="Không sao lưu">Không</option>
                     </select>
                   </div>
                   <div><label className="form-label text-[10px]">Lưu Log? (L5)</label>
-                     <select {...register("l5_log_enabled")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                     <select {...register("l5_log_enabled")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                   </div>
                </div>
                <div><label className="form-label text-[10px]">Sự cố ATTT gần đây (L6)</label>
-                  <select {...register("l6_incident_has")} className="form-input h-8 py-0"><option value="Không có sự cố nào">Không có</option><option value="Có">Có sự cố</option></select>
+                  <select {...register("l6_incident_has")} className="form-input h-11 "><option value="Không có sự cố nào">Không có</option><option value="Có">Có sự cố</option></select>
                   {formData.l6_incident_has === "Có" && <textarea {...register("l6_incident_desc")} className="form-input mt-2 min-h-[60px]" placeholder="Mô tả sự cố..." />}
                </div>
                
                <div className="pt-4 border-t border-white/5 space-y-4">
                   <h4 className="text-[10px] uppercase font-bold text-cyan-400 tracking-wider">Q. Quản lý bản vá (Patching)</h4>
                   <div><label className="form-label text-[10px]">Bản vá HĐH (Q1)</label>
-                     <select {...register("cap_nhat_he_dieu_hanh")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Định kỳ">Định kỳ</option><option value="Thủ công">Thủ công</option></select>
+                     <select {...register("cap_nhat_he_dieu_hanh")} className="form-input h-11 "><option value="Không">Không</option><option value="Định kỳ">Định kỳ</option><option value="Thủ công">Thủ công</option></select>
                   </div>
                   <div><label className="form-label text-[10px]">Bản vá ứng dụng (Q2)</label>
-                     <select {...register("Q2_cap_nhat_ung_dung")} className="form-input h-8 py-0"><option value="Không">Không</option><option value="Có">Có</option></select>
+                     <select {...register("Q2_cap_nhat_ung_dung")} className="form-input h-11 "><option value="Không">Không</option><option value="Có">Có</option></select>
                   </div>
-                  <div><label className="form-label text-[10px]">Người chịu trách nhiệm (Q3)</label><input {...register("Q3_nguoi_chiu_trach_nhiem")} className="form-input h-8 text-xs" /></div>
+                  <div><label className="form-label text-[10px]">Người chịu trách nhiệm (Q3)</label><input {...register("Q3_nguoi_chiu_trach_nhiem")} className="form-input h-11 text-xs" /></div>
                </div>
              </div>
            </div>
@@ -701,7 +701,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                    ].map(k => (
                     <div key={k.id} className="p-3 bg-white/5 rounded border border-white/5">
                        <label className="text-[9px] text-gray-400 block mb-1 uppercase">{k.label}</label>
-                       <input {...register(k.id)} placeholder="Số hiệu văn bản..." className="form-input h-8 text-xs" />
+                       <input {...register(k.id)} placeholder="Số hiệu văn bản..." className="form-input h-11 text-xs" />
                     </div>
                   ))}
                 </div>
@@ -727,12 +727,12 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
              <div className="pt-4 border-t border-white/5 space-y-3">
                 <h4 className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">BC. Metadata Báo cáo</h4>
                 <div className="grid grid-cols-2 gap-2">
-                    <input {...register("BC_so_bao_cao")} placeholder="Số báo cáo" className="form-input text-xs h-9" />
-                    <input {...register("BC_ten_tinh")} placeholder="Tại tỉnh" className="form-input text-xs h-9" />
+                    <input {...register("BC_so_bao_cao")} placeholder="Số báo cáo" className="form-input text-xs h-11" />
+                    <input {...register("BC_ten_tinh")} placeholder="Tại tỉnh" className="form-input text-xs h-11" />
                  </div>
                  <div className="space-y-2 mt-2">
-                    <input {...register("BC_qd_ubnd_tinh_so_attt")} placeholder="Số QĐ UBND tỉnh về ATTT" className="form-input text-xs h-9" />
-                    <input {...register("BC_qd_ubnd_tinh_phan_cong")} placeholder="Số QĐ UBND tỉnh phân công" className="form-input text-xs h-9" />
+                    <input {...register("BC_qd_ubnd_tinh_so_attt")} placeholder="Số QĐ UBND tỉnh về ATTT" className="form-input text-xs h-11" />
+                    <input {...register("BC_qd_ubnd_tinh_phan_cong")} placeholder="Số QĐ UBND tỉnh phân công" className="form-input text-xs h-11" />
                  </div>
              </div>
 
@@ -752,13 +752,13 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         
         <div className="flex flex-col gap-2">
            <div className="flex gap-2">
-              <button type="button" onClick={() => handleExport("phieu")} className="flex-1 h-10 bg-indigo-500/20 text-indigo-400 rounded-lg text-[10px] font-bold uppercase border border-indigo-500/30 flex items-center justify-center gap-1.5">
+              <button type="button" onClick={() => handleExport("phieu")} className="flex-1 h-11 bg-indigo-500/20 text-indigo-400 rounded-lg text-[10px] font-bold uppercase border border-indigo-500/30 flex items-center justify-center gap-1.5">
                  <FileCheck className="w-4 h-4" /> Phiếu
               </button>
-              <button type="button" onClick={() => handleExport("hsdx")} className="flex-1 h-10 bg-purple-500/20 text-purple-400 rounded-lg text-[10px] font-bold uppercase border border-purple-500/30 flex items-center justify-center gap-1.5">
+              <button type="button" onClick={() => handleExport("hsdx")} className="flex-1 h-11 bg-purple-500/20 text-purple-400 rounded-lg text-[10px] font-bold uppercase border border-purple-500/30 flex items-center justify-center gap-1.5">
                  <Shield className="w-4 h-4" /> HSDX
               </button>
-              <button type="button" onClick={() => handleExport("baocao")} className="flex-1 h-10 bg-blue-500/20 text-blue-400 rounded-lg text-[10px] font-bold uppercase border border-blue-500/30 flex items-center justify-center gap-1.5">
+              <button type="button" onClick={() => handleExport("baocao")} className="flex-1 h-11 bg-blue-500/20 text-blue-400 rounded-lg text-[10px] font-bold uppercase border border-blue-500/30 flex items-center justify-center gap-1.5">
                  <FileText className="w-4 h-4" /> Báo cáo
               </button>
            </div>
