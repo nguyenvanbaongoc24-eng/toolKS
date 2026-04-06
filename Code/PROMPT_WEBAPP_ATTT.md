@@ -696,4 +696,63 @@ function setCheckbox(template, varName, selectedValue) {
 
 ---
 
-*Phiên bản: 2.0 | Cập nhật: 04/2026*
+*Phiên bản: 2.1 | Cập nhật: 06/04/2026*
+
+---
+
+## VIII. PHỤ LỤC KỸ THUẬT: MAPPING & AI PIPELINE
+
+> [!IMPORTANT]
+> **Hướng dẫn bảo trì mã nguồn:** Để tránh phá vỡ giao diện (UI) và database hiện tại, chúng ta sử dụng bảng mapping dưới đây để chuyển đổi giữa **Code Key** (dùng trong React/Supabase) và **Template Key** (dùng trong file Word).
+
+### 1. Bảng Mapping Biến (Code ⇄ Template)
+
+| Nhóm | Code Key (UI/DB) | Template Key (Word) | Ghi chú |
+|------|------------------|---------------------|---------|
+| **Chung** | `ten_don_vi` | `A1_ten_don_vi` | Tên cơ quan |
+| | `he_thong_thong_tin` | `A2_ten_he_thong` | Tên HTTT |
+| **L1** | `l1_phys_key` | `L1_kiem_soat` | Quy đổi từ radio sang 4 option |
+| **L2** | `l2_pass_policy` | `L2_chinh_sach` | |
+| **L3** | `l3_av_has` | `L3_co_antivirus` | |
+| **L4** | `l4_bak_has` | `L4_quy_trinh` | |
+| **L5** | `l5_log_enabled` | `L5_ghi_log` | |
+| **L6** | `l6_incident_has` | `L6_su_co` | |
+| **L7** | `l7_type` | `L7_1_loai` | |
+| **P** | `p1_protocol` | `P1_giao_thuc_web` | |
+| **Q** | `cap_nhat_he_dieu_hanh`| `Q1_cap_nhat_os` | |
+
+### 2. Định nghĩa Confidence Scores (Độ tin cậy AI)
+
+Khi AI thực hiện trích xuất dữ liệu từ ảnh (OCR) vào JSON, mỗi trường dữ liệu phải đi kèm một object `confidence_scores`:
+
+```json
+{
+  "ten_don_vi": "UBND Xã Lý Nhân",
+  "confidence_scores": {
+    "ten_don_vi": "high",
+    "so_dien_thoai": "low",
+    "he_thong_thong_tin": "medium"
+  }
+}
+```
+
+**Quy tắc gán nhãn:**
+- **high**: AI chắc chắn 100%, text OCR rõ ràng, khớp hoàn toàn với ngữ cảnh.
+- **medium**: AI có thể đoán được nhưng text OCR bị mờ hoặc có ký tự lạ.
+- **low**: AI không chắc chắn, text OCR bị lỗi nặng hoặc không tìm thấy nhưng phải tự suy luận.
+- **N/A**: Không có dữ liệu trong ảnh.
+
+### 3. Logic Suy luận cho Báo cáo & HSDX (Backend Python)
+
+Backend (Python/DocumentExporter) phải thực hiện các phép logic sau trước khi `render`:
+
+**A. Phụ lục I & II (HSDX):**
+- Biến `appendix_1_status`: Nếu `l3_av_has == "Có"` và `l3_ban_quyen == "Có"` → Gán "Đã đáp ứng". Ngược lại → "Chưa đáp ứng".
+- Biến `appendix_2_status`: Nếu `l5_log_enabled == "Có"` → Gán "Đã đáp ứng".
+
+**B. Phần V - Vấn đề tồn tại (Báo cáo):**
+- Nếu `l3_co_antivirus == "Không"` → Thêm vào mảng `vấn_đề`: "Đơn vị chưa cài đặt phần mềm diệt virus tập trung."
+- Nếu `l7_1_loai == "router_tich_hop"` → Thêm: "Chưa có thiết bị Tường lửa phần cứng chuyên dụng để kiểm soát sâu lưu lượng mạng."
+
+---
+*Bản cập nhật kỹ thuật phục vụ triển khai thực thực tế.*

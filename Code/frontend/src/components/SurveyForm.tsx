@@ -40,42 +40,74 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const defaultVals = prefilledData || {
     // Internal
     nguoi_thuc_hien: "",
-    // Tab 1
+    ngay_khao_sat: new Date().toISOString().split('T')[0],
+    
+    // Tab 1: Đơn vị & Nhân sự (Mục A, B, C)
     ten_don_vi: "", dia_chi: "", nguoi_dung_dau: "", so_dien_thoai: "", email: "", 
-    he_thong_thong_tin: "",
+    A6_chuc_vu_thu_truong: "", A7_so_quyet_dinh: "",
+    he_thong_thong_tin: "", C1_mo_ta_chuc_nang: "", C2_doi_tuong_nguoi_dung: "", C3_loai_du_lieu: "",
+    C4_du_lieu_type: "Không xác định", C5_noi_bo: "", C5_ben_ngoai: "", C6_nam_hoat_dong: "",
+    C7_ket_noi_cap_tren_has: "Không", C7_ten_he_thong_cap_tren: "",
+    C8_bi_mat_nha_nuoc_has: "Không", C8_do_mat: "",
     can_bo_phu_trach: [],
     
-    // Tab 2
-    ket_noi_internet: [], 
-    thiet_bi_mang: [],
-    may_chu: [],
-    camera: [],
+    // Tab 2: Hạ tầng & Mạng (Mục D, E, F, G, H, T)
+    ket_noi_internet: [], D2_router_modem: "", D3_ip_lan_gateway: "",
+    thiet_bi_mang: [], E2_firewall_type: "Dùng Firewall tích hợp",
+    F1_pc_sl: "", F1_pc_os: "Windows 10/11", F1_laptop_sl: "", F1_laptop_os: "Windows 10/11",
+    F1_tablet_sl: "", F1_mayin_sl: "", F1_dienthoai_sl: "",
+    F2_khong_may_chu_has: "Không", F2_luu_tru_o_dau: "",
+    may_chu: [], F3_cloud_has: "Không", F3_ten_cloud: "",
+    camera: [], G2_dau_ghi_nvr: "", G3_luu_tru_ngay: "",
+    H1_dai_ip_lan: "", H2_ip_gateway: "", H3_dns: "", H4_co_vlan: "Không", H4_so_vlan: "", H4_mo_ta_vlan: "",
     ip_tinh: [],
+    T1_1_co_dmz: "Không", T1_1_may_chu_dmz: "", 
+    T1_2_wifi_tach_rieng: "Không có WiFi", T1_3_ssid: "", T1_3_bao_mat_wifi: "",
+    T1_4_camera_vlan_has: "Cùng mạng LAN",
+    T3_1_co_rack: "Không", T3_1_rack_u: "", T3_1_rack_vi_tri: "", T3_2_thiet_bi_trong_tu: "",
+    T4_1_loai_cap: "Cáp đồng (Cat5e/Cat6)", T4_2_cap_isp: "",
+    T5_vi_tri: [],
     
-    // Tab 3
+    // Tab 3: Dịch vụ & Ứng dụng (Mục I, P)
     ung_dung: [],
-    ma_hoa_du_lieu: "Không", vpn: "Không", email_bao_mat: "Không",
     p1_protocol: "HTTP (không mã hóa)",
     p2_vpn: "Không có VPN", p2_vpn_type: "",
+    P3_ket_noi_cap_tren_type: "Không kết nối", P3_1_ten_he_thong_va_phuong_thuc: "",
+    P4_ma_hoa_luu_tru_has: "Không", P4_phuong_phap: "",
+    P5_email_sec: "Không",
     
-    // Tab 4
-    l1_phys_key: "Không có kiểm soát riêng",
+    // Tab 4: An toàn Bảo mật (Mục L, Q, K)
+    l1_phys_key: "Không có kiểm soát riêng", L1_bang_ky_ten: "Không",
     l2_pass_policy: "Không có chính sách thống nhất", l2_pass_len: "", l2_pass_time: "",
-    l3_av_has: "Không", l3_av_name: "",
-    l4_bak_has: "Không sao lưu", l4_bak_freq: "",
+    L2_admin_acc_type: "Dùng chung một tài khoản admin", L2_2fa_has: "Không",
+    l3_av_has: "Không", l3_av_name: "", l3_av_license: "Không", L3_cap_nhat_virus: "Không",
+    l4_bak_has: "Không sao lưu", l4_bak_freq: "", L4_offsite_has: "Không",
     l5_log_enabled: "Không", l5_log_retention: "Không lưu", l5_siem_has: "Không", l5_siem_name: "",
     l6_incident_has: "Không có sự cố nào", l6_incident_desc: "", l6_incident_resolution: "",
-    l7_type: "Tường lửa tích hợp (SPI)", l7_policy_default: "Không biết / Chưa cấu hình", l7_remote_access: "Không",
-    cap_nhat_he_dieu_hanh: "Không",
+    l7_type: "Tường lửa tích hợp (SPI)", L7_chinh_sach: "Chưa cấu hình", L7_remote_access: "Không", L7_4_cong_mo: "",
+    L8_1_co_ups: "Không", L8_1_ups_hang_model: "", L8_1_ups_cong_suat_va: "", L8_1_ups_thoi_gian_phut: "",
+    L8_2_dieu_hoa: "Không", L8_3_bin_chua_chay_has: "Không", L8_4_mo_ta_phong: "",
+    cap_nhat_he_dieu_hanh: "Không", Q2_cap_nhat_ung_dung: "Không", Q3_nguoi_chiu_trach_nhiem: "", Q4_firmware_mang: "", Q5_theo_doi_canh_bao: "Không",
     
-    // Tab 5
+    k1_quy_che: "", k2_ke_hoach_ht: "", k3_ke_hoach_tr: "", k4_qd_can_bo: "",
+    K5_qd_phe_duyet_httt: "", K6_ung_pho_su_co: "", K7_bien_ban_kiem_tra: "",
+
+    // Tab 5: Đánh giá & Xác nhận (Mục M, N, BC)
+    ...Array.from({ length: 14 }, (_, i) => ({ [`M${i+1}_status`]: false })).reduce((a, b) => ({ ...a, ...b }), {}),
+    n_nguoi_lap: "", n_chuc_vu_lap: "", n_ngay_lap: new Date().toISOString().split('T')[0],
+    N_nguoi_kiem_tra_ho_ten: "", N_nguoi_kiem_tra_chuc_vu: "", N_ngay_kiem_tra: "",
+    N_thu_truong_ho_ten: "", N_thu_truong_chuc_vu: "", N_ngay_ky: "",
+    
+    BC_so_bao_cao: "", BC_ngay_bao_cao: "", BC_don_vi_thuc_hien: "",
+    BC_qd_ubnd_tinh_so_attt: "", BC_qd_ubnd_tinh_phan_cong: "", BC_ten_tinh: "",
+    
     dao_tao: [],
     kiem_tra_attt: [],
     port_switch: [],
     ghi_chu: ""
   };
 
-  const { register, control, handleSubmit } = useForm({ defaultValues: defaultVals });
+  const { register, control, handleSubmit, watch, formState: { errors } } = useForm({ defaultValues: defaultVals });
 
   // Arrays
   const canBoFields = useFieldArray({ control, name: "can_bo_phu_trach" });
@@ -208,8 +240,11 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       {/* TAB 1: ĐƠN VỊ & NHÂN SỰ */}
       {activeTab === "don_vi" && (
         <div className="space-y-6 animate-fade-in">
+          {/* THÔNG TIN ĐƠN VỊ - MỤC A */}
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge">A</span> Mục A & C. Thông tin chung</h2>
+            <h2 className="section-title">
+              <span className="section-badge bg-indigo-500">A</span> Mục A. Thông tin cơ quan & Thủ trưởng
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2 bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-lg mb-2">
                 <label className="form-label text-indigo-400">Người phụ trách hồ sơ (Lưu nội bộ, không xuất file)</label>
@@ -224,14 +259,118 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <label className="form-label">Tên cơ quan chủ quản (*) <Indicator name="ten_don_vi" required /></label>
                 <input {...register("ten_don_vi")} className="form-input" />
               </div>
+              <div>
+                <label className="form-label">Người đứng đầu (Họ tên) <Indicator name="nguoi_dung_dau" /></label>
+                <input {...register("nguoi_dung_dau")} className="form-input" />
+              </div>
+              <div>
+                <label className="form-label">Chức vụ người đứng đầu (A6.ii)</label>
+                <input {...register("A6_chuc_vu_thu_truong")} className="form-input" placeholder="VD: Chủ tịch UBND huyện" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="form-label">Địa chỉ trụ sở <Indicator name="dia_chi" /></label>
+                <input {...register("dia_chi")} className="form-input" />
+              </div>
+              <div>
+                <label className="form-label">Điện thoại <Indicator name="so_dien_thoai" /></label>
+                <input {...register("so_dien_thoai")} className="form-input" />
+              </div>
+              <div>
+                <label className="form-label">Email cơ quan <Indicator name="email" /></label>
+                <input {...register("email")} className="form-input" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="form-label">Số quyết định giao nhiệm vụ (nếu có - A7)</label>
+                <input {...register("A7_so_quyet_dinh")} className="form-input" placeholder="VD: 123/QĐ-UBND" />
+              </div>
+            </div>
+          </div>
+
+          {/* MỤC C: MÔ TẢ HỆ THỐNG */}
+          <div className="section-card">
+            <h2 className="section-title">
+              <span className="section-badge bg-blue-500">C</span> Mục C. Mô tả hệ thống thông tin
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="md:col-span-2 text-sm text-gray-400 mb-2 italic">
+                Cung cấp thông tin chi tiết về hệ thống thông tin (HTTT) cần được phân loại cấp độ.
+              </div>
               <div className="md:col-span-2">
                 <label className="form-label">Tên hệ thống thông tin cần phân loại (*) <Indicator name="he_thong_thong_tin" required /></label>
                 <input {...register("he_thong_thong_tin")} className="form-input" />
               </div>
-              <div><label className="form-label">Người đứng đầu <Indicator name="nguoi_dung_dau" /></label><input {...register("nguoi_dung_dau")} className="form-input" /></div>
-              <div><label className="form-label">Địa chỉ trụ sở <Indicator name="dia_chi" /></label><input {...register("dia_chi")} className="form-input" /></div>
-              <div><label className="form-label">Điện thoại <Indicator name="so_dien_thoai" /></label><input {...register("so_dien_thoai")} className="form-input" /></div>
-              <div><label className="form-label">Email cơ quan <Indicator name="email" /></label><input {...register("email")} className="form-input" /></div>
+              <div className="md:col-span-2">
+                <label className="form-label">Mô tả chức năng, nhiệm vụ chính (C1)</label>
+                <textarea {...register("C1_mo_ta_chuc_nang")} className="form-input" rows={2} placeholder="Hệ điều hành, phần mềm ứng dụng, dịch vụ cung cấp..." />
+              </div>
+              <div>
+                <label className="form-label">Đối tượng người dùng (C2)</label>
+                <input {...register("C2_doi_tuong_nguoi_dung")} className="form-input" placeholder="VD: Cán bộ, CV, Người dân, Doanh nghiệp..." />
+              </div>
+              <div>
+                <label className="form-label">Loại hình dữ liệu xử lý (C3)</label>
+                <input {...register("C3_loai_du_lieu")} className="form-input" placeholder="VD: Dữ liệu hồ sơ hành chính, kết quả TTHC..." />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="form-label">Phân loại dữ liệu chính (C4 - Chọn mục phù hợp nhất)</label>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {["Cá nhân thông thường", "Cá nhân nhạy cảm", "Dữ liệu công", "Không xác định"].map(val => (
+                    <label key={val} className="flex items-center space-x-2 cursor-pointer transition-colors hover:text-blue-400">
+                      <input type="radio" value={val} {...register("C4_du_lieu_type")} className="text-blue-600" />
+                      <span className="text-xs">{val}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="form-label">Số người dùng nội bộ (C5.i)</label>
+                <input {...register("C5_noi_bo")} className="form-input" type="number" />
+              </div>
+              <div>
+                <label className="form-label">Số người dùng bên ngoài (C5.ii)</label>
+                <input {...register("C5_ben_ngoai")} className="form-input" type="number" />
+              </div>
+              <div>
+                <label className="form-label">Năm hệ thống bắt đầu hoạt động (C6)</label>
+                <input {...register("C6_nam_hoat_dong")} className="form-input" placeholder="VD: 2021" />
+              </div>
+
+              <div>
+                <label className="form-label">Kết nối với hệ thống cấp trên (C7)</label>
+                <div className="flex gap-4 mt-2">
+                  {["Có", "Không"].map(val => (
+                    <label key={val} className="flex items-center space-x-2">
+                      <input type="radio" value={val} {...register("C7_ket_noi_cap_tren_has")} />
+                      <span className="text-sm">{val}</span>
+                    </label>
+                  ))}
+                </div>
+                {watch("C7_ket_noi_cap_tren_has") === "Có" && (
+                  <input {...register("C7_ten_he_thong_cap_tren")} className="form-input mt-2" placeholder="Tên hệ thống cấp trên..." />
+                )}
+              </div>
+
+              <div>
+                <label className="form-label">Có xử lý bí mật nhà nước (C8)</label>
+                <div className="flex gap-4 mt-2">
+                  {["Có", "Không"].map(val => (
+                    <label key={val} className="flex items-center space-x-2">
+                      <input type="radio" value={val} {...register("C8_bi_mat_nha_nuoc_has")} />
+                      <span className="text-sm">{val}</span>
+                    </label>
+                  ))}
+                </div>
+                {watch("C8_bi_mat_nha_nuoc_has") === "Có" && (
+                  <select {...register("C8_do_mat")} className="form-input mt-2">
+                    <option value="">-- Chọn độ mật --</option>
+                    <option value="Tuyệt mật">Tuyệt mật</option>
+                    <option value="Tối mật">Tối mật</option>
+                    <option value="Mật">Mật</option>
+                  </select>
+                )}
+              </div>
             </div>
           </div>
 
@@ -262,21 +401,29 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       {/* TAB 2: HẠ TẦNG & MẠNG */}
       {activeTab === "ha_tang" && (
         <div className="space-y-6 animate-fade-in">
+          {/* MỤC D: KẾT NỐI INTERNET */}
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="section-title mb-0"><span className="section-badge bg-cyan-500">D</span> Mục D. Kết nối Internet</h2>
+              <h2 className="section-title mb-0"><span className="section-badge bg-cyan-500">D</span> Mục D. Kết nối Internet & Gateway</h2>
               <button type="button" onClick={() => internetFields.append({ nha_cung_cap: "", loai: "", bang_thong: "", vai_tro: "Đường chính", ip_wan: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm đường truyền</button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="form-label">Thiết bị Modem/Router Gateway (D2)</label>
+                <input {...register("D2_router_modem")} className="form-input" placeholder="Hãng, Model..." />
+              </div>
+              <div>
+                <label className="form-label">Địa chỉ IP LAN Gateway (D3)</label>
+                <input {...register("D3_ip_lan_gateway")} className="form-input" placeholder="VD: 192.168.1.1" />
+              </div>
             </div>
             <div className="space-y-3">
               {internetFields.fields.map((field, idx) => (
                 <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
-                    <div><label className="form-label">Phân loại (Vai trò)</label><select {...register(`ket_noi_internet.${idx}.vai_tro`)} className="form-input py-2"><option value="Đường chính">Đường chính</option><option value="Đường dự phòng">Đường dự phòng</option></select></div>
+                    <div><label className="form-label">Vai trò</label><select {...register(`ket_noi_internet.${idx}.vai_tro`)} className="form-input py-2"><option value="Đường chính">Đường chính (duy nhất)</option><option value="Đường dự phòng">Đường dự phòng</option></select></div>
                     <div><label className="form-label">ISP (Nhà cung cấp)</label><input {...register(`ket_noi_internet.${idx}.nha_cung_cap`)} className="form-input" /></div>
-                    <div><label className="form-label">Loại kết nối</label><input {...register(`ket_noi_internet.${idx}.loai`)} className="form-input" /></div>
                     <div><label className="form-label">Băng thông</label><input {...register(`ket_noi_internet.${idx}.bang_thong`)} className="form-input" /></div>
-                    <div><label className="form-label">IP WAN (Tĩnh/Động)</label><input {...register(`ket_noi_internet.${idx}.ip_wan`)} className="form-input" /></div>
-                    <div><label className="form-label">Ghi chú</label><input {...register(`ket_noi_internet.${idx}.ghi_chu`)} className="form-input" /></div>
                   </div>
                   <button type="button" onClick={() => internetFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
                 </div>
@@ -284,22 +431,34 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
+          {/* MỤC E: THIẾT BỊ MẠNG & FIREWALL */}
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="section-title mb-0"><span className="section-badge bg-rose-500">E</span> Mục E. Thiết bị mạng (Router/Switch)</h2>
+              <h2 className="section-title mb-0"><span className="section-badge bg-rose-500">E</span> Mục E. Thiết bị mạng & Firewall</h2>
               <button type="button" onClick={() => tbMangFields.append({ loai_thiet_bi: "", hang: "", model: "", serial: "", vi_tri: "", nam_mua: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm thiết bị</button>
+            </div>
+            <div className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-lg mb-4">
+              <label className="form-label text-rose-400">Hình thức trang bị Tường lửa (Firewall - E2)</label>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+                {[
+                  { label: "Có (phần cứng chuyên dụng)", val: "Có (phần cứng chuyên dụng)" },
+                  { label: "Dùng Firewall tích hợp", val: "Dùng Firewall tích hợp" },
+                  { label: "Dùng phần mềm Firewall", val: "Dùng phần mềm Firewall" }
+                ].map(item => (
+                  <label key={item.val} className="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" value={item.val} {...register("E2_firewall_type")} className="text-rose-500" />
+                    <span className="text-sm">{item.label}</span>
+                  </label>
+                ))}
+              </div>
             </div>
             <div className="space-y-3">
               {tbMangFields.fields.map((field, idx) => (
                 <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
-                    <div><label className="form-label">Loại thiết bị</label><input {...register(`thiet_bi_mang.${idx}.loai_thiet_bi`)} className="form-input" /></div>
-                    <div><label className="form-label">Hãng sản xuất</label><input {...register(`thiet_bi_mang.${idx}.hang`)} className="form-input" /></div>
-                    <div><label className="form-label">Model</label><input {...register(`thiet_bi_mang.${idx}.model`)} className="form-input" /></div>
-                    <div><label className="form-label">Số Serial (*Bắt buộc)</label><input {...register(`thiet_bi_mang.${idx}.serial`)} className="form-input border-emerald-500/50" /></div>
-                    <div><label className="form-label">Vị trí (Tầng - Phòng)</label><input {...register(`thiet_bi_mang.${idx}.vi_tri`)} className="form-input" /></div>
-                    <div><label className="form-label">Năm mua</label><input {...register(`thiet_bi_mang.${idx}.nam_mua`)} className="form-input" /></div>
-                    <div className="md:col-span-3"><label className="form-label">Ghi chú thêm</label><input {...register(`thiet_bi_mang.${idx}.ghi_chu`)} className="form-input" /></div>
+                    <div><label className="form-label">Loại thiết bị</label><input {...register(`thiet_bi_mang.${idx}.loai_thiet_bi`)} className="form-input" placeholder="Switch, AP..." /></div>
+                    <div><label className="form-label">Hãng / Model</label><input {...register(`thiet_bi_mang.${idx}.hang`)} className="form-input" /></div>
+                    <div><label className="form-label">Số Serial</label><input {...register(`thiet_bi_mang.${idx}.serial`)} className="form-input" /></div>
                   </div>
                   <button type="button" onClick={() => tbMangFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
                 </div>
@@ -307,68 +466,207 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
+          {/* MỤC F: THIẾT BỊ ĐẦU CUỐI & MÁY CHỦ */}
           <div className="section-card">
-            <div className="flex justify-between items-center mb-4">
-               <h2 className="section-title mb-0"><span className="section-badge bg-emerald-500">F</span> Mục F. Máy chủ</h2>
-               <button type="button" onClick={() => mayChuFields.append({ vai_tro: "", hang: "", model: "", serial: "", ram: "", hdd: "", he_dieu_hanh: "", vi_tri: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm máy chủ</button>
+            <h2 className="section-title"><span className="section-badge bg-emerald-500">F</span> Mục F. Thiết bị đầu cuối & Máy chủ</h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6 pt-2">
+              <div className="form-group">
+                <label className="form-label text-[10px] uppercase tracking-wider text-gray-500">Máy tính bàn (F1.1)</label>
+                <div className="flex items-center gap-2">
+                  <input {...register("F1_pc_sl")} className="form-input text-center" placeholder="SL" type="number" />
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="form-label text-[10px] uppercase tracking-wider text-gray-500">Laptop (F1.2)</label>
+                <input {...register("F1_laptop_sl")} className="form-input text-center" placeholder="SL" type="number" />
+              </div>
+              <div className="form-group">
+                <label className="form-label text-[10px] uppercase tracking-wider text-gray-500">Máy in (F1.4)</label>
+                <input {...register("F1_mayin_sl")} className="form-input text-center" placeholder="SL" type="number" />
+              </div>
+              <div className="form-group">
+                <label className="form-label text-[10px] uppercase tracking-wider text-gray-500">Điện thoại (F1.5)</label>
+                <input {...register("F1_dienthoai_sl")} className="form-input text-center" placeholder="SL" type="number" />
+              </div>
+              <div className="form-group">
+                <label className="form-label text-[10px] uppercase tracking-wider text-gray-500">Hệ điều hành chính</label>
+                <input {...register("F1_pc_os")} className="form-input text-xs" />
+              </div>
             </div>
-            <div className="space-y-3">
+
+            <div className="bg-emerald-500/5 border border-emerald-500/10 p-4 rounded-lg mb-6">
+              <div className="flex flex-col md:flex-row md:items-center gap-6">
+                <div>
+                  <label className="form-label">Không có máy chủ vật lý? (F2)</label>
+                  <div className="flex gap-4 mt-1">
+                    {["Có", "Không"].map(val => (
+                      <label key={val} className="flex items-center space-x-2">
+                        <input type="radio" value={val} {...register("F2_khong_may_chu_has")} />
+                        <span className="text-sm">{val}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                {watch("F2_khong_may_chu_has") === "Có" && (
+                  <div className="flex-1">
+                    <label className="form-label">Nơi lưu trữ/xử lý thay thế (F2.ii)</label>
+                    <input {...register("F2_luu_tru_o_dau")} className="form-input" placeholder="VD: Thuê Cloud, dùng máy trạm làm máy chủ..." />
+                  </div>
+                )}
+                <div>
+                  <label className="form-label">Dùng dịch vụ Điện toán đám mây? (F3)</label>
+                  <div className="flex gap-4 mt-1">
+                    {["Có", "Không"].map(val => (
+                      <label key={val} className="flex items-center space-x-2">
+                        <input type="radio" value={val} {...register("F3_cloud_has")} />
+                        <span className="text-sm">{val}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                {watch("F3_cloud_has") === "Có" && (
+                  <div className="flex-1">
+                    <label className="form-label">Tên nhà cung cấp Cloud (F3.ii)</label>
+                    <input {...register("F3_ten_cloud")} className="form-input" placeholder="VD: AWS, Azure, Viettel, VNPT..." />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center mb-4">
+               <h3 className="text-sm font-semibold text-emerald-400">Danh sách máy chủ chi tiết (F2)</h3>
+               <button type="button" onClick={() => mayChuFields.append({ vai_tro: "", hang: "", model: "", serial: "", ram: "", hdd: "", he_dieu_hanh: "", vi_tri: "" })} className="btn-add text-[10px] py-1">Thêm dòng</button>
+            </div>
+            <div className="space-y-2">
               {mayChuFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3 flex-1">
-                    <div className="md:col-span-2"><label className="form-label">Vai trò</label><input {...register(`may_chu.${idx}.vai_tro`)} className="form-input" /></div>
-                    <div><label className="form-label">Hãng</label><input {...register(`may_chu.${idx}.hang`)} className="form-input" /></div>
-                    <div><label className="form-label">Model</label><input {...register(`may_chu.${idx}.model`)} className="form-input" /></div>
-                    <div><label className="form-label">Số Serial</label><input {...register(`may_chu.${idx}.serial`)} className="form-input" /></div>
-                    <div><label className="form-label">RAM (GB)</label><input {...register(`may_chu.${idx}.ram`)} className="form-input" /></div>
-                    <div><label className="form-label">Ổ cứng (TB)</label><input {...register(`may_chu.${idx}.hdd`)} className="form-input" /></div>
-                    <div><label className="form-label">Hệ điều hành</label><input {...register(`may_chu.${idx}.he_dieu_hanh`)} className="form-input" /></div>
-                    <div className="md:col-span-4"><label className="form-label">Vị trí (Tầng - Phòng)</label><input {...register(`may_chu.${idx}.vi_tri`)} className="form-input" /></div>
+                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-2 rounded-lg border border-white/5">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 flex-1">
+                    <input {...register(`may_chu.${idx}.vai_tro`)} className="form-input text-xs" placeholder="Vai trò (AD, Web...)" />
+                    <input {...register(`may_chu.${idx}.model`)} className="form-input text-xs" placeholder="Hãng/Model" />
+                    <input {...register(`may_chu.${idx}.serial`)} className="form-input text-xs" placeholder="Số Serial" />
+                    <input {...register(`may_chu.${idx}.vi_tri`)} className="form-input text-xs" placeholder="Vị trí vật lý" />
                   </div>
-                  <button type="button" onClick={() => mayChuFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                  <button type="button" onClick={() => mayChuFields.remove(idx)} className="text-red-400 hover:text-red-300 mt-2"><Trash2 className="w-3 h-3" /></button>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="section-card">
-            <div className="flex justify-between items-center mb-4">
-               <h2 className="section-title mb-0"><span className="section-badge bg-blue-500">G</span> Mục G. Camera</h2>
-               <button type="button" onClick={() => cameraFields.append({ hang: "", model: "", serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm Camera</button>
-            </div>
-            <div className="space-y-3">
-              {cameraFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
-                    <div><label className="form-label">Hãng</label><input {...register(`camera.${idx}.hang`)} className="form-input" /></div>
-                    <div><label className="form-label">Model</label><input {...register(`camera.${idx}.model`)} className="form-input" /></div>
-                    <div><label className="form-label">Số Serial (*Bắt buộc)</label><input {...register(`camera.${idx}.serial`)} className="form-input border-emerald-500/50" /></div>
-                    <div><label className="form-label">Độ phân giải</label><input {...register(`camera.${idx}.do_phan_giai`)} className="form-input" /></div>
-                    <div><label className="form-label">Vị trí</label><input {...register(`camera.${idx}.vi_tri`)} className="form-input" /></div>
-                    <div><label className="form-label">Ghi chú</label><input {...register(`camera.${idx}.ghi_chu`)} className="form-input" /></div>
+          {/* MỤC G & H: CAMERA & IP */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="section-card">
+              <h2 className="section-title"><span className="section-badge bg-blue-500">G</span> Mục G. Hệ thống Camera</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                <div><label className="form-label text-xs">Model đầu ghi NVR (G2)</label><input {...register("G2_dau_ghi_nvr")} className="form-input text-xs" /></div>
+                <div><label className="form-label text-xs">Số ngày lưu trữ (G3)</label><input {...register("G3_luu_tru_ngay")} className="form-input text-xs" type="number" /></div>
+              </div>
+              <div className="space-y-2">
+                {cameraFields.fields.map((field, idx) => (
+                  <div key={field.id} className="flex gap-2 items-center bg-black/20 p-2 rounded-lg border border-white/5">
+                    <input {...register(`camera.${idx}.hang`)} className="form-input text-xs flex-1" placeholder="Hãng/Model" />
+                    <input {...register(`camera.${idx}.serial`)} className="form-input text-xs flex-1" placeholder="Serial" />
+                    <button type="button" onClick={() => cameraFields.remove(idx)} className="text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
-                  <button type="button" onClick={() => cameraFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                ))}
+                <button type="button" onClick={() => cameraFields.append({ hang: "", model: "", serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" })} className="text-[10px] text-blue-400 hover:underline">+ Thêm camera</button>
+              </div>
+            </div>
+
+            <div className="section-card">
+              <h2 className="section-title"><span className="section-badge bg-indigo-500">H</span> Mục H. Quy hoạch mạng LAN</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                <div><label className="form-label text-xs">Dải IP LAN (H1)</label><input {...register("H1_dai_ip_lan")} className="form-input text-xs" placeholder="VD: 10.0.0.0/24" /></div>
+                <div><label className="form-label text-xs">DNS Server (H3)</label><input {...register("H3_dns")} className="form-input text-xs" placeholder="VD: 8.8.8.8" /></div>
+                <div className="md:col-span-2">
+                   <label className="form-label text-xs">Phân chia VLAN? (H4)</label>
+                   <div className="flex items-center gap-4 mt-1">
+                      {["Có", "Không"].map(v => (
+                        <label key={v} className="flex items-center space-x-1 text-xs">
+                          <input type="radio" value={v} {...register("H4_co_vlan")} />
+                          <span>{v}</span>
+                        </label>
+                      ))}
+                      {watch("H4_co_vlan") === "Có" && (
+                        <input {...register("H4_mo_ta_vlan")} className="form-input text-xs flex-1" placeholder="Số lượng/Mục đích..." />
+                      )}
+                   </div>
                 </div>
-              ))}
+              </div>
+              <div className="space-y-2">
+                {ipTinhFields.fields.map((field, idx) => (
+                  <div key={field.id} className="flex gap-2 items-center bg-black/20 p-2 rounded-lg border border-white/5">
+                    <input {...register(`ip_tinh.${idx}.ten_thiet_bi`)} className="form-input text-xs flex-1" placeholder="Thiết bị/Người dùng" />
+                    <input {...register(`ip_tinh.${idx}.ip_tinh`)} className="form-input text-xs flex-1" placeholder="IP Tĩnh" />
+                    <button type="button" onClick={() => ipTinhFields.remove(idx)} className="text-red-400"><Trash2 className="w-3 h-3" /></button>
+                  </div>
+                ))}
+                <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", ip_tinh: "", ghi_chu: "" })} className="text-[10px] text-indigo-400 hover:underline">+ Thêm IP tĩnh</button>
+              </div>
             </div>
           </div>
 
+          {/* MỤC T: THÔNG TIN SƠ ĐỒ CHI TIẾT */}
           <div className="section-card">
-            <div className="flex justify-between items-center mb-4">
-               <h2 className="section-title mb-0"><span className="section-badge bg-indigo-500">H</span> Mục H. Danh sách IP Tĩnh</h2>
-               <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", ip_tinh: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm IP</button>
-            </div>
-            <div className="space-y-3">
-              {ipTinhFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
-                    <div><label className="form-label">Tên thiết bị / Nhóm</label><input {...register(`ip_tinh.${idx}.ten_thiet_bi`)} className="form-input" /></div>
-                    <div><label className="form-label">IP Tĩnh</label><input {...register(`ip_tinh.${idx}.ip_tinh`)} className="form-input" /></div>
-                    <div><label className="form-label">Ghi chú</label><input {...register(`ip_tinh.${idx}.ghi_chu`)} className="form-input" /></div>
+            <h2 className="section-title"><span className="section-badge bg-emerald-600">T</span> Mục T. Đặc tả Sơ đồ Mạng & Vật lý</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* T1: Vùng mạng */}
+              <div className="space-y-4 border-r border-white/5 pr-4">
+                <h3 className="text-xs font-bold text-gray-500 uppercase">T1. Phân vùng mạng</h3>
+                <div>
+                  <label className="form-label text-[11px]">Có vùng DMZ? (T1.1)</label>
+                  <div className="flex gap-4">
+                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("T1_1_co_dmz")} /><span>{v}</span></label>)}
                   </div>
-                  <button type="button" onClick={() => ipTinhFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                  {watch("T1_1_co_dmz") === "Có" && <input {...register("T1_1_may_chu_dmz")} className="form-input text-xs mt-1" placeholder="Các máy chủ trong DMZ..." />}
                 </div>
-              ))}
+                <div>
+                  <label className="form-label text-[11px]">WiFi tách riêng VLAN? (T1.2)</label>
+                  <select {...register("T1_2_wifi_tach_rieng")} className="form-input text-xs py-1">
+                    <option value="Tách riêng VLAN">Có - Tách VLAN riêng</option>
+                    <option value="Dùng chung mạng LAN">Không - Dùng chung LAN</option>
+                    <option value="Không có WiFi">Không có WiFi</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* T3: Tủ Rack */}
+              <div className="space-y-4 border-r border-white/5 pr-4">
+                <h3 className="text-xs font-bold text-gray-500 uppercase">T3. Tủ mạng (Rack)</h3>
+                <div>
+                  <label className="form-label text-[11px]">Có tủ Rack chuyên dụng? (T3.1)</label>
+                  <div className="flex gap-4">
+                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("T3_1_co_rack")} /><span>{v}</span></label>)}
+                  </div>
+                  {watch("T3_1_co_rack") === "Có" && (
+                    <div className="flex gap-2 mt-1">
+                      <input {...register("T3_1_rack_u")} className="form-input text-xs" placeholder="Số U" />
+                      <input {...register("T3_1_rack_vi_tri")} className="form-input text-xs" placeholder="Vị trí m2" />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="form-label text-[11px]">Thiết bị trong tủ (T3.2)</label>
+                  <input {...register("T3_2_thiet_bi_trong_tu")} className="form-input text-xs" placeholder="Router, Switch, UPS..." />
+                </div>
+              </div>
+
+              {/* T4: Hạ tầng cáp */}
+              <div className="space-y-4">
+                <h3 className="text-xs font-bold text-gray-500 uppercase">T4. Kết nối vật lý</h3>
+                <div>
+                  <label className="form-label text-[11px]">Loại cáp nội bộ chính (T4.1)</label>
+                  <select {...register("T4_1_loai_cap")} className="form-input text-xs py-1">
+                    <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
+                    <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
+                    <option value="Không dây">Kết nối không dây</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label text-[11px]">Cáp từ Nhà cung cấp ISP (T4.2)</label>
+                  <input {...register("T4_2_cap_isp")} className="form-input text-xs" placeholder="Cáp quang, Viba..." />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -377,6 +675,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       {/* TAB 3: DỊCH VỤ & ỨNG DỤNG */}
       {activeTab === "ung_dung" && (
         <div className="space-y-6 animate-fade-in">
+          {/* MỤC I: ỨNG DỤNG */}
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
               <h2 className="section-title mb-0"><span className="section-badge bg-amber-500">I</span> Mục I. Ứng dụng & Dịch vụ CNTT</h2>
@@ -384,45 +683,69 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
             <div className="space-y-3">
               {ungDungFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
-                    <div><label className="form-label">Tên phần mềm / Hệ thống</label><input {...register(`ung_dung.${idx}.ten_ung_dung`)} className="form-input" /></div>
-                    <div className="md:col-span-2"><label className="form-label">Chức năng chính</label><input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input" /></div>
-                    <div><label className="form-label">Đơn vị triển khai/cung cấp</label><input {...register(`ung_dung.${idx}.don_vi`)} className="form-input" /></div>
-                    <div><label className="form-label">Phiên bản</label><input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input" /></div>
-                    <div><label className="form-label">Ra Internet?</label><select {...register(`ung_dung.${idx}.ket_noi_internet`)} className="form-input py-2"><option value="Có">Có Internet</option><option value="Không">Chỉ nội bộ</option></select></div>
-                    <div className="md:col-span-3"><label className="form-label">Ghi chú thêm</label><input {...register(`ung_dung.${idx}.ghi_chu`)} className="form-input" /></div>
+                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-2 rounded-lg border border-white/5 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 flex-1">
+                    <input {...register(`ung_dung.${idx}.ten_ung_dung`)} className="form-input text-xs" placeholder="Tên ứng dụng" />
+                    <input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input text-xs md:col-span-2" placeholder="Chức năng" />
+                    <input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input text-xs" placeholder="Phiên bản" />
                   </div>
-                  <button type="button" onClick={() => ungDungFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                  <button type="button" onClick={() => ungDungFields.remove(idx)} className="text-red-400 mt-2"><Trash2 className="w-3 h-3" /></button>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* MỤC P: MÃ HÓA & KẾT NỐI */}
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-orange-500">P</span> Mục P. Mã hóa / Chứng thư số</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="form-label">Giao thức ứng dụng Web (HTTPS/HTTP)</label>
-                <select {...register("p1_protocol")} className="form-input py-2">
-                  <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
-                  <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
-                  <option value="Cả hai">Cả hai</option>
-                </select>
-              </div>
-              <div>
-                <label className="form-label">Sử dụng VPN kết nối từ xa?</label>
-                <select {...register("p2_vpn")} className="form-input py-2">
-                  <option value="Có">Có sử dụng</option>
-                  <option value="Không có VPN">Không sử dụng</option>
-                </select>
-              </div>
-              {formData.p2_vpn === "Có" && (
-                <div className="md:col-span-2">
-                  <label className="form-label">Loại VPN (VD: SSL VPN, IPSec...)</label>
-                  <input {...register("p2_vpn_type")} className="form-input" placeholder="Nhập loại VPN" />
+            <h2 className="section-title"><span className="section-badge bg-orange-500">P</span> Mục P. Bảo mật kết nối & Mã hóa</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label">Giao thức ứng dụng Web (P1)</label>
+                  <select {...register("p1_protocol")} className="form-input py-1 text-sm">
+                    <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
+                    <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
+                    <option value="Cả hai">Cả hai</option>
+                  </select>
                 </div>
-              )}
+                <div>
+                  <label className="form-label">Sử dụng VPN kết nối từ xa? (P2.i)</label>
+                  <select {...register("p2_vpn")} className="form-input py-1 text-sm">
+                    <option value="Có">Có sử dụng</option>
+                    <option value="Không có VPN">Không sử dụng</option>
+                  </select>
+                  {watch("p2_vpn") === "Có" && (
+                    <input {...register("p2_vpn_type")} className="form-input mt-2 text-xs" placeholder="Loại VPN (FortiClient, AnyConnect...)" />
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label">Kết nối với mạng cơ quan cấp trên? (P3)</label>
+                  <select {...register("P3_ket_noi_cap_tren_type")} className="form-input py-1 text-sm">
+                    <option value="Không kết nối">Không kết nối</option>
+                    <option value="VPN chuyên dụng">Có - VPN chuyên dụng (P3.i)</option>
+                    <option value="Internet (HTTPS)">Có - Qua Internet (HTTPS)</option>
+                    <option value="MPLS">Có - Đường truyền MPLS</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label">Có mã hóa dữ liệu lưu trữ? (P4.i)</label>
+                  <div className="flex gap-4 mt-1">
+                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P4_ma_hoa_luu_tru_has")} /><span>{v}</span></label>)}
+                  </div>
+                  {watch("P4_ma_hoa_luu_tru_has") === "Có" && (
+                    <input {...register("P4_phuong_phap")} className="form-input mt-2 text-xs" placeholder="Phương pháp mã hóa (Bitlocker, VeraCrypt...)" />
+                  )}
+                </div>
+                <div>
+                   <label className="form-label text-xs">Phòng chống thư rác/Email Security? (P5)</label>
+                   <div className="flex gap-4">
+                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P5_email_sec")} /><span>{v}</span></label>)}
+                   </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -431,173 +754,131 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       {/* TAB 4: AN TOÀN BẢO MẬT */}
       {activeTab === "bao_mat" && (
         <div className="space-y-6 animate-fade-in">
-          
+          {/* MỤC L: KIỂM SOÁT VÀ GIÁM SÁT */}
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-rose-500">L1</span> Kiểm soát truy cập vật lý</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="form-label">Hình thức kiểm soát ra vào phòng máy chủ/thiết bị</label>
-                <select {...register("l1_phys_key")} className="form-input py-2">
-                  <option value="Có khóa cửa (chìa khóa thường)">Có khóa cửa (chìa khóa thường)</option>
-                  <option value="Có khóa cửa + camera giám sát">Có khóa cửa + Camera giám sát</option>
-                  <option value="Có thẻ từ / kiểm soát điện tử">Có thẻ từ / Kiểm soát điện tử</option>
-                  <option value="Không có kiểm soát riêng">Không có kiểm soát riêng</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-blue-500">L2</span> Kiểm soát truy cập logic</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="form-label">Chính sách mật khẩu (Password Policy)</label>
-                <select {...register("l2_pass_policy")} className="form-input py-2">
-                  <option value="Có chính sách mật khẩu">Có chính sách mật khẩu thống nhất</option>
-                  <option value="Không có chính sách thống nhất">Không có chính sách (tự do)</option>
-                </select>
-              </div>
-              {formData.l2_pass_policy === "Có chính sách mật khẩu" && (
-                <>
-                  <div>
-                     <label className="form-label">Độ dài tối thiểu (ký tự)</label>
-                     <input {...register("l2_pass_len")} type="number" className="form-input" placeholder="8" />
-                  </div>
-                  <div>
-                     <label className="form-label">Thời gian đổi mật khẩu (tháng)</label>
-                     <input {...register("l2_pass_time")} type="number" className="form-input" placeholder="3" />
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-emerald-500">L3</span> Phần mềm bảo vệ (Antivirus)</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="form-label">Đơn vị có sử dụng Antivirus không?</label>
-                <select {...register("l3_av_has")} className="form-input py-2">
-                  <option value="Có">Có sử dụng</option>
-                  <option value="Không">Không sử dụng</option>
-                </select>
-              </div>
-              {formData.l3_av_has === "Có" && (
+            <h2 className="section-title"><span className="section-badge bg-violet-500">L</span> Mục L. Kiểm soát truy cập & Giám sát</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
                 <div>
-                  <label className="form-label">Tên phần mềm (VD: Kaspersky, BKAV...)</label>
-                  <input {...register("l3_av_name")} className="form-input" placeholder="Nhập tên phần mềm" />
+                  <label className="form-label text-xs">Kiểm soát vật lý (L1)</label>
+                  <select {...register("l1_phys_key")} className="form-input text-xs py-1">
+                    <option value="Có khóa cửa (chìa khóa thường)">Có khóa cửa (chìa khóa thường)</option>
+                    <option value="Có khóa cửa + camera giám sát">Có khóa cửa + camera giám sát</option>
+                    <option value="Có thẻ từ / kiểm soát điện tử">Có thẻ từ / kiểm soát điện tử</option>
+                    <option value="Không có kiểm soát riêng">Không có kiểm soát riêng</option>
+                  </select>
                 </div>
-              )}
-            </div>
-          </div>
-
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-amber-500">L4</span> Sao lưu dữ liệu (Backup)</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="form-label">Quy trình sao lưu dữ liệu</label>
-                <select {...register("l4_bak_has")} className="form-input py-2">
-                  <option value="Có">Có quy trình định kỳ</option>
-                  <option value="Thủ công">Thực hiện thủ công khi nhớ</option>
-                  <option value="Không sao lưu">Không thực hiện sao lưu</option>
-                </select>
-              </div>
-              {formData.l4_bak_has === "Có" && (
                 <div>
-                  <label className="form-label">Tần suất sao lưu (Ghi rõ)</label>
-                  <input {...register("l4_bak_freq")} className="form-input" placeholder="VD: Hàng ngày, Hàng tuần..." />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-indigo-500">L5</span> Giám sát & Nhật ký hệ thống</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="form-label">Trạng thái ghi Log thiết bị mạng</label>
-                <select {...register("l5_log_enabled")} className="form-input py-2">
-                  <option value="Có">Đang bật (Có)</option>
-                  <option value="Không">Đang tắt (Không)</option>
-                  <option value="Không biết / Chưa kiểm tra">Chưa kiểm tra / Không biết</option>
-                </select>
-              </div>
-              <div>
-                <label className="form-label">Thời gian lưu trữ Log</label>
-                <select {...register("l5_log_retention")} className="form-input py-2">
-                  <option value="< 3 tháng">&lt; 3 tháng</option>
-                  <option value="3 – 6 tháng">Từ 3 - 6 tháng</option>
-                  <option value="> 6 tháng">&gt; 6 tháng</option>
-                  <option value="Không lưu">Không lưu trữ</option>
-                </select>
-              </div>
-              <div>
-                <label className="form-label">Sử dụng hệ thống SIEM tập trung?</label>
-                <select {...register("l5_siem_has")} className="form-input py-2">
-                  <option value="Có">Có sử dụng</option>
-                  <option value="Không">Không có</option>
-                </select>
-              </div>
-              {formData.l5_siem_has === "Có" && (
-                <div className="animate-slide-down">
-                  <label className="form-label">Tên hệ thống SIEM (VD: Wazuh, ELK...)</label>
-                  <input {...register("l5_siem_name")} className="form-input" placeholder="Nhập tên hệ thống SIEM" />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-rose-500">L6</span> Lịch sử sự cố An toàn thông tin</h2>
-            <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="form-label">Sự cố ATTT trong 2 năm qua</label>
-                <select {...register("l6_incident_has")} className="form-input py-2">
-                  <option value="Không có sự cố nào">Không có sự cố nào</option>
-                  <option value="Có">Có xảy ra sự cố</option>
-                  <option value="Không biết / Không ghi nhận">Không rõ / Không ghi nhận</option>
-                </select>
-              </div>
-              
-              {formData.l6_incident_has === "Có" && (
-                <div className="space-y-4 animate-slide-down">
-                  <div>
-                    <label className="form-label">Mô tả ngắn gọn sự cố</label>
-                    <textarea {...register("l6_incident_desc")} className="form-input" placeholder="VD: Nhiễm mã độc tống tiền (Ransomware)..." />
-                  </div>
-                  <div>
-                    <label className="form-label">Cách thức xử lý & khắc phục</label>
-                    <textarea {...register("l6_incident_resolution")} className="form-input" placeholder="VD: Khôi phục từ bản sao lưu, cài lại hệ điều hành..." />
+                  <label className="form-label text-xs">Phòng máy có bảng ký tên ra vào? (L1.ii)</label>
+                  <div className="flex gap-4">
+                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L1_bang_ky_ten")} /><span>{v}</span></label>)}
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
+                <div>
+                  <label className="form-label text-xs">Chính sách mật khẩu (L2.1)</label>
+                  <select {...register("l2_pass_policy")} className="form-input text-xs py-1">
+                    <option value="Có chính sách mật khẩu">Đã ban hành và áp dụng</option>
+                    <option value="Không có chính sách thống nhất">Chưa có chính sách thống nhất</option>
+                  </select>
+                </div>
+              </div>
 
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-violet-500">L7</span> Tường lửa & Truy cập từ xa</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="form-label">Phân loại Tường lửa (Firewall)</label>
-                <select {...register("l7_type")} className="form-input py-2">
-                  <option value="Tường lửa tích hợp (SPI)">Tường lửa tích hợp trên Router (SPI)</option>
-                  <option value="Tường lửa phần cứng chuyên dụng">Tường lửa phần cứng chuyên dụng (Appliance)</option>
-                  <option value="Tường lửa phần mềm trên máy chủ">Tường lửa phần mềm trên máy chủ (Host-based)</option>
-                </select>
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label text-xs">Công cụ diệt Virus (L3)</label>
+                  <div className="flex gap-2">
+                    <select {...register("l3_av_has")} className="form-input text-xs py-1 flex-1">
+                      <option value="Có">Có cài đặt</option>
+                      <option value="Không">Chưa cài đặt</option>
+                    </select>
+                    {watch("l3_av_has") === "Có" && <input {...register("l3_av_name")} placeholder="Tên phần mềm..." className="form-input text-xs py-1 flex-1" />}
+                  </div>
+                </div>
+                <div>
+                  <label className="form-label text-xs">Sao lưu dữ liệu (L4)</label>
+                  <select {...register("l4_bak_has")} className="form-input text-xs py-1">
+                    <option value="Có">Có - Tự động hàng ngày</option>
+                    <option value="Thủ công">Có - Thủ công (USB/Ổ cứng)</option>
+                    <option value="Không sao lưu">Không có phương án sao lưu</option>
+                  </select>
+                </div>
+                <div>
+                   <label className="form-label text-xs">Lưu trữ sao lưu bên ngoài (Offsite)?</label>
+                   <div className="flex gap-4">
+                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L4_offsite_has")} /><span>{v}</span></label>)}
+                   </div>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* MỤC L8: AN TOÀN VẬT LÝ PHÒNG MÁY CHỦ */}
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-gray-500">Q</span> Mục Q. Quản lý lỗ hổng & Vá lỗi</h2>
+            <h2 className="section-title"><span className="section-badge bg-blue-600">L8</span> Mục L8. An toàn vật lý & Môi trường</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="form-label">Có quy trình cập nhật Hệ điều hành không?</label>
-                <select {...register("cap_nhat_he_dieu_hanh")} className="form-input py-2">
-                  <option value="Hàng tháng">Có - Hàng tháng</option>
-                  <option value="Hàng quý">Có - Hàng quý</option>
-                  <option value="Thủ công">Không định kỳ - Thủ công</option>
-                  <option value="Không">Không bao giờ cập nhật</option>
+              <div className="bg-blue-500/5 p-4 rounded-lg border border-blue-500/10">
+                <label className="form-label">Hệ thống nguồn dự phòng (UPS - L8.1)</label>
+                <div className="flex gap-4 mb-2">
+                   {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L8_1_co_ups")} /><span>{v}</span></label>)}
+                </div>
+                {watch("L8_1_co_ups") === "Có" && (
+                  <div className="grid grid-cols-2 gap-2 mt-2">
+                    <input {...register("L8_1_ups_hang_model")} className="form-input text-xs" placeholder="Hãng/Model UPS" />
+                    <input {...register("L8_1_ups_cong_suat_va")} className="form-input text-xs" placeholder="Công suất (VA)" />
+                    <input {...register("L8_1_ups_thoi_gian_phut")} className="form-input text-xs md:col-span-2" placeholder="Thời gian dự phòng (phút)" />
+                  </div>
+                )}
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label text-xs">Điều hòa nhiệt độ máy chủ (L8.2)</label>
+                  <select {...register("L8_2_dieu_hoa")} className="form-input text-xs py-1">
+                    <option value="Có – 24/7">Có - Chạy 24/7</option>
+                    <option value="Có – Giờ hành chính">Có - Chạy giờ hành chính</option>
+                    <option value="Không">Không có</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label text-xs">Trang bị bình chữa cháy chuyên dụng (L8.3)</label>
+                  <div className="flex gap-4">
+                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L8_3_bin_chua_chay_has")} /><span>{v}</span></label>)}
+                  </div>
+                </div>
+                <div>
+                  <label className="form-label text-xs">Mô tả phòng máy chủ/vị trí đặt tủ mạng (L8.4)</label>
+                  <textarea {...register("L8_4_mo_ta_phong")} className="form-input text-xs" rows={1} placeholder="VD: Phòng riêng tầng 2, có khóa, thông thoáng..." />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* MỤC Q: PATCH MANAGEMENT */}
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-slate-500">Q</span> Mục Q. Bảo trì & Cập nhật phần mềm</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div>
+                <label className="form-label text-xs">Cập nhật HĐH máy chủ/trạm (Q1)</label>
+                <select {...register("cap_nhat_he_dieu_hanh")} className="form-input text-xs py-1">
+                  <option value="Hàng tháng">Định kỳ hàng tháng</option>
+                  <option value="Hàng quý">Định kỳ hàng quý</option>
+                  <option value="Thủ công">Cập nhật thủ công</option>
+                  <option value="Không">Chưa thực hiện</option>
+                </select>
+              </div>
+              <div>
+                <label className="form-label text-xs">Cập nhật ứng dụng chuyên ngành (Q2)</label>
+                <select {...register("Q2_cap_nhat_ung_dung")} className="form-input text-xs py-1">
+                  <option value="Tự động">Tự động</option>
+                  <option value="Định kỳ">Định kỳ khi có bản mới</option>
+                  <option value="Không">Không cập nhật</option>
+                </select>
+              </div>
+              <div>
+                <label className="form-label text-xs">Cán bộ theo dõi cảnh báo ATTT (Q5)</label>
+                <select {...register("Q5_theo_doi_canh_bao")} className="form-input text-xs py-1">
+                  <option value="Thường xuyên">Kiểm tra thường xuyên</option>
+                  <option value="Thỉnh thoảng">Thỉnh thoảng</option>
+                  <option value="Không">Chưa có người theo dõi</option>
                 </select>
               </div>
             </div>
@@ -605,23 +886,98 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
         </div>
       )}
 
-      {/* TAB 5: ĐÁNH GIÁ & SƠ ĐỒ */}
+      {/* TAB 5: ĐÁNH GIÁ & XÁC NHẬN */}
       {activeTab === "danh_gia" && (
-        <div className="space-y-6 animate-fade-in">
-          
+        <div className="space-y-6 animate-fade-in pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* MỤC K: HỒ SƠ PHÁP LÝ */}
+            <div className="section-card">
+              <h2 className="section-title"><span className="section-badge bg-stone-500">K</span> Mục K. Danh mục Hồ sơ / Tài liệu</h2>
+              <div className="space-y-2">
+                {[
+                  { id: "k1_quy_che", label: "K1. Quy chế ATTT của đơn vị" },
+                  { id: "k2_ke_hoach_ht", label: "K2. Danh mục tài sản / HTTT" },
+                  { id: "k3_ke_hoach_tr", label: "K3. Kế hoạch ứng phó sự cố" },
+                  { id: "k4_qd_can_bo", label: "K4. QĐ phân công Cán bộ phụ trách" },
+                  { id: "K5_qd_phe_duyet_httt", label: "K5. QĐ phê duyệt cấp độ HTTT" },
+                  { id: "K6_ung_pho_su_co", label: "K6. Biên bản ứng phó sự cố" },
+                  { id: "K7_bien_ban_kiem_tra", label: "K7. Biên bản kiểm tra định kỳ" }
+                ].map(item => (
+                  <div key={item.id} className="flex flex-col gap-1 p-2 bg-stone-500/5 border border-stone-500/20 rounded">
+                    <label className="font-medium text-stone-300 text-[10px] uppercase">{item.label}</label>
+                    <input {...register(item.id)} className="form-input text-[11px] h-7" placeholder="Số hiệu/Ngày ban hành..." />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* MỤC M: DANH MỤC ẢNH CHỤP */}
+            <div className="section-card">
+              <h2 className="section-title"><span className="section-badge bg-emerald-600">M</span> Mục M. Hồ sơ ảnh chụp (Checklist)</h2>
+              <div className="grid grid-cols-1 gap-1">
+                {[
+                  "1. Ảnh chụp Modem/Router (Mặt trước/sau)",
+                  "2. Ảnh chụp Tủ Rack/Thiết bị mạng",
+                  "3. Ảnh chụp Máy chủ (Server)",
+                  "4. Ảnh chụp Tem nhãn Serial máy chủ",
+                  "5. Ảnh chụp Màn hình HĐH máy chủ (OS)",
+                  "6. Ảnh chụp Màn hình Antivirus",
+                  "7. Ảnh chụp Màn hình Backup",
+                  "8. Ảnh chụp Hệ thống Camera/Đầu ghi",
+                  "9. Ảnh chụp UPS/Điều hòa",
+                  "10. Ảnh chụp PCCC phòng máy",
+                  "11. Ảnh chụp Sơ đồ mạng dán tại phòng",
+                  "12. Ảnh chụp Bảng ký tên ra vào",
+                  "13. Ảnh chụp Cáp mạng/Hệ thống dây",
+                  "14. Ảnh chụp Tổng quan phòng máy"
+                ].map((text, i) => (
+                  <label key={i} className="flex items-center space-x-3 p-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                    <input type="checkbox" {...register(`M${i+1}_status`)} className="w-4 h-4 rounded border-gray-700 bg-gray-800 text-emerald-500" />
+                    <span className="text-xs text-gray-300">{text}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* MỤC N: XÁC NHẬN CHỮ KÝ */}
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-blue-500">R</span> Đào tạo & <span className="section-badge bg-emerald-500 ml-2">S</span> Kiểm tra ATTT</h2>
-            <div className="grid grid-cols-1 gap-4">
-               <div>
-                  <label className="form-label">Cán bộ đã được tập huấn ATTT chưa? Liệt kê nếu có:</label>
-                  <textarea {...register("ghi_chu")} className="form-input min-h-[100px]" placeholder="VD: 3 cán bộ tập huấn 9/2023 do Sở TTTT tổ chức." />
-               </div>
+            <h2 className="section-title"><span className="section-badge bg-indigo-500">N</span> Mục N. Xác nhận của Cá nhân & Thủ trưởng</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                <h3 className="text-xs font-bold text-indigo-400 uppercase tracking-widest border-b border-white/10 pb-2">Người lập phiếu</h3>
+                <input {...register("n_nguoi_lap")} className="form-input text-sm" placeholder="Họ và tên" />
+                <input {...register("n_chuc_vu_lap")} className="form-input text-sm" placeholder="Chức vụ" />
+                <input {...register("n_ngay_lap")} type="date" className="form-input text-sm" />
+              </div>
+              <div className="space-y-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                <h3 className="text-xs font-bold text-emerald-400 uppercase tracking-widest border-b border-white/10 pb-2">Người kiểm tra</h3>
+                <input {...register("N_nguoi_kiem_tra_ho_ten")} className="form-input text-sm" placeholder="Họ và tên" />
+                <input {...register("N_nguoi_kiem_tra_chuc_vu")} className="form-input text-sm" placeholder="Chức vụ" />
+                <input {...register("N_ngay_kiem_tra")} type="date" className="form-input text-sm" />
+              </div>
+              <div className="space-y-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                <h3 className="text-xs font-bold text-rose-400 uppercase tracking-widest border-b border-white/10 pb-2">Thủ trưởng đơn vị</h3>
+                <input {...register("N_thu_truong_ho_ten")} className="form-input text-sm" placeholder="Họ và tên" />
+                <input {...register("N_thu_truong_chuc_vu")} className="form-input text-sm" placeholder="Chức vụ" />
+                <input {...register("N_ngay_ky")} type="date" className="form-input text-sm" />
+              </div>
+            </div>
+          </div>
+
+          {/* MỤC BC: THÔNG TIN BÁO CÁO (Metadata) */}
+          <div className="section-card border-dashed border-gray-700">
+            <h2 className="section-title"><span className="section-badge bg-gray-500">BC</span> Metadata Báo cáo (Dành cho Văn bản)</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div><label className="form-label text-[10px]">Số báo cáo</label><input {...register("BC_so_bao_cao")} className="form-input text-xs h-8" placeholder="Số: .../BC-PH-ATTT" /></div>
+              <div><label className="form-label text-[10px]">Ngày báo cáo</label><input {...register("BC_ngay_bao_cao")} className="form-input text-xs h-8" /></div>
+              <div><label className="form-label text-[10px]">Đơn vị thực hiện báo cáo</label><input {...register("BC_don_vi_thuc_hien")} className="form-input text-xs h-8" /></div>
+              <div><label className="form-label text-[10px]">Tại tỉnh/thành</label><input {...register("BC_ten_tinh")} className="form-input text-xs h-8" placeholder="Tỉnh Lâm Đồng" /></div>
             </div>
           </div>
 
           <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-gray-600">T</span> Sơ đồ Topology Tự động</h2>
-            <p className="text-sm text-gray-400 mb-4">Dựa trên dữ liệu từ Tab II & III, hệ thống tự động vẽ sơ đồ mạng Logic.</p>
+            <h2 className="section-title"><span className="section-badge bg-gray-600">T</span> Sơ đồ Topology (Vẽ tự động)</h2>
             <NetworkDiagram data={formData} />
           </div>
         </div>
