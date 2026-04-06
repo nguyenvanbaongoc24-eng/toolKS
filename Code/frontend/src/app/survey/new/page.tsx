@@ -103,7 +103,7 @@ export default function NewSurveyPage() {
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold">Tạo Hồ sơ Khảo sát Mới</h1>
+            <h1 className="text-2xl font-bold flex items-center gap-2">Tạo Hồ sơ Khảo sát Mới <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">v2.6</span></h1>
             <p className="text-sm text-gray-400 mt-1">Tải ảnh phiếu khảo sát hoặc điền trực tiếp</p>
           </div>
         </div>
