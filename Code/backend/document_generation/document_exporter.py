@@ -23,112 +23,12 @@ class DocumentExporter:
             context[placeholder] = "☒" if str(value).lower() == str(option).lower() else "☐"
         return context
 
-    def _get_context(self, data):
-        """Common context mapping"""
-        context = {
-            'ten_don_vi': data.get('ten_don_vi', ''),
-            'dia_chi': data.get('dia_chi', ''),
-            'nguoi_khao_sat': data.get('nguoi_thuc_hien', ''),
-            'ngay_khao_sat': data.get('ngay_khao_sat', '.../.../2026'),
-            'he_thong_thong_tin': data.get('he_thong_thong_tin', ''),
-            'nguoi_dai_dien': data.get('nguoi_dung_dau', ''),
-            'so_dien_thoai': data.get('so_dien_thoai', ''),
-            'email': data.get('email', ''),
-            'nam_khao_sat': '2026',
-            
-            # L5: Giám sát & Nhật ký
-            'l5_siem_name': data.get('l5_siem_name', ''),
-            
-            # L6: Sự cố ATTT
-            'l6_incident_desc': data.get('l6_incident_desc', ''),
-            'l6_incident_resolution': data.get('l6_incident_resolution', ''),
-
-            # Tables
-            'may_chu': data.get('may_chu', []),
-            'thiet_bi_mang': data.get('thiet_bi_mang', []),
-            'ung_dung': data.get('ung_dung', []),
-            'camera': data.get('camera', []),
-        }
-
-        # Checkbox mappings
-        context.update(self._map_checkboxes(data.get('l1_phys_key'), {
-            "Có khóa cửa (chìa khóa thường)": "l1_phys_key",
-            "Có khóa cửa + camera giám sát": "l1_phys_cam",
-            "Có thẻ từ / kiểm soát điện tử": "l1_phys_card",
-            "Không có kiểm soát riêng": "l1_phys_none"
-        }))
-        
-        context.update(self._map_checkboxes(data.get('l2_pass_policy'), {
-            "Có chính sách mật khẩu": "l2_pass_yes",
-            "Không có chính sách thống nhất": "l2_pass_no"
-        }))
-        context['l2_pass_len'] = data.get('l2_pass_len', '')
-        context['l2_pass_time'] = data.get('l2_pass_time', '')
-
-        context.update(self._map_checkboxes(data.get('l3_av_has'), {
-            "Có": "l3_av_yes",
-            "Không": "l3_av_no"
-        }))
-        context['l3_av_name'] = data.get('l3_av_name', '')
-
-        context.update(self._map_checkboxes(data.get('l4_bak_has'), {
-            "Có": "l4_bak_yes",
-            "Thủ công": "l4_bak_manual",
-            "Không sao lưu": "l4_bak_none"
-        }))
-        context['l4_bak_freq'] = data.get('l4_bak_freq', '')
-
-        context.update(self._map_checkboxes(data.get('l5_log_enabled'), {
-            "Có": "l5_log_yes",
-            "Không biết / Chưa kiểm tra": "l5_log_unknown",
-            "Không": "l5_log_no"
-        }))
-        
-        context.update(self._map_checkboxes(data.get('l5_log_retention'), {
-            "< 3 tháng": "l5_retention_3m",
-            "3 – 6 tháng": "l5_retention_6m",
-            "> 6 tháng": "l5_retention_gt6m",
-            "Không lưu": "l5_retention_none"
-        }))
-
-        context.update(self._map_checkboxes(data.get('l5_siem_has'), {
-            "Có": "l5_siem_yes",
-            "Không": "l5_siem_no"
-        }))
-
-        context.update(self._map_checkboxes(data.get('l6_incident_has'), {
-            "Không có sự cố nào": "l6_incident_none",
-            "Có": "l6_incident_yes",
-            "Không biết / Không ghi nhận": "l6_incident_unknown"
-        }))
-        
-        context.update(self._map_checkboxes(data.get('l7_type'), {
-            "Tường lửa tích hợp (SPI)": "l7_type_spi",
-            "Tường lửa phần cứng chuyên dụng": "l7_type_hardware",
-            "Tường lửa phần mềm trên máy chủ": "l7_type_software"
-        }))
-
-        # P: Mã hóa
-        context.update(self._map_checkboxes(data.get('p1_protocol'), {
-            "HTTPS (có chứng chỉ SSL/TLS)": "p1_https",
-            "HTTP (không mã hóa)": "p1_http",
-            "Cả hai": "p1_both"
-        }))
-
-        context.update(self._map_checkboxes(data.get('p2_vpn'), {
-            "Có": "p2_vpn_yes",
-            "Không có VPN": "p2_vpn_no"
-        }))
-        context['p2_vpn_type'] = data.get('p2_vpn_type', '')
-
-        return context
-
     def _get_hsdx_logic(self, data):
         """Logic for calculating Appendix I & II compliance in HSDX"""
         logic = {}
         
         # Appendix I: Technical
-        logic['network_status'] = "Đã đáp ứng" if data.get('l7_type') == "Tường lửa phần cứng chuyên dụng" else "Chưa đáp ứng"
+        logic['network_status'] = "Đã đáp ứng" if data.get('E2_firewall_type') == "Có (phần cứng chuyên dụng)" else "Chưa đáp ứng"
         logic['endpoint_status'] = "Đã đáp ứng" if data.get('l3_av_has') == "Có" else "Chưa đáp ứng"
         logic['app_status'] = "Đã đáp ứng" if data.get('p1_protocol') == "HTTPS (có chứng chỉ SSL/TLS)" else "Chưa đáp ứng"
         logic['data_status'] = "Đã đáp ứng" if data.get('l4_bak_has') == "Có" else "Chưa đáp ứng"
@@ -149,7 +49,7 @@ class DocumentExporter:
             problems.append("- Hệ thống chưa được trang bị phần mềm diệt virus tập trung trên các máy chủ và máy trạm.")
             solutions.append("- Trang bị phần mềm diệt virus có bản quyền ( Kaspersky, Trend Micro...) để bảo vệ hệ thống.")
 
-        if data.get('l7_type') != "Tường lửa phần cứng chuyên dụng":
+        if data.get('E2_firewall_type') != "Có (phần cứng chuyên dụng)":
             problems.append("- Chưa có thiết bị Tường lửa (Firewall) phần cứng chuyên dụng để kiểm soát sâu lưu lượng mạng.")
             solutions.append("- Đầu tư thiết bị Tường lửa phần cứng (Next-Generation Firewall) để ngăn chặn tấn công từ Internet.")
 
@@ -234,8 +134,8 @@ class DocumentExporter:
             'P4_phuong_phap': data.get('P4_phuong_phap', ''),
 
             # Mục Q: Patch Management
-            'Q3_nguoi_chiu_trach_nhiem': data.get('Q3_nguoi_chiu_trach_nhiem', ''),
-            'Q4_firmware_mang': data.get('Q4_firmware_mang', ''),
+            'Q3_nguoi_patching': data.get('Q3_nguoi_patching', ''),
+            'Q4_cap_nhat_firmware_tb_mang': data.get('Q4_cap_nhat_firmware_tb_mang', ''),
 
             # Mục T: Topology Details
             'T1_1_may_chu_dmz': data.get('T1_1_may_chu_dmz', ''),
@@ -268,7 +168,7 @@ class DocumentExporter:
 
             # Thông tin Báo cáo (BC)
             'BC_so_bao_cao': data.get('BC_so_bao_cao', ''),
-            'BC_ngay_bao_cao': data.get('BC_ngay_bao_cao', ''),
+            'BC_ngay_bao_cao': data.get('BC_ngay_bao_cao', '') or data.get('BC_ngay_bao_cao_date', ''),
             'BC_don_vi_thuc_hien': data.get('BC_don_vi_thuc_hien', ''),
             'BC_qd_ubnd_tinh_so_attt': data.get('BC_qd_ubnd_tinh_so_attt', ''),
             'BC_qd_ubnd_tinh_phan_cong': data.get('BC_qd_ubnd_tinh_phan_cong', ''),
@@ -326,26 +226,12 @@ class DocumentExporter:
             "Không có kiểm soát riêng": "l1_phys_none"
         }))
         context.update(self._map_checkboxes(data.get('l2_pass_policy'), {"Có chính sách mật khẩu": "l2_pass_yes", "Không có chính sách thống nhất": "l2_pass_no"}))
-        context.update(self._map_checkboxes(data.get('L2_admin_acc_type'), {
-            "Mỗi cán bộ có tài khoản riêng": "L2_admin_rieng",
-            "Dùng chung một tài khoản admin": "L2_admin_chung",
-            "Cả hai hình thức": "L2_admin_ca_hai"
-        }))
         context.update(self._map_checkboxes(data.get('L2_2fa_has'), {"Có": "L2_2fa_yes", "Không": "L2_2fa_no"}))
         context.update(self._map_checkboxes(data.get('l3_av_has'), {"Có": "l3_av_yes", "Không": "l3_av_no"}))
-        context.update(self._map_checkboxes(data.get('L3_cap_nhat_virus'), {"Tự động": "L3_auto", "Thủ công": "L3_manual", "Không": "L3_none"}))
         context.update(self._map_checkboxes(data.get('l4_bak_has'), {"Có": "l4_bak_yes", "Thủ công": "l4_bak_manual", "Không sao lưu": "l4_bak_none"}))
-        context.update(self._map_checkboxes(data.get('L4_offsite_has'), {"Có": "L4_offsite_yes", "Không": "L4_offsite_no"}))
-        context.update(self._map_checkboxes(data.get('l5_log_enabled'), {"Có": "l5_log_yes", "Không biết / Chưa kiểm tra": "l5_log_unknown", "Không": "l5_log_no"}))
-        context.update(self._map_checkboxes(data.get('l5_log_retention'), {"< 3 tháng": "l5_retention_3m", "3 – 6 tháng": "l5_retention_6m", "> 6 tháng": "l5_retention_gt6m", "Không lưu": "l5_retention_none"}))
-        context.update(self._map_checkboxes(data.get('l6_incident_has'), {"Không có sự cố nào": "l6_incident_none", "Có": "l6_incident_yes", "Không biết / Không ghi nhận": "l6_incident_unknown"}))
-        context.update(self._map_checkboxes(data.get('l7_type'), {"Tường lửa tích hợp (SPI)": "l7_type_spi", "Tường lửa phần cứng chuyên dụng": "l7_type_hardware", "Tường lửa phần mềm trên máy chủ": "l7_type_software"}))
-        context.update(self._map_checkboxes(data.get('L7_chinh_sach'), {"Chặn tất cả (Default Deny)": "L7_deny", "Cho phép tất cả (Default Allow)": "L7_allow", "Chưa cấu hình": "L7_unknown"}))
-        context.update(self._map_checkboxes(data.get('L7_remote_access'), {"Có – qua VPN": "L7_remote_vpn", "Có – RDP/TeamViewer": "L7_remote_rdp", "Không": "L7_remote_none"}))
-        context.update(self._map_checkboxes(data.get('L8_1_co_ups'), {"Có": "L8_ups_yes", "Không": "L8_ups_no"}))
-        context.update(self._map_checkboxes(data.get('L8_2_dieu_hoa'), {"Có – 24/7": "L8_air_247", "Có – Giờ hành chính": "L8_air_office", "Không": "L8_air_no"}))
-        context.update(self._map_checkboxes(data.get('L8_3_bin_chua_chay_has'), {"Có": "L8_fire_yes", "Không": "L8_fire_no"}))
-
+        context.update(self._map_checkboxes(data.get('l5_log_enabled'), {"Có": "l5_log_yes", "Không": "l5_log_no"}))
+        context.update(self._map_checkboxes(data.get('l6_incident_has'), {"Không có sự cố nào": "l6_incident_none", "Có": "l6_incident_yes"}))
+        
         # Mục P
         context.update(self._map_checkboxes(data.get('p1_protocol'), {"HTTPS (có chứng chỉ SSL/TLS)": "p1_https", "HTTP (không mã hóa)": "p1_http", "Cả hai": "p1_both"}))
         context.update(self._map_checkboxes(data.get('p2_vpn'), {"Có": "p2_vpn_yes", "Không có VPN": "p2_vpn_no"}))
@@ -354,14 +240,12 @@ class DocumentExporter:
         context.update(self._map_checkboxes(data.get('P5_email_sec'), {"Có": "P5_email_yes", "Không": "P5_email_no"}))
 
         # Mục Q
-        context.update(self._map_checkboxes(data.get('cap_nhat_he_dieu_hanh'), {"Hàng tháng": "Q1_monthly", "Hàng quý": "Q1_quarterly", "Thủ công": "Q1_manual", "Không": "Q1_none"}))
-        context.update(self._map_checkboxes(data.get('Q2_cap_nhat_ung_dung'), {"Tự động": "Q2_auto", "Định kỳ": "Q2_periodic", "Không": "Q2_none"}))
-        context.update(self._map_checkboxes(data.get('Q5_theo_doi_canh_bao'), {"Thường xuyên": "Q5_regular", "Thỉnh thoảng": "Q5_rare", "Không": "Q5_none"}))
+        context.update(self._map_checkboxes(data.get('cap_nhat_he_dieu_hanh'), {"Hàng tháng": "Q1_monthly", "Định kỳ": "Q1_periodic", "Thủ công": "Q1_manual", "Không": "Q1_none"}))
+        context.update(self._map_checkboxes(data.get('Q2_cap_nhat_ung_dung'), {"Tự động": "Q2_auto", "Có": "Q2_yes", "Không": "Q2_none"}))
 
         # Mục T
         context.update(self._map_checkboxes(data.get('T1_1_co_dmz'), {"Có": "T1_dmz_yes", "Không": "T1_dmz_no"}))
-        context.update(self._map_checkboxes(data.get('T1_2_wifi_tach_rieng'), {"Tách riêng VLAN": "T1_wifi_vlan", "Dùng chung mạng LAN": "T1_wifi_lan", "Không có WiFi": "T1_wifi_none"}))
-        context.update(self._map_checkboxes(data.get('T1_4_camera_vlan_has'), {"VLAN riêng biệt": "T1_cam_vlan", "Cùng mạng LAN": "T1_cam_lan", "Không có Camera": "T1_cam_none"}))
+        context.update(self._map_checkboxes(data.get('T1_2_wifi_tach_rieng'), {"Tách riêng VLAN": "T1_wifi_vlan", "Có": "T1_wifi_yes", "Không có WiFi": "T1_wifi_none"}))
         context.update(self._map_checkboxes(data.get('T3_1_co_rack'), {"Có": "T3_rack_yes", "Không": "T3_rack_no"}))
         context.update(self._map_checkboxes(data.get('T4_1_loai_cap'), {"Cáp quang (Fiber)": "T4_fiber", "Cáp đồng (Cat5e/Cat6)": "T4_copper", "Không dây": "T4_wireless"}))
 
