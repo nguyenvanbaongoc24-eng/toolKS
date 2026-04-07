@@ -13,12 +13,18 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [activeDropdownId, setActiveDropdownId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<any>({});
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
   useEffect(() => {
     fetchData();
+    
+    // Close dropdown on click outside
+    const handleClickOutside = () => setActiveDropdownId(null);
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
   }, []);
 
   const fetchData = async () => {
@@ -75,20 +81,46 @@ export default function Home() {
     router.push("/survey/new?mode=manual");
   };
 
-  const handleDownloadWord = async (rec: any) => {
+  const handleDownload = async (rec: any, type: 'phieu' | 'hsdx' | 'bao-cao') => {
      try {
-       const mockData = { ten_don_vi: rec.ten_don_vi, nguoi_thuc_hien: rec.doer, he_thong_thong_tin: "Hệ thống Demo" };
        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-       const response = await axios.post(`${apiUrl}/api/generate-report`, { data: mockData }, { responseType: 'blob' });
+       let endpoint = "";
+       let downloadName = "";
+       
+       const exportData = {
+         ...(rec.data || {}),
+         ten_don_vi: rec.ten_don_vi,
+         nguoi_thuc_hien: rec.doer,
+         ngay_khao_sat: rec.date
+       };
+
+       switch(type) {
+         case 'phieu':
+           endpoint = "/export/phieu-khao-sat";
+           downloadName = `Phieu_Khao_Sat_${rec.ten_don_vi.replace(/\s+/g, '')}.docx`;
+           break;
+         case 'hsdx':
+           endpoint = "/export/ho-so-de-xuat";
+           downloadName = `HSDX_${rec.ten_don_vi.replace(/\s+/g, '')}.docx`;
+           break;
+         case 'bao-cao':
+           endpoint = "/export/bao-cao";
+           downloadName = `Bao_Cao_${rec.ten_don_vi.replace(/\s+/g, '')}.docx`;
+           break;
+       }
+
+       const response = await axios.post(`${apiUrl}${endpoint}`, { data: exportData }, { responseType: 'blob' });
        const url = window.URL.createObjectURL(new Blob([response.data]));
        const link = document.createElement('a');
        link.href = url;
-       link.setAttribute('download', `HoSoATTT_${rec.ten_don_vi.replace(/\s+/g, '')}.docx`);
+       link.setAttribute('download', downloadName);
        document.body.appendChild(link);
        link.click();
        document.body.removeChild(link);
+       setActiveDropdownId(null);
      } catch (e) {
-       alert("Lỗi tải báo cáo Word trên máy chủ từ xa!");
+       console.error("Download error:", e);
+       alert("Lỗi tải bản Word từ máy chủ!");
      }
   };
 
@@ -212,9 +244,38 @@ export default function Home() {
                             </span>
                           </td>
                           <td className="px-6 py-4 text-right flex justify-end gap-1">
-                            <button onClick={() => handleShare(rec)} className="text-gray-400 hover:text-blue-400 transition-colors p-1" title="Chia sẻ nền tảng"><Share2 className="w-4 h-4"/></button>
-                            <button onClick={() => handleDownloadWord(rec)} className="text-gray-400 hover:text-emerald-400 transition-colors p-1" title="Tải & Xem bản Word"><Download className="w-4 h-4"/></button>
-                            <button onClick={() => handleOpenSurvey(rec)} className="text-gray-400 hover:text-indigo-400 transition-colors p-1" title="Vào trang sửa Full Data"><ExternalLink className="w-4 h-4"/></button>
+                            <button onClick={(e) => { e.stopPropagation(); handleShare(rec); }} className="text-gray-400 hover:text-blue-400 transition-colors p-1" title="Chia sẻ nền tảng"><Share2 className="w-4 h-4"/></button>
+                            
+                            {/* DOWNLOAD DROPDOWN */}
+                            <div className="relative">
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActiveDropdownId(activeDropdownId === rec.id ? null : rec.id);
+                                }} 
+                                className={`p-1 transition-colors rounded-md ${activeDropdownId === rec.id ? 'bg-indigo-500/20 text-indigo-400' : 'text-gray-400 hover:text-emerald-400'}`}
+                                title="Tải hồ sơ Word"
+                              >
+                                <Download className="w-4 h-4"/>
+                              </button>
+                              
+                              {activeDropdownId === rec.id && (
+                                <div className="absolute right-0 mt-2 w-56 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 py-1 overflow-hidden" onClick={e => e.stopPropagation()}>
+                                  <div className="px-3 py-2 text-[10px] uppercase tracking-wider text-gray-500 font-bold border-b border-gray-800">Chọn bản Word để tải</div>
+                                  <button onClick={() => handleDownload(rec, 'phieu')} className="w-full text-left px-4 py-2.5 text-xs hover:bg-indigo-500/10 hover:text-indigo-300 flex items-center gap-2 transition-colors">
+                                    <FileText className="w-3.5 h-3.5 text-indigo-400"/> Phiếu khảo sát ATTT
+                                  </button>
+                                  <button onClick={() => handleDownload(rec, 'hsdx')} className="w-full text-left px-4 py-2.5 text-xs hover:bg-emerald-500/10 hover:text-emerald-300 flex items-center gap-2 transition-colors">
+                                    <TrendingUp className="w-3.5 h-3.5 text-emerald-400"/> Hồ sơ đề xuất cấp độ
+                                  </button>
+                                  <button onClick={() => handleDownload(rec, 'bao-cao')} className="w-full text-left px-4 py-2.5 text-xs hover:bg-amber-500/10 hover:text-amber-300 flex items-center gap-2 transition-colors border-t border-gray-800/50">
+                                    <Check className="w-3.5 h-3.5 text-amber-400"/> Báo cáo khảo sát
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+
+                            <button onClick={(e) => { e.stopPropagation(); handleOpenSurvey(rec); }} className="text-gray-400 hover:text-indigo-400 transition-colors p-1" title="Vào trang sửa Full Data"><ExternalLink className="w-4 h-4"/></button>
                             <button onClick={() => startEdit(rec)} className="text-gray-400 hover:text-amber-400 transition-colors p-1 border-l border-gray-700 ml-1 pl-2" title="Sửa nhanh thông tin tĩnh"><Edit3 className="w-4 h-4"/></button>
                           </td>
                         </>
@@ -276,9 +337,36 @@ export default function Home() {
                          </span>
                        </div>
                        <div className="flex gap-2">
-                         <button onClick={() => handleShare(rec)} className="text-gray-400 active:text-blue-400 p-1 bg-black/30 rounded-md"><Share2 className="w-4 h-4"/></button>
-                         <button onClick={() => handleDownloadWord(rec)} className="text-gray-400 active:text-emerald-400 p-1 bg-black/30 rounded-md"><Download className="w-4 h-4"/></button>
-                         <button onClick={() => handleOpenSurvey(rec)} className="text-gray-400 active:text-indigo-400 p-1 bg-black/30 rounded-md"><ExternalLink className="w-4 h-4"/></button>
+                         <button onClick={(e) => { e.stopPropagation(); handleShare(rec); }} className="text-gray-400 active:text-blue-400 p-1 bg-black/30 rounded-md"><Share2 className="w-4 h-4"/></button>
+                         
+                         {/* MOBILE DOWNLOAD DROPDOWN */}
+                         <div className="relative">
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveDropdownId(activeDropdownId === rec.id ? null : rec.id);
+                              }} 
+                              className={`p-1 rounded-md bg-black/30 ${activeDropdownId === rec.id ? 'text-indigo-400 ring-1 ring-indigo-500/50' : 'text-gray-400 active:text-emerald-400'}`}
+                            >
+                              <Download className="w-4 h-4"/>
+                            </button>
+                            
+                            {activeDropdownId === rec.id && (
+                              <div className="absolute right-0 bottom-full mb-2 w-48 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 py-1" onClick={e => e.stopPropagation()}>
+                                <button onClick={() => handleDownload(rec, 'phieu')} className="w-full text-left px-4 py-3 text-xs hover:bg-white/5 flex items-center gap-2 border-b border-gray-800">
+                                  Phiếu khảo sát
+                                </button>
+                                <button onClick={() => handleDownload(rec, 'hsdx')} className="w-full text-left px-4 py-3 text-xs hover:bg-white/5 flex items-center gap-2 border-b border-gray-800">
+                                  Hồ sơ đề xuất
+                                </button>
+                                <button onClick={() => handleDownload(rec, 'bao-cao')} className="w-full text-left px-4 py-3 text-xs hover:bg-white/5 flex items-center gap-2">
+                                  Báo cáo khảo sát
+                                </button>
+                              </div>
+                            )}
+                         </div>
+
+                         <button onClick={(e) => { e.stopPropagation(); handleOpenSurvey(rec); }} className="text-gray-400 active:text-indigo-400 p-1 bg-black/30 rounded-md"><ExternalLink className="w-4 h-4"/></button>
                        </div>
                     </div>
                   </>
