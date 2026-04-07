@@ -132,7 +132,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         setValue(key as any, (clearedFields as any)[key]);
       });
     }
-  }, [prefilledData, setValue]);
+  }, [prefilledData, setValue, availableStaff]);
 
   // Watch and persist technician name (Doer)
   const currentDoer = watch("nguoi_thuc_hien");

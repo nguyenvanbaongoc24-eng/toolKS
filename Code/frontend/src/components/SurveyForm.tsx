@@ -228,7 +228,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
         setValue(key as any, (clearedFields as any)[key]);
       });
     }
-  }, [prefilledData, setValue]);
+  }, [prefilledData, setValue, availableStaff]);
 
   // Arrays
   const canBoFields = useFieldArray({ control, name: "can_bo_phu_trach" });
