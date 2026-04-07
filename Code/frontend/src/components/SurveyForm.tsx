@@ -13,15 +13,15 @@ import axios from "axios";
 import { useAutoSave } from "@/hooks/useAutoSave";
 
 const TABS = [
-  { id: "don_vi", label: "I. Đơn vị & Nhân sự", icon: Building },
-  { id: "ha_tang", label: "II. Hạ tầng & Mạng", icon: Router },
-  { id: "bao_mat", label: "III. An toàn Bảo mật", icon: ShieldAlert },
-  { id: "dao_tao", label: "IV. Đào tạo & Kiểm tra", icon: GraduationCap },
-  { id: "xac_nhan", label: "V. Xác nhận & Hình ảnh", icon: LayoutPanelLeft }
+  { id: "don_vi", label: "A-C. Đơn vị & Hệ thống", icon: Building },
+  { id: "ha_tang", label: "D-I. Hạ tầng & Mạng", icon: Router },
+  { id: "bao_mat", label: "K-P. An toàn Bảo mật", icon: ShieldAlert },
+  { id: "quan_ly", label: "Q-S. Quản lý & Đào tạo", icon: GraduationCap },
+  { id: "hinh_anh", label: "M-T. Xác nhận & Sơ đồ", icon: LayoutPanelLeft }
 ];
 
 export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
-  const [activeTab, setActiveTab] = useState("don_vi");
+  const [activeTab, setActiveTab] = useState<"don_vi" | "ha_tang" | "bao_mat" | "quan_ly" | "hinh_anh">("don_vi");
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -42,77 +42,169 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
        if (prefilledData?.id) {
           delete prefilledData.id;
        }
+       // Auto-fill doer from localStorage if creating a new survey
+       const lastDoer = localStorage.getItem("last_survey_doer");
+       if (lastDoer && !prefilledData?.doer && !prefilledData?.nguoi_thuc_hien) {
+          // We'll handle this in the defaultVals or use setValue from useForm if needed
+       }
     }
   }, [prefilledData]);
 
-  const defaultVals = prefilledData || {
-    // Internal
-    nguoi_thuc_hien: prefilledData?.doer || "",
-    ngay_khao_sat: new Date().toISOString().split('T')[0],
+  const defaultVals = {
+    ...(prefilledData || {}),
+    nguoi_thuc_hien: prefilledData?.doer || prefilledData?.nguoi_thuc_hien || (typeof window !== "undefined" ? localStorage.getItem("last_survey_doer") : "") || "",
+    ngay_khao_sat: prefilledData?.date || prefilledData?.ngay_khao_sat || new Date().toISOString().split('T')[0],
     
-    // Tab 1: Đơn vị & Nhân sự (Mục A, B, C)
-    ten_don_vi: "", dia_chi: "", A6_ho_ten_thu_truong: "", so_dien_thoai: "", email: "", 
-    A6_chuc_vu_thu_truong: "", A7_so_quyet_dinh: "",
-    he_thong_thong_tin: "", C1_mo_ta_chuc_nang: "", C2_doi_tuong_nguoi_dung: "", C3_loai_du_lieu: "",
-    C4_du_lieu_type: "Không xác định", C5_noi_bo: "", C5_ben_ngoai: "", C6_nam_hoat_dong: "",
-    C7_ket_noi_cap_tren_has: "Không", C7_ten_he_thong_cap_tren: "",
-    C8_bi_mat_nha_nuoc_has: "Không", C8_do_mat: "",
-    can_bo_phu_trach: [],
+    ten_don_vi: prefilledData?.ten_don_vi || "",
+    dia_chi: prefilledData?.dia_chi || "",
+    A6_ho_ten_thu_truong: prefilledData?.A6_ho_ten_thu_truong || "",
+    so_dien_thoai: prefilledData?.so_dien_thoai || "",
+    email: prefilledData?.email || "",
+    A6_chuc_vu_thu_truong: prefilledData?.A6_chuc_vu_thu_truong || "",
+    A7_so_quyet_dinh: prefilledData?.A7_so_quyet_dinh || "",
+    he_thong_thong_tin: prefilledData?.he_thong_thong_tin || "",
+    C1_mo_ta_chuc_nang: prefilledData?.C1_mo_ta_chuc_nang || "",
+    C2_doi_tuong_nguoi_dung: prefilledData?.C2_doi_tuong_nguoi_dung || "",
+    C3_loai_du_lieu: prefilledData?.C3_loai_du_lieu || "",
+    C4_du_lieu_type: prefilledData?.C4_du_lieu_type || "Không xác định",
+    C5_noi_bo: prefilledData?.C5_noi_bo || "",
+    C5_ben_ngoai: prefilledData?.C5_ben_ngoai || "",
+    C6_nam_hoat_dong: prefilledData?.C6_nam_hoat_dong || "",
+    C7_ket_noi_cap_tren_has: prefilledData?.C7_ket_noi_cap_tren_has || "Không",
+    C7_ten_he_thong_cap_tren: prefilledData?.C7_ten_he_thong_cap_tren || "",
+    C8_bi_mat_nha_nuoc_has: prefilledData?.C8_bi_mat_nha_nuoc_has || "Không",
+    C8_do_mat: prefilledData?.C8_do_mat || "",
+    can_bo_phu_trach: prefilledData?.can_bo_phu_trach || [],
     
-    // Tab 2: Hạ tầng & Mạng (Mục D, E, F, G, H, T)
-    ket_noi_internet: [], D2_router_modem: "", D3_ip_lan_gateway: "",
-    thiet_bi_mang: [], E2_firewall_type: "Dùng Firewall tích hợp",
-    F1_pc_sl: "", F1_pc_os: "Windows 10/11", F1_laptop_sl: "", F1_laptop_os: "Windows 10/11",
-    F1_tablet_sl: "", F1_mayin_sl: "", F1_dienthoai_sl: "",
-    F2_khong_may_chu_has: "Không", F2_luu_tru_o_dau: "",
-    may_chu: [], F3_cloud_has: "Không", F3_ten_cloud: "",
-    camera: [], G2_dau_ghi_nvr: "", G3_luu_tru_ngay: "",
-    H1_dai_ip_lan: "", H2_ip_gateway: "", H3_dns: "", H4_co_vlan: "Không", H4_so_vlan: "", H4_mo_ta_vlan: "",
-    ip_tinh: [],
-    T1_1_co_dmz: "Không", T1_1_may_chu_dmz: "", 
-    T1_2_wifi_tach_rieng: "Không có WiFi", T1_3_ssid: "", T1_3_bao_mat_wifi: "",
-    T1_4_camera_vlan_has: "Cùng mạng LAN",
-    T3_1_co_rack: "Không", T3_1_rack_u: "", T3_1_rack_vi_tri: "", T3_2_thiet_bi_trong_tu: "",
-    T4_1_loai_cap: "Cáp đồng (Cat5e/Cat6)", T4_2_cap_isp: "",
-    T5_vi_tri: [],
+    // Tab 2 properties
+    ket_noi_internet: prefilledData?.ket_noi_internet || [],
+    D2_router_modem: prefilledData?.D2_router_modem || "",
+    D3_ip_lan_gateway: prefilledData?.D3_ip_lan_gateway || "",
+    thiet_bi_mang: prefilledData?.thiet_bi_mang || [],
+    E2_firewall_type: prefilledData?.E2_firewall_type || "Dùng Firewall tích hợp",
+    F1_pc_sl: prefilledData?.F1_pc_sl || "",
+    F1_pc_os: prefilledData?.F1_pc_os || "Windows 10/11",
+    F1_laptop_sl: prefilledData?.F1_laptop_sl || "",
+    F1_laptop_os: prefilledData?.F1_laptop_os || "Windows 10/11",
+    F1_tablet_sl: prefilledData?.F1_tablet_sl || "",
+    F1_mayin_sl: prefilledData?.F1_mayin_sl || "",
+    F1_dienthoai_sl: prefilledData?.F1_dienthoai_sl || "",
+    F2_khong_may_chu_has: prefilledData?.F2_khong_may_chu_has || "Không",
+    F2_luu_tru_o_dau: prefilledData?.F2_luu_tru_o_dau || "",
+    may_chu: prefilledData?.may_chu || [],
+    F3_cloud_has: prefilledData?.F3_cloud_has || "Không",
+    F3_ten_cloud: prefilledData?.F3_ten_cloud || "",
+    camera: prefilledData?.camera || [],
+    G2_dau_ghi_nvr: prefilledData?.G2_dau_ghi_nvr || "",
+    G3_luu_tru_ngay: prefilledData?.G3_luu_tru_ngay || "",
+    H1_dai_ip_lan: prefilledData?.H1_dai_ip_lan || "",
+    H2_ip_gateway: prefilledData?.H2_ip_gateway || "",
+    H3_dns: prefilledData?.H3_dns || "",
+    H4_co_vlan: prefilledData?.H4_co_vlan || "Không",
+    H4_so_vlan: prefilledData?.H4_so_vlan || "",
+    H4_mo_ta_vlan: prefilledData?.H4_mo_ta_vlan || "",
+    ip_tinh: prefilledData?.ip_tinh || [],
     
-    // Tab 3: Dịch vụ & Ứng dụng (Mục I, P)
-    ung_dung: [],
-    p1_protocol: "HTTP (không mã hóa)",
-    p2_vpn: "Không có VPN", p2_vpn_type: "",
-    P3_ket_noi_cap_tren_type: "Không kết nối", P3_1_ten_he_thong_va_phuong_thuc: "",
-    P4_ma_hoa_luu_tru_has: "Không", P4_phuong_phap: "",
-    P5_email_sec: "Không",
-    
-    // Tab 4: An toàn Bảo mật (Mục L, Q, K)
-    l1_phys_key: "Không có kiểm soát riêng", L1_bang_ky_ten: "Không",
-    l2_pass_policy: "Không có chính sách thống nhất", l2_pass_len: "8", l2_pass_time: "3",
-    L2_admin_acc_type: "Dùng chung một tài khoản admin", L2_2fa_has: "Không",
-    l3_av_has: "Không", l3_av_name: "", l3_av_license: "Có bản quyền", L3_cap_nhat_virus: "Tự động",
-    l4_bak_has: "Không sao lưu", l4_bak_freq: "Hàng ngày", L4_offsite_has: "Không", L4_luu_o_dau: "Ổ cứng ngoài",
-    l5_log_enabled: "Không", l5_log_retention: "3 tháng", l5_siem_has: "Không", l5_siem_name: "",
-    l6_incident_has: "Không có sự cố nào", l6_incident_desc: "", l6_incident_resolution: "",
-    l7_type: "Tường lửa tích hợp (SPI)", L7_chinh_sach: "Chưa cấu hình", L7_remote_access: "Không", L7_4_cong_mo: "",
-    L8_1_co_ups: "Không", L8_1_ups_hang_model: "", L8_1_ups_cong_suat_va: "", L8_1_ups_thoi_gian_phut: "",
-    L8_2_dieu_hoa: "Không", L8_3_bin_chua_chay_has: "Không", L8_4_mo_ta_phong: "",
-    cap_nhat_he_dieu_hanh: "Không", Q2_cap_nhat_ung_dung: "Không", Q3_nguoi_chiu_trach_nhiem: "", Q4_firmware_mang: "", Q5_theo_doi_canh_bao: "Không",
-    
-    k1_quy_che: "", k2_ke_hoach_ht: "", k3_ke_hoach_tr: "", k4_qd_can_bo: "",
-    K5_qd_phe_duyet_httt: "", K6_ung_pho_su_co: "", K7_bien_ban_kiem_tra: "",
+    // Tab 2 detail Section T
+    T1_1_co_dmz: prefilledData?.T1_1_co_dmz || "Không",
+    T1_1_may_chu_dmz: prefilledData?.T1_1_may_chu_dmz || "",
+    T1_2_wifi_tach_rieng: prefilledData?.T1_2_wifi_tach_rieng || "Không có WiFi",
+    T1_3_ssid: prefilledData?.T1_3_ssid || "",
+    T1_3_bao_mat_wifi: prefilledData?.T1_3_bao_mat_wifi || "",
+    T1_4_camera_vlan_has: prefilledData?.T1_4_camera_vlan_has || "Không - Dùng chung LAN",
+    T3_1_co_rack: prefilledData?.T3_1_co_rack || "Không",
+    T3_1_rack_u: prefilledData?.T3_1_rack_u || "",
+    T3_1_rack_vi_tri: prefilledData?.T3_1_rack_vi_tri || "",
+    T3_2_thiet_bi_trong_tu: prefilledData?.T3_2_thiet_bi_trong_tu || "",
+    T4_1_loai_cap: prefilledData?.T4_1_loai_cap || "Cáp đồng (Cat5e/Cat6)",
+    T4_2_cap_isp: prefilledData?.T4_2_cap_isp || "",
+    T5_vi_tri: prefilledData?.T5_vi_tri || [],
 
-    // Tab 5: Đánh giá & Xác nhận (Mục M, N, BC)
-    ...Array.from({ length: 14 }, (_, i) => ({ [`M${i+1}_status`]: false })).reduce((a, b) => ({ ...a, ...b }), {}),
-    n_nguoi_lap: "", n_chuc_vu_lap: "", n_ngay_lap: new Date().toISOString().split('T')[0],
-    N_nguoi_kiem_tra_ho_ten: "", N_nguoi_kiem_tra_chuc_vu: "", N_ngay_kiem_tra: "",
-    N_thu_truong_ho_ten: "", N_thu_truong_chuc_vu: "", N_ngay_ky: "",
+    // Tab 3
+    ung_dung: prefilledData?.ung_dung || [],
+    p1_protocol: prefilledData?.p1_protocol || "HTTPS (có chứng chỉ SSL/TLS)",
+    p2_vpn: prefilledData?.p2_vpn || "Không có VPN",
+    p2_vpn_type: prefilledData?.p2_vpn_type || "",
+    P3_ket_noi_cap_tren_type: prefilledData?.P3_ket_noi_cap_tren_type || "Không kết nối",
+    P3_1_ten_he_thong_va_phuong_thuc: prefilledData?.P3_1_ten_he_thong_va_phuong_thuc || "",
+    P4_ma_hoa_luu_tru_has: prefilledData?.P4_ma_hoa_luu_tru_has || "Không",
+    P4_phuong_phap: prefilledData?.P4_phuong_phap || "",
+    P5_email_sec: prefilledData?.P5_email_sec || "Không",
+
+    // Tab 4
+    l1_phys_key: prefilledData?.l1_phys_key || "Không có kiểm soát riêng",
+    L1_bang_ky_ten: prefilledData?.L1_bang_ky_ten || "Không",
+    l2_pass_policy: prefilledData?.l2_pass_policy || "Không có chính sách thống nhất",
+    l2_pass_len: prefilledData?.l2_pass_len || "8",
+    l2_pass_time: prefilledData?.l2_pass_time || "3",
+    L2_admin_acc_type: prefilledData?.L2_admin_acc_type || "Dùng chung một tài khoản admin",
+    L2_2fa_has: prefilledData?.L2_2fa_has || "Không",
+    l3_av_has: prefilledData?.l3_av_has || "Không",
+    l3_av_name: prefilledData?.l3_av_name || "",
+    l3_av_license: prefilledData?.l3_av_license || "Có bản quyền",
+    L3_cap_nhat_virus: prefilledData?.L3_cap_nhat_virus || "Tự động",
+    l4_bak_has: prefilledData?.l4_bak_has || "Không sao lưu",
+    l4_bak_freq: prefilledData?.l4_bak_freq || "Hàng ngày",
+    L4_offsite_has: prefilledData?.L4_offsite_has || "Không",
+    L4_luu_o_dau: prefilledData?.L4_luu_o_dau || "Ổ cứng ngoài",
+    l5_log_enabled: prefilledData?.l5_log_enabled || "Không",
+    l5_log_retention: prefilledData?.l5_log_retention || "3 tháng",
+    l5_siem_has: prefilledData?.l5_siem_has || "Không",
+    l5_siem_name: prefilledData?.l5_siem_name || "",
+    l6_incident_has: prefilledData?.l6_incident_has || "Không có sự cố nào",
+    l6_incident_desc: prefilledData?.l6_incident_desc || "",
+    l6_incident_resolution: prefilledData?.l6_incident_resolution || "",
+    l7_type: prefilledData?.l7_type || "Tường lửa tích hợp (SPI)",
+    L7_chinh_sach: prefilledData?.L7_chinh_sach || "Chưa cấu hình",
+    L7_remote_access: prefilledData?.L7_remote_access || "Không",
+    L7_4_cong_mo: prefilledData?.L7_4_cong_mo || "",
+    L8_1_co_ups: prefilledData?.L8_1_co_ups || "Không",
+    L8_1_ups_hang_model: prefilledData?.L8_1_ups_hang_model || "",
+    L8_1_ups_cong_suat_va: prefilledData?.L8_1_ups_cong_suat_va || "",
+    L8_1_ups_thoi_gian_phut: prefilledData?.L8_1_ups_thoi_gian_phut || "",
+    L8_2_dieu_hoa: prefilledData?.L8_2_dieu_hoa || "Không",
+    L8_3_bin_chua_chay_has: prefilledData?.L8_3_bin_chua_chay_has || "Không",
+    L8_4_mo_ta_phong: prefilledData?.L8_4_mo_ta_phong || "",
+    cap_nhat_he_dieu_hanh: prefilledData?.cap_nhat_he_dieu_hanh || "Hàng tháng",
+    Q2_cap_nhat_ung_dung: prefilledData?.Q2_cap_nhat_ung_dung || "Có",
+    Q3_nguoi_chiu_trach_nhiem: prefilledData?.Q3_nguoi_chiu_trach_nhiem || "",
+    Q4_firmware_mang: prefilledData?.Q4_firmware_mang || "Đã cập nhật mới nhất",
+    Q5_theo_doi_canh_bao: prefilledData?.Q5_theo_doi_canh_bao || "Thường xuyên",
+    k1_quy_che: prefilledData?.k1_quy_che || "",
+    k2_ke_hoach_ht: prefilledData?.k2_ke_hoach_ht || "",
+    k3_ke_hoach_tr: prefilledData?.k3_ke_hoach_tr || "",
+    k4_qd_can_bo: prefilledData?.k4_qd_can_bo || "",
+    K5_qd_phe_duyet_httt: prefilledData?.K5_qd_phe_duyet_httt || "",
+    K6_ung_pho_su_co: prefilledData?.K6_ung_pho_su_co || "",
+    K7_bien_ban_kiem_tra: prefilledData?.K7_bien_ban_kiem_tra || "",
+
+    // Tab 5
+    ...Array.from({ length: 14 }, (_, i) => ({ [`M${i+1}_status`]: prefilledData?.[`M${i+1}_status`] || false })).reduce((a, b) => ({ ...a, ...b }), {}),
+    n_nguoi_lap: prefilledData?.n_nguoi_lap || "",
+    n_chuc_vu_lap: prefilledData?.n_chuc_vu_lap || "",
+    n_ngay_lap: prefilledData?.n_ngay_lap || new Date().toISOString().split('T')[0],
+    N_nguoi_kiem_tra_ho_ten: prefilledData?.N_nguoi_kiem_tra_ho_ten || "",
+    N_nguoi_kiem_tra_chuc_vu: prefilledData?.N_nguoi_kiem_tra_chuc_vu || "",
+    N_ngay_kiem_tra: prefilledData?.N_ngay_kiem_tra || "",
+    N_thu_truong_ho_ten: prefilledData?.N_thu_truong_ho_ten || "",
+    N_thu_truong_chuc_vu: prefilledData?.N_thu_truong_chuc_vu || "",
+    N_ngay_ky: prefilledData?.N_ngay_ky || "",
     
-    BC_so_bao_cao: "", BC_ngay_bao_cao: "", BC_don_vi_thuc_hien: "",
-    BC_qd_ubnd_tinh_so_attt: "", BC_qd_ubnd_tinh_phan_cong: "", BC_ten_tinh: "",
+    BC_so_bao_cao: prefilledData?.BC_so_bao_cao || "",
+    BC_ngay_bao_cao: prefilledData?.BC_ngay_bao_cao || new Date().toISOString().split('T')[0],
+    BC_nguoi_thuc_hien: prefilledData?.BC_nguoi_thuc_hien || "",
+    BC_don_vi_thuc_hien: prefilledData?.BC_don_vi_thuc_hien || "Công ty Cổ phần Công nghệ ABC",
+    BC_qd_ubnd_tinh_so_attt: prefilledData?.BC_qd_ubnd_tinh_so_attt || "",
+    BC_qd_ubnd_tinh_phan_cong: prefilledData?.BC_qd_ubnd_tinh_phan_cong || "",
+    BC_ten_tinh: prefilledData?.BC_ten_tinh || "Ninh Bình",
     
-    dao_tao: [],
-    kiem_tra_attt: [],
-    port_switch: [],
-    ghi_chu: ""
+    dao_tao: prefilledData?.dao_tao || [],
+    R2_co_tuyen_truyen: prefilledData?.R2_co_tuyen_truyen || "Không",
+    R2_hinh_thuc_tuyen_truyen: prefilledData?.R2_hinh_thuc_tuyen_truyen || "",
+    kiem_tra_attt: prefilledData?.kiem_tra_attt || [],
+    S2_ke_hoach_tiep_theo: prefilledData?.S2_ke_hoach_tiep_theo || "",
+    port_switch: prefilledData?.port_switch || [],
+    ghi_chu: prefilledData?.ghi_chu || ""
   };
 
 
@@ -164,8 +256,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
         return { filled, total };
      };
      const { filled } = countFields(formData);
-     const percent = Math.min(100, Math.round((filled / 60) * 100));
-     return { percent, missing: Math.max(0, 60 - filled) };
+     const percent = Math.min(100, Math.round((filled / 85) * 100));
+     return { percent, missing: Math.max(0, 85 - filled) };
   };
 
   const Indicator = ({ name, required }: { name: string, required?: boolean }) => {
@@ -236,15 +328,18 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       setActiveTab("don_vi");
       return;
     }
-    if (confirm("Xác nhận hoàn thành hồ sơ này?")) {
+    if (confirm("Xác nhận hoàn thành hồ sơ này? Sau khi hoàn thành, trạng thái sẽ chuyển sang 'Hoàn thành'.")) {
       setIsCompleting(true);
-      const dataWithStatus = { ...formData, status: "Hoàn thành" };
-      await onSubmit(dataWithStatus);
+      await handleAction(formData, "completed");
       setIsCompleting(false);
     }
   };
 
   const onSubmit = async (data: any) => {
+    await handleAction(data);
+  };
+
+  const handleAction = async (data: any, forcedStatus?: string) => {
     if (!data.ten_don_vi || !data.he_thong_thong_tin) {
       setShowValidationModal(true);
       setActiveTab("don_vi");
@@ -253,13 +348,18 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     
     setIsSaving(true);
     try {
+      // Save last doer for auto-fill in next new survey
+      if (data.nguoi_thuc_hien) {
+        localStorage.setItem("last_survey_doer", data.nguoi_thuc_hien);
+      }
+
       const payload = {
         id: prefilledData?.id,
         ten_don_vi: data.ten_don_vi,
         doer: data.nguoi_thuc_hien,
-        status: data.status || "Đang xử lý",
+        status: forcedStatus || data.status || "draft",
         date: data.ngay_khao_sat || new Date().toISOString().split('T')[0],
-        data: data
+        data: { ...data, status: forcedStatus || data.status || "draft" }
       };
       
       const response = await axios.post(`${API_URL}/api/surveys`, payload);
@@ -287,7 +387,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 isActive ? "bg-indigo-500 text-white shadow-lg shadow-indigo-500/20" : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
@@ -686,31 +786,32 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
-          <div className="section-card">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="section-title mb-0"><span className="section-badge bg-amber-500">I</span> Mục I. Ứng dụng & Dịch vụ CNTT</h2>
-              <button type="button" onClick={() => ungDungFields.append({ ten: "", chuc_nang: "", don_vi_cung_cap: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm App</button>
-            </div>
-            <div className="space-y-3">
-              {ungDungFields.fields.map((field, idx) => (
-                <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div><label className="form-label text-[10px]">Tên ứng dụng</label><input {...register(`ung_dung.${idx}.ten`)} className="form-input text-xs" /></div>
-                    <div><label className="form-label text-[10px]">Chức năng chính</label><input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input text-xs" /></div>
-                    <div><label className="form-label text-[10px]">Đơn vị cung cấp</label><input {...register(`ung_dung.${idx}.don_vi_cung_cap`)} className="form-input text-xs" /></div>
-                    <div><label className="form-label text-[10px]">Phiên bản</label><input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input text-xs" /></div>
-                    <div><label className="form-label text-[10px]">Kết nối Internet?</label><select {...register(`ung_dung.${idx}.ket_noi_internet`)} className="form-input text-xs py-1"><option value="Có">Có</option><option value="Không">Không</option></select></div>
-                    <div><label className="form-label text-[10px]">Ghi chú (URL/User...)</label><input {...register(`ung_dung.${idx}.ghi_chu`)} className="form-input text-xs" /></div>
+            <div className="section-card">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="section-title mb-0"><span className="section-badge bg-amber-500">I</span> Mục I. Ứng dụng & Dịch vụ CNTT</h2>
+                <button type="button" onClick={() => ungDungFields.append({ ten: "", chuc_nang: "", don_vi_cung_cap: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm App</button>
+              </div>
+              <div className="space-y-3">
+                {ungDungFields.fields.map((field, idx) => (
+                  <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <div><label className="form-label text-[10px]">Tên ứng dụng</label><input {...register(`ung_dung.${idx}.ten`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Chức năng chính</label><input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Đơn vị cung cấp</label><input {...register(`ung_dung.${idx}.don_vi_cung_cap`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Phiên bản</label><input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Kết nối Internet?</label><select {...register(`ung_dung.${idx}.ket_noi_internet`)} className="form-input text-xs py-1"><option value="Có">Có</option><option value="Không">Không</option></select></div>
+                      <div><label className="form-label text-[10px]">Ghi chú (URL/User...)</label><input {...register(`ung_dung.${idx}.ghi_chu`)} className="form-input text-xs" /></div>
+                    </div>
+                    <button type="button" onClick={() => ungDungFields.remove(idx)} className="absolute top-2 right-2 text-red-400"><Trash2 className="w-4 h-4" /></button>
                   </div>
-                  <button type="button" onClick={() => ungDungFields.remove(idx)} className="absolute top-2 right-2 text-red-400"><Trash2 className="w-4 h-4" /></button>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+
         </div>
       )}
 
-      {/* TAB 3: AN TOÀN BẢO MẬT */}
+      {/* TAB 3: AN TOÀN BẢO MẬT (K, L, P) */}
       {activeTab === "bao_mat" && (
         <div className="space-y-6 animate-fade-in">
           {/* MỤC K: HỒ SƠ PHÁP LÝ */}
@@ -734,65 +835,6 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
-          {/* MỤC P: MÃ HÓA & KẾT NỐI */}
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-orange-500">P</span> Mục P. Bảo mật kết nối & Mã hóa</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div>
-                  <label className="form-label">Giao thức ứng dụng Web (P1)</label>
-                  <select {...register("p1_protocol")} className="form-input py-1 text-sm">
-                    <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
-                    <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
-                    <option value="Cả hai">Cả hai</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="form-label">Sử dụng VPN kết nối từ xa? (P2.i)</label>
-                  <select {...register("p2_vpn")} className="form-input py-1 text-sm">
-                    <option value="Có">Có sử dụng</option>
-                    <option value="Không có VPN">Không sử dụng</option>
-                  </select>
-                  {watch("p2_vpn") === "Có" && (
-                    <input {...register("p2_vpn_type")} className="form-input mt-2 text-xs" placeholder="Loại VPN (FortiClient, AnyConnect...)" />
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="form-label">Kết nối với mạng cơ quan cấp trên? (P3)</label>
-                  <select {...register("P3_ket_noi_cap_tren_type")} className="form-input py-1 text-sm">
-                    <option value="Không kết nối">Không kết nối</option>
-                    <option value="VPN chuyên dụng">Có - VPN chuyên dụng (P3.i)</option>
-                    <option value="Internet (HTTPS)">Có - Qua Internet (HTTPS)</option>
-                    <option value="MPLS">Có - Đường truyền MPLS</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="form-label">Có mã hóa dữ liệu lưu trữ? (P4.i)</label>
-                  <div className="flex gap-4 mt-1">
-                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P4_ma_hoa_luu_tru_has")} /><span>{v}</span></label>)}
-                  </div>
-                  {watch("P4_ma_hoa_luu_tru_has") === "Có" && (
-                    <input {...register("P4_phuong_phap")} className="form-input mt-2 text-xs" placeholder="Phương pháp mã hóa (Bitlocker, VeraCrypt...)" />
-                  )}
-                </div>
-                <div>
-                   <label className="form-label text-xs">Phòng chống thư rác/Email Security? (P5)</label>
-                   <div className="flex gap-4">
-                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P5_email_sec")} /><span>{v}</span></label>)}
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 4: AN TOÀN BẢO MẬT */}
-      {activeTab === "bao_mat" && (
-        <div className="space-y-6 animate-fade-in">
           {/* MỤC L: KIỂM SOÁT VÀ GIÁM SÁT */}
           <div className="section-card">
             <h2 className="section-title"><span className="section-badge bg-violet-500">L</span> Mục L. Kiểm soát truy cập & Giám sát</h2>
@@ -860,6 +902,59 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
+          {/* MỤC P: MÃ HÓA & KẾT NỐI */}
+          <div className="section-card">
+            <h2 className="section-title"><span className="section-badge bg-orange-500">P</span> Mục P. Bảo mật kết nối & Mã hóa</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label">Giao thức ứng dụng Web (P1)</label>
+                  <select {...register("p1_protocol")} className="form-input py-1 text-sm">
+                    <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
+                    <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
+                    <option value="Cả hai">Cả hai</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="form-label">Sử dụng VPN kết nối từ xa? (P2.i)</label>
+                  <select {...register("p2_vpn")} className="form-input py-1 text-sm">
+                    <option value="Có">Có sử dụng</option>
+                    <option value="Không có VPN">Không sử dụng</option>
+                  </select>
+                  {watch("p2_vpn") === "Có" && (
+                    <input {...register("p2_vpn_type")} className="form-input mt-2 text-xs" placeholder="Loại VPN (FortiClient, AnyConnect...)" />
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label">Kết nối với mạng cơ quan cấp trên? (P3)</label>
+                  <select {...register("P3_ket_noi_cap_tren_type")} className="form-input py-1 text-sm">
+                    <option value="Không kết nối">Không kết nối</option>
+                    <option value="VPN chuyên dụng">Có - VPN chuyên dụng (P3.i)</option>
+                    <option value="Internet (HTTPS)">Có - Qua Internet (HTTPS)</option>
+                    <option value="MPLS">Có - Đường truyền MPLS</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="form-label">Mã hóa lưu trữ? (P4)</label>
+                    <div className="flex gap-4 mt-1">
+                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P4_ma_hoa_luu_tru_has")} /><span>{v}</span></label>)}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="form-label">Email Security? (P5)</label>
+                    <div className="flex gap-4 mt-1">
+                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P5_email_sec")} /><span>{v}</span></label>)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* MỤC L8: AN TOÀN VẬT LÝ PHÒNG MÁY CHỦ */}
           <div className="section-card">
             <h2 className="section-title"><span className="section-badge bg-blue-600">L8</span> Mục L8. An toàn vật lý & Môi trường</h2>
@@ -878,9 +973,9 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 )}
               </div>
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-2 mt-2">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="form-label text-xs">Điều hòa nhiệt độ (L8.2)</label>
+                    <label className="form-label text-xs">Điều hòa (L8.2)</label>
                     <select {...register("L8_2_dieu_hoa")} className="form-input text-xs py-1">
                       <option value="Có – 24/7">Có - Chạy 24/7</option>
                       <option value="Có – Giờ hành chính">Có - Chạy giờ hành chính</option>
@@ -888,31 +983,29 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                     </select>
                   </div>
                   <div>
-                    <label className="form-label text-xs">Bình chữa cháy (L8.3)</label>
-                    <select {...register("L8_3_bin_chua_chay_has")} className="form-input text-xs py-1">
-                      <option value="Có">Có</option>
-                      <option value="Không">Không</option>
-                    </select>
+                    <label className="form-label text-xs">PCCC (L8.3)</label>
+                    <div className="flex gap-2">
+                       {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L8_3_bin_chua_chay_has")} /><span>{v}</span></label>)}
+                    </div>
                   </div>
                 </div>
                 <div>
-                  <label className="form-label text-xs">Trang bị bình chữa cháy chuyên dụng (L8.3)</label>
-                  <div className="flex gap-4">
-                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L8_3_bin_chua_chay_has")} /><span>{v}</span></label>)}
-                  </div>
-                </div>
-                <div>
-                  <label className="form-label text-xs">Mô tả phòng máy chủ/vị trí đặt tủ mạng (L8.4)</label>
-                  <textarea {...register("L8_4_mo_ta_phong")} className="form-input text-xs" rows={1} placeholder="VD: Phòng riêng tầng 2, có khóa, thông thoáng..." />
+                  <label className="form-label text-xs">Mô tả phòng máy chủ (L8.4)</label>
+                  <textarea {...register("L8_4_mo_ta_phong")} className="form-input text-xs" rows={1} placeholder="Vị trí đặt tủ mạng, điều kiện phòng..." />
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      )}
 
+      {/* TAB 4: QUẢN LÝ & ĐÀO TẠO (Q-S) */}
+      {activeTab === "quan_ly" && (
+        <div className="space-y-6 animate-fade-in">
           {/* MỤC Q: PATCH MANAGEMENT */}
           <div className="section-card">
             <h2 className="section-title"><span className="section-badge bg-slate-500">Q</span> Mục Q. Bảo trì & Cập nhật phần mềm</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <label className="form-label text-xs">Cập nhật HĐH máy chủ/trạm (Q1)</label>
                 <select {...register("cap_nhat_he_dieu_hanh")} className="form-input text-xs py-1">
@@ -923,38 +1016,54 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 </select>
               </div>
               <div>
-                <label className="form-label text-xs">Cán bộ phụ trách Patching (Q3)</label>
-                <input {...register("Q3_nguoi_patching")} className="form-input text-xs h-9" placeholder="Họ và tên..." />
+                <label className="form-label text-xs">Cập nhật phần mềm ứng dụng (Q2)</label>
+                <select {...register("Q2_cap_nhat_ung_dung")} className="form-input text-xs py-1">
+                  <option value="Tự động">Cập nhật tự động</option>
+                  <option value="Có">Có cập nhật định kỳ</option>
+                  <option value="Không">Chưa thực hiện</option>
+                </select>
+              </div>
+              <div>
+                <label className="form-label text-xs">Cán bộ chịu trách nhiệm (Q3)</label>
+                <input {...register("Q3_nguoi_chiu_trach_nhiem")} className="form-input text-xs h-9" placeholder="Họ và tên..." />
               </div>
               <div>
                  <label className="form-label text-xs">Cập nhật Firmware TB Mạng (Q4)</label>
-                 <select {...register("Q4_cap_nhat_firmware_tb_mang")} className="form-input text-xs py-1">
+                 <select {...register("Q4_firmware_mang")} className="form-input text-xs py-1">
                     <option value="Đã cập nhật mới nhất">Đã cập nhật mới nhất</option>
                     <option value="Chưa cập nhật">Chưa cập nhật thường xuyên</option>
                  </select>
               </div>
               <div>
-                <label className="form-label text-xs">Cán bộ theo dõi cảnh báo (Q5)</label>
+                <label className="form-label text-xs">Theo dõi cảnh báo ATTT (Q5)</label>
                 <select {...register("Q5_theo_doi_canh_bao")} className="form-input text-xs py-1">
-                  <option value="Thường xuyên">Kiểm tra thường xuyên</option>
+                  <option value="Thường xuyên">Kiểm tra thường xuyên (VNCERT...)</option>
                   <option value="Thỉnh thoảng">Thỉnh thoảng</option>
                   <option value="Không">Chưa có người theo dõi</option>
                 </select>
               </div>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* TAB 4: ĐÀO TẠO & KIỂM TRA */}
-      {activeTab === "dao_tao" && (
-        <div className="space-y-6 animate-fade-in">
           {/* MỤC R: ĐÀO TẠO */}
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="section-title mb-0"><span className="section-badge bg-emerald-500">R</span> Mục R. Hoạt động đào tạo, tập huấn</h2>
-              <button type="button" onClick={() => daoTaoFields.append({ hinh_thuc: "", don_vi_to_chuc: "", thoi_gian: "", so_can_bo: "", chung_chi_so_vb: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm khóa</button>
+              <h2 className="section-title mb-0"><span className="section-badge bg-emerald-500">R</span> Mục R. Đào tạo & Nhận thức ATTT</h2>
+              <button type="button" onClick={() => daoTaoFields.append({ hinh_thuc: "", don_vi_to_chuc: "", thoi_gian: "", so_can_bo: "", chung_chi_so_vb: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm khóa học</button>
             </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+               <div className="bg-emerald-500/5 p-4 rounded-lg border border-emerald-500/10">
+                  <label className="form-label">Tổ chức tuyên truyền ATTT nội bộ? (R2)</label>
+                  <div className="flex gap-4 mt-1">
+                    {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("R2_co_tuyen_truyen")} /><span>{v}</span></label>)}
+                  </div>
+                  {watch("R2_co_tuyen_truyen") === "Có" && (
+                    <input {...register("R2_hinh_thuc_tuyen_truyen")} className="form-input mt-2 text-xs" placeholder="Hình thức (Email, Họp, Poster...)" />
+                  )}
+               </div>
+            </div>
+
             <div className="space-y-3">
               {daoTaoFields.fields.map((field, idx) => (
                 <div key={field.id} className="grid grid-cols-1 md:grid-cols-4 gap-3 bg-black/20 p-3 rounded-lg border border-white/5 relative">
@@ -972,9 +1081,15 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           {/* MỤC S: KIỂM TRA */}
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="section-title mb-0"><span className="section-badge bg-blue-500">S</span> Mục S. Hoạt động kiểm tra, đánh giá định kỳ</h2>
-              <button type="button" onClick={() => kiemTraFields.append({ loai_kiem_tra: "", don_vi_thuc_hien: "", thoi_gian: "", ket_qua_so_vb: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm lần</button>
+              <h2 className="section-title mb-0"><span className="section-badge bg-blue-500">S</span> Mục S. Kiểm tra & Đánh giá định kỳ</h2>
+              <button type="button" onClick={() => kiemTraFields.append({ loai_kiem_tra: "", don_vi_thuc_hien: "", thoi_gian: "", ket_qua_so_vb: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm lần kiểm tra</button>
             </div>
+            
+            <div className="mb-4">
+              <label className="form-label text-xs">Kế hoạch kiểm tra ATTT tiếp theo (Dự kiến - S2)</label>
+              <input {...register("S2_ke_hoach_tiep_theo")} className="form-input text-xs" placeholder="Thời gian và nội dung dự kiến..." />
+            </div>
+
             <div className="space-y-3">
               {kiemTraFields.fields.map((field, idx) => (
                 <div key={field.id} className="grid grid-cols-1 md:grid-cols-4 gap-3 bg-black/20 p-3 rounded-lg border border-white/5 relative">
@@ -990,8 +1105,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
         </div>
       )}
 
-      {/* TAB 5: XÁC NHẬN & HÌNH ẢNH */}
-      {activeTab === "xac_nhan" && (
+      {/* TAB 5: XÁC NHẬN & HÌNH ẢNH (M-T) */}
+      {activeTab === "hinh_anh" && (
         <div className="space-y-6 animate-fade-in pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* MỤC M: DANH MỤC ẢNH CHỤP */}
@@ -1040,79 +1155,176 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
-          {/* MỤC T: TOPOLOGY */}
-          <div className="section-card">
-            <h2 className="section-title"><span className="section-badge bg-gray-600">T</span> Mục T. Sơ đồ Topology (Vẽ tự động)</h2>
-            <NetworkDiagram data={formData} />
+          {/* MỤC T: CHI TIẾT TOPOLOGY (KẾT NỐI VẬT LÝ) */}
+          <div className="section-card border-indigo-500/20">
+            <h2 className="section-title text-indigo-400"><span className="section-badge bg-indigo-500">T</span> Mục T. Chi tiết Kết nối & Topology (T1-T4)</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="form-label text-xs">Vùng DMZ (T1.1)</label>
+                    <select {...register("T1_1_co_dmz")} className="form-input text-xs py-1">
+                      <option value="Không">Không có</option>
+                      <option value="Có">Có DMZ</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="form-label text-xs">Phân vùng Camera (T1.4)</label>
+                    <select {...register("T1_4_camera_vlan_has")} className="form-input text-xs py-1">
+                      <option value="Không - Dùng chung LAN">Dùng chung LAN</option>
+                      <option value="Có - VLAN tách biệt">VLAN tách biệt</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                   <label className="form-label text-xs">Mạng WiFi nội bộ/khách (T1.2 & T1.3)</label>
+                   <div className="grid grid-cols-2 gap-2">
+                     <select {...register("T1_2_wifi_tach_rieng")} className="form-input text-xs py-1">
+                        <option value="Không có WiFi">Không có WiFi</option>
+                        <option value="Có">Có WiFi</option>
+                        <option value="Tách riêng VLAN">VLAN tách biệt</option>
+                     </select>
+                     {watch("T1_2_wifi_tach_rieng") !== "Không có WiFi" && <input {...register("T1_3_ssid")} placeholder="Tên SSID" className="form-input text-xs h-9" />}
+                   </div>
+                </div>
+                <div>
+                  <label className="form-label text-xs">Thông tin Tủ Rack (T3)</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <input {...register("T3_rack_u")} className="form-input text-xs h-9" placeholder="Số U (VD: 12U)" />
+                    <input {...register("T3_rack_vi_tri")} className="form-input text-xs h-9" placeholder="Vị trí tủ" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="form-label text-xs">Loại cáp mạng sử dụng (T4)</label>
+                  <select {...register("T4_1_loai_cap")} className="form-input text-xs py-1">
+                    <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng</option>
+                    <option value="Cáp quang (Fiber)">Cáp quang</option>
+                    <option value="Hỗn hợp">Hỗn hợp</option>
+                  </select>
+                </div>
+                <div className="bg-black/20 p-3 rounded border border-white/5">
+                   <div className="flex justify-between items-center mb-2">
+                      <span className="text-[10px] font-bold text-indigo-300 uppercase">T2. Port Switch Mapping</span>
+                      <button type="button" onClick={() => portSwitchFields.append({ ten_switch: "", so_cong: "", cong_su_dung: "" })} className="btn-add py-1 px-2 text-[8px]"><Plus className="w-2 h-2"/> Thêm</button>
+                   </div>
+                   <div className="max-h-32 overflow-y-auto space-y-1 pr-1">
+                      {portSwitchFields.fields.map((field, idx) => (
+                        <div key={field.id} className="flex gap-1">
+                           <input {...register(`port_switch.${idx}.ten_switch`)} className="form-input text-[10px] h-7 bg-transparent" placeholder="Tên SW" />
+                           <input {...register(`port_switch.${idx}.so_cong`)} className="form-input text-[10px] h-7 w-12 bg-transparent" placeholder="Tổng" />
+                           <input {...register(`port_switch.${idx}.cong_su_dung`)} className="form-input text-[10px] h-7 w-12 bg-transparent" placeholder="Dùng" />
+                           <button type="button" onClick={() => portSwitchFields.remove(idx)} className="text-rose-500"><Trash2 className="w-3 h-3"/></button>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-4 pt-4 border-t border-indigo-500/10">
+               <h3 className="text-[10px] font-bold text-gray-500 uppercase mb-3">Sơ đồ Topology (Vẽ tự động)</h3>
+               <NetworkDiagram data={formData} />
+            </div>
           </div>
 
           {/* MỤC BC: BÁO CÁO */}
-          <div className="section-card border-dashed border-gray-700">
-            <h2 className="section-title"><span className="section-badge bg-gray-500">BC</span> Metadata Báo cáo</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-               <div><label className="form-label text-xs">Người báo cáo (BC2)</label><input {...register("BC2_nguoi_bao_cao")} className="form-input text-xs" /></div>
-               <div><label className="form-label text-xs">Chức vụ (BC3)</label><input {...register("BC3_chuc_vu")} className="form-input text-xs" /></div>
-               <div><label className="form-label text-xs">Ngày báo cáo (BC4)</label><input {...register("BC4_ngay_bao_cao")} type="date" className="form-input text-xs" /></div>
+          <div className="section-card border-dashed border-indigo-500/30 bg-indigo-500/5">
+            <h2 className="section-title"><span className="section-badge bg-indigo-600">BC</span> Metadata Báo cáo Khảo sát</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+               <div>
+                 <label className="form-label text-xs">Số báo cáo (BC_so_bao_cao)</label>
+                 <input {...register("BC_so_bao_cao")} className="form-input text-xs" placeholder="VD: 45/MBF.NBH-KDT" />
+               </div>
+               <div>
+                 <label className="form-label text-xs">Ngày báo cáo (BC_ngay_bao_cao)</label>
+                 <input {...register("BC_ngay_bao_cao")} type="date" className="form-input text-xs" />
+               </div>
+               <div>
+                 <label className="form-label text-xs">Người thực hiện báo cáo (BC_nguoi_thuc_hien)</label>
+                 <input {...register("BC_nguoi_thuc_hien")} className="form-input text-xs" placeholder="Họ và tên kỹ thuật viên" />
+               </div>
+               <div className="lg:col-span-2">
+                 <label className="form-label text-xs">Đơn vị thực hiện khảo sát (BC_don_vi_thuc_hien)</label>
+                 <input {...register("BC_don_vi_thuc_hien")} className="form-input text-xs" placeholder="Tên chi nhánh/Công ty thực hiện" />
+               </div>
+               <div>
+                 <label className="form-label text-xs">Tên tỉnh (BC_ten_tinh)</label>
+                 <input {...register("BC_ten_tinh")} className="form-input text-xs" />
+               </div>
+               <div className="md:col-span-2">
+                 <label className="form-label text-xs">Số QĐ UBND tỉnh về ATTT mạng (BC_qd_ubnd_tinh_so_attt)</label>
+                 <input {...register("BC_qd_ubnd_tinh_so_attt")} className="form-input text-xs" />
+               </div>
+               <div className="md:col-span-2">
+                 <label className="form-label text-xs">Số QĐ UBND tỉnh phân công đơn vị chuyên trách (BC_qd_ubnd_tinh_phan_cong)</label>
+                 <input {...register("BC_qd_ubnd_tinh_phan_cong")} className="form-input text-xs" />
+               </div>
             </div>
           </div>
         </div>
       )}
-
-
-
-      {/* BOTTOM ACTION BAR */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur border-t border-gray-800 p-4" style={{ marginLeft: "260px" }}>
-        <div className="flex justify-between gap-3 max-w-4xl mx-auto items-center">
-          <div className="flex items-center gap-4 hidden md:flex">
-             <div className="w-32 h-2 bg-gray-800 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-indigo-500 to-emerald-500" style={{ width: `${calculateProgress().percent}%` }}></div>
+      {/* BOTTOM ACTION BAR - ENHANCED & STICKY */}
+      <div className="fixed bottom-6 left-[280px] right-6 bg-gray-900/40 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[60] transition-all hover:border-white/20">
+        <div className="flex justify-between gap-4 w-full px-2 items-center">
+          <div className="flex items-center gap-8 hidden xl:flex border-r border-white/10 pr-8 mr-2">
+             <div className="text-right">
+                <div className="text-[10px] text-indigo-400 uppercase font-black tracking-widest mb-0.5">Tiến độ hồ sơ</div>
+                <div className="text-2xl font-black text-white tabular-nums tracking-tighter">{calculateProgress().percent}<span className="text-xs text-gray-500 ml-0.5">%</span></div>
              </div>
-             <span className="text-xs text-gray-400 font-medium">{calculateProgress().percent}% Complete</span>
+             <div className="w-48 h-3 bg-black/40 rounded-full overflow-hidden border border-white/5 p-[2px] shadow-inner">
+                <div 
+                  className="h-full bg-gradient-to-r from-indigo-600 via-cyan-400 to-emerald-400 rounded-full transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(34,211,238,0.4)] relative" 
+                  style={{ width: `${calculateProgress().percent}%` }}
+                >
+                  <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:1rem_1rem] animate-[progress-stripe_1s_linear_infinite]"></div>
+                </div>
+             </div>
           </div>
 
-          <div className="flex justify-end gap-3 flex-1 overflow-x-auto pb-1 no-scrollbar">
-            <button type="submit" disabled={isSaving || isCompleting} className={`btn-primary whitespace-nowrap bg-indigo-600 hover:bg-indigo-700 ${isSaving || isCompleting ? 'opacity-70 grayscale' : ''}`}>
-               {isSaving ? (
-                 <>
-                   <Loader2 className="w-4 h-4 animate-spin" /> Đang lưu...
-                 </>
-               ) : (
-                 <>
-                   <Save className="w-4 h-4" /> Lưu Bản nháp
-                 </>
-               )}
+          <div className="flex justify-end gap-3 flex-1 items-center">
+            <button 
+              type="submit" 
+              disabled={isSaving || isCompleting} 
+              className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-xl active:scale-95 bg-white/5 hover:bg-white/10 text-white border border-white/10 disabled:opacity-50"
+            >
+               {isSaving ? <Loader2 className="w-4 h-4 animate-spin text-indigo-400" /> : <Save className="w-5 h-5 text-indigo-400" />}
+               Lưu Nháp
             </button>
 
             <button 
               type="button" 
               onClick={handleComplete}
               disabled={isSaving || isCompleting}
-              className={`btn-primary whitespace-nowrap bg-gradient-to-r from-amber-500 to-rose-600 border-none shadow-lg shadow-rose-500/20 hover:scale-[1.02] transition-all ${isSaving || isCompleting ? 'opacity-70 grayscale' : ''}`}
+              className="group flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-black text-sm transition-all shadow-2xl active:scale-95 bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-400/20 disabled:opacity-50 relative overflow-hidden"
             >
-               {isCompleting ? (
-                 <Loader2 className="w-4 h-4 animate-spin" />
-               ) : (
-                 <>
-                   <CheckCircle2 className="w-4 h-4" /> Xác nhận Hoàn thành
-                 </>
-               )}
+               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+               {isCompleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-5 h-5" />}
+               Xác nhận Hoàn thành
             </button>
-            <button type="button" onClick={() => triggerExport("phieu")} className="btn-secondary whitespace-nowrap">
-              <FileDown className="w-4 h-4 text-indigo-400" /> Xuất Phiếu KS
-            </button>
-            <button type="button" onClick={() => triggerExport("hsdx")} className="btn-secondary whitespace-nowrap">
-              <Shield className="w-4 h-4 text-emerald-400" /> Xuất HSDX
-            </button>
-            <button type="button" onClick={() => triggerExport("baocao")} className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all shadow-lg shadow-indigo-500/20 whitespace-nowrap">
-              <FileText className="w-4 h-4 text-white" /> Xuất Báo cáo
-            </button>
+            
+            <div className="w-[1px] h-10 bg-white/10 mx-3 hidden md:block"></div>
+
+            <div className="flex items-center gap-2">
+              <button type="button" onClick={() => triggerExport("phieu")} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors text-cyan-400" title="Xuất Phiếu Khảo Sát">
+                <FileDown className="w-6 h-6" />
+              </button>
+              <button type="button" onClick={() => triggerExport("hsdx")} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors text-emerald-400" title="Xuất Hồ Sơ Đề Xuất">
+                <Shield className="w-6 h-6" />
+              </button>
+              <button type="button" onClick={() => triggerExport("baocao")} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors text-indigo-400" title="Xuất Báo Cáo Khảo Sát">
+                <FileText className="w-6 h-6" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {showValidationModal && (
         <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-gray-900 border border-white/10 rounded-xl max-w-md w-full p-6 shadow-2xl relative">
+          <div className="bg-gray-900 border border-white/10 rounded-xl max-w-md w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
             <div className="w-12 h-12 bg-rose-500/10 rounded-full flex items-center justify-center mb-4 mx-auto">
                <AlertCircle className="w-6 h-6 text-rose-500" />
             </div>
@@ -1125,10 +1337,10 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
 
             <div className="flex gap-3">
-              <button type="button" onClick={() => setShowValidationModal(false)} className="btn-secondary flex-1 justify-center">
+              <button type="button" onClick={() => setShowValidationModal(false)} className="btn-secondary flex-1 justify-center py-3">
                 Quay lại bổ sung
               </button>
-              <button type="button" onClick={executeExportWrapper} className="btn-primary flex-1 justify-center bg-rose-500">
+              <button type="button" onClick={() => executeExport(exportType || "phieu")} className="btn-primary flex-1 justify-center bg-rose-600 py-3">
                 Vẫn Xuất (Bỏ qua)
               </button>
             </div>

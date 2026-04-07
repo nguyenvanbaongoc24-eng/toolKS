@@ -48,9 +48,9 @@ export default function Home() {
         id: editingId,
         ten_don_vi: editForm.ten_don_vi,
         doer: editForm.doer,
-        status: editForm.status,
+        status: editForm.status === 'Hoàn thành' ? 'completed' : 'draft',
         date: editForm.date,
-        data: editForm.data || {}
+        data: { ...(editForm.data || {}), status: editForm.status === 'Hoàn thành' ? 'completed' : 'draft' }
       });
       setEditingId(null);
       fetchData(); // Refresh list
@@ -140,15 +140,15 @@ export default function Home() {
           </div>
           <div className="stat-card emerald">
             <div className="stat-value">
-              {records.filter(r => r.status === "Hoàn thành").length}
+              {records.filter(r => r.status === "completed" || r.status === "Hoàn thành").length}
             </div>
             <div className="stat-label">Hoàn thành</div>
           </div>
           <div className="stat-card rose">
             <div className="stat-value">
-              {records.filter(r => r.status !== "Hoàn thành").length}
+              {records.filter(r => r.status === "draft" || r.status === "Đang xử lý" || r.status === "Đang chờ").length}
             </div>
-            <div className="stat-label">Đang xử lý</div>
+            <div className="stat-label">Chưa xong</div>
           </div>
         </div>
 
@@ -207,8 +207,8 @@ export default function Home() {
                           <td className="px-6 py-4 text-gray-400">{rec.date || "N/A"}</td>
                           <td className="px-6 py-4 text-gray-300 font-medium">{deviceCount} thiết bị</td>
                           <td className="px-6 py-4">
-                            <span className={`badge ${rec.status === 'Hoàn thành' ? 'badge-success' : 'badge-pending'}`}>
-                              {rec.status}
+                            <span className={`badge ${(rec.status === 'completed' || rec.status === 'Hoàn thành') ? 'badge-success' : 'badge-pending'}`}>
+                              {(rec.status === 'completed' || rec.status === 'Hoàn thành') ? 'Hoàn thành' : 'Chưa hoàn thành'}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-right flex justify-end gap-1">
@@ -260,8 +260,8 @@ export default function Home() {
                       <button onClick={() => startEdit(rec)} className="absolute top-4 right-4 text-gray-400 hover:text-indigo-400 p-2 bg-black/30 rounded-md"><Edit3 className="w-4 h-4"/></button>
                     </div>
                     <div className="flex flex-wrap gap-2 mb-3 mt-1">
-                      <span className={`text-xs px-2 py-1 rounded-md border ${rec.status === 'Hoàn thành' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/10 text-amber-400 border-amber-500/30'}`}>
-                        {rec.status}
+                      <span className={`text-xs px-2 py-1 rounded-md border ${(rec.status === 'completed' || rec.status === 'Hoàn thành') ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/10 text-amber-400 border-amber-500/30'}`}>
+                        {(rec.status === 'completed' || rec.status === 'Hoàn thành') ? 'Hoàn thành' : 'Chưa hoàn thành'}
                       </span>
                       <span className="text-xs px-2 py-1 bg-indigo-500/10 text-indigo-300 rounded-md border border-indigo-500/30 font-medium">@ {rec.doer}</span>
                     </div>

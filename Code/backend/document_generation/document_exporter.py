@@ -27,16 +27,19 @@ class DocumentExporter:
         """Logic for calculating Appendix I & II compliance in HSDX"""
         logic = {}
         
-        # Appendix I: Technical
-        logic['network_status'] = "Đã đáp ứng" if data.get('E2_firewall_type') == "Có (phần cứng chuyên dụng)" else "Chưa đáp ứng"
-        logic['endpoint_status'] = "Đã đáp ứng" if data.get('l3_av_has') == "Có" else "Chưa đáp ứng"
-        logic['app_status'] = "Đã đáp ứng" if data.get('p1_protocol') == "HTTPS (có chứng chỉ SSL/TLS)" else "Chưa đáp ứng"
-        logic['data_status'] = "Đã đáp ứng" if data.get('l4_bak_has') == "Có" else "Chưa đáp ứng"
+        # Appendix I: Technical (P.I)
+        logic['P1_network_status'] = "Đã đáp ứng" if data.get('E2_firewall_type') == "Có (phần cứng chuyên dụng)" else "Chưa đáp ứng"
+        logic['P2_endpoint_status'] = "Đã đáp ứng" if data.get('l3_av_has') == "Có" else "Chưa đáp ứng"
+        logic['P3_app_status'] = "Đã đáp ứng" if data.get('p1_protocol') == "HTTPS (có chứng chỉ SSL/TLS)" else "Chưa đáp ứng"
+        logic['P4_data_status'] = "Đã đáp ứng" if data.get('l4_bak_has') and data.get('l4_bak_has') != "Không sao lưu" else "Chưa đáp ứng"
+        logic['P5_device_status'] = "Đã đáp ứng" if data.get('Q4_firmware_mang') == "Đã cập nhật mới nhất" else "Chưa đáp ứng"
 
-        # Appendix II: Management
-        logic['policy_status'] = "Đã đáp ứng" if data.get('l2_pass_policy') == "Có chính sách mật khẩu" else "Chưa đáp ứng"
-        logic['personnel_status'] = "Đã đáp ứng" if len(data.get('can_bo_phu_trach', [])) > 0 else "Chưa đáp ứng"
-        logic['log_status'] = "Đã đáp ứng" if data.get('l5_log_enabled') == "Có" else "Chưa đáp ứng"
+        # Appendix II: Management (P.II)
+        logic['P6_policy_status'] = "Đã đáp ứng" if data.get('l2_pass_policy') == "Có chính sách mật khẩu" else "Chưa đáp ứng"
+        logic['P7_personnel_status'] = "Đã đáp ứng" if len(data.get('can_bo_phu_trach', [])) > 0 else "Chưa đáp ứng"
+        logic['P8_log_status'] = "Đã đáp ứng" if data.get('l5_log_enabled') == "Có" else "Chưa đáp ứng"
+        logic['P9_training_status'] = "Đã đáp ứng" if data.get('R2_co_tuyen_truyen') == "Có" or len(data.get('dao_tao', [])) > 0 else "Chưa đáp ứng"
+        logic['P10_check_status'] = "Đã đáp ứng" if len(data.get('kiem_tra_attt', [])) > 0 else "Chưa đáp ứng"
         
         return logic
 
@@ -45,30 +48,55 @@ class DocumentExporter:
         problems = []
         solutions = []
 
+        # 1. Antivirus (Mục L3)
         if data.get('l3_av_has') != "Có":
-            problems.append("- Hệ thống chưa được trang bị phần mềm diệt virus tập trung trên các máy chủ và máy trạm.")
-            solutions.append("- Trang bị phần mềm diệt virus có bản quyền ( Kaspersky, Trend Micro...) để bảo vệ hệ thống.")
+            problems.append("- Hệ thống chưa được trang bị phần mềm diệt virus tập trung trên các máy chủ và máy trạm (L3).")
+            solutions.append("- Trang bị phần mềm diệt virus bản quyền (Kaspersky, Trend Micro...) để bảo vệ hệ thống trước mã độc.")
+        elif data.get('l3_av_license') != "Có bản quyền":
+            problems.append("- Phần mềm diệt virus hiện có chưa được trang bị bản quyền đầy đủ hoặc đã hết hạn.")
+            solutions.append("- Rà soát và gia hạn bản quyền phần mềm diệt virus để đảm bảo tính năng cập nhật mẫu mã độc mới nhất.")
 
+        # 2. Firewall (Mục E2)
         if data.get('E2_firewall_type') != "Có (phần cứng chuyên dụng)":
-            problems.append("- Chưa có thiết bị Tường lửa (Firewall) phần cứng chuyên dụng để kiểm soát sâu lưu lượng mạng.")
-            solutions.append("- Đầu tư thiết bị Tường lửa phần cứng (Next-Generation Firewall) để ngăn chặn tấn công từ Internet.")
+            problems.append("- Chưa có thiết bị Tường lửa (Firewall) phần cứng chuyên dụng để kiểm soát sâu lưu lượng mạng (E2).")
+            solutions.append("- Đầu tư thiết bị Tường lửa phần cứng (Next-Gen Firewall) để ngăn chặn tấn công và lọc nội dung độc hại.")
 
-        if data.get('l5_log_enabled') != "Có":
-            problems.append("- Các thiết bị mạng và máy chủ chưa được bật tính năng ghi nhật ký hệ thống (Log) tập trung.")
-            solutions.append("- Cấu hình ghi nhật ký hệ thống và lưu trữ tối thiểu 03 tháng để phục vụ điều tra sự cố.")
+        # 3. Encryption (Mục P1)
+        if data.get('p1_protocol') != "HTTPS (có chứng chỉ SSL/TLS)":
+            problems.append("- Ứng dụng Web chưa được mã hóa truyền dẫn (HTTPS), tiềm ẩn nguy cơ lộ lọt mật khẩu trên đường truyền (P1).")
+            solutions.append("- Triển khai chứng chỉ SSL/TLS cho các ứng dụng Web để mã hóa dữ liệu trao đổi giữa người dùng và máy chủ.")
 
+        # 4. Backup (Mục L4)
+        if data.get('l4_bak_has') == "Không sao lưu":
+            problems.append("- Chưa có phương án sao lưu dữ liệu định kỳ, nguy cơ mất dữ liệu khi xảy ra sự cố phần cứng hoặc Ransomware (L4).")
+            solutions.append("- Xây dựng quy trình sao lưu dữ liệu tự động ra thiết bị lưu trữ ngoài hoặc Cloud và kiểm định định kỳ.")
+
+        # 5. Policies & Training (Mục L2, R2)
         if data.get('l2_pass_policy') != "Có chính sách mật khẩu":
-            problems.append("- Chưa có chính sách mật khẩu thống nhất (độ dài, độ phức tạp, thời gian thay đổi).")
-            solutions.append("- Ban hành và áp dụng chính sách mật khẩu mạnh cho toàn bộ cán bộ, công chức.")
+            problems.append("- Chưa có chính sách mật khẩu thống nhất về độ dài, độ phức tạp và định kỳ thay đổi (L2).")
+            solutions.append("- Ban hành quy chế ATTT, trong đó quy định rõ tiêu chuẩn mật khẩu mạnh cho toàn bộ cán bộ.")
+        
+        if data.get('R2_co_tuyen_truyen') != "Có":
+            problems.append("- Chưa tổ chức các đợt tuyên truyền, phổ biến kiến thức về ATTT cho cán bộ, công chức (R2).")
+            solutions.append("- Tổ chức định kỳ các buổi tập huấn, tuyên truyền nhận thức về các hình thức tấn công mạng lừa đảo.")
+
+        # 6. Physical & Environment (Mục L8)
+        if data.get('L8_1_co_ups') != "Có":
+            problems.append("- Phòng máy chủ chưa được trang bị bộ lưu điện (UPS), dễ gây hỏng hóc thiết bị khi mất điện đột ngột (L8.1).")
+            solutions.append("- Trang bị bộ lưu điện có công suất phù hợp để duy trì hoạt động và tắt máy chủ an toàn khi mất điện.")
+        
+        if data.get('L8_3_bin_chua_chay_has') != "Có":
+            problems.append("- Khu vực đặt thiết bị mạng/máy chủ chưa trang bị bình chữa cháy chuyên dụng cho thiết bị điện (L8.3).")
+            solutions.append("- Bổ sung bình chữa cháy khí CO2 hoặc bột chuyên dụng tại vị trí đặt tủ mạng/phòng máy chủ.")
 
         if not problems:
             problems.append("- Không có vấn đề tồn tại lớn về ATTT tại thời điểm khảo sát.")
-            solutions.append("- Tiếp tục duy trì và cập nhật các phương án bảo mật hiện có.")
+            solutions.append("- Tiếp tục duy trì và cập nhật thường xuyên các phương án bảo mật hiện có.")
 
         return {
             'problems': "\n".join(problems),
             'solutions': "\n".join(solutions),
-            'has_problems': len(problems) > 0 if problems[0].startswith("- Hệ thống") else False
+            'has_problems': len(problems) > 0 and not problems[0].startswith("- Không có")
         }
 
     def _get_context(self, data):
@@ -133,10 +161,6 @@ class DocumentExporter:
             'P3_1_ten_he_thong_va_phuong_thuc': data.get('P3_1_ten_he_thong_va_phuong_thuc', ''),
             'P4_phuong_phap': data.get('P4_phuong_phap', ''),
 
-            # Mục Q: Patch Management
-            'Q3_nguoi_patching': data.get('Q3_nguoi_patching', ''),
-            'Q4_cap_nhat_firmware_tb_mang': data.get('Q4_cap_nhat_firmware_tb_mang', ''),
-
             # Mục T: Topology Details
             'T1_1_may_chu_dmz': data.get('T1_1_may_chu_dmz', ''),
             'T1_3_ssid': data.get('T1_3_ssid', ''),
@@ -162,9 +186,17 @@ class DocumentExporter:
             'N_nguoi_kiem_tra_ho_ten': data.get('N_nguoi_kiem_tra_ho_ten', ''),
             'N_nguoi_kiem_tra_chuc_vu': data.get('N_nguoi_kiem_tra_chuc_vu', ''),
             'N_ngay_kiem_tra': data.get('N_ngay_kiem_tra', ''),
-            'N_thu_truong_ho_ten': data.get('N_thu_truong_ho_ten', ''),
-            'N_thu_truong_chuc_vu': data.get('N_thu_truong_chuc_vu', ''),
             'N_ngay_ky': data.get('N_ngay_ky', ''),
+
+            # Mục Q, R, S: Quản lý
+            'Q1_os_update': data.get('cap_nhat_he_dieu_hanh', ''),
+            'Q2_app_update': data.get('Q2_cap_nhat_ung_dung', ''),
+            'Q3_nguoi_patching': data.get('Q3_nguoi_chiu_trach_nhiem', ''),
+            'Q4_firmware_mang': data.get('Q4_firmware_mang', ''),
+            'Q5_theo_doi_canh_bao': data.get('Q5_theo_doi_canh_bao', ''),
+            'R2_co_tuyen_truyen': data.get('R2_co_tuyen_truyen', ''),
+            'R2_hinh_thuc_tuyen_truyen': data.get('R2_hinh_thuc_tuyen_truyen', ''),
+            'S2_ke_hoach_tiep_theo': data.get('S2_ke_hoach_tiep_theo', ''),
 
             # Thông tin Báo cáo (BC)
             'BC_so_bao_cao': data.get('BC_so_bao_cao', ''),

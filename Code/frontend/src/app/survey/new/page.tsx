@@ -211,7 +211,7 @@ function SurveyContent() {
         )}
 
         {mode === "manual" && !isLoading && (
-          <div className="max-w-4xl">
+          <div className="max-w-full xl:pr-10">
             {isMobile ? (
               <MobileSurveyForm prefilledData={extractedData || undefined} />
             ) : (

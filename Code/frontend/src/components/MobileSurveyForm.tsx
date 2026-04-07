@@ -41,10 +41,11 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     }
   }, [prefilledData]);
 
-  const defaultVals = prefilledData || {
-    // Internal & Doer
-    nguoi_thuc_hien: prefilledData?.doer || "",
-    ngay_khao_sat: new Date().toISOString().split('T')[0],
+  const defaultVals = {
+    ...(prefilledData || {}),
+    // Map backend 'doer' to frontend 'nguoi_thuc_hien'
+    nguoi_thuc_hien: prefilledData?.doer || prefilledData?.nguoi_thuc_hien || (typeof window !== "undefined" ? localStorage.getItem("last_survey_doer") : "") || "",
+    ngay_khao_sat: prefilledData?.date || prefilledData?.ngay_khao_sat || new Date().toISOString().split('T')[0],
     
     // Tab 1: Đơn vị & Nhân sự (Mục A, B, C)
     ten_don_vi: "", dia_chi: "", A6_ho_ten_thu_truong: "", so_dien_thoai: "", email: "", 
@@ -180,15 +181,18 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
       setShowValidationModal(true);
       return;
     }
-    if (confirm("Xác nhận hoàn thành hồ sơ này? Sau khi hoàn thành, hồ sơ sẽ được chuyển trạng thái chính thức.")) {
+    if (confirm("Xác nhận hoàn thành hồ sơ này? Sau khi hoàn thành, trạng thái sẽ chuyển sang 'Hoàn thành'.")) {
       setIsCompleting(true);
-      const dataWithStatus = { ...formData, status: "Hoàn thành" };
-      await onSubmit(dataWithStatus);
+      await handleAction(formData, "completed");
       setIsCompleting(false);
     }
   };
 
   const onSubmit = async (data: any) => {
+    await handleAction(data);
+  };
+
+  const handleAction = async (data: any, forcedStatus?: string) => {
     if (!data.ten_don_vi || !data.he_thong_thong_tin) {
       setShowValidationModal(true);
       return;
@@ -196,23 +200,28 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     
     setIsSaving(true);
     try {
+      // Save last doer for auto-fill
+      if (data.nguoi_thuc_hien) {
+        localStorage.setItem("last_survey_doer", data.nguoi_thuc_hien);
+      }
+
       const payload = {
         id: prefilledData?.id,
         ten_don_vi: data.ten_don_vi,
         doer: data.nguoi_thuc_hien,
-        status: data.status || "Đang xử lý",
+        status: forcedStatus || data.status || "draft",
         date: data.ngay_khao_sat || new Date().toISOString().split('T')[0],
-        data: data // The entire form data
+        data: { ...data, status: forcedStatus || data.status || "draft" }
       };
       
       const response = await axios.post(`${API_URL}/api/surveys`, payload);
       if (response.data.status === "success") {
-        alert(prefilledData?.id ? "Cập nhật hồ sơ thành công!" : "Lưu hồ sơ mới thành công!");
-        window.location.href = "/"; // Back to dashboard
+        alert(prefilledData?.id ? "Cập nhật thành công!" : "Lưu hồ sơ mới thành công!");
+        window.location.href = "/";
       }
     } catch (err) {
       console.error(err);
-      alert("Lỗi khi lưu dữ liệu lên máy chủ. Vui lòng kiểm tra kết nối mạng.");
+      alert("Lỗi khi kết nối máy chủ.");
     } finally {
       setIsSaving(false);
     }
