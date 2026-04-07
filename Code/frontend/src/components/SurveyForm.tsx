@@ -37,18 +37,6 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     fetchStaff();
   }, [API_URL]);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.location.pathname.endsWith("/survey/new")) {
-       if (prefilledData?.id) {
-          delete prefilledData.id;
-       }
-       // Auto-fill doer from localStorage if creating a new survey
-       const lastDoer = localStorage.getItem("last_survey_doer");
-       if (lastDoer && !prefilledData?.doer && !prefilledData?.nguoi_thuc_hien) {
-          // We'll handle this in the defaultVals or use setValue from useForm if needed
-       }
-    }
-  }, [prefilledData]);
 
   const defaultVals = {
     ...(prefilledData || {}),
@@ -207,8 +195,40 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     ghi_chu: prefilledData?.ghi_chu || ""
   };
 
+  const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm({
+    defaultValues: defaultVals
+  });
 
-  const { register, control, handleSubmit, watch, formState: { errors } } = useForm({ defaultValues: defaultVals });
+  // Watch and persist technician name (Doer)
+  const currentDoer = watch("nguoi_thuc_hien");
+  useEffect(() => {
+    if (currentDoer) {
+      localStorage.setItem("last_survey_doer", currentDoer);
+    }
+  }, [currentDoer]);
+
+  // Sync prefilledData to form if it changes (e.g. forced reset from parent or dashboard click)
+  useEffect(() => {
+    if (prefilledData && Object.keys(prefilledData).length > 0) {
+      // Load specific record or draft
+      Object.keys(prefilledData).forEach(key => {
+        setValue(key as any, prefilledData[key]);
+      });
+      // Special handle for doer mapping (some sources use .doer, others .nguoi_thuc_hien)
+      const doerVal = prefilledData.doer || prefilledData.nguoi_thuc_hien;
+      if (doerVal) {
+        setValue("nguoi_thuc_hien", doerVal);
+        localStorage.setItem("last_survey_doer", doerVal);
+      }
+    } else if (prefilledData && Object.keys(prefilledData).length === 0) {
+      // "Bỏ qua & Tạo mới" case - reset to defaults but keep technician name
+      const lastDoer = localStorage.getItem("last_survey_doer");
+      const clearedFields = { ...defaultVals, nguoi_thuc_hien: lastDoer || "" };
+      Object.keys(clearedFields).forEach(key => {
+        setValue(key as any, (clearedFields as any)[key]);
+      });
+    }
+  }, [prefilledData, setValue]);
 
   // Arrays
   const canBoFields = useFieldArray({ control, name: "can_bo_phu_trach" });

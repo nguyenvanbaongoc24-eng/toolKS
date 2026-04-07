@@ -183,20 +183,17 @@ function SurveyContent() {
                   {getSavedDraft() ? "Tiếp tục Bản nháp" : "Vào Form Trống"}
                 </button>
                 
-                {getSavedDraft() && (
-                  <button 
-                    onClick={() => {
-                      if (confirm("Xác nhận xóa bản nháp hiện tại và bắt đầu hồ sơ mới hoàn toàn?")) {
-                        localStorage.removeItem('survey_profiler_draft');
-                        setExtractedData(null);
-                        setMode("manual");
-                      }
-                    }}
-                    className="text-[10px] text-rose-400 hover:text-rose-300 transition-colors uppercase tracking-widest font-bold mt-1"
-                  >
-                    Bỏ qua & Tạo mới
-                  </button>
-                )}
+                <button 
+                  onClick={() => {
+                    if (confirm("Bắt đầu hồ sơ mới hoàn toàn? (Bản nháp hiện tại của bạn vẫn sẽ được giữ lại)")) {
+                      setExtractedData({}); // Explicit empty object to skip draft loading
+                      setMode("manual");
+                    }
+                  }}
+                  className="btn-secondary w-full justify-center bg-rose-500/10 text-rose-400 border-rose-500/20 hover:bg-rose-500/20 mt-1"
+                >
+                  Bỏ qua & Tạo mới
+                </button>
               </div>
             </div>
           </div>

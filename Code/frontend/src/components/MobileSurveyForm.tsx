@@ -30,16 +30,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     fetchStaff();
   }, []);
 
-  useEffect(() => {
-    // Crucial: Clear ID from prefilled results or drafts when explicitly creating a NEW survey
-    // This prevents accidental overwriting of old survey records.
-    if (typeof window !== "undefined" && window.location.pathname.endsWith("/survey/new")) {
-       if (prefilledData?.id) {
-          console.warn("Detected ID in NEW survey route. Clearing ID to prevent overwrite.");
-          delete prefilledData.id;
-       }
-    }
-  }, [prefilledData]);
 
   const defaultVals = {
     ...(prefilledData || {}),
@@ -116,7 +106,41 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     ...prefilledData
   };
 
-  const { register, control, handleSubmit, watch } = useForm({ defaultValues: defaultVals });
+  const { register, control, handleSubmit, watch, setValue } = useForm({ defaultValues: defaultVals });
+
+  // Sync prefilledData to form if it changes (e.g. forced reset from parent or dashboard click)
+  useEffect(() => {
+    if (prefilledData && Object.keys(prefilledData).length > 0) {
+      // Clear ID if in /new route to prevent overwrite
+      if (typeof window !== "undefined" && window.location.pathname.endsWith("/survey/new")) {
+         if (prefilledData.id) delete prefilledData.id;
+      }
+      
+      Object.keys(prefilledData).forEach(key => {
+        setValue(key as any, prefilledData[key]);
+      });
+      const doerVal = prefilledData.doer || prefilledData.nguoi_thuc_hien;
+      if (doerVal) {
+        setValue("nguoi_thuc_hien", doerVal);
+        localStorage.setItem("last_survey_doer", doerVal);
+      }
+    } else if (prefilledData && Object.keys(prefilledData).length === 0) {
+      // Force blank form case
+      const lastDoer = localStorage.getItem("last_survey_doer");
+      const clearedFields = { ...defaultVals, nguoi_thuc_hien: lastDoer || "" };
+      Object.keys(clearedFields).forEach(key => {
+        setValue(key as any, (clearedFields as any)[key]);
+      });
+    }
+  }, [prefilledData, setValue]);
+
+  // Watch and persist technician name (Doer)
+  const currentDoer = watch("nguoi_thuc_hien");
+  useEffect(() => {
+    if (currentDoer) {
+      localStorage.setItem("last_survey_doer", currentDoer);
+    }
+  }, [currentDoer]);
 
   const canBoFields = useFieldArray({ control, name: "can_bo_phu_trach" });
   const internetFields = useFieldArray({ control, name: "ket_noi_internet" });
