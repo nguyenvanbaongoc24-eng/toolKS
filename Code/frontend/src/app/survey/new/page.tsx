@@ -162,23 +162,42 @@ function SurveyContent() {
               </button>
             </div>
             
-            <div className="glass-card p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-cyan-500/50 transition-colors" onClick={() => {
-              const draft = getSavedDraft();
-              if (draft) {
-                 if (confirm("Tìm thấy bản nháp đang lưu. Bạn có muốn tiếp tục chỉnh sửa bản nháp này không?")) {
-                    setExtractedData(draft);
-                 }
-              }
-              setMode("manual");
-            }}>
-              <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
+            <div className="glass-card p-8 flex flex-col items-center justify-center text-center group hover:border-cyan-500/50 transition-colors">
+              <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <PenLine className="w-8 h-8 text-cyan-400" />
               </div>
               <h3 className="text-lg font-bold mb-2">Điền Thủ Công</h3>
-              <p className="text-sm text-gray-400 mb-6">Tiếp tục bản nháp hoặc tạo một Form trống tinh tươm.</p>
-              <button className="btn-secondary w-full justify-center pointer-events-none">
-                Vào Form
-              </button>
+              <p className="text-sm text-gray-400 mb-6">Tự tay điền mọi thông tin vào biểu mẫu chuyên dụng.</p>
+              
+              <div className="flex flex-col w-full gap-2">
+                <button 
+                  onClick={() => {
+                    const draft = getSavedDraft();
+                    if (draft) {
+                      setExtractedData(draft);
+                    }
+                    setMode("manual");
+                  }}
+                  className="btn-primary w-full justify-center"
+                >
+                  {getSavedDraft() ? "Tiếp tục Bản nháp" : "Vào Form Trống"}
+                </button>
+                
+                {getSavedDraft() && (
+                  <button 
+                    onClick={() => {
+                      if (confirm("Xác nhận xóa bản nháp hiện tại và bắt đầu hồ sơ mới hoàn toàn?")) {
+                        localStorage.removeItem('survey_profiler_draft');
+                        setExtractedData(null);
+                        setMode("manual");
+                      }
+                    }}
+                    className="text-[10px] text-rose-400 hover:text-rose-300 transition-colors uppercase tracking-widest font-bold mt-1"
+                  >
+                    Bỏ qua & Tạo mới
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         )}

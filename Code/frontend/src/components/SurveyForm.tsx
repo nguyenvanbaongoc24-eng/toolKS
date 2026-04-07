@@ -35,11 +35,19 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       }
     };
     fetchStaff();
-  }, []);
+  }, [API_URL]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.pathname.endsWith("/survey/new")) {
+       if (prefilledData?.id) {
+          delete prefilledData.id;
+       }
+    }
+  }, [prefilledData]);
 
   const defaultVals = prefilledData || {
     // Internal
-    nguoi_thuc_hien: "",
+    nguoi_thuc_hien: prefilledData?.doer || "",
     ngay_khao_sat: new Date().toISOString().split('T')[0],
     
     // Tab 1: Đơn vị & Nhân sự (Mục A, B, C)
@@ -131,11 +139,33 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [isSaving, setIsSaving] = useState(false);
   const [exportType, setExportType] = useState<"phieu" | "hsdx" | "baocao" | null>(null);
 
+  const [isCompleting, setIsCompleting] = useState(false);
+
   const calculateProgress = () => {
-     const fields = ["ten_don_vi", "he_thong_thong_tin", "nguoi_dung_dau", "dia_chi"];
-     //@ts-ignore
-     const filled = fields.filter(f => !!formData[f]).length;
-     return { percent: Math.round((filled / fields.length) * 100), missing: fields.length - filled };
+     const countFields = (obj: any): { filled: number, total: number } => {
+        let filled = 0;
+        let total = 0;
+        const ignore = ["id", "status", "date", "ngay_khao_sat", "data", "ghi_chu", "BC_ten_tinh"];
+        Object.keys(obj).forEach(key => {
+           if (ignore.includes(key)) return;
+           const val = obj[key];
+           if (Array.isArray(val)) {
+              if (val.length > 0) filled++;
+              total++;
+           } else if (typeof val === "object" && val !== null) {
+              const sub = countFields(val);
+              filled += sub.filled;
+              total += sub.total;
+           } else {
+              if (val !== "" && val !== null && val !== undefined && val !== "Không xác định") filled++;
+              total++;
+           }
+        });
+        return { filled, total };
+     };
+     const { filled } = countFields(formData);
+     const percent = Math.min(100, Math.round((filled / 60) * 100));
+     return { percent, missing: Math.max(0, 60 - filled) };
   };
 
   const Indicator = ({ name, required }: { name: string, required?: boolean }) => {
@@ -159,6 +189,10 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
        return;
     }
     executeExport(type);
+  };
+
+  const executeExportWrapper = () => {
+    if (exportType) executeExport(exportType);
   };
 
   const executeExport = async (type: "phieu" | "hsdx" | "baocao") => {
@@ -196,36 +230,46 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     }
   };
 
-  const executeExportWrapper = () => {
-    if (exportType) executeExport(exportType);
+  const handleComplete = async () => {
+    if (!formData.ten_don_vi || !formData.he_thong_thong_tin) {
+      setShowValidationModal(true);
+      setActiveTab("don_vi");
+      return;
+    }
+    if (confirm("Xác nhận hoàn thành hồ sơ này?")) {
+      setIsCompleting(true);
+      const dataWithStatus = { ...formData, status: "Hoàn thành" };
+      await onSubmit(dataWithStatus);
+      setIsCompleting(false);
+    }
   };
 
   const onSubmit = async (data: any) => {
     if (!data.ten_don_vi || !data.he_thong_thong_tin) {
       setShowValidationModal(true);
+      setActiveTab("don_vi");
       return;
     }
     
     setIsSaving(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const payload = {
         id: prefilledData?.id,
         ten_don_vi: data.ten_don_vi,
         doer: data.nguoi_thuc_hien,
         status: data.status || "Đang xử lý",
         date: data.ngay_khao_sat || new Date().toISOString().split('T')[0],
-        data: data 
+        data: data
       };
       
-      const response = await axios.post(`${apiUrl}/api/surveys`, payload);
+      const response = await axios.post(`${API_URL}/api/surveys`, payload);
       if (response.data.status === "success") {
-        alert(prefilledData?.id ? "Cập nhật hồ sơ thành công!" : "Lưu hồ sơ mới thành công!");
-        window.location.href = "/"; 
+        alert(prefilledData?.id ? "Cập nhật thành công!" : "Lưu hồ sơ mới thành công!");
+        window.location.href = "/";
       }
     } catch (err) {
       console.error(err);
-      alert("Lỗi khi lưu dữ liệu lên máy chủ!");
+      alert("Lỗi khi kết nối máy chủ.");
     } finally {
       setIsSaving(false);
     }
@@ -1027,14 +1071,29 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           </div>
 
           <div className="flex justify-end gap-3 flex-1 overflow-x-auto pb-1 no-scrollbar">
-            <button type="submit" disabled={isSaving} className={`btn-primary whitespace-nowrap ${isSaving ? 'opacity-70 grayscale' : ''}`}>
+            <button type="submit" disabled={isSaving || isCompleting} className={`btn-primary whitespace-nowrap bg-indigo-600 hover:bg-indigo-700 ${isSaving || isCompleting ? 'opacity-70 grayscale' : ''}`}>
                {isSaving ? (
                  <>
                    <Loader2 className="w-4 h-4 animate-spin" /> Đang lưu...
                  </>
                ) : (
                  <>
-                   <Save className="w-4 h-4" /> Lưu Form
+                   <Save className="w-4 h-4" /> Lưu Bản nháp
+                 </>
+               )}
+            </button>
+
+            <button 
+              type="button" 
+              onClick={handleComplete}
+              disabled={isSaving || isCompleting}
+              className={`btn-primary whitespace-nowrap bg-gradient-to-r from-amber-500 to-rose-600 border-none shadow-lg shadow-rose-500/20 hover:scale-[1.02] transition-all ${isSaving || isCompleting ? 'opacity-70 grayscale' : ''}`}
+            >
+               {isCompleting ? (
+                 <Loader2 className="w-4 h-4 animate-spin" />
+               ) : (
+                 <>
+                   <CheckCircle2 className="w-4 h-4" /> Xác nhận Hoàn thành
                  </>
                )}
             </button>
