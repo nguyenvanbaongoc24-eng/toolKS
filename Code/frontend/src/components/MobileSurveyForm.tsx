@@ -52,7 +52,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     F1_tablet_sl: "", F1_mayin_sl: "", F1_dienthoai_sl: "",
     F2_khong_may_chu_has: "Không", F2_luu_tru_o_dau: "",
     may_chu: [], F3_cloud_has: "Không", F3_ten_cloud: "",
-    camera: [], G2_dau_ghi_nvr: "", G3_luu_tru_ngay: "",
+    camera: [{ hang_san_xuat: "", model: "", so_serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" }], 
+    G2_dau_ghi_nvr: "", G3_luu_tru_ngay: "",
     H1_dai_ip_lan: "", H2_ip_gateway: "", H3_dns: "", H4_co_vlan: "Không", H4_so_vlan: "", H4_mo_ta_vlan: "",
     ip_tinh: [],
     T1_1_co_dmz: "Không", T1_1_may_chu_dmz: "", 
@@ -386,33 +387,43 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                     </div>
                  </div>
               ))}
-           </div>
-           
-           <div className="pt-4 border-t border-white/5">
-              <div className="flex justify-between items-center mb-2">
-                 <label className="text-[10px] uppercase font-bold text-sky-400">G. Hệ thống Camera (CCTV)</label>
-                 <button type="button" onClick={() => cameraFields.append({ hang_san_xuat: "", model: "", so_serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" })} className="bg-sky-500/20 text-sky-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
-              </div>
-              <div className="grid grid-cols-2 gap-2 mb-3">
-                 <div><label className="form-label text-[9px]">Đầu ghi NVR (G2)</label><input {...register("G2_dau_ghi_nvr")} placeholder="Hãng, model, S/N..." className="form-input h-11 text-xs" /></div>
-                 <div><label className="form-label text-[9px]">Lưu trữ (G3)</label><input {...register("G3_luu_tru_ngay")} placeholder="Số ngày lưu" className="form-input h-11 text-xs" /></div>
-              </div>
-              {cameraFields.fields.map((field, idx) => (
-                 <div key={field.id} className="p-3 bg-white/5 rounded-lg mb-2 border border-white/5 shadow-md">
-                    <div className="flex justify-between mb-2"><span className="text-[9px] text-gray-500 uppercase font-bold">Camera #{idx+1}</span><button type="button" onClick={() => cameraFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3 h-3"/></button></div>
-                    <div className="grid grid-cols-2 gap-2 mb-2">
-                       <input {...register(`camera.${idx}.hang_san_xuat`)} placeholder="Hãng sản xuất" className="form-input text-xs h-11" />
-                       <input {...register(`camera.${idx}.model`)} placeholder="Model" className="form-input text-xs h-11" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 mb-2">
-                       <input {...register(`camera.${idx}.so_serial`)} placeholder="Số Serial (S/N)" className="form-input text-xs h-11" />
-                       <input {...register(`camera.${idx}.do_phan_giai`)} placeholder="Độ phân giải" className="form-input text-xs h-11" />
-                    </div>
-                    <input {...register(`camera.${idx}.vi_tri`)} placeholder="Vị trí lắp đặt" className="form-input text-xs h-11 mb-2" />
-                    <input {...register(`camera.${idx}.ghi_chu`)} placeholder="Ghi chú (góc quay...)" className="form-input text-xs h-11" />
-                 </div>
-              ))}
-           </div>
+            </div>
+            
+            <div className="pt-4 border-t border-white/5 space-y-4">
+               <div className="flex justify-between items-center mb-3">
+                  <label className="text-[10px] uppercase font-bold text-sky-400">G. Danh mục Camera (G1)</label>
+                  <button type="button" onClick={() => cameraFields.append({ hang_san_xuat: "", model: "", so_serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" })} className="bg-sky-500/20 text-sky-400 p-1.5 rounded-lg flex items-center gap-1">
+                     <Plus className="w-4 h-4" /> <span className="text-[9px]">THÊM CAMERA</span>
+                  </button>
+               </div>
+
+               {cameraFields.fields.map((field, idx) => (
+                  <div key={field.id} className="p-3 bg-white/5 rounded-lg border border-white/5 shadow-md">
+                     <div className="flex justify-between mb-2"><span className="text-[9px] text-gray-500 uppercase font-bold">Camera #{idx+1}</span><button type="button" onClick={() => cameraFields.remove(idx)} className="text-rose-400 p-1"><Trash2 className="w-3.5 h-3.5"/></button></div>
+                     <div className="grid grid-cols-2 gap-2 mb-2">
+                        <input {...register(`camera.${idx}.hang_san_xuat`)} placeholder="Hãng sản xuất (*)" className="form-input text-xs h-11" />
+                        <input {...register(`camera.${idx}.model`)} placeholder="Model (*)" className="form-input text-xs h-11" />
+                     </div>
+                     <div className="grid grid-cols-2 gap-2 mb-2">
+                        <input {...register(`camera.${idx}.so_serial`)} placeholder="Số Serial (S/N) (*)" className="form-input text-xs h-11" />
+                        <input {...register(`camera.${idx}.do_phan_giai`)} placeholder="Độ phân giải" className="form-input text-xs h-11" />
+                     </div>
+                     <input {...register(`camera.${idx}.vi_tri`)} placeholder="Vị trí lắp đặt (*)" className="form-input text-xs h-11 mb-2" />
+                     <input {...register(`camera.${idx}.ghi_chu`)} placeholder="Ghi chú (góc quay, ngoài trời...)" className="form-input text-xs h-11" />
+                  </div>
+               ))}
+
+               <div className="pt-2 border-t border-white/5 mt-2 space-y-3">
+                  <div className="p-3 bg-white/5 rounded border border-white/5">
+                     <label className="form-label text-[10px] text-sky-400 font-bold uppercase mb-2 block">G2. Đầu ghi camera (NVR/DVR) (*)</label>
+                     <input {...register("G2_dau_ghi_nvr")} placeholder="Hãng, model, số serial, vị trí..." className="form-input h-11 text-xs" />
+                  </div>
+                  <div className="p-3 bg-white/5 rounded border border-white/5">
+                     <label className="form-label text-[10px] text-sky-400 font-bold uppercase mb-2 block">G3. Thời gian lưu trữ (Số ngày)</label>
+                     <input {...register("G3_luu_tru_ngay")} placeholder="Số ngày lưu trữ thực tế (Vd: 30 ngày)" className="form-input h-11 text-xs" />
+                  </div>
+               </div>
+            </div>
 
            <div className="pt-4 border-t border-white/5">
               <div className="flex justify-between items-center mb-2">
