@@ -1,5 +1,7 @@
 import os
 import tempfile
+import traceback
+import logging
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -248,7 +250,8 @@ async def export_phieu_khao_sat(req: GenerateDocxRequest):
         filename = f"Phieu_Khao_Sat_{req.data.get('ten_don_vi', 'Export')}.docx"
         return FileResponse(result_path, filename=filename, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Phieu Export Error: {str(e)}")
 
 @app.post("/export/ho-so-de-xuat")
 async def export_ho_so_de_xuat(req: GenerateDocxRequest):
@@ -263,7 +266,8 @@ async def export_ho_so_de_xuat(req: GenerateDocxRequest):
         filename = f"HSDX_{req.data.get('ten_don_vi', 'Export')}.docx"
         return FileResponse(result_path, filename=filename, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"HSDX Export Error: {str(e)}")
 
 @app.post("/export/bao-cao")
 async def export_bao_cao_official(req: GenerateDocxRequest):
@@ -272,7 +276,8 @@ async def export_bao_cao_official(req: GenerateDocxRequest):
         filename = f"Bao_Cao_{req.data.get('ten_don_vi', 'Export')}.docx"
         return FileResponse(result_path, filename=filename, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Bao Cao Export Error: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

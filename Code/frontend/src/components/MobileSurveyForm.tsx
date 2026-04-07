@@ -291,12 +291,13 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         setExportProgress(0);
       }, 500);
 
-    } catch (err) {
+    } catch (err: any) {
       clearInterval(progressInterval);
       setIsExporting(false);
       setExportProgress(0);
       console.error(err);
-      alert("Lỗi xuất file Word!");
+      const errorMsg = err.response?.data?.detail || "Lỗi xuất file Word! Vui lòng kiểm tra lại kết nối máy chủ.";
+      alert(errorMsg);
     }
   };
 
