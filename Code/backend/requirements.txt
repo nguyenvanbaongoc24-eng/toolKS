@@ -10,3 +10,6 @@ docxtpl
 pytesseract
 Pillow
 httpx
+networkx
+matplotlib
+numpy
