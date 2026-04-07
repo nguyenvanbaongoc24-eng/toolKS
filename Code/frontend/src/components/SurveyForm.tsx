@@ -401,8 +401,12 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
         ten_don_vi: data.ten_don_vi,
         doer: data.nguoi_thuc_hien,
         status: forcedStatus || data.status || "draft",
-        date: data.ngay_khao_sat || new Date().toISOString().split('T')[0],
-        data: { ...data, status: forcedStatus || data.status || "draft" }
+        date: data.ngay_khao_sat || new Date().toLocaleDateString('vi-VN'),
+        data: { 
+          ...data, 
+          status: forcedStatus || data.status || "draft",
+          ngay_khao_sat: data.ngay_khao_sat || new Date().toISOString().split('T')[0]
+        }
       };
       
       const response = await axios.post(`${API_URL}/api/surveys`, payload);

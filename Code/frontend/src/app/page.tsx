@@ -184,13 +184,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="glass-card mb-8 overflow-hidden hidden md:block">
+        <div className="glass-card mb-8 hidden md:block">
           <div className="flex justify-between items-center px-6 py-4 border-b border-gray-800">
             <h2 className="font-semibold flex items-center gap-2">
               <Clock className="w-4 h-4 text-indigo-400" /> Hồ sơ gần đây
             </h2>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-visible">
             <table className="data-table w-full text-sm text-left">
               <thead>
                 <tr>
