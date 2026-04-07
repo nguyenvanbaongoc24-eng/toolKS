@@ -296,8 +296,24 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
       setIsExporting(false);
       setExportProgress(0);
       console.error(err);
-      const errorMsg = err.response?.data?.detail || "Lỗi xuất file Word! Vui lòng kiểm tra lại kết nối máy chủ.";
-      alert(errorMsg);
+      
+      let errorMsg = "Lỗi xuất file Word! Vui lòng kiểm tra lại kết nối máy chủ.";
+      
+      // Handle Blob error response
+      if (err.response?.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const errorData = JSON.parse(reader.result as string);
+            alert(errorData.detail || errorMsg);
+          } catch (e) {
+            alert(errorMsg);
+          }
+        };
+        reader.readAsText(err.response.data);
+      } else {
+        alert(err.response?.data?.detail || errorMsg);
+      }
     }
   };
 

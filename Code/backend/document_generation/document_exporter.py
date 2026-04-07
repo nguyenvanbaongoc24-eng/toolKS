@@ -42,8 +42,8 @@ class DocumentExporter:
         logic['logic_pass_ok'] = "Đã đáp ứng" if data.get('l2_pass_policy') == "Có chính sách mật khẩu" else "Chưa đáp ứng"
         logic['logic_backup_ok'] = "Đã đáp ứng" if data.get('l4_bak_has') == "Có" and data.get('L4_off_site') == "Có" else "Chưa đáp ứng"
         logic['logic_log_ok'] = "Đã đáp ứng" if data.get('l5_log_enabled') == "Có" else "Chưa đáp ứng"
-        logic['logic_training_ok'] = "Đã đáp ứng" if len(data.get('dao_tao', [])) >= 1 else "Chưa đáp ứng"
-        logic['logic_audit_ok'] = "Đã đáp ứng" if len(data.get('kiem_tra_attt', [])) >= 1 else "Chưa đáp ứng"
+        logic['logic_training_ok'] = "Đã đáp ứng" if len(data.get('dao_tao') or []) >= 1 else "Chưa đáp ứng"
+        logic['logic_audit_ok'] = "Đã đáp ứng" if len(data.get('kiem_tra_attt') or []) >= 1 else "Chưa đáp ứng"
         logic['logic_https_ok'] = "Đã đáp ứng" if data.get('p1_protocol') == "HTTPS (có chứng chỉ SSL/TLS)" else "Chưa đáp ứng"
         logic['logic_enc_ok'] = "Đã đáp ứng" if data.get('P4_ma_hoa_luu_tru_has') == "Có" else "Chưa đáp ứng"
         
@@ -95,7 +95,7 @@ class DocumentExporter:
             solutions.append("- Thiết lập quy trình sao lưu 3-2-1 (3 bản sao, 2 loại phương tiện, 1 bản off-site) và diễn tập ứng cứu sự cố.")
 
         # 8. Training (Mục R1)
-        if not data.get('dao_tao') or len(data.get('dao_tao', [])) == 0:
+        if not data.get('dao_tao') or len(data.get('dao_tao') or []) == 0:
             problems.append("- Cán bộ, công chức chưa được tham gia các khóa đào tạo hoặc tập huấn nâng cao nhận thức ATTT định kỳ.")
             solutions.append("- Tổ chức các đợt phổ biến kiến thức ATTT nội bộ hoặc cử cán bộ tham gia các lớp bồi dưỡng chuyên môn.")
 
@@ -340,11 +340,16 @@ class DocumentExporter:
         
         output_filename = f"Phieu_Khao_Sat_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
-        doc.render(context)
-        doc.save(output_path)
-        logger.info(f"  Output: {output_path}")
-        logger.info("="*60)
-        return output_path
+        try:
+            doc.render(context)
+            doc.save(output_path)
+            logger.info(f"  Output: {output_path}")
+            logger.info("="*60)
+            return output_path
+        except Exception as e:
+            logger.error(f"Render error in Phieu Khao Sat: {e}")
+            traceback.print_exc()
+            raise e
 
     def generate_hsdx(self, data, diagram_path=None):
         template_path = os.path.join(self.template_dir, 'hsdx_template.docx')
