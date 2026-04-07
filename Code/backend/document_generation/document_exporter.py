@@ -341,15 +341,19 @@ class DocumentExporter:
         output_filename = f"Phieu_Khao_Sat_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         try:
+            # docxtpl automatically handles row loops for standard {% for %} tags if they occupy table rows
             doc.render(context)
             doc.save(output_path)
             logger.info(f"  Output: {output_path}")
             logger.info("="*60)
             return output_path
         except Exception as e:
-            logger.error(f"Render error in Phieu Khao Sat: {e}")
+            logger.error(f"Render error in Phieu Khao Sat: {str(e)}")
+            # If a Jinja error occurs, it often points to a specific tag or missing data
+            if "Encountered unknown tag" in str(e):
+                logger.error("  CRITICAL: Found an unsupported Jinja tag in document. Verify template structure.")
             traceback.print_exc()
-            raise e
+            raise Exception(f"Phieu Export Error: {str(e)}")
 
     def generate_hsdx(self, data, diagram_path=None):
         template_path = os.path.join(self.template_dir, 'hsdx_template.docx')
@@ -392,9 +396,9 @@ class DocumentExporter:
             logger.info(f"  Output saved: {output_path}")
             return output_path
         except Exception as e:
-            logger.error(f"Render error in HSDX: {e}")
+            logger.error(f"Render error in HSDX: {str(e)}")
             traceback.print_exc()
-            raise e
+            raise Exception(f"HSDX Export Error: {str(e)}")
 
     def generate_bao_cao(self, data):
         template_path = os.path.join(self.template_dir, 'bao_cao_template.docx')
@@ -433,6 +437,6 @@ class DocumentExporter:
             logger.info(f"  Output saved: {output_path}")
             return output_path
         except Exception as e:
-            logger.error(f"Render error in Bao Cao: {e}")
+            logger.error(f"Render error in Bao Cao: {str(e)}")
             traceback.print_exc()
-            raise e
+            raise Exception(f"Bao Cao Export Error: {str(e)}")
