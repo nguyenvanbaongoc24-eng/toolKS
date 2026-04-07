@@ -220,6 +220,40 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 <div><label className="form-label">Chức vụ</label><input {...register("A6_chuc_vu_thu_truong")} className="form-input" /></div>
              </div>
 
+             <div className="pt-4 border-t border-white/5">
+                <div className="flex justify-between items-center mb-3">
+                  <label className="form-label font-bold mb-0 text-white">B. Nhân sự quản trị / Vận hành</label>
+                  <button type="button" onClick={() => canBoFields.append({ ho_ten: "", chuc_vu: "", dien_thoai: "", email: "", trinh_do: "", chung_chi: "" })} className="bg-indigo-500/20 text-indigo-400 p-1.5 rounded-lg"><Plus className="w-4 h-4" /></button>
+                </div>
+                {canBoFields.fields.map((field, idx) => (
+                  <div key={field.id} className="p-4 bg-gray-800/40 rounded-lg mb-3 border border-white/5">
+                     <div className="flex justify-between items-center mb-3 border-b border-white/5 pb-2">
+                        <span className="text-[10px] font-bold text-gray-500 uppercase">Cán bộ #{idx + 1}</span>
+                        <button type="button" onClick={() => canBoFields.remove(idx)} className="text-rose-500 bg-rose-500/10 p-1.5 rounded-md"><Trash2 className="w-3.5 h-3.5"/></button>
+                     </div>
+                     <div className="space-y-3">
+                        <div>
+                           <label className="text-[9px] text-gray-400 uppercase">Họ tên & Chức vụ</label>
+                           <div className="grid grid-cols-2 gap-2 mt-1">
+                              <input {...register(`can_bo_phu_trach.${idx}.ho_ten`)} placeholder="Họ tên" className="form-input text-xs" />
+                              <input {...register(`can_bo_phu_trach.${idx}.chuc_vu`)} placeholder="Chức vụ" className="form-input text-xs" />
+                           </div>
+                        </div>
+                        <div>
+                           <label className="text-[9px] text-gray-400 uppercase">Liên hệ</label>
+                           <div className="grid grid-cols-2 gap-2 mt-1">
+                              <input {...register(`can_bo_phu_trach.${idx}.dien_thoai`)} placeholder="SĐT" className="form-input text-xs" />
+                              <input {...register(`can_bo_phu_trach.${idx}.email`)} placeholder="Email" className="form-input text-xs" />
+                           </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 mt-1">
+                           <input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} placeholder="Trình độ" className="form-input text-xs h-11" />
+                           <input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} placeholder="Chứng chỉ ATTT" className="form-input text-xs h-11" />
+                        </div>
+                     </div>
+                  </div>
+                ))}
+             </div>
              <div className="pt-4 border-t border-white/5 space-y-3">
                 <h4 className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">C. Hệ thống thông tin (HTTT)</h4>
                 <div><label className="form-label">Tên HTTT (*) <Indicator name="he_thong_thong_tin" required /></label><input {...register("he_thong_thong_tin")} className="form-input" /></div>
@@ -271,40 +305,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 </div>
              </div>
              
-             <div className="pt-4 border-t border-white/5">
-                <div className="flex justify-between items-center mb-3">
-                  <label className="form-label font-bold mb-0 text-white">B. Nhân sự quản trị / Vận hành</label>
-                  <button type="button" onClick={() => canBoFields.append({ ho_ten: "", chuc_vu: "", dien_thoai: "", email: "", trinh_do: "", chung_chi: "" })} className="bg-indigo-500/20 text-indigo-400 p-1.5 rounded-lg"><Plus className="w-4 h-4" /></button>
-                </div>
-                {canBoFields.fields.map((field, idx) => (
-                  <div key={field.id} className="p-4 bg-gray-800/40 rounded-lg mb-3 border border-white/5">
-                     <div className="flex justify-between items-center mb-3 border-b border-white/5 pb-2">
-                        <span className="text-[10px] font-bold text-gray-500 uppercase">Cán bộ #{idx + 1}</span>
-                        <button type="button" onClick={() => canBoFields.remove(idx)} className="text-rose-500 bg-rose-500/10 p-1.5 rounded-md"><Trash2 className="w-3.5 h-3.5"/></button>
-                     </div>
-                     <div className="space-y-3">
-                        <div>
-                           <label className="text-[9px] text-gray-400 uppercase">Họ tên & Chức vụ</label>
-                           <div className="grid grid-cols-2 gap-2 mt-1">
-                              <input {...register(`can_bo_phu_trach.${idx}.ho_ten`)} placeholder="Họ tên" className="form-input text-xs" />
-                              <input {...register(`can_bo_phu_trach.${idx}.chuc_vu`)} placeholder="Chức vụ" className="form-input text-xs" />
-                           </div>
-                        </div>
-                        <div>
-                           <label className="text-[9px] text-gray-400 uppercase">Liên hệ</label>
-                           <div className="grid grid-cols-2 gap-2 mt-1">
-                              <input {...register(`can_bo_phu_trach.${idx}.dien_thoai`)} placeholder="SĐT" className="form-input text-xs" />
-                              <input {...register(`can_bo_phu_trach.${idx}.email`)} placeholder="Email" className="form-input text-xs" />
-                           </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 mt-1">
-                           <input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} placeholder="Trình độ" className="form-input text-xs h-11" />
-                           <input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} placeholder="Chứng chỉ ATTT" className="form-input text-xs h-11" />
-                        </div>
-                     </div>
-                  </div>
-                ))}
-             </div>
           </div>
         )}
       </div>

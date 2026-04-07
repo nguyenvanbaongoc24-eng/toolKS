@@ -287,6 +287,29 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
           </div>
 
+          {/* MỤC B: CÁN BỘ PHỤ TRÁCH ATTT (Moved up v2.8) */}
+          <div className="section-card">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="section-title mb-0"><span className="section-badge bg-fuchsia-500">B</span> Mục B. Cán bộ phụ trách ATTT</h2>
+              <button type="button" onClick={() => canBoFields.append({ ho_ten: "", chuc_vu: "", dien_thoai: "", email: "", trinh_do: "", chung_chi: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm cán bộ</button>
+            </div>
+            <div className="space-y-3">
+              {canBoFields.fields.map((field, idx) => (
+                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
+                    <div><label className="form-label">Họ và tên</label><input {...register(`can_bo_phu_trach.${idx}.ho_ten`)} className="form-input" /></div>
+                    <div><label className="form-label">Chức vụ</label><input {...register(`can_bo_phu_trach.${idx}.chuc_vu`)} className="form-input" /></div>
+                    <div><label className="form-label">Điện thoại</label><input {...register(`can_bo_phu_trach.${idx}.dien_thoai`)} className="form-input" /></div>
+                    <div><label className="form-label">Email</label><input {...register(`can_bo_phu_trach.${idx}.email`)} className="form-input" /></div>
+                    <div><label className="form-label">Trình độ / Chuyên ngành</label><input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} className="form-input" /></div>
+                    <div><label className="form-label">Chứng chỉ ATTT (nếu có)</label><input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} className="form-input" /></div>
+                  </div>
+                  <button type="button" onClick={() => canBoFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* MỤC C: MÔ TẢ HỆ THỐNG */}
           <div className="section-card">
             <h2 className="section-title">
@@ -372,28 +395,6 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                   </select>
                 )}
               </div>
-            </div>
-          </div>
-
-          <div className="section-card">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="section-title mb-0"><span className="section-badge bg-fuchsia-500">B</span> Mục B. Cán bộ phụ trách ATTT</h2>
-              <button type="button" onClick={() => canBoFields.append({ ho_ten: "", chuc_vu: "", dien_thoai: "", email: "", trinh_do: "", chung_chi: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm cán bộ</button>
-            </div>
-            <div className="space-y-3">
-              {canBoFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
-                    <div><label className="form-label">Họ và tên</label><input {...register(`can_bo_phu_trach.${idx}.ho_ten`)} className="form-input" /></div>
-                    <div><label className="form-label">Chức vụ</label><input {...register(`can_bo_phu_trach.${idx}.chuc_vu`)} className="form-input" /></div>
-                    <div><label className="form-label">Điện thoại</label><input {...register(`can_bo_phu_trach.${idx}.dien_thoai`)} className="form-input" /></div>
-                    <div><label className="form-label">Email</label><input {...register(`can_bo_phu_trach.${idx}.email`)} className="form-input" /></div>
-                    <div><label className="form-label">Trình độ / Chuyên ngành</label><input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} className="form-input" /></div>
-                    <div><label className="form-label">Chứng chỉ ATTT (nếu có)</label><input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} className="form-input" /></div>
-                  </div>
-                  <button type="button" onClick={() => canBoFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
-                </div>
-              ))}
             </div>
           </div>
         </div>
