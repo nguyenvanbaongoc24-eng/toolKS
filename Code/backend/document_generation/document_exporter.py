@@ -1,6 +1,10 @@
 from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Mm
 import os
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 class DocumentExporter:
     def __init__(self, template_dir="templates", output_dir="generated_docs"):
@@ -300,10 +304,22 @@ class DocumentExporter:
         doc = DocxTemplate(template_path)
         context = self._get_context(data)
         
+        # Debug: Log key context values before rendering
+        logger.info("="*60)
+        logger.info("EXPORTING: Phiếu Khảo Sát ATTT")
+        logger.info("="*60)
+        for key in ['ten_don_vi', 'dia_chi', 'he_thong_thong_tin', 'so_dien_thoai', 'email', 
+                     'A6_ho_ten_thu_truong', 'D2_router_modem', 'nguoi_khao_sat']:
+            logger.info(f"  {key} = {context.get(key, '(NOT SET)')}")
+        logger.info(f"  Tables: may_chu={len(context.get('may_chu', []))}, thiet_bi_mang={len(context.get('thiet_bi_mang', []))}, ung_dung={len(context.get('ung_dung', []))}")
+        logger.info(f"  Template: {template_path}")
+        
         output_filename = f"Phieu_Khao_Sat_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         doc.render(context)
         doc.save(output_path)
+        logger.info(f"  Output: {output_path}")
+        logger.info("="*60)
         return output_path
 
     def generate_hsdx(self, data, diagram_path=None):
@@ -318,11 +334,23 @@ class DocumentExporter:
             context['network_diagram'] = InlineImage(doc, diagram_path, width=Mm(150))
         else:
             context['network_diagram'] = ""
+        
+        # Debug: Log key context values
+        logger.info("="*60)
+        logger.info("EXPORTING: Hồ Sơ Đề Xuất Cấp Độ")
+        logger.info("="*60)
+        for key in ['ten_don_vi', 'dia_chi', 'he_thong_thong_tin', 'so_dien_thoai', 'email',
+                     'A6_ho_ten_thu_truong', 'H1_dai_ip_lan', 'H2_ip_gateway', 'nguoi_khao_sat']:
+            logger.info(f"  {key} = {context.get(key, '(NOT SET)')}")
+        logger.info(f"  Network diagram: {'YES' if diagram_path else 'NO'}")
+        logger.info(f"  Template: {template_path}")
             
         output_filename = f"HSDX_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         doc.render(context)
         doc.save(output_path)
+        logger.info(f"  Output: {output_path}")
+        logger.info("="*60)
         return output_path
 
     def generate_bao_cao(self, data):
@@ -333,8 +361,22 @@ class DocumentExporter:
         doc = DocxTemplate(template_path)
         context = self._get_context(data)
         
+        # Debug: Log key context values
+        logger.info("="*60)
+        logger.info("EXPORTING: Báo Cáo Khảo Sát")
+        logger.info("="*60)
+        for key in ['ten_don_vi', 'dia_chi', 'he_thong_thong_tin', 'BC_so_bao_cao',
+                     'BC_don_vi_thuc_hien', 'BC_ten_tinh', 'problems', 'solutions']:
+            val = context.get(key, '(NOT SET)')
+            if isinstance(val, str) and len(val) > 100:
+                val = val[:100] + '...'
+            logger.info(f"  {key} = {val}")
+        logger.info(f"  Template: {template_path}")
+        
         output_filename = f"Bao_Cao_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         doc.render(context)
         doc.save(output_path)
+        logger.info(f"  Output: {output_path}")
+        logger.info("="*60)
         return output_path
