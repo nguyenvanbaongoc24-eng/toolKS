@@ -43,7 +43,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     ngay_khao_sat: new Date().toISOString().split('T')[0],
     
     // Tab 1: Đơn vị & Nhân sự (Mục A, B, C)
-    ten_don_vi: "", dia_chi: "", nguoi_dung_dau: "", so_dien_thoai: "", email: "", 
+    ten_don_vi: "", dia_chi: "", A6_ho_ten_thu_truong: "", so_dien_thoai: "", email: "", 
     A6_chuc_vu_thu_truong: "", A7_so_quyet_dinh: "",
     he_thong_thong_tin: "", C1_mo_ta_chuc_nang: "", C2_doi_tuong_nguoi_dung: "", C3_loai_du_lieu: "",
     C4_du_lieu_type: "Không xác định", C5_noi_bo: "", C5_ben_ngoai: "", C6_nam_hoat_dong: "",
@@ -78,11 +78,11 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     
     // Tab 4: An toàn Bảo mật (Mục L, Q, K)
     l1_phys_key: "Không có kiểm soát riêng", L1_bang_ky_ten: "Không",
-    l2_pass_policy: "Không có chính sách thống nhất", l2_pass_len: "", l2_pass_time: "",
+    l2_pass_policy: "Không có chính sách thống nhất", l2_pass_len: "8", l2_pass_time: "3",
     L2_admin_acc_type: "Dùng chung một tài khoản admin", L2_2fa_has: "Không",
-    l3_av_has: "Không", l3_av_name: "", l3_av_license: "Không", L3_cap_nhat_virus: "Không",
-    l4_bak_has: "Không sao lưu", l4_bak_freq: "", L4_offsite_has: "Không",
-    l5_log_enabled: "Không", l5_log_retention: "Không lưu", l5_siem_has: "Không", l5_siem_name: "",
+    l3_av_has: "Không", l3_av_name: "", l3_av_license: "Có bản quyền", L3_cap_nhat_virus: "Tự động",
+    l4_bak_has: "Không sao lưu", l4_bak_freq: "Hàng ngày", L4_offsite_has: "Không", L4_luu_o_dau: "Ổ cứng ngoài",
+    l5_log_enabled: "Không", l5_log_retention: "3 tháng", l5_siem_has: "Không", l5_siem_name: "",
     l6_incident_has: "Không có sự cố nào", l6_incident_desc: "", l6_incident_resolution: "",
     l7_type: "Tường lửa tích hợp (SPI)", L7_chinh_sach: "Chưa cấu hình", L7_remote_access: "Không", L7_4_cong_mo: "",
     L8_1_co_ups: "Không", L8_1_ups_hang_model: "", L8_1_ups_cong_suat_va: "", L8_1_ups_thoi_gian_phut: "",
@@ -106,6 +106,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     port_switch: [],
     ghi_chu: ""
   };
+
 
   const { register, control, handleSubmit, watch, formState: { errors } } = useForm({ defaultValues: defaultVals });
 
@@ -261,8 +262,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <input {...register("ten_don_vi")} className="form-input" />
               </div>
               <div>
-                <label className="form-label">Người đứng đầu (Họ tên) <Indicator name="nguoi_dung_dau" /></label>
-                <input {...register("nguoi_dung_dau")} className="form-input" />
+                <label className="form-label">Người đứng đầu (Họ tên) (A6) <Indicator name="A6_ho_ten_thu_truong" /></label>
+                <input {...register("A6_ho_ten_thu_truong")} className="form-input" />
               </div>
               <div>
                 <label className="form-label">Chức vụ người đứng đầu (A6.ii)</label>
@@ -291,7 +292,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
               <h2 className="section-title mb-0"><span className="section-badge bg-fuchsia-500">B</span> Mục B. Cán bộ phụ trách ATTT</h2>
-              <button type="button" onClick={() => canBoFields.append({ ho_ten: "", chuc_vu: "", dien_thoai: "", email: "", trinh_do: "", chung_chi: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm cán bộ</button>
+              <button type="button" onClick={() => canBoFields.append({ ho_ten: "", chuc_vu: "", so_dt: "", email: "", trinh_do: "", chung_chi_attt: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm cán bộ</button>
             </div>
             <div className="space-y-3">
               {canBoFields.fields.map((field, idx) => (
@@ -299,10 +300,10 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
                     <div><label className="form-label">Họ và tên</label><input {...register(`can_bo_phu_trach.${idx}.ho_ten`)} className="form-input" /></div>
                     <div><label className="form-label">Chức vụ</label><input {...register(`can_bo_phu_trach.${idx}.chuc_vu`)} className="form-input" /></div>
-                    <div><label className="form-label">Điện thoại</label><input {...register(`can_bo_phu_trach.${idx}.dien_thoai`)} className="form-input" /></div>
+                    <div><label className="form-label">Điện thoại</label><input {...register(`can_bo_phu_trach.${idx}.so_dt`)} className="form-input" /></div>
                     <div><label className="form-label">Email</label><input {...register(`can_bo_phu_trach.${idx}.email`)} className="form-input" /></div>
                     <div><label className="form-label">Trình độ / Chuyên ngành</label><input {...register(`can_bo_phu_trach.${idx}.trinh_do`)} className="form-input" /></div>
-                    <div><label className="form-label">Chứng chỉ ATTT (nếu có)</label><input {...register(`can_bo_phu_trach.${idx}.chung_chi`)} className="form-input" /></div>
+                    <div><label className="form-label">Chứng chỉ ATTT (nếu có)</label><input {...register(`can_bo_phu_trach.${idx}.chung_chi_attt`)} className="form-input" /></div>
                   </div>
                   <button type="button" onClick={() => canBoFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
                 </div>
@@ -407,7 +408,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
               <h2 className="section-title mb-0"><span className="section-badge bg-cyan-500">D</span> Mục D. Kết nối Internet & Gateway</h2>
-              <button type="button" onClick={() => internetFields.append({ nha_cung_cap: "", loai: "", bang_thong: "", vai_tro: "Đường chính", ip_wan: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm đường truyền</button>
+              <button type="button" onClick={() => internetFields.append({ isp: "", loai_ket_noi: "Cáp quang", bang_thong: "", vai_tro: "Đường chính", ip_wan: "IP Tĩnh", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm đường truyền</button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
@@ -421,13 +422,16 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
             <div className="space-y-3">
               {internetFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
+                <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div><label className="form-label">Vai trò</label><select {...register(`ket_noi_internet.${idx}.vai_tro`)} className="form-input py-2"><option value="Đường chính">Đường chính (duy nhất)</option><option value="Đường dự phòng">Đường dự phòng</option></select></div>
-                    <div><label className="form-label">ISP (Nhà cung cấp)</label><input {...register(`ket_noi_internet.${idx}.nha_cung_cap`)} className="form-input" /></div>
-                    <div><label className="form-label">Băng thông</label><input {...register(`ket_noi_internet.${idx}.bang_thong`)} className="form-input" /></div>
+                    <div><label className="form-label">ISP (Nhà cung cấp)</label><input {...register(`ket_noi_internet.${idx}.isp`)} className="form-input" /></div>
+                    <div><label className="form-label">Loại kết nối</label><input {...register(`ket_noi_internet.${idx}.loai_ket_noi`)} className="form-input" placeholder="Cáp quang, FTTH..." /></div>
+                    <div><label className="form-label">Băng thông (Mbps)</label><input {...register(`ket_noi_internet.${idx}.bang_thong`)} className="form-input" /></div>
+                    <div><label className="form-label">IP WAN</label><input {...register(`ket_noi_internet.${idx}.ip_wan`)} className="form-input" placeholder="IP Tĩnh/Động" /></div>
+                    <div><label className="form-label">Ghi chú</label><input {...register(`ket_noi_internet.${idx}.ghi_chu`)} className="form-input" /></div>
                   </div>
-                  <button type="button" onClick={() => internetFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                  <button type="button" onClick={() => internetFields.remove(idx)} className="absolute top-2 right-2 text-red-500 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
                 </div>
               ))}
             </div>
@@ -437,7 +441,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
               <h2 className="section-title mb-0"><span className="section-badge bg-rose-500">E</span> Mục E. Thiết bị mạng & Firewall</h2>
-              <button type="button" onClick={() => tbMangFields.append({ loai_thiet_bi: "", hang: "", model: "", serial: "", vi_tri: "", nam_mua: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm thiết bị</button>
+              <button type="button" onClick={() => tbMangFields.append({ loai_thiet_bi: "", hang_san_xuat: "", model: "", so_serial: "", vi_tri: "", nam_mua: "", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm thiết bị</button>
             </div>
             <div className="bg-rose-500/10 border border-rose-500/20 p-4 rounded-lg mb-4">
               <label className="form-label text-rose-400">Hình thức trang bị Tường lửa (Firewall - E2)</label>
@@ -456,13 +460,17 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             </div>
             <div className="space-y-3">
               {tbMangFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-3 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 flex-1">
+                <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                     <div><label className="form-label">Loại thiết bị</label><input {...register(`thiet_bi_mang.${idx}.loai_thiet_bi`)} className="form-input" placeholder="Switch, AP..." /></div>
-                    <div><label className="form-label">Hãng / Model</label><input {...register(`thiet_bi_mang.${idx}.hang`)} className="form-input" /></div>
-                    <div><label className="form-label">Số Serial</label><input {...register(`thiet_bi_mang.${idx}.serial`)} className="form-input" /></div>
+                    <div><label className="form-label">Hãng sản xuất</label><input {...register(`thiet_bi_mang.${idx}.hang_san_xuat`)} className="form-input" /></div>
+                    <div><label className="form-label">Model</label><input {...register(`thiet_bi_mang.${idx}.model`)} className="form-input" /></div>
+                    <div><label className="form-label">Số Serial</label><input {...register(`thiet_bi_mang.${idx}.so_serial`)} className="form-input" /></div>
+                    <div><label className="form-label">Vị trí lắp đặt</label><input {...register(`thiet_bi_mang.${idx}.vi_tri`)} className="form-input" /></div>
+                    <div><label className="form-label">Năm mua</label><input {...register(`thiet_bi_mang.${idx}.nam_mua`)} className="form-input" /></div>
+                    <div className="md:col-span-2"><label className="form-label">Ghi chú</label><input {...register(`thiet_bi_mang.${idx}.ghi_chu`)} className="form-input" /></div>
                   </div>
-                  <button type="button" onClick={() => tbMangFields.remove(idx)} className="btn-danger h-[42px] mt-7"><Trash2 className="w-4 h-4" /></button>
+                  <button type="button" onClick={() => tbMangFields.remove(idx)} className="absolute top-2 right-2 text-red-500 hover:text-red-400"><Trash2 className="w-4 h-4" /></button>
                 </div>
               ))}
             </div>
@@ -538,18 +546,21 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
 
             <div className="flex justify-between items-center mb-4">
                <h3 className="text-sm font-semibold text-emerald-400">Danh sách máy chủ chi tiết (F2)</h3>
-               <button type="button" onClick={() => mayChuFields.append({ vai_tro: "", hang: "", model: "", serial: "", ram: "", hdd: "", he_dieu_hanh: "", vi_tri: "" })} className="btn-add text-[10px] py-1">Thêm dòng</button>
+               <button type="button" onClick={() => mayChuFields.append({ vai_tro: "", hang_model: "", so_serial: "", ram_gb: "", o_cung_tb: "", he_dieu_hanh: "", vi_tri: "" })} className="btn-add text-[10px] py-1">Thêm dòng</button>
             </div>
             <div className="space-y-2">
               {mayChuFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-2 rounded-lg border border-white/5">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 flex-1">
-                    <input {...register(`may_chu.${idx}.vai_tro`)} className="form-input text-xs" placeholder="Vai trò (AD, Web...)" />
-                    <input {...register(`may_chu.${idx}.model`)} className="form-input text-xs" placeholder="Hãng/Model" />
-                    <input {...register(`may_chu.${idx}.serial`)} className="form-input text-xs" placeholder="Số Serial" />
-                    <input {...register(`may_chu.${idx}.vi_tri`)} className="form-input text-xs" placeholder="Vị trí vật lý" />
+                <div key={field.id} className="bg-black/20 p-3 rounded-lg border border-white/5 relative">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <div><label className="form-label text-[10px]">Vai trò (AD, Web...)</label><input {...register(`may_chu.${idx}.vai_tro`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Hãng / Model</label><input {...register(`may_chu.${idx}.hang_model`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Số Serial</label><input {...register(`may_chu.${idx}.so_serial`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">RAM (GB)</label><input {...register(`may_chu.${idx}.ram_gb`)} className="form-input text-xs" type="number" /></div>
+                    <div><label className="form-label text-[10px]">Ổ cứng (TB)</label><input {...register(`may_chu.${idx}.o_cung_tb`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Hệ điều hành</label><input {...register(`may_chu.${idx}.he_dieu_hanh`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Vị trí đặt</label><input {...register(`may_chu.${idx}.vi_tri`)} className="form-input text-xs" /></div>
                   </div>
-                  <button type="button" onClick={() => mayChuFields.remove(idx)} className="text-red-400 hover:text-red-300 mt-2"><Trash2 className="w-3 h-3" /></button>
+                  <button type="button" onClick={() => mayChuFields.remove(idx)} className="absolute top-2 right-2 text-red-400 hover:text-red-300"><Trash2 className="w-3 h-3" /></button>
                 </div>
               ))}
             </div>
@@ -565,13 +576,18 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
               </div>
               <div className="space-y-2">
                 {cameraFields.fields.map((field, idx) => (
-                  <div key={field.id} className="flex gap-2 items-center bg-black/20 p-2 rounded-lg border border-white/5">
-                    <input {...register(`camera.${idx}.hang`)} className="form-input text-xs flex-1" placeholder="Hãng/Model" />
-                    <input {...register(`camera.${idx}.serial`)} className="form-input text-xs flex-1" placeholder="Serial" />
-                    <button type="button" onClick={() => cameraFields.remove(idx)} className="text-red-400"><Trash2 className="w-3 h-3" /></button>
+                  <div key={field.id} className="bg-black/20 p-3 rounded-lg border border-white/5 relative">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div><label className="form-label text-[10px]">Hãng SX</label><input {...register(`camera.${idx}.hang_san_xuat`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Model</label><input {...register(`camera.${idx}.model`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Số Serial</label><input {...register(`camera.${idx}.so_serial`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Độ phân giải</label><input {...register(`camera.${idx}.do_phan_giai`)} className="form-input text-xs" /></div>
+                      <div className="col-span-2"><label className="form-label text-[10px]">Vị trí & Ghi chú</label><input {...register(`camera.${idx}.vi_tri`)} className="form-input text-xs" /></div>
+                    </div>
+                    <button type="button" onClick={() => cameraFields.remove(idx)} className="absolute top-2 right-2 text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                 ))}
-                <button type="button" onClick={() => cameraFields.append({ hang: "", model: "", serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" })} className="text-[10px] text-blue-400 hover:underline">+ Thêm camera</button>
+                <button type="button" onClick={() => cameraFields.append({ hang_san_xuat: "", model: "", so_serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" })} className="text-[10px] text-blue-400 hover:underline">+ Thêm camera</button>
               </div>
             </div>
 
@@ -600,30 +616,33 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 {ipTinhFields.fields.map((field, idx) => (
                   <div key={field.id} className="flex gap-2 items-center bg-black/20 p-2 rounded-lg border border-white/5">
                     <input {...register(`ip_tinh.${idx}.ten_thiet_bi`)} className="form-input text-xs flex-1" placeholder="Thiết bị/Người dùng" />
-                    <input {...register(`ip_tinh.${idx}.ip_tinh`)} className="form-input text-xs flex-1" placeholder="IP Tĩnh" />
+                    <input {...register(`ip_tinh.${idx}.dia_chi_ip`)} className="form-input text-xs flex-1" placeholder="IP Tĩnh" />
+                    <input {...register(`ip_tinh.${idx}.ghi_chu`)} className="form-input text-xs flex-1" placeholder="Ghi chú" />
                     <button type="button" onClick={() => ipTinhFields.remove(idx)} className="text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                 ))}
-                <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", ip_tinh: "", ghi_chu: "" })} className="text-[10px] text-indigo-400 hover:underline">+ Thêm IP tĩnh</button>
+                <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", dia_chi_ip: "", ghi_chu: "" })} className="text-[10px] text-indigo-400 hover:underline">+ Thêm IP tĩnh</button>
               </div>
             </div>
           </div>
 
-          {/* MỤC I: ỨNG DỤNG */}
           <div className="section-card">
             <div className="flex justify-between items-center mb-4">
               <h2 className="section-title mb-0"><span className="section-badge bg-amber-500">I</span> Mục I. Ứng dụng & Dịch vụ CNTT</h2>
-              <button type="button" onClick={() => ungDungFields.append({ ten_ung_dung: "", chuc_nang: "", don_vi: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm App</button>
+              <button type="button" onClick={() => ungDungFields.append({ ten: "", chuc_nang: "", don_vi_cung_cap: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm App</button>
             </div>
             <div className="space-y-3">
               {ungDungFields.fields.map((field, idx) => (
-                <div key={field.id} className="flex gap-2 items-start bg-black/20 p-2 rounded-lg border border-white/5 relative">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 flex-1">
-                    <input {...register(`ung_dung.${idx}.ten_ung_dung`)} className="form-input text-xs" placeholder="Tên ứng dụng" />
-                    <input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input text-xs md:col-span-2" placeholder="Chức năng" />
-                    <input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input text-xs" placeholder="Phiên bản" />
+                <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div><label className="form-label text-[10px]">Tên ứng dụng</label><input {...register(`ung_dung.${idx}.ten`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Chức năng chính</label><input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Đơn vị cung cấp</label><input {...register(`ung_dung.${idx}.don_vi_cung_cap`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Phiên bản</label><input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input text-xs" /></div>
+                    <div><label className="form-label text-[10px]">Kết nối Internet?</label><select {...register(`ung_dung.${idx}.ket_noi_internet`)} className="form-input text-xs py-1"><option value="Có">Có</option><option value="Không">Không</option></select></div>
+                    <div><label className="form-label text-[10px]">Ghi chú (URL/User...)</label><input {...register(`ung_dung.${idx}.ghi_chu`)} className="form-input text-xs" /></div>
                   </div>
-                  <button type="button" onClick={() => ungDungFields.remove(idx)} className="text-red-400 mt-2"><Trash2 className="w-3 h-3" /></button>
+                  <button type="button" onClick={() => ungDungFields.remove(idx)} className="absolute top-2 right-2 text-red-400"><Trash2 className="w-4 h-4" /></button>
                 </div>
               ))}
             </div>
@@ -734,18 +753,22 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                     {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L1_bang_ky_ten")} /><span>{v}</span></label>)}
                   </div>
                 </div>
-                <div>
-                  <label className="form-label text-xs">Chính sách mật khẩu (L2.1)</label>
+                <div className="bg-white/5 p-3 rounded-lg border border-white/5 space-y-2">
+                  <label className="form-label text-xs font-bold text-violet-400">Chính sách mật khẩu (L2)</label>
                   <select {...register("l2_pass_policy")} className="form-input text-xs py-1">
                     <option value="Có chính sách mật khẩu">Đã ban hành và áp dụng</option>
                     <option value="Không có chính sách thống nhất">Chưa có chính sách thống nhất</option>
                   </select>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div><label className="text-[10px]">Độ dài tối thiểu</label><input {...register("l2_pass_len")} className="form-input text-xs" /></div>
+                    <div><label className="text-[10px]">Thay đổi định kỳ (tháng)</label><input {...register("l2_pass_time")} className="form-input text-xs" /></div>
+                  </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div>
-                  <label className="form-label text-xs">Công cụ diệt Virus (L3)</label>
+                <div className="bg-white/5 p-3 rounded-lg border border-white/5 space-y-2">
+                  <label className="form-label text-xs font-bold text-emerald-400">Công cụ diệt Virus (L3)</label>
                   <div className="flex gap-2">
                     <select {...register("l3_av_has")} className="form-input text-xs py-1 flex-1">
                       <option value="Có">Có cài đặt</option>
@@ -753,20 +776,25 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                     </select>
                     {watch("l3_av_has") === "Có" && <input {...register("l3_av_name")} placeholder="Tên phần mềm..." className="form-input text-xs py-1 flex-1" />}
                   </div>
+                  <div className="grid grid-cols-2 gap-2">
+                     <select {...register("l3_av_license")} className="form-input text-xs py-1"><option value="Có bản quyền">Có bản quyền</option><option value="Miễn phí">Miễn phí</option><option value="Hết hạn">Hết hạn</option></select>
+                     <select {...register("L3_cap_nhat_virus")} className="form-input text-xs py-1"><option value="Tự động">Tự động cập nhật</option><option value="Thủ công">Cập nhật thủ công</option><option value="Không cập nhật">Không cập nhật</option></select>
+                  </div>
                 </div>
-                <div>
-                  <label className="form-label text-xs">Sao lưu dữ liệu (L4)</label>
+                <div className="bg-white/5 p-3 rounded-lg border border-white/5 space-y-2">
+                  <label className="form-label text-xs font-bold text-blue-400">Sao lưu dữ liệu (L4)</label>
                   <select {...register("l4_bak_has")} className="form-input text-xs py-1">
-                    <option value="Có">Có - Tự động hàng ngày</option>
+                    <option value="Có - Tự động">Có - Tự động</option>
                     <option value="Thủ công">Có - Thủ công (USB/Ổ cứng)</option>
                     <option value="Không sao lưu">Không có phương án sao lưu</option>
                   </select>
-                </div>
-                <div>
-                   <label className="form-label text-xs">Lưu trữ sao lưu bên ngoài (Offsite)?</label>
-                   <div className="flex gap-4">
+                  <div className="grid grid-cols-1 gap-2">
+                    <input {...register("L4_luu_o_dau")} className="form-input text-xs" placeholder="Nơi lưu trữ (VD: NAS, Ổ cứng ngoài...)" />
+                    <div className="flex gap-4">
+                      <label className="text-[10px]">Sao lưu Offsite?</label>
                       {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("L4_offsite_has")} /><span>{v}</span></label>)}
-                   </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -790,13 +818,22 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 )}
               </div>
               <div className="space-y-4">
-                <div>
-                  <label className="form-label text-xs">Điều hòa nhiệt độ máy chủ (L8.2)</label>
-                  <select {...register("L8_2_dieu_hoa")} className="form-input text-xs py-1">
-                    <option value="Có – 24/7">Có - Chạy 24/7</option>
-                    <option value="Có – Giờ hành chính">Có - Chạy giờ hành chính</option>
-                    <option value="Không">Không có</option>
-                  </select>
+                <div className="grid grid-cols-2 gap-2 mt-2">
+                  <div>
+                    <label className="form-label text-xs">Điều hòa nhiệt độ (L8.2)</label>
+                    <select {...register("L8_2_dieu_hoa")} className="form-input text-xs py-1">
+                      <option value="Có – 24/7">Có - Chạy 24/7</option>
+                      <option value="Có – Giờ hành chính">Có - Chạy giờ hành chính</option>
+                      <option value="Không">Không có</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="form-label text-xs">Bình chữa cháy (L8.3)</label>
+                    <select {...register("L8_3_bin_chua_chay_has")} className="form-input text-xs py-1">
+                      <option value="Có">Có</option>
+                      <option value="Không">Không</option>
+                    </select>
+                  </div>
                 </div>
                 <div>
                   <label className="form-label text-xs">Trang bị bình chữa cháy chuyên dụng (L8.3)</label>
