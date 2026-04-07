@@ -1,20 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Sidebar from "@/components/Sidebar";
 import SurveyForm from "@/components/SurveyForm";
 import MobileSurveyForm from "@/components/MobileSurveyForm";
 import { UploadCloud, PenLine, ArrowLeft, Loader2, Camera } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { getSavedDraft } from "@/hooks/useAutoSave";
 
-export default function NewSurveyPage() {
+function SurveyContent() {
   const [mode, setMode] = useState<"select" | "upload" | "manual">("select");
   const [isLoading, setIsLoading] = useState(false);
   const [extractedData, setExtractedData] = useState<any>(null);
   const isMobile = useIsMobile(768);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams && searchParams.get("mode") === "manual") {
+       const draft = getSavedDraft();
+       if (draft) {
+          setExtractedData(draft);
+          setMode("manual");
+       }
+    }
+  }, [searchParams]);
 
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +115,10 @@ export default function NewSurveyPage() {
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold flex items-center gap-2">Tạo Hồ sơ Khảo sát Mới <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">v2.6</span></h1>
+            <h1 className="text-2xl font-bold flex items-center gap-2">
+               {extractedData?.id ? "Chỉnh sửa Hồ sơ Khảo sát" : "Tạo Hồ sơ Khảo sát Mới"} 
+               <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">v2.6</span>
+            </h1>
             <p className="text-sm text-gray-400 mt-1">Tải ảnh phiếu khảo sát hoặc điền trực tiếp</p>
           </div>
         </div>
@@ -187,5 +202,13 @@ export default function NewSurveyPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function NewSurveyPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-white">Đang tải...</div>}>
+      <SurveyContent />
+    </Suspense>
   );
 }

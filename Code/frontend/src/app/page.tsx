@@ -62,13 +62,17 @@ export default function Home() {
   const router = useRouter();
 
   const handleOpenSurvey = (rec: any) => {
-    const mockData = {
+    // Map dashboard table root fields to survey form fields
+    const fullData = {
+      ...(rec.data || {}),
+      id: rec.id,
       ten_don_vi: rec.ten_don_vi,
       nguoi_thuc_hien: rec.doer,
-      he_thong_thong_tin: "Hệ thống Demo từ Dashboard"
+      ngay_khao_sat: rec.date || new Date().toISOString().split('T')[0]
     };
-    localStorage.setItem("survey_profiler_draft", JSON.stringify(mockData));
-    router.push("/survey/new");
+    
+    localStorage.setItem("survey_profiler_draft", JSON.stringify(fullData));
+    router.push("/survey/new?mode=manual");
   };
 
   const handleDownloadWord = async (rec: any) => {

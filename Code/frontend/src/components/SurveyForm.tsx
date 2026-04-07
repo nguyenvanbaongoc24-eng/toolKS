@@ -7,7 +7,7 @@ import {
   Building, Globe, Server, Save, FileDown, Plus, Trash2, 
   Router, Video, MonitorPlay, ShieldAlert, Users, StickyNote,
   FileCheck, Shield, GraduationCap, LayoutPanelLeft, FileText,
-  CheckCircle2, AlertTriangle, AlertCircle, XCircle
+  CheckCircle2, AlertTriangle, AlertCircle, XCircle, Loader2
 } from "lucide-react";
 import axios from "axios";
 import { useAutoSave } from "@/hooks/useAutoSave";
@@ -128,6 +128,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   useAutoSave(formData, 10000);
   
   const [showValidationModal, setShowValidationModal] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [exportType, setExportType] = useState<"phieu" | "hsdx" | "baocao" | null>(null);
 
   const calculateProgress = () => {
@@ -200,18 +201,33 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   };
 
   const onSubmit = async (data: any) => {
-    console.log("Saving to DB...", data);
+    if (!data.ten_don_vi || !data.he_thong_thong_tin) {
+      setShowValidationModal(true);
+      return;
+    }
+    
+    setIsSaving(true);
     try {
-      await axios.post(`${API_URL}/api/surveys`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const payload = {
+        id: prefilledData?.id,
         ten_don_vi: data.ten_don_vi,
         doer: data.nguoi_thuc_hien,
-        status: "Đang xử lý",
-        data: data
-      });
-      alert("Hồ sơ đã được lưu vào Database thành công!");
+        status: data.status || "Đang xử lý",
+        date: data.ngay_khao_sat || new Date().toISOString().split('T')[0],
+        data: data 
+      };
+      
+      const response = await axios.post(`${apiUrl}/api/surveys`, payload);
+      if (response.data.status === "success") {
+        alert(prefilledData?.id ? "Cập nhật hồ sơ thành công!" : "Lưu hồ sơ mới thành công!");
+        window.location.href = "/"; 
+      }
     } catch (err) {
       console.error(err);
-      alert("Lỗi lưu hồ sơ vào Database!");
+      alert("Lỗi khi lưu dữ liệu lên máy chủ!");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -1011,8 +1027,16 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           </div>
 
           <div className="flex justify-end gap-3 flex-1 overflow-x-auto pb-1 no-scrollbar">
-            <button type="submit" className="btn-primary whitespace-nowrap">
-              <Save className="w-4 h-4" /> Lưu Form
+            <button type="submit" disabled={isSaving} className={`btn-primary whitespace-nowrap ${isSaving ? 'opacity-70 grayscale' : ''}`}>
+               {isSaving ? (
+                 <>
+                   <Loader2 className="w-4 h-4 animate-spin" /> Đang lưu...
+                 </>
+               ) : (
+                 <>
+                   <Save className="w-4 h-4" /> Lưu Form
+                 </>
+               )}
             </button>
             <button type="button" onClick={() => triggerExport("phieu")} className="btn-secondary whitespace-nowrap">
               <FileDown className="w-4 h-4 text-indigo-400" /> Xuất Phiếu KS

@@ -7,7 +7,7 @@ import {
   Building, Globe, Server, Save, FileDown, Plus, Trash2, 
   Router, Video, MonitorPlay, ShieldAlert, Users, StickyNote,
   FileCheck, Shield, GraduationCap, LayoutPanelLeft, FileText,
-  ChevronDown, ChevronUp, Network, X, CheckCircle2, AlertTriangle, AlertCircle, XCircle
+  ChevronDown, ChevronUp, Network, X, CheckCircle2, AlertTriangle, AlertCircle, XCircle, Loader2
 } from "lucide-react";
 import axios from "axios";
 import { useAutoSave } from "@/hooks/useAutoSave";
@@ -116,6 +116,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const formData = watch();
   useAutoSave(formData, 10000);
   const [showValidationModal, setShowValidationModal] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   
   const calculateProgress = () => {
      const fields = ["ten_don_vi", "he_thong_thong_tin", "dia_chi"];
@@ -135,7 +136,29 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
       setShowValidationModal(true);
       return;
     }
-    // Handle submission logic...
+    
+    setIsSaving(true);
+    try {
+      const payload = {
+        id: prefilledData?.id,
+        ten_don_vi: data.ten_don_vi,
+        doer: data.nguoi_thuc_hien,
+        status: data.status || "Đang xử lý",
+        date: data.ngay_khao_sat || new Date().toISOString().split('T')[0],
+        data: data // The entire form data
+      };
+      
+      const response = await axios.post(`${API_URL}/api/surveys`, payload);
+      if (response.data.status === "success") {
+        alert(prefilledData?.id ? "Cập nhật hồ sơ thành công!" : "Lưu hồ sơ mới thành công!");
+        window.location.href = "/"; // Back to dashboard
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Lỗi khi lưu dữ liệu lên máy chủ. Vui lòng kiểm tra kết nối mạng.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleExport = async (type: string) => {
@@ -713,8 +736,16 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 <textarea {...register("ghi_chu")} className="form-input min-h-[100px] text-xs" placeholder="..." />
              </div>
            </div>
-           <button type="submit" className="w-full h-14 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 uppercase tracking-widest active:scale-95 transition-transform">
-             <Save className="w-6 h-6" /> Lưu hồ sơ khảo sát
+           <button type="submit" disabled={isSaving} className={`w-full h-14 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 uppercase tracking-widest active:scale-95 transition-transform ${isSaving ? 'opacity-70 grayscale' : ''}`}>
+             {isSaving ? (
+               <>
+                 <Loader2 className="w-6 h-6 animate-spin" /> Đang lưu hồ sơ...
+               </>
+             ) : (
+               <>
+                 <Save className="w-6 h-6" /> Lưu hồ sơ khảo sát
+               </>
+             )}
            </button>
         </div>
       )}
