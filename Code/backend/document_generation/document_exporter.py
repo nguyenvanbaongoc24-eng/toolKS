@@ -2,6 +2,8 @@ from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Mm
 import os
 import logging
+from .diagram_generator import DiagramGenerator
+from ai_extraction.security_analyzer import SecurityAnalyzer
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -330,6 +332,16 @@ class DocumentExporter:
         doc = DocxTemplate(template_path)
         context = self._get_context(data)
         
+        # Automatically generate diagram if not provided
+        if not diagram_path:
+            try:
+                dg = DiagramGenerator(output_dir=self.output_dir)
+                diagram_filename = f"network_{data.get('ten_don_vi', 'Unknown').replace(' ', '_')}.png"
+                diagram_path = dg.generate_network_topology(data, diagram_filename)
+            except Exception as e:
+                logger.error(f"Failed to generate network diagram: {e}")
+                diagram_path = None
+        
         if diagram_path and os.path.exists(diagram_path):
             context['network_diagram'] = InlineImage(doc, diagram_path, width=Mm(150))
         else:
@@ -361,6 +373,15 @@ class DocumentExporter:
         doc = DocxTemplate(template_path)
         context = self._get_context(data)
         
+        # Override hardcoded logic with intelligent RAG analysis
+        try:
+            analyzer = SecurityAnalyzer()
+            ai_results = analyzer.analyze_survey(data)
+            context['problems'] = ai_results.get('problems', context.get('problems'))
+            context['solutions'] = ai_results.get('solutions', context.get('solutions'))
+        except Exception as e:
+            logger.warning(f"Could not perform Intelligent Security Analysis: {e}")
+            
         # Debug: Log key context values
         logger.info("="*60)
         logger.info("EXPORTING: Báo Cáo Khảo Sát")
