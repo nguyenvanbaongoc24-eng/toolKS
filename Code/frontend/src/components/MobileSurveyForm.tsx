@@ -106,7 +106,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     ...prefilledData
   };
 
-  const { register, control, handleSubmit, watch, setValue } = useForm({ defaultValues: defaultVals });
+  const { register, control, handleSubmit, watch, setValue, getValues } = useForm({ defaultValues: defaultVals });
 
   // Sync prefilledData to form if it changes (e.g. forced reset from parent or dashboard click)
   useEffect(() => {
@@ -133,6 +133,10 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
       });
     }
   }, [prefilledData, setValue, availableStaff]);
+
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportProgress, setExportProgress] = useState(0);
+  const [exportType, setExportType] = useState<string | null>(null);
 
   // Watch and persist technician name (Doer)
   const currentDoer = watch("nguoi_thuc_hien");
@@ -252,17 +256,44 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   };
 
   const handleExport = async (type: string) => {
-     try {
-       const endpoint = type === "phieu" ? "/export/phieu-khao-sat" : type === "hsdx" ? "/export/ho-so-de-xuat" : "/export/bao-cao";
-       const filename = `${type.toUpperCase()}_${formData.ten_don_vi || "ATTT"}.docx`;
-       const response = await axios.post(`${API_URL}${endpoint}`, { data: formData }, { responseType: 'blob' });
-       const url = window.URL.createObjectURL(new Blob([response.data]));
-       const link = document.createElement('a');
-       link.href = url;
-       link.setAttribute('download', filename);
-       document.body.appendChild(link);
-       link.click();
-     } catch (err) { console.error("Export error:", err); }
+    setIsExporting(true);
+    setExportProgress(10);
+    const progressInterval = setInterval(() => {
+      setExportProgress(prev => (prev < 90 ? prev + Math.floor(Math.random() * 8) + 2 : prev));
+    }, 400);
+
+    try {
+      const currentData = getValues();
+      const endpoint = type === "phieu" ? "/export/phieu-khao-sat" : type === "hsdx" ? "/export/ho-so-de-xuat" : "/export/bao-cao";
+      const filename = `${type === "phieu" ? "Phieu_KS" : type === "hsdx" ? "HSDX" : "Bao_Cao"}_${(currentData.ten_don_vi || "ATTT").replace(/\s+/g, "_")}.docx`;
+
+      const response = await axios.post(`${API_URL}${endpoint}`, 
+        { data: currentData }, 
+        { responseType: 'blob' }
+      );
+      
+      setExportProgress(100);
+      clearInterval(progressInterval);
+
+      setTimeout(() => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setIsExporting(false);
+        setExportProgress(0);
+      }, 500);
+
+    } catch (err) {
+      clearInterval(progressInterval);
+      setIsExporting(false);
+      setExportProgress(0);
+      console.error(err);
+      alert("Lỗi xuất file Word!");
+    }
   };
 
   const AccordionHeader = ({ id, label, icon: Icon }: { id: string, label: string, icon: any }) => (
@@ -370,7 +401,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
               </div>
               <div className="grid grid-cols-3 gap-2">
                  <div><label className="form-label text-[10px]">Nội bộ (người)</label><input {...register("C5_noi_bo")} className="form-input h-11 text-xs" type="number" /></div>
-                 <div><label className="form-label text-[10px]">Bên ngoài (lượt)</label><input {...register("C5_ben_ngoai")} className="form-input h-11 text-xs" /></div>
+                 <div><label className="form-label text-[10px]">Bên ngoài (lượt)</label><input {...register("C5_ben_ngoai")} className="form-input h-11 text-xs" type="number" /></div>
                  <div><label className="form-label text-[10px]">Năm HĐ (C6)</label><input {...register("C6_nam_hoat_dong")} className="form-input h-11 text-xs" /></div>
               </div>
               <div className="p-3 bg-white/5 rounded border border-white/5">
@@ -1073,13 +1104,46 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         </div>
       )}
 
-      {/* BOTTOM ACTION BAR (Floating) */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-white/10 p-3 z-50 flex gap-2 shadow-2xl">
-         <button type="button" onClick={() => handleExport("phieu")} className="flex-1 h-11 bg-indigo-500/20 text-indigo-400 rounded-lg text-[10px] font-bold uppercase border border-indigo-500/30">Phiếu</button>
-         <button type="button" onClick={() => handleExport("hsdx")} className="flex-1 h-11 bg-purple-500/20 text-purple-400 rounded-lg text-[10px] font-bold uppercase border border-purple-500/30">HSDX</button>
-         <button type="button" onClick={() => handleExport("baocao")} className="flex-1 h-11 bg-blue-500/20 text-blue-400 rounded-lg text-[10px] font-bold uppercase border border-blue-500/30">Báo cáo</button>
-         <button type="button" onClick={() => setShowNetworkModal(true)} className="w-12 h-11 bg-gray-800 rounded-lg flex items-center justify-center"><Network className="w-5 h-5 text-indigo-400" /></button>
+      {/* Bottom Bar with Export buttons */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-white/10 p-4 pb-8 flex flex-col gap-4 z-[90]">
+         <div className="flex gap-2 justify-center">
+            <button type="button" onClick={() => handleExport("phieu")} className="p-3 bg-white/5 rounded-xl border border-white/10 text-cyan-400">
+               <FileDown className="w-6 h-6" />
+            </button>
+            <button type="button" onClick={() => handleExport("hsdx")} className="p-3 bg-white/5 rounded-xl border border-white/10 text-emerald-400">
+               <Shield className="w-6 h-6" />
+            </button>
+            <button type="button" onClick={() => handleExport("baocao")} className="p-3 bg-white/5 rounded-xl border border-white/10 text-indigo-400">
+               <FileText className="w-6 h-6" />
+            </button>
+         </div>
+         <button type="submit" className="w-full bg-indigo-600 py-4 text-lg font-black rounded-xl">
+            LƯU HỒ SƠ
+         </button>
       </div>
+
+      {isExporting && (
+        <div className="fixed inset-0 z-[200] bg-gray-950/95 backdrop-blur-md flex items-center justify-center p-4 text-center">
+          <div className="w-full bg-gray-900 p-8 border border-white/10 shadow-2xl relative rounded-xl">
+             <div className="flex flex-col items-center">
+                <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mb-6 animate-pulse">
+                   <FileText className="w-8 h-8 text-cyan-400" />
+                </div>
+                <h2 className="text-xl font-bold text-white mb-2">Đang tạo văn bản...</h2>
+                <div className="w-full space-y-3 mt-4">
+                   <div className="flex justify-between text-xs font-bold text-cyan-400">
+                      <span>TIẾN ĐỘ</span>
+                      <span>{exportProgress}%</span>
+                   </div>
+                   <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                      <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${exportProgress}%` }}></div>
+                   </div>
+                   <p className="text-[10px] text-gray-500 italic">Vui lòng chờ trong giây lát</p>
+                </div>
+             </div>
+          </div>
+        </div>
+      )}
 
        {showNetworkModal && (
          <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex flex-col">

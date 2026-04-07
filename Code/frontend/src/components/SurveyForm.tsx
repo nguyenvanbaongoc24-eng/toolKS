@@ -195,7 +195,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     ghi_chu: prefilledData?.ghi_chu || ""
   };
 
-  const { register, control, handleSubmit, watch, setValue, formState: { errors } } = useForm({
+  const { register, control, handleSubmit, watch, setValue, getValues, formState: { errors } } = useForm({
     defaultValues: defaultVals
   });
 
@@ -250,6 +250,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [showValidationModal, setShowValidationModal] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [exportType, setExportType] = useState<"phieu" | "hsdx" | "baocao" | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportProgress, setExportProgress] = useState(0);
 
   const [isCompleting, setIsCompleting] = useState(false);
 
@@ -293,8 +295,9 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   };
 
   const triggerExport = (type: "phieu" | "hsdx" | "baocao") => {
+    const currentData = getValues();
     //@ts-ignore
-    const missingRequired = ["ten_don_vi", "he_thong_thong_tin"].filter(f => !formData[f]);
+    const missingRequired = ["ten_don_vi", "he_thong_thong_tin"].filter(f => !currentData[f]);
     if (missingRequired.length > 0) {
        setShowValidationModal(true);
        setExportType(type);
@@ -309,36 +312,56 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
 
   const executeExport = async (type: "phieu" | "hsdx" | "baocao") => {
     setShowValidationModal(false);
+    setIsExporting(true);
+    setExportProgress(10);
+    
+    // Simulate progress while waiting for backend
+    const progressInterval = setInterval(() => {
+      setExportProgress(prev => (prev < 90 ? prev + Math.floor(Math.random() * 10) + 2 : prev));
+    }, 400);
+
     try {
+      const currentData = getValues();
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       let endpoint = "";
       let filename = "";
 
       if (type === "phieu") {
         endpoint = "/export/phieu-khao-sat";
-        filename = "Phieu_Khao_Sat_ATTT.docx";
+        filename = `Phieu_Khao_Sat_${(currentData.ten_don_vi || "ATTT").replace(/\s+/g, "_")}.docx`;
       } else if (type === "hsdx") {
         endpoint = "/export/ho-so-de-xuat";
-        filename = "Ho_So_De_Xuat_Cap_Do.docx";
+        filename = `HSDX_${(currentData.ten_don_vi || "ATTT").replace(/\s+/g, "_")}.docx`;
       } else if (type === "baocao") {
         endpoint = "/export/bao-cao";
-        filename = "Bao_Cao_HSDX.docx";
+        filename = `Bao_Cao_${(currentData.ten_don_vi || "ATTT").replace(/\s+/g, "_")}.docx`;
       }
 
       const response = await axios.post(`${apiUrl}${endpoint}`, {
-        data: formData
+        data: currentData
       }, { responseType: 'blob' });
       
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', filename);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      setExportProgress(100);
+      clearInterval(progressInterval);
+
+      setTimeout(() => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setIsExporting(false);
+        setExportProgress(0);
+      }, 500);
+
     } catch (err) {
+      clearInterval(progressInterval);
+      setIsExporting(false);
+      setExportProgress(0);
       console.error(err);
-      alert("Lỗi xuất file Word!");
+      alert("Lỗi xuất file Word! Vui lòng kiểm tra lại kết nối máy chủ.");
     }
   };
 
@@ -1343,27 +1366,76 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       </div>
 
       {showValidationModal && (
-        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center">
-          <div className="bg-gray-900 border border-white/10 rounded-xl max-w-md w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <div className="w-12 h-12 bg-rose-500/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-               <AlertCircle className="w-6 h-6 text-rose-500" />
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-gray-900 border border-white/10 rounded-2xl max-w-md w-full p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative animate-in fade-in zoom-in duration-200">
+            <div className="w-16 h-16 bg-rose-500/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+               <AlertCircle className="w-8 h-8 text-rose-500" />
             </div>
-            <h2 className="text-xl font-bold text-center mb-2">Cảnh báo thiếu thông tin</h2>
-            <p className="text-gray-400 text-sm text-center mb-6">Bạn đang bỏ trống các trường dữ liệu quan trọng bắt buộc phải có cho báo cáo.</p>
+            <h2 className="text-2xl font-bold text-center mb-2">Thông tin chưa đầy đủ</h2>
+            <p className="text-gray-400 text-sm text-center mb-8">Bạn cần nhập các thông tin bắt buộc dưới đây để có thể xuất báo cáo chuẩn xác nhất.</p>
             
-            <div className="bg-black/30 p-4 rounded-lg mb-6 border border-white/5 space-y-2 text-sm">
-               {!formData.ten_don_vi && <div className="flex items-center gap-2 text-rose-400"><XCircle className="w-4 h-4"/> Tên cơ quan chủ quản</div>}
-               {!formData.he_thong_thong_tin && <div className="flex items-center gap-2 text-rose-400"><XCircle className="w-4 h-4"/> Tên hệ thống thông tin</div>}
+            <div className="bg-black/30 p-5 rounded-xl mb-8 border border-white/5 space-y-3 text-sm">
+               {!getValues("ten_don_vi") && <div className="flex items-center gap-3 text-rose-400 font-medium"><XCircle className="w-5 h-5"/> Tên cơ quan chủ quản</div>}
+               {!getValues("he_thong_thong_tin") && <div className="flex items-center gap-3 text-rose-400 font-medium"><XCircle className="w-5 h-5"/> Tên hệ thống thông tin</div>}
             </div>
 
-            <div className="flex gap-3">
-              <button type="button" onClick={() => setShowValidationModal(false)} className="btn-secondary flex-1 justify-center py-3">
-                Quay lại bổ sung
+            <div className="flex flex-col gap-3">
+              <button type="button" onClick={() => setShowValidationModal(false)} className="btn-secondary w-full justify-center py-4 bg-white/5 hover:bg-white/10">
+                Quay lại bổ sung ngay
               </button>
-              <button type="button" onClick={() => executeExport(exportType || "phieu")} className="btn-primary flex-1 justify-center bg-rose-600 py-3">
-                Vẫn Xuất (Bỏ qua)
+              <button type="button" onClick={() => executeExport(exportType || "phieu")} className="btn-primary w-full justify-center bg-rose-600 hover:bg-rose-500 py-4 shadow-lg shadow-rose-900/20">
+                Bỏ qua & Vẫn xuất file
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {isExporting && (
+        <div className="fixed inset-0 z-[200] bg-gray-950/90 backdrop-blur-md flex items-center justify-center p-6">
+          <div className="max-w-md w-full glass-card p-10 border border-white/10 shadow-[0_0_100px_rgba(34,211,238,0.1)] relative">
+             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-20"></div>
+             
+             <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 relative mb-8">
+                   <div className="absolute inset-0 bg-cyan-500/20 rounded-full animate-ping opacity-25"></div>
+                   <div className="relative w-full h-full bg-cyan-500/10 rounded-full flex items-center justify-center border border-cyan-500/30">
+                      {exportProgress < 100 ? (
+                        <FileText className="w-10 h-10 text-cyan-400 animate-pulse" />
+                      ) : (
+                        <CheckCircle2 className="w-10 h-10 text-emerald-400 scale-110 transition-transform" />
+                      )}
+                   </div>
+                </div>
+
+                <h2 className="text-2xl font-black text-white mb-2 tracking-tight">
+                   {exportProgress < 100 ? "Đang khởi tạo văn bản..." : "Tệp đã sẵn sàng!"}
+                </h2>
+                <p className="text-gray-400 text-sm mb-10 leading-relaxed">
+                   Hệ thống đang trích xuất dữ liệu và Render mẫu Word theo đúng chuẩn ISO/ATTT. Vui lòng giữ trình duyệt mở.
+                </p>
+
+                <div className="w-full space-y-4">
+                   <div className="flex justify-between items-end">
+                      <span className="text-[10px] font-black uppercase text-cyan-400 tracking-widest">Tiến trình xử lý</span>
+                      <span className="text-2xl font-black text-white tabular-nums">{exportProgress}%</span>
+                   </div>
+                   <div className="w-full h-3 bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/10">
+                      <div 
+                         className="h-full bg-gradient-to-r from-cyan-600 via-indigo-500 to-purple-500 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(6,182,212,0.4)] relative"
+                         style={{ width: `${exportProgress}%` }}
+                      >
+                         <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.15)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.15)_50%,rgba(255,255,255,0.15)_75%,transparent_75%,transparent)] bg-[length:1rem_1rem] animate-[progress-stripe_0.5s_linear_infinite]"></div>
+                      </div>
+                   </div>
+                   <div className="flex justify-between text-[8px] font-bold text-gray-600 uppercase tracking-tighter">
+                      <span>Khởi tạo mẫu</span>
+                      <span>Nạp dữ liệu</span>
+                      <span>Ghép nội dung</span>
+                      <span>Hoàn tất</span>
+                   </div>
+                </div>
+             </div>
           </div>
         </div>
       )}
