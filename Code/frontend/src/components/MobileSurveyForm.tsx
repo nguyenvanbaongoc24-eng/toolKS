@@ -68,8 +68,8 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     
     // Tab 3: Dịch vụ & Ứng dụng (Mục I, P)
     ung_dung: [],
-    p1_protocol: "HTTP (không mã hóa)",
-    p2_vpn: "Không có VPN", p2_vpn_type: "",
+    p1_protocol: "HTTPS (có chứng chỉ SSL/TLS)",
+    p2_vpn: "Không sử dụng", p2_vpn_type: "",
     P3_ket_noi_cap_tren_type: "Không kết nối", P3_1_ten_he_thong_va_phuong_thuc: "",
     P4_ma_hoa_luu_tru_has: "Không", P4_phuong_phap: "",
     P5_email_sec: "Không",
@@ -109,10 +109,9 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
 
   const { register, control, handleSubmit, watch, setValue, getValues } = useForm({ defaultValues: defaultVals });
 
-  // Sync prefilledData to form if it changes (e.g. forced reset from parent or dashboard click)
+  // Sync prefilledData to form if it changes
   useEffect(() => {
     if (prefilledData && Object.keys(prefilledData).length > 0) {
-      // Clear ID if in /new route to prevent overwrite
       if (typeof window !== "undefined" && window.location.pathname.endsWith("/survey/new")) {
          if (prefilledData.id) delete prefilledData.id;
       }
@@ -126,7 +125,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         localStorage.setItem("last_survey_doer", doerVal);
       }
     } else if (prefilledData && Object.keys(prefilledData).length === 0) {
-      // Force blank form case
       const lastDoer = localStorage.getItem("last_survey_doer");
       const clearedFields = { ...defaultVals, nguoi_thuc_hien: lastDoer || "" };
       Object.keys(clearedFields).forEach(key => {
@@ -139,7 +137,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const [exportProgress, setExportProgress] = useState(0);
   const [exportType, setExportType] = useState<string | null>(null);
 
-  // Watch and persist technician name (Doer)
   const currentDoer = watch("nguoi_thuc_hien");
   useEffect(() => {
     if (currentDoer) {
@@ -165,7 +162,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const [isSaving, setIsSaving] = useState(false);
   
   const calculateProgress = () => {
-     // A more comprehensive progress calculation across all sections
      const countFields = (obj: any): { filled: number, total: number } => {
         let filled = 0;
         let total = 0;
@@ -190,8 +186,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
      };
 
      const { filled, total } = countFields(formData);
-     // We normalize total to a reasonable number of "core" questions for a better UX
-     // The form has ~100+ raw fields, let's target about 50 key data points.
      const percent = Math.min(100, Math.round((filled / 60) * 100)); 
      return { percent, missing: Math.max(0, 60 - filled) };
   };
@@ -230,7 +224,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     
     setIsSaving(true);
     try {
-      // Save last doer for auto-fill
       if (data.nguoi_thuc_hien) {
         localStorage.setItem("last_survey_doer", data.nguoi_thuc_hien);
       }
@@ -298,10 +291,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
       setIsExporting(false);
       setExportProgress(0);
       console.error(err);
-      
-      let errorMsg = "Lỗi xuất file Word! Vui lòng kiểm tra lại kết nối máy chủ.";
-      
-      // Handle Blob error response
+      let errorMsg = "Lỗi xuất file Word!";
       if (err.response?.data instanceof Blob) {
         const reader = new FileReader();
         reader.onload = () => {
@@ -329,7 +319,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   return (
     <>
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 pb-28 px-2 max-w-full overflow-hidden text-white bg-black/20 relative">
-      {/* Sticky Progress Bar */}
       <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-md -mx-2 px-4 py-2 border-b border-indigo-500/30 flex items-center justify-between shadow-lg">
          <div className="flex-1 mr-4">
             <div className="flex justify-between items-center mb-1">
@@ -685,7 +674,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   
                   <div className="p-3 bg-indigo-500/5 rounded border border-indigo-500/10">
                       <div className="flex justify-between items-center mb-2">
-                        <label className="text-[10px] uppercase font-bold text-indigo-400">T2. KẾT NỐI VẬT LÝ SWITCH (PORT MAPPING)</label>
+                        <label className="text-[10px] uppercase font-bold text-indigo-400">T2. KẾT NỐI VẬT LÝ SWITCH</label>
                         <button type="button" onClick={() => portSwitchFields.append({ ten_switch: "", so_cong: "", cong_su_dung: "" })} className="bg-indigo-500/20 text-indigo-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
                      </div>
                      {portSwitchFields.fields.map((field, idx) => (
@@ -705,7 +694,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
 
                   <div className="space-y-2">
                      <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                        <label className="text-[9px] text-gray-500 block uppercase mb-1">Tủ Rack? (T3.1)</label>
+                        <label className="text-[9px] text-gray-500 block uppercase mb-1">T3.1 Tủ Rack?</label>
                         <div className="flex gap-2">
                            <select {...register("T3_1_co_rack")} className="form-input h-11 text-xs bg-gray-800 flex-1">
                               <option value="Không">K</option><option value="Có">Có</option>
@@ -720,7 +709,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                      </div>
                   </div>
                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                     <label className="text-[9px] text-gray-500 block uppercase mb-2">Thông tin cáp kết nối (T4)</label>
+                     <label className="text-[9px] text-gray-500 block uppercase mb-2">T4. Thông tin cáp kết nối</label>
                      <div className="space-y-3">
                         <div>
                            <label className="text-[8px] text-gray-400 block mb-1">T4.1 LOẠI CÁP MẠNG L.BỘ</label>
@@ -739,7 +728,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
 
                   <div className="p-3 bg-teal-500/5 rounded border border-teal-500/10">
                      <div className="flex justify-between items-center mb-2">
-                        <label className="text-[10px] uppercase font-bold text-teal-400">T5. VỊ TRÍ & TẦNG KHU VỰC (VẼ SƠ ĐỒ)</label>
+                        <label className="text-[10px] uppercase font-bold text-teal-400">T5. VỊ TRÍ & TẦNG KHU VỰC</label>
                         <button type="button" onClick={() => viTriFields.append({ tang: "", ten_thiet_bi: "", mo_ta: "" })} className="bg-teal-500/20 text-teal-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
                      </div>
                      <p className="text-[9px] text-gray-500 mb-2 italic">Dữ liệu này dùng để vẽ sơ đồ mạng thực tế.</p>
@@ -760,284 +749,322 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   </div>
                </div>
             </div>
+
+            {/* Restored Section I Integration */}
+            <div className="pt-4 border-t border-white/5 space-y-4">
+               <div className="flex justify-between items-center mb-1">
+                  <label className="text-[10px] uppercase font-bold text-amber-500 font-sans">I. Ứng dụng & Dịch vụ CNTT</label>
+                  <button type="button" onClick={() => ungDungFields.append({ ten_ung_dung: "", chuc_nang_chinh: "", don_vi_cung_cap: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="bg-amber-500/20 text-amber-500 p-1.5 rounded-lg flex items-center gap-1">
+                     <Plus className="w-4 h-4" /> <span className="text-[9px]">THÊM APP</span>
+                  </button>
+               </div>
+               {ungDungFields.fields.map((field, idx) => (
+                  <div key={field.id} className="p-4 bg-gray-800/40 rounded-xl mb-3 border border-white/5 shadow-lg relative">
+                     <div className="flex justify-between items-center mb-3">
+                        <span className="text-[10px] font-bold text-gray-500 uppercase">Ứng dụng #{idx + 1}</span>
+                        <button type="button" onClick={() => ungDungFields.remove(idx)} className="text-rose-500"><Trash2 className="w-4 h-4"/></button>
+                     </div>
+                     <div className="space-y-3">
+                        <input {...register(`ung_dung.${idx}.ten_ung_dung`)} placeholder="Tên ứng dụng (*)" className="form-input text-xs" />
+                        <textarea {...register(`ung_dung.${idx}.chuc_nang_chinh`)} placeholder="Chức năng chính..." className="form-input text-xs min-h-[60px]" />
+                        <div className="grid grid-cols-2 gap-2">
+                           <input {...register(`ung_dung.${idx}.don_vi_cung_cap`)} placeholder="Đơn vị cung cấp" className="form-input text-xs h-11" />
+                           <input {...register(`ung_dung.${idx}.phien_ban`)} placeholder="Phiên bản" className="form-input text-xs h-11" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                           <div className="bg-black/20 p-2 rounded">
+                              <label className="text-[9px] text-gray-500 uppercase block mb-1">Kết nối Internet?</label>
+                              <select {...register(`ung_dung.${idx}.ket_noi_internet`)} className="form-input h-9 text-xs py-0">
+                                 <option value="Có">Có</option>
+                                 <option value="Không">Không</option>
+                              </select>
+                           </div>
+                           <input {...register(`ung_dung.${idx}.ghi_chu`)} placeholder="Ghi chú hđ..." className="form-input text-xs h-11 self-end" />
+                        </div>
+                     </div>
+                  </div>
+               ))}
+            </div>
          </div>
       )}
 
       <AccordionHeader id="bao_mat" label="III. An toàn Bảo mật" icon={ShieldAlert} />
       {expandedSection === "bao_mat" && (
-        <div className="p-4 bg-black/40 rounded-xl mb-4 space-y-6 border border-white/5 shadow-inner">
-           <div className="space-y-3">
-              <h4 className="text-[10px] uppercase font-bold text-stone-400 tracking-wider">K. Danh mục hồ sơ hiện có</h4>
-              <div className="grid grid-cols-1 gap-2">
-                {[
-                   {id: "k1_quy_che", label: "K1. Quy chế ATTT"},
-                   {id: "k2_ke_hoach_ht", label: "K2. Kế hoạch ATTT năm HT"},
-                   {id: "k3_ke_hoach_tr", label: "K3. Kế hoạch ATTT năm trước"},
-                   {id: "k4_qd_can_bo", label: "K4. QĐ phân công cán bộ"},
-                   {id: "K5_qd_phe_duyet_httt", label: "K5. QĐ phê duyệt cấp độ"},
-                   {id: "K6_ung_pho_su_co", label: "K6. Quy trình ứng phó sự cố"},
-                   {id: "K7_bien_ban_kiem_tra", label: "K7. Biên bản kiểm tra ATTT"}
-                ].map(k => (
-                  <div key={k.id} className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-400 block mb-1 uppercase">{k.label}</label>
-                     <input {...register(k.id as any)} className="form-input h-11 text-xs" placeholder="Số/ngày ban hành..." />
-                  </div>
-                ))}
-              </div>
-           </div>
-           
-           <div className="pt-4 border-t border-white/5 space-y-4">
-               <h4 className="text-[10px] uppercase font-bold text-violet-400 tracking-wider">L. Kiểm soát truy cập & Giám sát</h4>
-               <div className="grid grid-cols-2 gap-2">
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="form-label text-[10px]">Kiểm soát vật lý (L1)</label>
-                     <select {...register("l1_phys_key")} className="form-input h-11 text-xs bg-gray-900 text-white">
-                        <option value="Có khóa cửa (chìa khóa thường)">Có khóa cửa (chìa khóa thường)</option>
-                        <option value="Có khóa cửa + camera giám sát">Có khóa cửa + camera giám sát</option>
-                        <option value="Có thẻ từ / kiểm soát điện tử">Có thẻ từ / kiểm soát điện tử</option>
-                        <option value="Không có kiểm soát riêng">Không có kiểm soát riêng</option>
-                     </select>
-                  </div>
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="form-label text-[10px]">Bảng ký tên? (L1.ii)</label>
-                     <div className="flex gap-4 items-center h-11 text-white">
-                        <label className="flex items-center gap-1"><input type="radio" {...register("L1_bang_ky_ten")} value="Có" /> Có</label>
-                        <label className="flex items-center gap-1"><input type="radio" {...register("L1_bang_ky_ten")} value="Không" /> Không</label>
-                     </div>
-                  </div>
-               </div>
-
-               <div className="p-3 bg-white/5 rounded border border-white/5">
-                  <label className="form-label text-[10px]">Chính sách mật khẩu (L2)</label>
-                  <select {...register("l2_pass_policy")} className="form-input h-11 text-xs mb-2 bg-gray-800 text-white">
-                     <option value="Đã ban hành và áp dụng">Đã ban hành và áp dụng</option>
-                     <option value="Có chính sách mật khẩu (chưa văn bản)">Có chính sách mật khẩu (chưa văn bản)</option>
-                     <option value="Không có chính sách thống nhất">Không có chính sách thống nhất</option>
-                  </select>
-                  <div className="grid grid-cols-2 gap-4 mt-2">
-                     <div>
-                        <label className="text-[9px] text-gray-500 uppercase block mb-1">Độ dài tối thiểu</label>
-                        <input {...register("l2_pass_len")} className="form-input h-11 text-xs" type="number" />
-                     </div>
-                     <div>
-                        <label className="text-[9px] text-gray-500 uppercase block mb-1">Thay đổi định kỳ (tháng)</label>
-                        <input {...register("l2_pass_time")} className="form-input h-11 text-xs" type="number" />
-                     </div>
-                  </div>
-               </div>
-
-               <div className="p-3 bg-white/5 rounded border border-white/5">
-                  <div className="flex justify-between items-center mb-2">
-                     <label className="form-label text-[10px] mb-0">Công cụ diệt Virus (L3)</label>
-                     <select {...register("l3_av_has")} className="bg-black/40 border-none text-[9px] text-white rounded">
-                        <option value="Có cài đặt">Có cài đặt</option>
-                        <option value="Không">Không</option>
-                     </select>
-                  </div>
-                  {watch("l3_av_has") !== "Không" && (
-                     <div className="space-y-2">
-                        <input {...register("l3_av_name")} placeholder="Tên phần mềm..." className="form-input h-11 text-xs" />
-                        <div className="grid grid-cols-2 gap-2">
-                           <select {...register("l3_av_license")} className="form-input h-11 text-xs bg-gray-800 text-white">
-                              <option value="Còn hạn">Còn hạn</option>
-                              <option value="Hết hạn">Hết hạn</option>
-                              <option value="Không bản quyền">K.bản quyền</option>
-                           </select>
-                           <select {...register("L3_cap_nhat_virus")} className="form-input h-11 text-xs bg-gray-800 text-white">
-                              <option value="Tự động">Cập nhật tự động</option>
-                              <option value="Thủ công">Cập nhật thủ công</option>
-                           </select>
-                        </div>
-                     </div>
-                  )}
-               </div>
-
-               <div className="p-3 bg-white/5 rounded border border-white/5">
-                  <label className="form-label text-[10px]">Sao lưu dữ liệu (L4)</label>
-                  <select {...register("l4_bak_has")} className="form-input h-11 text-xs mb-2 bg-gray-800 text-white">
-                     <option value="Có - Thủ công (USB/Ổ cứng)">Có - Thủ công (USB/Ổ cứng)</option>
-                     <option value="Có - Tự động (Server/Cloud)">Có - Tự động (Server/Cloud)</option>
-                     <option value="Không sao lưu">Không sao lưu</option>
-                  </select>
-                  <input {...register("L4_luu_o_dau")} placeholder="Tên thiết bị lưu trữ (Vd: Ổ cứng ngoài)" className="form-input h-11 text-xs mb-2" />
-                  <div className="flex items-center gap-4 p-1">
-                     <span className="text-[9px] text-gray-400 uppercase font-bold text-white">Sao lưu Offsite?</span>
-                     <label className="flex items-center gap-2 text-xs text-white"><input type="radio" {...register("L4_offsite_has")} value="Có" /> Có</label>
-                     <label className="flex items-center gap-2 text-xs text-white"><input type="radio" {...register("L4_offsite_has")} value="Không" /> Không</label>
-                  </div>
-               </div>
-
-               <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                  <div className="flex justify-between items-center mb-2">
-                     <label className="form-label text-[10px] mb-0">Nhật ký hệ thống (Logs) (L5)</label>
-                     <select {...register("l5_log_enabled")} className="bg-black/40 border-none text-[9px] rounded">
-                        <option value="Có">Có lưu</option>
-                        <option value="Không">Không</option>
-                     </select>
-                  </div>
-                  {watch("l5_log_enabled") === "Có" && (
-                     <div className="grid grid-cols-2 gap-2">
-                        <input {...register("l5_log_retention")} placeholder="Thời gian lưu (tháng)" className="form-input h-11 text-xs" />
-                        <select {...register("l5_siem_has")} className="form-input h-11 text-xs bg-gray-800">
-                           <option value="Không">K.có SIEM</option><option value="Có">Dùng SIEM</option>
-                        </select>
-                     </div>
-                  )}
-               </div>
-
-               <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                  <label className="form-label text-[10px]">Sự cố ATTT trong 1 năm qua (L6)</label>
-                  <select {...register("l6_incident_has")} className="form-input h-11 text-xs mb-2 bg-gray-800">
-                     <option value="Không có sự cố nào">Không có sự cố nào</option>
-                     <option value="Có sự cố (đã xử lý)">Có sự cố (đã xử lý)</option>
-                     <option value="Có sự cố (chưa xử lý xong)">Có sự cố (chưa xử lý xong)</option>
-                  </select>
-                  {watch("l6_incident_has") !== "Không có sự cố nào" && (
-                     <textarea {...register("l6_incident_desc")} placeholder="Mô tả sự cố và cách khắc phục..." className="form-input min-h-[60px] text-xs" />
-                  )}
-               </div>
-
+         <div className="p-4 bg-black/40 rounded-xl mb-4 space-y-6 border border-white/5 shadow-inner">
+            <div className="space-y-3">
+               <h4 className="text-[10px] uppercase font-bold text-stone-400 tracking-wider">K. Danh mục hồ sơ hiện có</h4>
                <div className="grid grid-cols-1 gap-2">
-                  <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                     <label className="form-label text-[10px]">Tường lửa (Firewall) (L7)</label>
-                     <select {...register("l7_type")} className="form-input h-11 text-xs mb-2 bg-gray-800">
-                        <option value="Cứng chuyên dụng">Cứng chuyên dụng</option>
-                        <option value="Tích hợp trên Router">Tích hợp trên Router</option>
-                        <option value="Phần mềm">Phần mềm</option>
-                        <option value="Không có">Không có</option>
-                     </select>
-                     <div className="grid grid-cols-2 gap-2">
-                        <input {...register("L7_chinh_sach")} placeholder="Chính sách (Vd: Deny all)" className="form-input h-11 text-xs" />
-                        <input {...register("L7_4_cong_mo")} placeholder="Các cổng mở..." className="form-input h-11 text-xs" />
-                     </div>
-                  </div>
-                  
-                  <div className="p-3 bg-white/5 rounded border border-white/10">
-                     <label className="text-[10px] uppercase font-bold text-gray-400 block mb-3 border-b border-white/5 pb-1">Hạ tầng phòng máy (L8)</label>
-                     <div className="space-y-3">
-                        <div className="bg-black/20 p-2 rounded">
-                           <label className="text-[9px] text-gray-500 uppercase block mb-1">Bộ lưu điện (UPS) (L8.1)</label>
-                           <div className="grid grid-cols-3 gap-2 text-white">
-                              <input {...register("L8_1_ups_hang_model")} placeholder="Hãng/Model" className="form-input h-11 text-xs col-span-2" />
-                              <input {...register("L8_1_ups_thoi_gian_phut")} placeholder="Phút" className="form-input h-11 text-xs text-center" />
-                           </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 text-white">
-                           <div className="bg-black/20 p-2 rounded">
-                              <label className="text-[9px] text-gray-500 uppercase block mb-1">Điều hòa (L8.2)</label>
-                              <select {...register("L8_2_dieu_hoa")} className="form-input h-11 text-xs bg-gray-800">
-                                <option value="Có – 24/7">Có – 24/7</option>
-                                <option value="Có – Giờ hành chính">Có – Giờ hành chính</option>
-                                <option value="Không">Không</option>
-                              </select>
-                           </div>
-                           <div className="bg-black/20 p-2 rounded">
-                              <label className="text-[9px] text-gray-500 uppercase block mb-1">PCCC (L8.3)</label>
-                              <select {...register("L8_3_bin_chua_chay_has")} className="form-input h-11 text-xs">
-                                <option value="Có">Có</option>
-                                <option value="Không">Không</option>
-                              </select>
-                           </div>
-                        </div>
-                        <textarea {...register("L8_4_mo_ta_phong")} placeholder="Mô tả hiện trạng phòng máy (L8.4)..." className="form-input min-h-[60px] text-xs" />
-                     </div>
-                  </div>
+                 {[
+                    {id: "k1_quy_che", label: "K1. Quy chế ATTT"},
+                    {id: "k2_ke_hoach_ht", label: "K2. Kế hoạch ATTT năm HT"},
+                    {id: "k3_ke_hoach_tr", label: "K3. Kế hoạch ATTT năm trước"},
+                    {id: "k4_qd_can_bo", label: "K4. QĐ phân công cán bộ"},
+                    {id: "K5_qd_phe_duyet_httt", label: "K5. QĐ phê duyệt cấp độ"},
+                    {id: "K6_ung_pho_su_co", label: "K6. Quy trình ứng phó sự cố"},
+                    {id: "K7_bien_ban_kiem_tra", label: "K7. Biên bản kiểm tra ATTT"}
+                 ].map(k => (
+                   <div key={k.id} className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-400 block mb-1 uppercase">{k.label}</label>
+                      <input {...register(k.id as any)} className="form-input h-11 text-xs" placeholder="Số/ngày ban hành..." />
+                   </div>
+                 ))}
                </div>
             </div>
-
+            
             <div className="pt-4 border-t border-white/5 space-y-4">
-               <h4 className="text-[10px] uppercase font-bold text-violet-400 tracking-wider">P. Bảo mật kết nối & Mã hóa</h4>
-               <div className="grid grid-cols-2 gap-2">
-                  <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Giao thức Web (P1)</label>
-                     <select {...register("p1_protocol")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (có chứng chỉ SSL/TLS)</option>
-                        <option value="HTTP (không mã hóa)">HTTP (không mã hóa)</option>
-                     </select>
-                  </div>
-                  <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Kết nối cấp trên (P3)</label>
-                     <select {...register("P3_ket_noi_cap_tren_type")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Internet (HTTPS)">Internet (HTTPS)</option>
-                        <option value="VPN chuyên dụng">VPN chuyên dụng</option>
-                        <option value="MPLS">MPLS</option>
-                        <option value="Không kết nối">Không kết nối</option>
-                     </select>
-                  </div>
-               </div>
-               <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                  <label className="text-[9px] text-gray-500 uppercase block mb-1">VPN kết nối từ xa? (P2.i)</label>
-                  <select {...register("p2_vpn")} className="form-input h-11 text-xs bg-gray-800">
-                     <option value="Không sử dụng">Không sử dụng</option>
-                     <option value="SSL VPN">SSL VPN</option>
-                     <option value="IPsec VPN">IPsec VPN</option>
-                     <option value="OpenVPN">OpenVPN</option>
-                     <option value="Khác">Khác</option>
-                  </select>
-               </div>
-               <div className="grid grid-cols-2 gap-2 text-white">
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Mã hóa lưu trữ? (P4.i)</label>
-                     <div className="flex gap-4 items-center h-11">
-                        <label className="flex items-center gap-2"><input type="radio" {...register("P4_ma_hoa_luu_tru_has")} value="Có" /> Có</label>
-                        <label className="flex items-center gap-2"><input type="radio" {...register("P4_ma_hoa_luu_tru_has")} value="Không" /> Không</label>
-                     </div>
-                  </div>
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Antispam/Email Sec (P5)</label>
-                     <div className="flex gap-4 items-center h-11">
-                        <label className="flex items-center gap-2"><input type="radio" {...register("P5_email_sec")} value="Có" /> Có</label>
-                        <label className="flex items-center gap-2"><input type="radio" {...register("P5_email_sec")} value="Không" /> Không</label>
-                     </div>
-                  </div>
-               </div>
-            </div>
+                <h4 className="text-[10px] uppercase font-bold text-violet-400 tracking-wider">L. Kiểm soát truy cập & Giám sát</h4>
+                <div className="grid grid-cols-2 gap-2">
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="form-label text-[10px]">Kiểm soát vật lý (L1)</label>
+                      <select {...register("l1_phys_key")} className="form-input h-11 text-xs bg-gray-900 text-white">
+                         <option value="Có khóa cửa (chìa khóa thường)">Có khóa cửa (chìa khóa thường)</option>
+                         <option value="Có khóa cửa + camera giám sát">Có khóa cửa + camera giám sát</option>
+                         <option value="Có thẻ từ / kiểm soát điện tử">Có thẻ từ / kiểm soát điện tử</option>
+                         <option value="Không có kiểm soát riêng">Không có kiểm soát riêng</option>
+                      </select>
+                   </div>
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="form-label text-[10px]">Bảng ký tên? (L1.ii)</label>
+                      <div className="flex gap-4 items-center h-11 text-white">
+                         <label className="flex items-center gap-1"><input type="radio" {...register("L1_bang_ky_ten")} value="Có" /> Có</label>
+                         <label className="flex items-center gap-1"><input type="radio" {...register("L1_bang_ky_ten")} value="Không" /> Không</label>
+                      </div>
+                   </div>
+                </div>
 
-            <div className="pt-4 border-t border-white/5 space-y-4">
-               <h4 className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">Q. Vận hành & Giám sát</h4>
-               <div className="grid grid-cols-2 gap-2 text-white">
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Update HĐH (Q1)</label>
-                     <select {...register("cap_nhat_he_dieu_hanh")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Hàng tháng">Định kỳ hàng tháng</option>
-                        <option value="Hàng quý">Định kỳ hàng quý</option>
-                        <option value="Thủ công">Cập nhật thủ công</option>
-                        <option value="Không">Chưa thực hiện</option>
-                     </select>
-                  </div>
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Update App (Q2)</label>
-                     <select {...register("Q2_cap_nhat_ung_dung")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Tự động">Cập nhật tự động</option>
-                        <option value="Có">Có cập nhật định kỳ</option>
-                        <option value="Không">Chưa thực hiện</option>
-                     </select>
-                  </div>
-               </div>
-               <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                  <label className="text-[9px] text-gray-500 uppercase block mb-1">Người vận hành (Q3) (*)</label>
-                  <input {...register("Q3_nguoi_chiu_trach_nhiem")} placeholder="Tên cán bộ phụ trách..." className="form-input h-11 text-xs" />
-               </div>
-               <div className="grid grid-cols-2 gap-2 text-white">
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Firmware (Q4)</label>
-                     <select {...register("Q4_firmware_mang")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Đã cập nhật mới nhất">Đã cập nhật mới nhất</option>
-                        <option value="Chưa cập nhật">Chưa cập nhật thường xuyên</option>
-                     </select>
-                  </div>
-                  <div className="p-3 bg-white/5 rounded border border-white/5">
-                     <label className="text-[9px] text-gray-500 uppercase block mb-1">Cảnh báo (Q5)</label>
-                     <select {...register("Q5_theo_doi_canh_bao")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Thường xuyên">Kiểm tra thường xuyên (VNCERT...)</option>
-                        <option value="Thỉnh thoảng">Thỉnh thoảng</option>
-                        <option value="Không">Chưa có người theo dõi</option>
-                     </select>
-                  </div>
-               </div>
-            </div>
-         </div>
-      )}
+                <div className="p-3 bg-white/5 rounded border border-white/5">
+                   <label className="form-label text-[10px]">Chính sách mật khẩu (L2)</label>
+                   <select {...register("l2_pass_policy")} className="form-input h-11 text-xs mb-2 bg-gray-800 text-white">
+                      <option value="Đã ban hành và áp dụng">Đã ban hành và áp dụng</option>
+                      <option value="Có chính sách mật khẩu (chưa văn bản)">Có chính sách mật khẩu (chưa văn bản)</option>
+                      <option value="Không có chính sách thống nhất">Không có chính sách thống nhất</option>
+                   </select>
+                   <div className="grid grid-cols-2 gap-4 mt-2">
+                      <div>
+                         <label className="text-[9px] text-gray-500 uppercase block mb-1">Độ dài tối thiểu</label>
+                         <input {...register("l2_pass_len")} className="form-input h-11 text-xs" type="number" />
+                      </div>
+                      <div>
+                         <label className="text-[9px] text-gray-500 uppercase block mb-1">Thay đổi định kỳ (tháng)</label>
+                         <input {...register("l2_pass_time")} className="form-input h-11 text-xs" type="number" />
+                      </div>
+                   </div>
+                </div>
+
+                <div className="p-3 bg-white/5 rounded border border-white/5">
+                   <div className="flex justify-between items-center mb-2">
+                      <label className="form-label text-[10px] mb-0">Công cụ diệt Virus (L3)</label>
+                      <select {...register("l3_av_has")} className="bg-black/40 border-none text-[9px] text-white rounded">
+                         <option value="Có cài đặt">Có cài đặt</option>
+                         <option value="Không">Chưa cài đặt</option>
+                      </select>
+                   </div>
+                   {watch("l3_av_has") !== "Không" && watch("l3_av_has") !== "Chưa cài đặt" && (
+                      <div className="space-y-2">
+                         <input {...register("l3_av_name")} placeholder="Tên phần mềm..." className="form-input h-11 text-xs" />
+                         <div className="grid grid-cols-2 gap-2">
+                            <select {...register("l3_av_license")} className="form-input h-11 text-xs bg-gray-800 text-white">
+                               <option value="Còn hạn">Còn hạn</option>
+                               <option value="Hết hạn">Hết hạn</option>
+                               <option value="Không bản quyền">K.bản quyền</option>
+                            </select>
+                            <select {...register("L3_cap_nhat_virus")} className="form-input h-11 text-xs bg-gray-800 text-white">
+                               <option value="Tự động">Cập nhật tự động</option>
+                               <option value="Thủ công">Cập nhật thủ công</option>
+                            </select>
+                         </div>
+                      </div>
+                   )}
+                </div>
+
+                <div className="p-3 bg-white/5 rounded border border-white/5">
+                   <label className="form-label text-[10px]">Sao lưu dữ liệu (L4)</label>
+                   <select {...register("l4_bak_has")} className="form-input h-11 text-xs mb-2 bg-gray-800 text-white">
+                      <option value="Có - Tự động (Server/Cloud)">Có - Tự động (Server/Cloud)</option>
+                      <option value="Có - Thủ công (USB/Ổ cứng)">Có - Thủ công (USB/Ổ cứng)</option>
+                      <option value="Không sao lưu">Không sao lưu</option>
+                   </select>
+                   <input {...register("L4_luu_o_dau")} placeholder="Tên thiết bị lưu trữ (Vd: Ổ cứng ngoài)" className="form-input h-11 text-xs mb-2" />
+                   <div className="flex items-center gap-4 p-1">
+                      <span className="text-[9px] text-gray-400 uppercase font-bold text-white">Sao lưu Offsite?</span>
+                      <label className="flex items-center gap-2 text-xs text-white"><input type="radio" {...register("L4_offsite_has")} value="Có" /> Có</label>
+                      <label className="flex items-center gap-2 text-xs text-white"><input type="radio" {...register("L4_offsite_has")} value="Không" /> Không</label>
+                   </div>
+                </div>
+
+                <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                   <div className="flex justify-between items-center mb-2">
+                      <label className="form-label text-[10px] mb-0">Nhật ký hệ thống (Logs) (L5)</label>
+                      <select {...register("l5_log_enabled")} className="bg-black/40 border-none text-[9px] rounded">
+                         <option value="Có">Có lưu</option>
+                         <option value="Không">Không</option>
+                      </select>
+                   </div>
+                   {watch("l5_log_enabled") === "Có" && (
+                      <div className="grid grid-cols-2 gap-2">
+                         <input {...register("l5_log_retention")} placeholder="Thời gian lưu (tháng)" className="form-input h-11 text-xs" />
+                         <select {...register("l5_siem_has")} className="form-input h-11 text-xs bg-gray-800">
+                            <option value="Không">K.có SIEM</option><option value="Có">Dùng SIEM</option>
+                         </select>
+                      </div>
+                   )}
+                </div>
+
+                <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                   <label className="form-label text-[10px]">Sự cố ATTT trong 1 năm qua (L6)</label>
+                   <select {...register("l6_incident_has")} className="form-input h-11 text-xs mb-2 bg-gray-800">
+                      <option value="Không có sự cố nào">Không có sự cố nào</option>
+                      <option value="Có sự cố (đã xử lý)">Có sự cố (đã xử lý)</option>
+                      <option value="Có sự cố (chưa xử lý xong)">Có sự cố (chưa xử lý xong)</option>
+                   </select>
+                   {watch("l6_incident_has") !== "Không có sự cố nào" && (
+                      <textarea {...register("l6_incident_desc")} placeholder="Mô tả sự cố và cách khắc phục..." className="form-input min-h-[60px] text-xs" />
+                   )}
+                </div>
+
+                <div className="grid grid-cols-1 gap-2">
+                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                      <label className="form-label text-[10px]">Tường lửa (Firewall) (L7)</label>
+                      <select {...register("l7_type")} className="form-input h-11 text-xs mb-2 bg-gray-800">
+                         <option value="Cứng chuyên dụng">Cứng chuyên dụng</option>
+                         <option value="Tường lửa tích hợp (SPI)">Tường lửa tích hợp (SPI)</option>
+                         <option value="Phần mềm">Phần mềm</option>
+                         <option value="Không có">Không có</option>
+                      </select>
+                      <div className="grid grid-cols-2 gap-2">
+                         <input {...register("L7_chinh_sach")} placeholder="Chính sách (Vd: Deny all)" className="form-input h-11 text-xs" />
+                         <input {...register("L7_4_cong_mo")} placeholder="Các cổng mở..." className="form-input h-11 text-xs" />
+                      </div>
+                   </div>
+                   
+                   <div className="p-3 bg-white/5 rounded border border-white/10">
+                      <label className="text-[10px] uppercase font-bold text-gray-400 block mb-3 border-b border-white/5 pb-1">Hạ tầng phòng máy (L8)</label>
+                      <div className="space-y-3">
+                         <div className="bg-black/20 p-2 rounded">
+                            <label className="text-[9px] text-gray-500 uppercase block mb-1">Bộ lưu điện (UPS) (L8.1)</label>
+                            <div className="grid grid-cols-3 gap-2 text-white">
+                               <input {...register("L8_1_ups_hang_model")} placeholder="Hãng/Model" className="form-input h-11 text-xs col-span-2" />
+                               <input {...register("L8_1_ups_thoi_gian_phut")} placeholder="Phụt" className="form-input h-11 text-xs text-center" />
+                            </div>
+                         </div>
+                         <div className="grid grid-cols-2 gap-2 text-white">
+                            <div className="bg-black/20 p-2 rounded">
+                               <label className="text-[9px] text-gray-500 uppercase block mb-1">Điều hòa (L8.2)</label>
+                               <select {...register("L8_2_dieu_hoa")} className="form-input h-11 text-xs bg-gray-800">
+                                 <option value="Có – 24/7">Có – 24/7</option>
+                                 <option value="Có – Giờ hành chính">Có – Giờ hành chính</option>
+                                 <option value="Không">Không</option>
+                               </select>
+                            </div>
+                            <div className="bg-black/20 p-2 rounded">
+                               <label className="text-[9px] text-gray-500 uppercase block mb-1">PCCC (L8.3)</label>
+                               <select {...register("L8_3_bin_chua_chay_has")} className="form-input h-11 text-xs">
+                                 <option value="Có">Có</option>
+                                 <option value="Không">Không</option>
+                               </select>
+                            </div>
+                         </div>
+                         <textarea {...register("L8_4_mo_ta_phong")} placeholder="Mô tả hiện trạng phòng máy (L8.4)..." className="form-input min-h-[60px] text-xs" />
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+             <div className="pt-4 border-t border-white/5 space-y-4">
+                <h4 className="text-[10px] uppercase font-bold text-violet-400 tracking-wider">P. Bảo mật kết nối & Mã hóa</h4>
+                <div className="grid grid-cols-2 gap-2">
+                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Giao thức Web (P1)</label>
+                      <select {...register("p1_protocol")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (có chứng chỉ SSL/TLS)</option>
+                         <option value="HTTP (không mã hóa)">HTTP (không mã hóa)</option>
+                      </select>
+                   </div>
+                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Kết nối cấp trên (P3)</label>
+                      <select {...register("P3_ket_noi_cap_tren_type")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Internet (HTTPS)">Internet (HTTPS)</option>
+                         <option value="VPN chuyên dụng">VPN chuyên dụng</option>
+                         <option value="MPLS">MPLS</option>
+                         <option value="Không kết nối">Không kết nối</option>
+                      </select>
+                   </div>
+                </div>
+                <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                   <label className="text-[9px] text-gray-500 uppercase block mb-1">VPN kết nối từ xa? (P2.i)</label>
+                   <select {...register("p2_vpn")} className="form-input h-11 text-xs bg-gray-800">
+                      <option value="Không sử dụng">Không sử dụng</option>
+                      <option value="SSL VPN">SSL VPN</option>
+                      <option value="IPsec VPN">IPsec VPN</option>
+                      <option value="OpenVPN">OpenVPN</option>
+                      <option value="Khác">Khác</option>
+                   </select>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-white">
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Mã hóa lưu trữ? (P4.i)</label>
+                      <select {...register("P4_ma_hoa_luu_tru_has")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Không mã hóa dữ liệu lưu trữ">Không mã hóa dữ liệu lưu trữ</option>
+                         <option value="Có – Phần mềm/phương pháp">Có – Phần mềm/phương pháp</option>
+                      </select>
+                   </div>
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Antispam/Email Sec (P5)</label>
+                      <select {...register("P5_email_sec")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Không">Không</option>
+                         <option value="Có – TLS/SMTPS (qua email.gov.vn hoặc tương đương)">Có – TLS/SMTPS</option>
+                         <option value="Không biết">Không biết</option>
+                      </select>
+                   </div>
+                </div>
+             </div>
+
+             <div className="pt-4 border-t border-white/5 space-y-4">
+                <h4 className="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">Q. Vận hành & Giám sát</h4>
+                <div className="grid grid-cols-2 gap-2 text-white">
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Update HĐH (Q1)</label>
+                      <select {...register("cap_nhat_he_dieu_hanh")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Hàng tháng">Hàng tháng</option>
+                         <option value="Hàng quý">Hàng quý</option>
+                         <option value="Khi có cảnh báo">Khi có cảnh báo</option>
+                         <option value="Khác">Khác</option>
+                         <option value="Không có quy trình – Cập nhật tùy lúc">Không có qu.trình</option>
+                         <option value="Không cập nhật">Không cập nhật</option>
+                      </select>
+                   </div>
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Update App (Q2)</label>
+                      <select {...register("Q2_cap_nhat_ung_dung")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Có – Tự động">Tự động</option>
+                         <option value="Có – Thủ công (khi nhớ)">Thủ công</option>
+                         <option value="Không cập nhật">Không cập nhật</option>
+                      </select>
+                   </div>
+                </div>
+                <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                   <label className="text-[9px] text-gray-500 uppercase block mb-1">Người vận hành (Q3) (*)</label>
+                   <input {...register("Q3_nguoi_chiu_trach_nhiem")} placeholder="Tên cán bộ phụ trách..." className="form-input h-11 text-xs" />
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-white">
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Firmware (Q4)</label>
+                      <select {...register("Q4_firmware_mang")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Đã cập nhật mới nhất">Đã cập nhật mới nhất</option>
+                         <option value="Chưa cập nhật">Chưa cập nhật thường xuyên</option>
+                      </select>
+                   </div>
+                   <div className="p-3 bg-white/5 rounded border border-white/5">
+                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Cảnh báo (Q5)</label>
+                      <select {...register("Q5_theo_doi_canh_bao")} className="form-input h-11 text-xs bg-gray-800">
+                         <option value="Thường xuyên">Có theo dõi (VNCERT/Bộ TT&TT...)</option>
+                         <option value="Không">Không theo dõi</option>
+                      </select>
+                   </div>
+                </div>
+             </div>
+          </div>
+       )}
 
       <AccordionHeader id="dao_tao" label="IV. Đào tạo & Kiểm tra" icon={Shield} />
       {expandedSection === "dao_tao" && (
@@ -1142,15 +1169,15 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
              </div>
            </div>
            <button type="submit" disabled={isSaving} className={`w-full h-14 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 uppercase tracking-widest active:scale-95 transition-transform ${isSaving ? 'opacity-70 grayscale' : ''}`}>
-             {isSaving ? (
-               <>
-                 <Loader2 className="w-6 h-6 animate-spin" /> Đang lưu hồ sơ...
-               </>
-              ) : (
+              {isSaving ? (
                 <>
-                  <Save className="w-6 h-6" /> Lưu tạm thời (Draft)
+                  <Loader2 className="w-6 h-6 animate-spin" /> Đang lưu...
                 </>
-              )}
+               ) : (
+                 <>
+                   <Save className="w-6 h-6" /> Lưu hồ sơ (Draft)
+                 </>
+               )}
             </button>
 
             <button 
@@ -1167,14 +1194,13 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                      <CheckCircle2 className="w-5 h-5" /> 
                      <span>Xác nhận Hoàn thành</span>
                   </div>
-                  <span className="text-[8px] opacity-70 normal-case font-normal mt-0.5">Chuyển sang trạng thái chính thức</span>
                 </>
               )}
             </button>
         </div>
       )}
 
-      {/* Bottom Bar with Export buttons */}
+      {/* Action Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-white/10 p-4 pb-8 flex flex-col gap-4 z-[90]">
          <div className="flex gap-2 justify-center">
             <button type="button" onClick={() => handleExport("phieu")} className="p-3 bg-white/5 rounded-xl border border-white/10 text-cyan-400">
@@ -1187,9 +1213,6 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                <FileText className="w-6 h-6" />
             </button>
          </div>
-         <button type="submit" className="w-full bg-indigo-600 py-4 text-lg font-black rounded-xl">
-            LƯU HỒ SƠ
-         </button>
       </div>
 
       {isExporting && (
@@ -1201,14 +1224,11 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 </div>
                 <h2 className="text-xl font-bold text-white mb-2">Đang tạo văn bản...</h2>
                 <div className="w-full space-y-3 mt-4">
-                   <div className="flex justify-between text-xs font-bold text-cyan-400">
-                      <span>TIẾN ĐỘ</span>
-                      <span>{exportProgress}%</span>
-                   </div>
+                   <div className="flex justify-between text-xs font-bold text-cyan-400"><span>TIẾN ĐỘ</span><span>{exportProgress}%</span></div>
                    <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
                       <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${exportProgress}%` }}></div>
                    </div>
-                   <p className="text-[10px] text-gray-500 italic">Vui lòng chờ trong giây lát</p>
+                   <p className="text-[10px] text-gray-500 italic">Vui lòng chờ...</p>
                 </div>
              </div>
           </div>
@@ -1218,7 +1238,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
        {showNetworkModal && (
          <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex flex-col">
            <div className="p-4 flex justify-between items-center border-b border-white/10 bg-gray-900">
-             <h2 className="font-bold text-sm uppercase flex items-center gap-2"><Network className="w-5 h-5 text-indigo-400"/> Sơ đồ Topology</h2>
+             <h2 className="font-bold text-sm uppercase flex items-center gap-2"><Network className="w-5 h-5 text-indigo-400"/> Topology</h2>
              <button type="button" onClick={() => setShowNetworkModal(false)} className="p-2 bg-white/10 rounded-lg"><X className="w-5 h-5" /></button>
            </div>
            <div className="flex-1 overflow-auto p-4 flex items-start justify-center">
@@ -1232,7 +1252,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
            <div className="bg-gray-900 border border-white/10 rounded-xl w-full p-6 max-w-sm text-center">
              <AlertCircle className="w-12 h-12 text-rose-500 mx-auto mb-4" />
              <h2 className="text-xl font-bold mb-2">Thiếu thông tin</h2>
-             <p className="text-xs text-gray-400 mb-6 uppercase tracking-wider">Vui lòng điền đủ Tên cơ quan và Tên hệ thống (HTTT)</p>
+             <p className="text-xs text-gray-400 mb-6 uppercase tracking-wider">Vui lòng điền đủ Tên cơ quan và HTTT</p>
              <button type="button" onClick={() => setShowValidationModal(false)} className="w-full h-12 bg-indigo-600 rounded-lg font-bold uppercase">Đóng</button>
            </div>
          </div>

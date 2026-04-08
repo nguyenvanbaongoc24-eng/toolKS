@@ -160,6 +160,14 @@ class DocumentExporter:
             'F3_ten_cloud': data.get('F3_ten_cloud', ''),
             'G2_dau_ghi_nvr': data.get('G2_dau_ghi_nvr', ''),
             'G3_luu_tru_ngay': data.get('G3_luu_tru_ngay', ''),
+            
+            # Mục H: Quy hoạch IP
+            'H1_dai_ip_lan': data.get('H1_dai_ip_lan', ''),
+            'H2_ip_gateway': data.get('H2_ip_gateway', ''),
+            'H3_dns': data.get('H3_dns', ''),
+            'H4_co_vlan': data.get('H4_co_vlan', ''),
+            'H4_so_vlan': data.get('H4_so_vlan', ''),
+            'H4_mo_ta_vlan': data.get('H4_mo_ta_vlan', ''),
 
             # Mục L: Bảo mật
             'l5_siem_name': data.get('l5_siem_name', ''),
@@ -273,29 +281,49 @@ class DocumentExporter:
             "Có thẻ từ / kiểm soát điện tử": "L1_the_tu",
             "Không có kiểm soát riêng": "L1_khong_kiem_soat"
         }))
-        context.update(self._map_checkboxes(data.get('l2_pass_policy'), {"Có chính sách mật khẩu": "L2_chinh_sach_mat_khau"}))
+        context.update(self._map_checkboxes(data.get('L1_bang_ky_ten'), {"Có": "L1_bang_ky_ten_co", "Không": "L1_bang_ky_ten_khong"}))
+        
+        context.update(self._map_checkboxes(data.get('l2_pass_policy'), {
+            "Đã ban hành và áp dụng": "L2_chinh_sach_mat_khau",
+            "Có chính sách mật khẩu": "L2_chinh_sach_mat_khau", # Legacy
+            "Có chính sách mật khẩu (chưa văn bản)": "L2_chinh_sach_mat_khau_chua_vb",
+            "Không có chính sách thống nhất": "L2_chinh_sach_khong"
+        }))
         context.update(self._map_checkboxes(data.get('L2_admin_acc_type'), {
             "Mỗi cán bộ có tài khoản riêng": "L2_admin_rieng",
             "Dùng chung một tài khoản admin": "L2_admin_chung",
             "Cả hai hình thức": "L2_admin_ca_hai"
         }))
-        context.update(self._map_checkboxes(data.get('L2_2fa_has'), {"Có": "L2_xac_thuc_2fa"}))
-        context.update(self._map_checkboxes(data.get('l3_av_has'), {"Có": "L3_co_antivirus"}))
+        context.update(self._map_checkboxes(data.get('L2_2fa_has'), {"Có": "L2_xac_thuc_2fa_co", "Không": "L2_xac_thuc_2fa_khong"}))
+        
+        context.update(self._map_checkboxes(data.get('l3_av_has'), {
+            "Có": "L3_co_antivirus", 
+            "Có cài đặt": "L3_co_antivirus",
+            "Không": "L3_khong_antivirus"
+        }))
         context.update(self._map_checkboxes(data.get('l4_bak_has'), {
-            "Có": "L4_co_tan_suat", 
+            "Có - Tự động": "L4_tu_dong",
+            "Có - Tự động (Server/Cloud)": "L4_tu_dong",
+            "Có - Thủ công": "L4_thu_cong",
+            "Có - Thủ công (USB/Ổ cứng)": "L4_thu_cong", 
             "Thủ công": "L4_thu_cong", 
             "Không sao lưu": "L4_khong"
         }))
-        context.update(self._map_checkboxes(data.get('l5_log_enabled'), {"Có": "L5_ghi_log"}))
+        context.update(self._map_checkboxes(data.get('L4_offsite_has'), {"Có": "L4_offsite_co", "Không": "L4_offsite_khong"}))
+        context.update(self._map_checkboxes(data.get('l5_log_enabled'), {"Có": "L5_ghi_log_co", "Không": "L5_ghi_log_khong"}))
         context.update(self._map_checkboxes(data.get('l6_incident_has'), {
             "Không có sự cố nào": "L6_khong_su_co",
-            "Có": "L6_co_su_co",
-            "Không biết": "L6_khong_biet"
+            "Có sự cố (đã xử lý)": "L6_co_su_co_da_xl",
+            "Có sự cố (chưa xử lý xong)": "L6_co_su_co_chua_xl",
+            "Có": "L6_co_su_co"
         }))
         context.update(self._map_checkboxes(data.get('l7_type'), {
+            "Cứng chuyên dụng": "L7_1_phan_cung",
             "Tường lửa tích hợp (SPI)": "L7_1_router_spi",
             "Tường lửa phần cứng chuyên dụng": "L7_1_phan_cung",
-            "Tường lửa phần mềm trên máy chủ": "L7_1_phan_mem"
+            "Tích hợp trên Router": "L7_1_router_spi",
+            "Phần mềm": "L7_1_phan_mem",
+            "Không có": "L7_1_khong"
         }))
         context.update(self._map_checkboxes(data.get('L8_2_dieu_hoa'), {
             "Có – 24/7": "L8_2_247",
@@ -304,12 +332,24 @@ class DocumentExporter:
         }))
 
         # Section P
-        context.update(self._map_checkboxes(data.get('p1_protocol'), {"HTTPS (có chứng chỉ SSL/TLS)": "P1_giao_thuc_web_https", "HTTP (không mã hóa)": "P1_giao_thuc_web_http"}))
+        context.update(self._map_checkboxes(data.get('p1_protocol'), {
+            "HTTPS (có chứng chỉ SSL/TLS)": "P1_giao_thuc_web_https", 
+            "HTTP (không mã hóa)": "P1_giao_thuc_web_http"
+        }))
         context.update(self._map_checkboxes(data.get('P3_ket_noi_cap_tren_type'), {
             "VPN chuyên dụng": "P3_vpn_chuyen_dung",
             "Internet (HTTPS)": "P3_internet_https",
             "MPLS": "P3_mpls",
             "Không kết nối": "P3_khong_ket_noi"
+        }))
+        context.update(self._map_checkboxes(data.get('P4_ma_hoa_luu_tru_has'), {
+            "Có – Phần mềm/phương pháp": "P4_ma_hoa_co",
+            "Không mã hóa dữ liệu lưu trữ": "P4_ma_hoa_khong"
+        }))
+        context.update(self._map_checkboxes(data.get('P5_email_sec'), {
+            "Có – TLS/SMTPS (qua email.gov.vn hoặc tương đương)": "P5_email_tls",
+            "Không biết": "P5_email_dont_know",
+            "Không": "P5_email_none"
         }))
 
         # Section T
@@ -327,6 +367,21 @@ class DocumentExporter:
             "Cáp đồng (Cat5e/Cat6)": "T4_1_cap_dong",
             "Cáp quang (Fiber)": "T4_1_cap_quang",
             "Hỗn hợp": "T4_1_hon_hop"
+        }))
+        
+        # Section Q
+        context.update(self._map_checkboxes(data.get('cap_nhat_he_dieu_hanh'), {
+            "Hàng tháng": "Q1_update_hang_thang",
+            "Hàng quý": "Q1_update_hang_quy",
+            "Khi có cảnh báo": "Q1_update_canh_bao",
+            "Khác": "Q1_update_khac",
+            "Không có quy trình – Cập nhật tùy lúc": "Q1_update_tuy_luc",
+            "Không cập nhật": "Q1_update_khong"
+        }))
+        context.update(self._map_checkboxes(data.get('Q2_cap_nhat_ung_dung'), {
+            "Có – Tự động": "Q2_update_tu_dong",
+            "Có – Thủ công (khi nhớ)": "Q2_update_thu_cong",
+            "Không cập nhật": "Q2_update_khong"
         }))
 
         # Photos M1-M14 - Standardized for the new template

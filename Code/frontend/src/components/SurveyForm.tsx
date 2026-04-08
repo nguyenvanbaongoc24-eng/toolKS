@@ -890,14 +890,14 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
             <div className="section-card">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="section-title mb-0"><span className="section-badge bg-amber-500">I</span> Mục I. Ứng dụng & Dịch vụ CNTT</h2>
-                <button type="button" onClick={() => ungDungFields.append({ ten: "", chuc_nang: "", don_vi_cung_cap: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm App</button>
+                <button type="button" onClick={() => ungDungFields.append({ ten_ung_dung: "", chuc_nang_chinh: "", don_vi_cung_cap: "", phien_ban: "", ket_noi_internet: "Có", ghi_chu: "" })} className="btn-add"><Plus className="w-4 h-4" /> Thêm App</button>
               </div>
               <div className="space-y-3">
                 {ungDungFields.fields.map((field, idx) => (
                   <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div><label className="form-label text-[10px]">Tên ứng dụng</label><input {...register(`ung_dung.${idx}.ten`)} className="form-input text-xs" /></div>
-                      <div><label className="form-label text-[10px]">Chức năng chính</label><input {...register(`ung_dung.${idx}.chuc_nang`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Tên ứng dụng</label><input {...register(`ung_dung.${idx}.ten_ung_dung`)} className="form-input text-xs" /></div>
+                      <div><label className="form-label text-[10px]">Chức năng chính</label><input {...register(`ung_dung.${idx}.chuc_nang_chinh`)} className="form-input text-xs" /></div>
                       <div><label className="form-label text-[10px]">Đơn vị cung cấp</label><input {...register(`ung_dung.${idx}.don_vi_cung_cap`)} className="form-input text-xs" /></div>
                       <div><label className="form-label text-[10px]">Phiên bản</label><input {...register(`ung_dung.${idx}.phien_ban`)} className="form-input text-xs" /></div>
                       <div><label className="form-label text-[10px]">Kết nối Internet?</label><select {...register(`ung_dung.${idx}.ket_noi_internet`)} className="form-input text-xs py-1"><option value="Có">Có</option><option value="Không">Không</option></select></div>
@@ -959,8 +959,9 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <div className="bg-white/5 p-3 rounded-lg border border-white/5 space-y-2">
                   <label className="form-label text-xs font-bold text-violet-400">Chính sách mật khẩu (L2)</label>
                   <select {...register("l2_pass_policy")} className="form-input text-xs py-1">
-                    <option value="Có chính sách mật khẩu">Đã ban hành và áp dụng</option>
-                    <option value="Không có chính sách thống nhất">Chưa có chính sách thống nhất</option>
+                    <option value="Đã ban hành và áp dụng">Đã ban hành và áp dụng</option>
+                    <option value="Có chính sách mật khẩu (chưa văn bản)">Có chính sách mật khẩu (chưa văn bản)</option>
+                    <option value="Không có chính sách thống nhất">Không có chính sách thống nhất</option>
                   </select>
                   <div className="grid grid-cols-2 gap-2">
                     <div><label className="text-[10px]">Độ dài tối thiểu</label><input {...register("l2_pass_len")} className="form-input text-xs" /></div>
@@ -974,7 +975,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                   <label className="form-label text-xs font-bold text-emerald-400">Công cụ diệt Virus (L3)</label>
                   <div className="flex gap-2">
                     <select {...register("l3_av_has")} className="form-input text-xs py-1 flex-1">
-                      <option value="Có">Có cài đặt</option>
+                      <option value="Có cài đặt">Có cài đặt</option>
                       <option value="Không">Chưa cài đặt</option>
                     </select>
                     {watch("l3_av_has") === "Có" && <input {...register("l3_av_name")} placeholder="Tên phần mềm..." className="form-input text-xs py-1 flex-1" />}
@@ -987,9 +988,9 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <div className="bg-white/5 p-3 rounded-lg border border-white/5 space-y-2">
                   <label className="form-label text-xs font-bold text-blue-400">Sao lưu dữ liệu (L4)</label>
                   <select {...register("l4_bak_has")} className="form-input text-xs py-1">
-                    <option value="Có - Tự động">Có - Tự động</option>
-                    <option value="Thủ công">Có - Thủ công (USB/Ổ cứng)</option>
-                    <option value="Không sao lưu">Không có phương án sao lưu</option>
+                    <option value="Có - Tự động (Server/Cloud)">Có - Tự động (Server/Cloud)</option>
+                    <option value="Có - Thủ công (USB/Ổ cứng)">Có - Thủ công (USB/Ổ cứng)</option>
+                    <option value="Không sao lưu">Không sao lưu</option>
                   </select>
                   <div className="grid grid-cols-1 gap-2">
                     <input {...register("L4_luu_o_dau")} className="form-input text-xs" placeholder="Nơi lưu trữ (VD: NAS, Ổ cứng ngoài...)" />
@@ -1011,16 +1012,15 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <div>
                   <label className="form-label">Giao thức ứng dụng Web (P1)</label>
                   <select {...register("p1_protocol")} className="form-input py-1 text-sm">
-                    <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (Có mã hóa)</option>
-                    <option value="HTTP (không mã hóa)">HTTP (Không mã hóa)</option>
-                    <option value="Cả hai">Cả hai</option>
+                    <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (có chứng chỉ SSL/TLS)</option>
+                    <option value="HTTP (không mã hóa)">HTTP (không mã hóa)</option>
                   </select>
                 </div>
                 <div>
                   <label className="form-label">Sử dụng VPN kết nối từ xa? (P2.i)</label>
                   <select {...register("p2_vpn")} className="form-input py-1 text-sm">
                     <option value="Có">Có sử dụng</option>
-                    <option value="Không có VPN">Không sử dụng</option>
+                    <option value="Không sử dụng">Không sử dụng</option>
                   </select>
                   {watch("p2_vpn") === "Có" && (
                     <input {...register("p2_vpn_type")} className="form-input mt-2 text-xs" placeholder="Loại VPN (FortiClient, AnyConnect...)" />
@@ -1033,23 +1033,26 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                   <label className="form-label">Kết nối với mạng cơ quan cấp trên? (P3)</label>
                   <select {...register("P3_ket_noi_cap_tren_type")} className="form-input py-1 text-sm">
                     <option value="Không kết nối">Không kết nối</option>
-                    <option value="VPN chuyên dụng">Có - VPN chuyên dụng (P3.i)</option>
-                    <option value="Internet (HTTPS)">Có - Qua Internet (HTTPS)</option>
-                    <option value="MPLS">Có - Đường truyền MPLS</option>
+                    <option value="VPN chuyên dụng">VPN chuyên dụng</option>
+                    <option value="Internet (HTTPS)">Internet (HTTPS)</option>
+                    <option value="MPLS">MPLS</option>
                   </select>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="form-label">Mã hóa lưu trữ? (P4)</label>
-                    <div className="flex gap-4 mt-1">
-                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P4_ma_hoa_luu_tru_has")} /><span>{v}</span></label>)}
-                    </div>
+                    <select {...register("P4_ma_hoa_luu_tru_has")} className="form-input py-1 text-sm">
+                      <option value="Không mã hóa dữ liệu lưu trữ">Không mã hóa dữ liệu lưu trữ</option>
+                      <option value="Có – Phần mềm/phương pháp">Có – Phần mềm/phương pháp</option>
+                    </select>
                   </div>
                   <div>
                     <label className="form-label">Email Security? (P5)</label>
-                    <div className="flex gap-4 mt-1">
-                      {["Có", "Không"].map(v => <label key={v} className="flex items-center space-x-1 text-xs"><input type="radio" value={v} {...register("P5_email_sec")} /><span>{v}</span></label>)}
-                    </div>
+                    <select {...register("P5_email_sec")} className="form-input py-1 text-sm">
+                      <option value="Không">Không</option>
+                      <option value="Có – TLS/SMTPS (qua email.gov.vn hoặc tương đương)">Có – TLS/SMTPS</option>
+                      <option value="Không biết">Không biết</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -1110,18 +1113,20 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
               <div>
                 <label className="form-label text-xs">Cập nhật HĐH máy chủ/trạm (Q1)</label>
                 <select {...register("cap_nhat_he_dieu_hanh")} className="form-input text-xs py-1">
-                  <option value="Hàng tháng">Định kỳ hàng tháng</option>
-                  <option value="Hàng quý">Định kỳ hàng quý</option>
-                  <option value="Thủ công">Cập nhật thủ công</option>
-                  <option value="Không">Chưa thực hiện</option>
+                  <option value="Hàng tháng">Hàng tháng</option>
+                  <option value="Hàng quý">Hàng quý</option>
+                  <option value="Khi có cảnh báo">Khi có cảnh báo</option>
+                  <option value="Khác">Khác</option>
+                  <option value="Không có quy trình – Cập nhật tùy lúc">Không có quy trình – Cập nhật tùy lúc</option>
+                  <option value="Không cập nhật">Không cập nhật</option>
                 </select>
               </div>
               <div>
                 <label className="form-label text-xs">Cập nhật phần mềm ứng dụng (Q2)</label>
                 <select {...register("Q2_cap_nhat_ung_dung")} className="form-input text-xs py-1">
-                  <option value="Tự động">Cập nhật tự động</option>
-                  <option value="Có">Có cập nhật định kỳ</option>
-                  <option value="Không">Chưa thực hiện</option>
+                  <option value="Có – Tự động">Có – Tự động</option>
+                  <option value="Có – Thủ công (khi nhớ)">Có – Thủ công (khi nhớ)</option>
+                  <option value="Không cập nhật">Không cập nhật</option>
                 </select>
               </div>
               <div>
@@ -1138,9 +1143,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
               <div>
                 <label className="form-label text-xs">Theo dõi cảnh báo ATTT (Q5)</label>
                 <select {...register("Q5_theo_doi_canh_bao")} className="form-input text-xs py-1">
-                  <option value="Thường xuyên">Kiểm tra thường xuyên (VNCERT...)</option>
-                  <option value="Thỉnh thoảng">Thỉnh thoảng</option>
-                  <option value="Không">Chưa có người theo dõi</option>
+                  <option value="Thường xuyên">Thường xuyên (VNCERT/Bộ TT&TT...)</option>
+                  <option value="Không">Không theo dõi</option>
                 </select>
               </div>
             </div>
