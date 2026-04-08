@@ -156,6 +156,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const daoTaoFields = useFieldArray({ control, name: "dao_tao" });
   const kiemTraFields = useFieldArray({ control, name: "kiem_tra_attt" });
   const portMappingFields = useFieldArray({ control, name: "T2_port_mapping" });
+  const viTriFields = useFieldArray({ control, name: "T5_vi_tri" });
 
   const formData = watch();
   useAutoSave(formData, 10000);
@@ -718,6 +719,26 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                            <option value="Cáp quang">Cáp quang</option>
                         </select>
                      </div>
+                  </div>
+
+                  <div className="p-3 bg-teal-500/5 rounded border border-teal-500/10">
+                     <div className="flex justify-between items-center mb-2">
+                        <label className="text-[10px] uppercase font-bold text-teal-400">T5. VỊ TRÍ & TẦNG KHU VỰC (VẼ SƠ ĐỒ)</label>
+                        <button type="button" onClick={() => viTriFields.append({ tang: "", ten_thiet_bi: "", mo_ta: "" })} className="bg-teal-500/20 text-teal-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
+                     </div>
+                     <p className="text-[9px] text-gray-500 mb-2 italic">Dữ liệu này dùng để vẽ sơ đồ mạng thực tế.</p>
+                     {viTriFields.fields.map((field, idx) => (
+                        <div key={field.id} className="p-3 bg-white/5 rounded-lg mb-2 border border-white/5 shadow-md">
+                           <div className="flex justify-between mb-2">
+                              <span className="text-[9px] text-gray-500 font-bold uppercase">Khu vực #{idx+1}</span>
+                              <button type="button" onClick={() => viTriFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3.5 h-3.5"/></button>
+                           </div>
+                           <div className="grid grid-cols-1 gap-2">
+                              <input {...register(`T5_vi_tri.${idx}.tang`)} placeholder="Tên Tầng / Khu vực (VD: Tầng 1)" className="form-input text-xs h-11" />
+                              <input {...register(`T5_vi_tri.${idx}.ten_thiet_bi`)} placeholder="Tên Switch tương ứng (nếu có)" className="form-input text-xs h-11" />
+                           </div>
+                        </div>
+                     ))}
                   </div>
                </div>
             </div>
