@@ -26,7 +26,8 @@ const MOBILE_SECTIONS = [
 export default function MobileSurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [expandedSection, setExpandedSection] = useState<string | null>("section_ac");
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, '');
+  // Force redeploy to sync env vars
 
   useEffect(() => {
     const fetchStaff = async () => {

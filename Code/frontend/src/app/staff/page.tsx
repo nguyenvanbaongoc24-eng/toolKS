@@ -13,7 +13,8 @@ export default function StaffPage() {
   const [editValue, setEditValue] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, '');
+  // Force redeploy to sync env vars
 
   // Load from API on mount
   useEffect(() => {

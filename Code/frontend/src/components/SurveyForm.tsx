@@ -26,7 +26,8 @@ const TABS = [
 export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [activeTab, setActiveTab] = useState<string>("section_ac");
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, '');
+  // Force redeploy to sync env vars
 
   useEffect(() => {
     const fetchStaff = async () => {
