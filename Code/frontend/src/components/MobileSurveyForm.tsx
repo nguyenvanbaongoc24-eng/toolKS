@@ -54,16 +54,17 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
     F1_tablet_sl: "", F1_mayin_sl: "", F1_dienthoai_sl: "",
     F2_khong_may_chu_has: "Không", F2_luu_tru_o_dau: "",
     may_chu: [], F3_cloud_has: "Không", F3_ten_cloud: "",
-    camera: [{ hang_san_xuat: "", model: "", so_serial: "", do_phan_giai: "", vi_tri: "", ghi_chu: "" }], 
+    camera: [], 
     G2_dau_ghi_nvr: "", G3_luu_tru_ngay: "",
     H1_dai_ip_lan: "", H2_ip_gateway: "", H3_dns: "", H4_co_vlan: "Không", H4_so_vlan: "", H4_mo_ta_vlan: "",
     ip_tinh: [],
     T1_1_co_dmz: "Không", T1_1_may_chu_dmz: "", 
     T1_2_wifi_tach_rieng: "Không có WiFi", T1_3_ssid: "", T1_3_bao_mat_wifi: "",
-    T1_4_camera_vlan_has: "Cùng mạng LAN",
-    T2_port_mapping: [{ ten_switch: "", so_cong: "", port_map: "", ghi_chu: "" }],
+    T1_4_camera_vlan_has: "Không - Dùng chung LAN",
+    port_switch: [],
     T3_1_co_rack: "Không", T3_1_rack_u: "", T3_1_rack_vi_tri: "", T3_2_thiet_bi_trong_tu: "",
     T4_1_loai_cap: "Cáp đồng (Cat5e/Cat6)", T4_2_cap_isp: "",
+    T5_vi_tri: [],
     
     // Tab 3: Dịch vụ & Ứng dụng (Mục I, P)
     ung_dung: [],
@@ -155,7 +156,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const ipTinhFields = useFieldArray({ control, name: "ip_tinh" });
   const daoTaoFields = useFieldArray({ control, name: "dao_tao" });
   const kiemTraFields = useFieldArray({ control, name: "kiem_tra_attt" });
-  const portMappingFields = useFieldArray({ control, name: "T2_port_mapping" });
+  const portSwitchFields = useFieldArray({ control, name: "port_switch" });
   const viTriFields = useFieldArray({ control, name: "T5_vi_tri" });
 
   const formData = watch();
@@ -683,21 +684,21 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   </div>
                   
                   <div className="p-3 bg-indigo-500/5 rounded border border-indigo-500/10">
-                     <div className="flex justify-between items-center mb-2">
+                      <div className="flex justify-between items-center mb-2">
                         <label className="text-[10px] uppercase font-bold text-indigo-400">T2. KẾT NỐI VẬT LÝ SWITCH (PORT MAPPING)</label>
-                        <button type="button" onClick={() => portMappingFields.append({ ten_switch: "", so_cong: "", port_map: "", ghi_chu: "" })} className="bg-indigo-500/20 text-indigo-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
+                        <button type="button" onClick={() => portSwitchFields.append({ ten_switch: "", so_cong: "", cong_su_dung: "" })} className="bg-indigo-500/20 text-indigo-400 p-1 rounded-lg"><Plus className="w-4 h-4" /></button>
                      </div>
-                     {portMappingFields.fields.map((field, idx) => (
+                     {portSwitchFields.fields.map((field, idx) => (
                         <div key={field.id} className="p-3 bg-white/5 rounded-lg mb-2 border border-white/5 shadow-md">
                            <div className="flex justify-between mb-2">
                               <span className="text-[9px] text-gray-500 font-bold uppercase">Switch #{idx+1}</span>
-                              <button type="button" onClick={() => portMappingFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3.5 h-3.5"/></button>
+                              <button type="button" onClick={() => portSwitchFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3.5 h-3.5"/></button>
                            </div>
-                           <div className="grid grid-cols-3 gap-2 mb-2">
-                              <input {...register(`T2_port_mapping.${idx}.ten_switch`)} placeholder="Tên Switch" className="form-input text-xs h-11 col-span-2" />
-                              <input {...register(`T2_port_mapping.${idx}.so_cong`)} placeholder="SL Cổng" className="form-input text-xs h-11 text-center" />
+                           <div className="grid grid-cols-2 gap-2 mb-2">
+                              <input {...register(`port_switch.${idx}.ten_switch`)} placeholder="Tên Switch" className="form-input text-xs h-11" />
+                              <input {...register(`port_switch.${idx}.so_cong`)} placeholder="Tổng cổng" className="form-input text-xs h-11 text-center" />
                            </div>
-                           <textarea {...register(`T2_port_mapping.${idx}.port_map`)} placeholder="Mô tả cổng (Vd: Port 1->Modem, Port 2->Server...)" className="form-input min-h-[60px] text-xs" />
+                           <input {...register(`port_switch.${idx}.cong_su_dung`)} placeholder="Cổng đang sử dụng (VD: Port 1, 2...)" className="form-input text-xs h-11" />
                         </div>
                      ))}
                   </div>
@@ -924,11 +925,18 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                         <div className="grid grid-cols-2 gap-2 text-white">
                            <div className="bg-black/20 p-2 rounded">
                               <label className="text-[9px] text-gray-500 uppercase block mb-1">Điều hòa (L8.2)</label>
-                              <select {...register("L8_2_dieu_hoa")} className="form-input h-11 text-xs bg-gray-800"><option value="Có">Có</option><option value="Không">Không</option></select>
+                              <select {...register("L8_2_dieu_hoa")} className="form-input h-11 text-xs bg-gray-800">
+                                <option value="Có – 24/7">Có – 24/7</option>
+                                <option value="Có – Giờ hành chính">Có – Giờ hành chính</option>
+                                <option value="Không">Không</option>
+                              </select>
                            </div>
                            <div className="bg-black/20 p-2 rounded">
                               <label className="text-[9px] text-gray-500 uppercase block mb-1">PCCC (L8.3)</label>
-                              <select {...register("L8_3_bin_chua_chay_has")} className="form-input h-11 text-xs"><option value="Có">Có</option><option value="Không">Không</option></select>
+                              <select {...register("L8_3_bin_chua_chay_has")} className="form-input h-11 text-xs">
+                                <option value="Có">Có</option>
+                                <option value="Không">Không</option>
+                              </select>
                            </div>
                         </div>
                         <textarea {...register("L8_4_mo_ta_phong")} placeholder="Mô tả hiện trạng phòng máy (L8.4)..." className="form-input min-h-[60px] text-xs" />
@@ -943,16 +951,16 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Giao thức Web (P1)</label>
                      <select {...register("p1_protocol")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="HTTPS (có mã hóa)">HTTPS (có mã hóa)</option>
+                        <option value="HTTPS (có chứng chỉ SSL/TLS)">HTTPS (có chứng chỉ SSL/TLS)</option>
                         <option value="HTTP (không mã hóa)">HTTP (không mã hóa)</option>
                      </select>
                   </div>
                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Kết nối cấp trên (P3)</label>
                      <select {...register("P3_ket_noi_cap_tren_type")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Có - Qua Internet (HTTPS)">Có - Qua Internet (HTTPS)</option>
-                        <option value="Có - Mạng truyền số liệu CD">Có - Mạng truyền số liệu CD</option>
-                        <option value="Có - VPN">Có - VPN</option>
+                        <option value="Internet (HTTPS)">Internet (HTTPS)</option>
+                        <option value="VPN chuyên dụng">VPN chuyên dụng</option>
+                        <option value="MPLS">MPLS</option>
                         <option value="Không kết nối">Không kết nối</option>
                      </select>
                   </div>
@@ -991,16 +999,18 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   <div className="p-3 bg-white/5 rounded border border-white/5">
                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Update HĐH (Q1)</label>
                      <select {...register("cap_nhat_he_dieu_hanh")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Hàng tháng">Hàng tháng</option>
-                        <option value="Thủ công">Thủ công</option>
-                        <option value="Không">Không</option>
+                        <option value="Hàng tháng">Định kỳ hàng tháng</option>
+                        <option value="Hàng quý">Định kỳ hàng quý</option>
+                        <option value="Thủ công">Cập nhật thủ công</option>
+                        <option value="Không">Chưa thực hiện</option>
                      </select>
                   </div>
                   <div className="p-3 bg-white/5 rounded border border-white/5">
                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Update App (Q2)</label>
                      <select {...register("Q2_cap_nhat_ung_dung")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Tự động">Tự động</option>
-                        <option value="Không">Không</option>
+                        <option value="Tự động">Cập nhật tự động</option>
+                        <option value="Có">Có cập nhật định kỳ</option>
+                        <option value="Không">Chưa thực hiện</option>
                      </select>
                   </div>
                </div>
@@ -1012,15 +1022,16 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                   <div className="p-3 bg-white/5 rounded border border-white/5">
                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Firmware (Q4)</label>
                      <select {...register("Q4_firmware_mang")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Đã cập nhật">Đã cập nhật</option>
-                        <option value="Chưa cập nhật">Chưa cập nhật</option>
+                        <option value="Đã cập nhật mới nhất">Đã cập nhật mới nhất</option>
+                        <option value="Chưa cập nhật">Chưa cập nhật thường xuyên</option>
                      </select>
                   </div>
                   <div className="p-3 bg-white/5 rounded border border-white/5">
                      <label className="text-[9px] text-gray-500 uppercase block mb-1">Cảnh báo (Q5)</label>
                      <select {...register("Q5_theo_doi_canh_bao")} className="form-input h-11 text-xs bg-gray-800">
-                        <option value="Có">Có theo dõi</option>
-                        <option value="Không">Không</option>
+                        <option value="Thường xuyên">Kiểm tra thường xuyên (VNCERT...)</option>
+                        <option value="Thỉnh thoảng">Thỉnh thoảng</option>
+                        <option value="Không">Chưa có người theo dõi</option>
                      </select>
                   </div>
                </div>

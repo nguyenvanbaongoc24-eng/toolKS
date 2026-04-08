@@ -137,6 +137,16 @@ async def save_survey(survey: SurveyRecord):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.delete("/api/surveys/{survey_id}")
+async def delete_survey(survey_id: int):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Database not configured")
+    try:
+        response = supabase.table("surveys").delete().eq("id", survey_id).execute()
+        return {"status": "success", "message": f"Survey {survey_id} deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 # === EXISTING ENDPOINTS (OCR/TRANSCRIPTION/DOCX) ===
 
 @app.post("/api/upload", response_model=ExtractionResponse)

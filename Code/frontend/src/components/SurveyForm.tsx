@@ -60,9 +60,8 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     C6_nam_hoat_dong: prefilledData?.C6_nam_hoat_dong || "",
     C7_ket_noi_cap_tren_has: prefilledData?.C7_ket_noi_cap_tren_has || "Không",
     C7_ten_he_thong_cap_tren: prefilledData?.C7_ten_he_thong_cap_tren || "",
-    C8_bi_mat_nha_nuoc_has: prefilledData?.C8_bi_mat_nha_nuoc_has || "Không",
-    C8_do_mat: prefilledData?.C8_do_mat || "",
     can_bo_phu_trach: prefilledData?.can_bo_phu_trach || [],
+    B2_don_vi_ho_tro: prefilledData?.B2_don_vi_ho_tro || "",
     
     // Tab 2 properties
     ket_noi_internet: prefilledData?.ket_noi_internet || [],

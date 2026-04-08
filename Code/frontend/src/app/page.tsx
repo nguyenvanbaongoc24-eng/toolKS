@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Sidebar from "@/components/Sidebar";
-import { FileText, Plus, TrendingUp, Users, Server, Wifi, Clock, ArrowRight, Edit3, Check, X, Share2, Download, ExternalLink } from "lucide-react";
+import { FileText, Plus, TrendingUp, Users, Server, Wifi, Clock, ArrowRight, Edit3, Check, X, Share2, Download, ExternalLink, Trash2 } from "lucide-react";
 
 export default function Home() {
   const [records, setRecords] = useState<any[]>([]);
@@ -137,6 +137,18 @@ export default function Home() {
       } else {
          alert("Trình duyệt không hỗ trợ Web Share API. Bạn sử dụng trên điện thoại để có hiệu quả tốt nhất.");
       }
+  };
+
+  const handleDelete = async (id: number) => {
+    if (confirm("Bạn có chắc chắn muốn xóa hồ sơ này? Thao tác này không thể hoàn tác.")) {
+      try {
+        await axios.delete(`${API_URL}/api/surveys/${id}`);
+        fetchData(); // Refresh list
+      } catch (err) {
+        console.error("Delete error:", err);
+        alert("Lỗi khi xóa hồ sơ!");
+      }
+    }
   };
 
   return (
@@ -276,7 +288,8 @@ export default function Home() {
                             </div>
 
                             <button onClick={(e) => { e.stopPropagation(); handleOpenSurvey(rec); }} className="text-gray-400 hover:text-indigo-400 transition-colors p-1" title="Vào trang sửa Full Data"><ExternalLink className="w-4 h-4"/></button>
-                            <button onClick={() => startEdit(rec)} className="text-gray-400 hover:text-amber-400 transition-colors p-1 border-l border-gray-700 ml-1 pl-2" title="Sửa nhanh thông tin tĩnh"><Edit3 className="w-4 h-4"/></button>
+                            <button onClick={(e) => { e.stopPropagation(); startEdit(rec); }} className="text-gray-400 hover:text-amber-400 transition-colors p-1 border-l border-gray-700 ml-1 pl-2" title="Sửa nhanh thông tin tĩnh"><Edit3 className="w-4 h-4"/></button>
+                            <button onClick={(e) => { e.stopPropagation(); handleDelete(rec.id); }} className="text-gray-400 hover:text-rose-500 transition-colors p-1" title="Xóa hồ sơ"><Trash2 className="w-4 h-4"/></button>
                           </td>
                         </>
                       )}
