@@ -858,32 +858,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", ip_tinh: "", ghi_chu: "" })} className="text-[10px] text-indigo-400 hover:underline">+ Thêm IP tĩnh</button>
               </div>
             </div>
-            <div className="section-card lg:col-span-2">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="section-title mb-0"><span className="section-badge bg-teal-500">T</span> Mục T. Vị trí thiết bị (Phục vụ vẽ sơ đồ mạng)</h2>
-                <button type="button" onClick={() => viTriFields.append({ tang: "", ten_thiet_bi: "", mo_ta: "" })} className="btn-add">
-                  <Plus className="w-4 h-4" /> Thêm Tầng/Khu vực
-                </button>
-              </div>
-              <p className="text-xs text-gray-400 mb-4 italic">Khai báo danh sách các Tầng/Phòng không gian mạng thực tế của đơn vị. Hệ thống sẽ dựa vào dữ liệu này để tự động nối các Switch tương ứng và vẽ "Sơ đồ kiến trúc chi tiết".</p>
-              <div className="space-y-3">
-                {viTriFields.fields.map((field, idx) => (
-                  <div key={field.id} className="bg-black/20 p-4 rounded-lg border border-white/5 relative">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <div>
-                        <label className="form-label text-[10px]">Tên Tầng / Khu vực</label>
-                        <input {...register(`T5_vi_tri.${idx}.tang`)} className="form-input text-xs" placeholder="VD: Tầng 1, Phòng Tầng 2..." />
-                      </div>
-                      <div className="md:col-span-2">
-                        <label className="form-label text-[10px]">Tên thiết bị (Switch tương ứng nếu có)</label>
-                        <input {...register(`T5_vi_tri.${idx}.ten_thiet_bi`)} className="form-input text-xs" placeholder="VD: Access Switch Tầng 1" />
-                      </div>
-                    </div>
-                    <button type="button" onClick={() => viTriFields.remove(idx)} className="absolute top-2 right-2 text-red-400"><Trash2 className="w-4 h-4" /></button>
-                  </div>
-                ))}
-              </div>
-            </div>
+
 
           </div>
 
