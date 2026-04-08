@@ -715,15 +715,24 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                                  <input {...register("T3_1_rack_vi_tri")} placeholder="Vị trí tủ" className="form-input h-11 text-xs flex-1" />
                               </div>
                            )}
-                        </div>
                      </div>
-                     <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                        <label className="text-[9px] text-gray-500 block uppercase">Loại cáp (T4.1)</label>
-                        <select {...register("T4_1_loai_cap")} className="form-input h-11 text-xs bg-gray-800">
-                           <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
-                           <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
-                           <option value="Hỗn hợp">Hỗn hợp</option>
-                        </select>
+
+                  </div>
+                  <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
+                     <label className="text-[9px] text-gray-500 block uppercase mb-2">Thông tin cáp kết nối (T4)</label>
+                     <div className="space-y-3">
+                        <div>
+                           <label className="text-[8px] text-gray-400 block mb-1">T4.1 LOẠI CÁP MẠNG L.BỘ</label>
+                           <select {...register("T4_1_loai_cap")} className="form-input h-11 text-xs bg-gray-800">
+                              <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
+                              <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
+                              <option value="Hỗn hợp">Hỗn hợp</option>
+                           </select>
+                        </div>
+                        <div>
+                           <label className="text-[8px] text-gray-400 block mb-1">T4.2 CÁP TỪ ISP VDC</label>
+                           <input {...register("T4_2_cap_isp")} className="form-input h-11 text-xs" placeholder="VD: Cáp quang 100Mbps từ VNPT" />
+                        </div>
                      </div>
                   </div>
 
@@ -736,13 +745,15 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                      {viTriFields.fields.map((field, idx) => (
                         <div key={field.id} className="p-3 bg-white/5 rounded-lg mb-2 border border-white/5 shadow-md">
                            <div className="flex justify-between mb-2">
-                              <span className="text-[9px] text-gray-500 font-bold uppercase">Khu vực #{idx+1}</span>
+                              <span className="text-[9px] text-gray-500 font-bold uppercase">Thiết bị/Khu vực #{idx+1}</span>
                               <button type="button" onClick={() => viTriFields.remove(idx)} className="text-rose-400"><Trash2 className="w-3.5 h-3.5"/></button>
                            </div>
-                           <div className="grid grid-cols-1 gap-2">
-                              <input {...register(`T5_vi_tri.${idx}.tang`)} placeholder="Tên Tầng / Khu vực (VD: Tầng 1)" className="form-input text-xs h-11" />
-                              <input {...register(`T5_vi_tri.${idx}.ten_thiet_bi`)} placeholder="Tên Switch tương ứng (nếu có)" className="form-input text-xs h-11" />
+                           <div className="grid grid-cols-2 gap-2 mb-2">
+                              <input {...register(`T5_vi_tri.${idx}.ten_thiet_bi`)} placeholder="Tên thiết bị (Router/AP)" className="form-input text-xs h-11 col-span-2" />
+                              <input {...register(`T5_vi_tri.${idx}.tang`)} placeholder="Tầng (VD: T1)" className="form-input text-xs h-11" />
+                              <input {...register(`T5_vi_tri.${idx}.phong_cu_the`)} placeholder="Phòng (VD: P102)" className="form-input text-xs h-11" />
                            </div>
+                           <input {...register(`T5_vi_tri.${idx}.ghi_chu`)} placeholder="Ghi chú (VD: Gắn trên giá, để bàn...)" className="form-input text-xs h-11" />
                         </div>
                      ))}
                   </div>

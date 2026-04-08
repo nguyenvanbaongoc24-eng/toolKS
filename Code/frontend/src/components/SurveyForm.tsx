@@ -1321,12 +1321,21 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
 
               <div className="space-y-5">
                 <div className="bg-black/20 p-3 rounded-lg border border-white/5">
-                  <label className="form-label text-[10px] text-emerald-400 uppercase tracking-wider mb-2">Loại cáp mạng sử dụng (T4)</label>
-                  <select {...register("T4_1_loai_cap")} className="form-input text-xs h-10 bg-gray-900 text-white">
-                    <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
-                    <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
-                    <option value="Hỗn hợp">Hỗn hợp</option>
-                  </select>
+                  <label className="form-label text-[10px] text-emerald-400 uppercase tracking-wider mb-2">Thông tin cáp kết nối (T4)</label>
+                  <div className="space-y-3">
+                     <div>
+                        <label className="text-[9px] text-gray-500 uppercase block mb-1">T4.1 Cáp mạng nội bộ (LAN)</label>
+                        <select {...register("T4_1_loai_cap")} className="form-input text-xs h-10 bg-gray-900 text-white w-full">
+                          <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
+                          <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
+                          <option value="Hỗn hợp">Hỗn hợp</option>
+                        </select>
+                     </div>
+                     <div>
+                        <label className="text-[9px] text-gray-500 uppercase block mb-1">T4.2 Cáp từ ISP vào Router/Modem</label>
+                        <input {...register("T4_2_cap_isp")} className="form-input text-xs h-10 w-full" placeholder="VD: Cáp quang 100Mbps từ VNPT" />
+                     </div>
+                  </div>
                 </div>
                 <div className="bg-black/20 p-3 rounded border border-white/5">
                    <div className="flex justify-between items-center mb-3">
@@ -1340,6 +1349,37 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                            <div className="col-span-5 md:col-span-3"><input {...register(`port_switch.${idx}.so_cong`)} className="form-input text-xs text-center" placeholder="Tổng cổng" /></div>
                            <div className="col-span-5 md:col-span-3"><input {...register(`port_switch.${idx}.cong_su_dung`)} className="form-input text-xs text-center" placeholder="Đang dùng" /></div>
                            <div className="col-span-2 md:col-span-1 flex justify-end"><button type="button" onClick={() => portSwitchFields.remove(idx)} className="text-rose-400 p-1 bg-rose-500/10 rounded"><Trash2 className="w-4 h-4"/></button></div>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+
+                <div className="bg-teal-500/5 p-3 rounded-lg border border-teal-500/20">
+                   <div className="flex justify-between items-center mb-3">
+                      <span className="text-xs font-bold text-teal-400 uppercase">T5. Sơ đồ Mặt bằng (Vị trí Thiết bị)</span>
+                      <button type="button" onClick={() => viTriFields.append({ ten_thiet_bi: "", tang: "", phong_cu_the: "", ghi_chu: "" })} className="btn-add py-1 px-3 text-[10px] bg-teal-500 hover:bg-teal-400 border-teal-400"><Plus className="w-3 h-3 text-black"/> Thêm</button>
+                   </div>
+                   <p className="text-[10px] text-gray-500 mb-3 italic">Mô tả vị trí của từng thiết bị để vẽ sơ đồ Vật lý.</p>
+                   <div className="max-h-80 overflow-y-auto space-y-2 pr-1">
+                      {viTriFields.fields.map((field, idx) => (
+                        <div key={field.id} className="grid grid-cols-1 md:grid-cols-2 gap-2 bg-black/40 p-3 rounded-lg border border-teal-500/10 relative group">
+                           <div>
+                              <label className="text-[9px] text-gray-500 uppercase">Tên thiết bị / Nhóm</label>
+                              <input {...register(`T5_vi_tri.${idx}.ten_thiet_bi`)} className="form-input text-xs mt-1" placeholder="VD: Router Viettel" />
+                           </div>
+                           <div>
+                              <label className="text-[9px] text-gray-500 uppercase">Tầng</label>
+                              <input {...register(`T5_vi_tri.${idx}.tang`)} className="form-input text-xs mt-1" placeholder="VD: Tầng 1" />
+                           </div>
+                           <div>
+                              <label className="text-[9px] text-gray-500 uppercase">Phòng cụ thể</label>
+                              <input {...register(`T5_vi_tri.${idx}.phong_cu_the`)} className="form-input text-xs mt-1" placeholder="VD: Phòng CNTT (102)" />
+                           </div>
+                           <div>
+                              <label className="text-[9px] text-gray-500 uppercase">Ghi chú (vị trí đặt)</label>
+                              <input {...register(`T5_vi_tri.${idx}.ghi_chu`)} className="form-input text-xs mt-1" placeholder="VD: Gắn trên giá đỡ" />
+                           </div>
+                           <button type="button" onClick={() => viTriFields.remove(idx)} className="absolute top-2 right-2 text-rose-500 opacity-0 group-hover:opacity-100 transition-opacity bg-black rounded-full p-1"><Trash2 className="w-4 h-4"/></button>
                         </div>
                       ))}
                    </div>
