@@ -1261,64 +1261,85 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           <div className="section-card border-indigo-500/20">
             <h2 className="section-title text-indigo-400"><span className="section-badge bg-indigo-500">T</span> Mục T. Chi tiết Kết nối & Topology (T1-T4)</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="form-label text-xs">Vùng DMZ (T1.1)</label>
-                    <select {...register("T1_1_co_dmz")} className="form-input text-xs py-1">
+              <div className="space-y-5">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-black/20 p-3 rounded-lg border border-white/5">
+                    <label className="form-label text-[10px] text-gray-400 uppercase tracking-wider mb-2">Vùng DMZ (T1.1)</label>
+                    <select {...register("T1_1_co_dmz")} className="form-input text-xs h-10 bg-gray-900 text-white">
                       <option value="Không">Không có</option>
                       <option value="Có">Có DMZ</option>
                     </select>
                   </div>
-                  <div>
-                    <label className="form-label text-xs">Phân vùng Camera (T1.4)</label>
-                    <select {...register("T1_4_camera_vlan_has")} className="form-input text-xs py-1">
+                  <div className="bg-black/20 p-3 rounded-lg border border-white/5">
+                    <label className="form-label text-[10px] text-gray-400 uppercase tracking-wider mb-2">Camera VLAN (T1.4)</label>
+                    <select {...register("T1_4_camera_vlan_has")} className="form-input text-xs h-10 bg-gray-900 text-white">
                       <option value="Không - Dùng chung LAN">Dùng chung LAN</option>
                       <option value="Có - VLAN tách biệt">VLAN tách biệt</option>
                     </select>
                   </div>
                 </div>
-                <div>
-                   <label className="form-label text-xs">Mạng WiFi nội bộ/khách (T1.2 & T1.3)</label>
-                   <div className="grid grid-cols-2 gap-2">
-                     <select {...register("T1_2_wifi_tach_rieng")} className="form-input text-xs py-1">
+
+                <div className="bg-black/20 p-3 rounded-lg border border-white/5">
+                   <div className="flex items-center justify-between mb-2">
+                      <label className="form-label text-[10px] text-sky-400 uppercase tracking-wider mb-0">Mạng WiFi nội bộ/khách (T1.2 & T1.3)</label>
+                   </div>
+                   <div className="grid grid-cols-1 gap-2">
+                     <select {...register("T1_2_wifi_tach_rieng")} className="form-input text-xs h-10 bg-gray-900 text-white">
                         <option value="Không có WiFi">Không có WiFi</option>
                         <option value="Có">Có WiFi</option>
                         <option value="Tách riêng VLAN">VLAN tách biệt</option>
                      </select>
-                     {watch("T1_2_wifi_tach_rieng") !== "Không có WiFi" && <input {...register("T1_3_ssid")} placeholder="Tên SSID" className="form-input text-xs h-9" />}
+                     {watch("T1_2_wifi_tach_rieng") !== "Không có WiFi" && (
+                        <div className="grid grid-cols-2 gap-2 mt-1">
+                           <div>
+                              <label className="text-[9px] text-gray-500 uppercase block mb-1">Tên WiFi (SSID)</label>
+                              <input {...register("T1_3_ssid")} placeholder="VD: UBND-Khach" className="form-input text-xs h-10" />
+                           </div>
+                           <div>
+                              <label className="text-[9px] text-gray-500 uppercase block mb-1">Bảo mật (Mật khẩu)</label>
+                              <input {...register("T1_3_bao_mat_wifi")} placeholder="VD: WPA2-PSK" className="form-input text-xs h-10" />
+                           </div>
+                        </div>
+                     )}
                    </div>
                 </div>
-                <div>
-                  <label className="form-label text-xs">Thông tin Tủ Rack (T3)</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    <input {...register("T3_rack_u")} className="form-input text-xs h-9" placeholder="Số U (VD: 12U)" />
-                    <input {...register("T3_rack_vi_tri")} className="form-input text-xs h-9" placeholder="Vị trí tủ" />
+
+                <div className="bg-black/20 p-3 rounded-lg border border-white/5">
+                  <label className="form-label text-[10px] text-indigo-400 uppercase tracking-wider mb-2">Thông tin Tủ Rack (T3)</label>
+                  <div className="grid grid-cols-5 gap-2">
+                    <div className="col-span-2">
+                       <label className="text-[9px] text-gray-500 uppercase block mb-1">Kích thước</label>
+                       <input {...register("T3_rack_u")} className="form-input text-xs h-10" placeholder="Số U (VD: 12U)" />
+                    </div>
+                    <div className="col-span-3">
+                       <label className="text-[9px] text-gray-500 uppercase block mb-1">Vị trí lắp đặt</label>
+                       <input {...register("T3_rack_vi_tri")} className="form-input text-xs h-10" placeholder="Tầng/Phòng lắp đặt" />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <label className="form-label text-xs">Loại cáp mạng sử dụng (T4)</label>
-                  <select {...register("T4_1_loai_cap")} className="form-input text-xs py-1">
-                    <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng</option>
-                    <option value="Cáp quang (Fiber)">Cáp quang</option>
+              <div className="space-y-5">
+                <div className="bg-black/20 p-3 rounded-lg border border-white/5">
+                  <label className="form-label text-[10px] text-emerald-400 uppercase tracking-wider mb-2">Loại cáp mạng sử dụng (T4)</label>
+                  <select {...register("T4_1_loai_cap")} className="form-input text-xs h-10 bg-gray-900 text-white">
+                    <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
+                    <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
                     <option value="Hỗn hợp">Hỗn hợp</option>
                   </select>
                 </div>
                 <div className="bg-black/20 p-3 rounded border border-white/5">
-                   <div className="flex justify-between items-center mb-2">
-                      <span className="text-[10px] font-bold text-indigo-300 uppercase">T2. Port Switch Mapping</span>
-                      <button type="button" onClick={() => portSwitchFields.append({ ten_switch: "", so_cong: "", cong_su_dung: "" })} className="btn-add py-1 px-2 text-[8px]"><Plus className="w-2 h-2"/> Thêm</button>
+                   <div className="flex justify-between items-center mb-3">
+                      <span className="text-xs font-bold text-indigo-300 uppercase">T2. Port Switch Mapping</span>
+                      <button type="button" onClick={() => portSwitchFields.append({ ten_switch: "", so_cong: "", cong_su_dung: "" })} className="btn-add py-1 px-3 text-[10px]"><Plus className="w-3 h-3"/> Thêm</button>
                    </div>
-                   <div className="max-h-32 overflow-y-auto space-y-1 pr-1">
+                   <div className="max-h-64 overflow-y-auto space-y-2 pr-1">
                       {portSwitchFields.fields.map((field, idx) => (
-                        <div key={field.id} className="flex gap-1">
-                           <input {...register(`port_switch.${idx}.ten_switch`)} className="form-input text-[10px] h-7 bg-transparent" placeholder="Tên SW" />
-                           <input {...register(`port_switch.${idx}.so_cong`)} className="form-input text-[10px] h-7 w-12 bg-transparent" placeholder="Tổng" />
-                           <input {...register(`port_switch.${idx}.cong_su_dung`)} className="form-input text-[10px] h-7 w-12 bg-transparent" placeholder="Dùng" />
-                           <button type="button" onClick={() => portSwitchFields.remove(idx)} className="text-rose-500"><Trash2 className="w-3 h-3"/></button>
+                        <div key={field.id} className="grid grid-cols-12 gap-2 items-center bg-white/5 p-2 rounded-lg border border-white/5">
+                           <div className="col-span-12 md:col-span-5"><input {...register(`port_switch.${idx}.ten_switch`)} className="form-input text-xs" placeholder="Tên Switch (VD: Dahua 16 cổng)" /></div>
+                           <div className="col-span-5 md:col-span-3"><input {...register(`port_switch.${idx}.so_cong`)} className="form-input text-xs text-center" placeholder="Tổng cổng" /></div>
+                           <div className="col-span-5 md:col-span-3"><input {...register(`port_switch.${idx}.cong_su_dung`)} className="form-input text-xs text-center" placeholder="Đang dùng" /></div>
+                           <div className="col-span-2 md:col-span-1 flex justify-end"><button type="button" onClick={() => portSwitchFields.remove(idx)} className="text-rose-400 p-1 bg-rose-500/10 rounded"><Trash2 className="w-4 h-4"/></button></div>
                         </div>
                       ))}
                    </div>
