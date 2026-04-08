@@ -15,16 +15,16 @@ import { surveySchema } from "@/schemas/surveySchema";
 import { FormSection } from "./DynamicForm/FormSection";
 import { validateSurvey, ValidationResult } from "@/utils/validation";
 
-const MOBILE_TABS = [
-  { id: "don_vi", label: "I. Đơn vị & Hệ thống", icon: Building, sections: ["A", "B", "C"] },
-  { id: "ha_tang", label: "II. Hạ tầng & Mạng", icon: Router, sections: ["D", "E", "F", "G", "H", "I"] },
-  { id: "bao_mat", label: "III. An toàn Bảo mật", icon: ShieldAlert, sections: ["K", "L", "P"] },
-  { id: "quan_ly", label: "IV. Quản lý & Đào tạo", icon: GraduationCap, sections: ["Q", "R", "S"] },
-  { id: "hinh_anh", label: "V. Xác nhận & Sơ đồ", icon: LayoutPanelLeft, sections: ["M", "T", "N", "BC"] }
+const MOBILE_SECTIONS = [
+  { id: "section_ac", label: "A-C. Đơn vị", icon: Building },
+  { id: "section_di", label: "D-I. Hạ tầng", icon: Router },
+  { id: "section_kp", label: "K-P. ATTT", icon: ShieldAlert },
+  { id: "section_qs", label: "Q-S. Quản lý", icon: GraduationCap },
+  { id: "section_mt", label: "M-T. Sơ đồ", icon: LayoutPanelLeft }
 ];
 
 export default function MobileSurveyForm({ prefilledData }: { prefilledData?: any }) {
-  const [expandedSection, setExpandedSection] = useState<string | null>("don_vi");
+  const [expandedSection, setExpandedSection] = useState<string | null>("section_ac");
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -59,15 +59,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   const [isExporting, setIsExporting] = useState(false);
   const [exportProgress, setExportProgress] = useState(0);
 
-  const calculateProgress = () => {
-    const result = validateSurvey(formData);
-    const totalRequired = 85; 
-    const missingCount = result.missingFields.length;
-    const percent = Math.min(100, Math.round(((totalRequired - missingCount) / totalRequired) * 100));
-    return { percent, missing: missingCount };
-  };
-
-  const progress = calculateProgress();
+  const validation = useMemo(() => validateSurvey(formData), [formData]);
 
   const triggerExport = (type: string) => {
     const currentData = getValues();
@@ -140,29 +132,29 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
   return (
     <div className="min-h-screen bg-gray-950 text-white pb-32">
       <form onSubmit={handleSubmit((data) => handleAction(data))} className="p-2 space-y-2">
-        {/* Progress Header */}
-        <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-md -mx-2 px-4 py-2 border-b border-indigo-500/30 flex items-center justify-between shadow-lg">
+        {/* Progress Header - height 6px requested */}
+        <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-md -mx-2 px-4 py-3 border-b border-indigo-500/30 flex items-center justify-between shadow-lg">
            <div className="flex-1 mr-4">
               <div className="flex justify-between items-center mb-1">
-                 <span className="text-[10px] font-bold uppercase text-indigo-400">Tiến độ</span>
-                 <span className="text-[10px] font-bold text-indigo-400">{progress.percent}%</span>
+                 <span className={`text-[10px] font-bold uppercase ${validation.progress.color}`}>Tiến độ</span>
+                 <span className={`text-[10px] font-bold ${validation.progress.color}`}>{validation.progress.percent}%</span>
               </div>
-              <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                 <div className="h-full bg-indigo-500 transition-all duration-500" style={{ width: `${progress.percent}%` }} />
+              <div className="w-full h-[6px] bg-gray-800 rounded-full overflow-hidden">
+                 <div className={`h-full transition-all duration-500 ${validation.progress.color.replace('text-', 'bg-')}`} style={{ width: `${validation.progress.percent}%` }} />
               </div>
            </div>
            <div className="text-right">
               <span className="text-[8px] text-gray-500 uppercase block">Thiếu</span>
-              <span className="text-[11px] font-bold text-rose-400">{progress.missing}</span>
+              <span className="text-[11px] font-bold text-rose-400">{validation.missingFields.length}</span>
            </div>
         </div>
 
-        {MOBILE_TABS.map((tab) => (
+        {MOBILE_SECTIONS.map((tab) => (
           <div key={tab.id}>
             <AccordionHeader id={tab.id} label={tab.label} icon={tab.icon} />
             {expandedSection === tab.id && (
               <div className="animate-fade-in p-2 space-y-4 bg-black/20 rounded-xl mb-4 border border-white/5">
-                {tab.id === "don_vi" && (
+                {tab.id === "section_ac" && (
                   <div className="bg-indigo-500/5 p-4 rounded-lg border border-indigo-500/10 mb-4">
                     <label className="form-label text-indigo-400 font-bold mb-2 block">Cán bộ thực hiện</label>
                     <select {...register("nguoi_thuc_hien")} className="form-input bg-black/40">
@@ -173,7 +165,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                 )}
                 
                 {surveySchema
-                  .filter(s => tab.sections.includes(s.id))
+                  .filter(s => s.id === tab.id)
                   .map(section => (
                     <FormSection
                       key={section.id}
@@ -184,7 +176,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                     />
                   ))}
                 
-                {tab.id === "hinh_anh" && (
+                {tab.id === "section_mt" && (
                   <div className="section-card mt-4">
                     <h2 className="section-title">Sơ đồ mạng Logic</h2>
                     <NetworkDiagram data={watch()} />
@@ -195,20 +187,20 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
           </div>
         ))}
 
-        {/* Floating Action Bar */}
-        <div className="fixed bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-lg border-t border-white/10 p-4 z-50">
-          <div className="flex gap-2">
-            <button type="submit" className="flex-1 bg-white/5 hover:bg-white/10 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2 border border-white/10">
-              <Save className="w-4 h-4" /> Lưu nháp
+        {/* Floating Action Bar - height 56px requested */}
+        <div className="fixed bottom-0 left-0 right-0 h-[56px] bg-gray-900/90 backdrop-blur-lg border-t border-white/10 px-2 flex items-center z-50">
+          <div className="flex gap-2 flex-1 h-full py-1.5">
+            <button type="submit" className="flex-1 bg-white/5 hover:bg-white/10 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 border border-white/10 text-sm">
+              <Save className="w-4 h-4" /> 💾 Lưu
             </button>
-            <button type="button" onClick={() => handleAction(watch(), "completed")} className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2">
-              <CheckCircle2 className="w-4 h-4" /> Hoàn thành
+            <button type="button" onClick={() => handleAction(watch(), "completed")} className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 text-sm">
+              <CheckCircle2 className="w-4 h-4" /> ✔ Xong
             </button>
           </div>
-          <div className="flex justify-around mt-4 pt-4 border-t border-white/5">
-            <button type="button" onClick={() => triggerExport("phieu")} className="text-cyan-400 p-2"><FileDown className="w-6 h-6"/></button>
-            <button type="button" onClick={() => triggerExport("hsdx")} className="text-emerald-400 p-2"><Shield className="w-6 h-6"/></button>
-            <button type="button" onClick={() => triggerExport("baocao")} className="text-indigo-400 p-2"><FileText className="w-6 h-6"/></button>
+          <div className="flex gap-3 px-3 h-full items-center border-l border-white/10 ml-2">
+            <button type="button" onClick={() => triggerExport("phieu")} className="text-cyan-400"><FileDown className="w-5 h-5"/></button>
+            <button type="button" onClick={() => triggerExport("hsdx")} className="text-emerald-400"><Shield className="w-5 h-5"/></button>
+            <button type="button" onClick={() => triggerExport("baocao")} className="text-indigo-400"><FileText className="w-5 h-5"/></button>
           </div>
         </div>
       </form>
@@ -241,7 +233,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                         <div className="space-y-1">
                             {fields.map((f: any) => (
                                 <div key={f.fieldLabel} className="bg-white/5 p-2 rounded text-xs flex items-center gap-2">
-                                    <div className="w-1 h-1 bg-rose-500 rounded-full" />
+                                    <div className="w-1 f h-1 bg-rose-500 rounded-full" />
                                     {f.fieldLabel}
                                 </div>
                             ))}

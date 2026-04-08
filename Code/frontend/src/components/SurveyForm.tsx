@@ -16,15 +16,15 @@ import { FormSection } from "./DynamicForm/FormSection";
 import { validateSurvey, ValidationResult } from "@/utils/validation";
 
 const TABS = [
-  { id: "don_vi", label: "A-C. Đơn vị & Hệ thống", icon: Building },
-  { id: "ha_tang", label: "D-I. Hạ tượng & Mạng", icon: Router },
-  { id: "bao_mat", label: "K-P. An toàn Bảo mật", icon: ShieldAlert },
-  { id: "quan_ly", label: "Q-S. Quản lý & Đào tạo", icon: GraduationCap },
-  { id: "hinh_anh", label: "M-T. Xác nhận & Sơ đồ", icon: LayoutPanelLeft }
+  { id: "section_ac", label: "A-C. Đơn vị & Hệ thống", icon: Building },
+  { id: "section_di", label: "D-I. Hạ tượng & Mạng", icon: Router },
+  { id: "section_kp", label: "K-P. An toàn Bảo mật", icon: ShieldAlert },
+  { id: "section_qs", label: "Q-S. Quản lý & Đào tạo", icon: GraduationCap },
+  { id: "section_mt", label: "M-T. Xác nhận & Sơ đồ", icon: LayoutPanelLeft }
 ];
 
 export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
-  const [activeTab, setActiveTab] = useState<string>("don_vi");
+  const [activeTab, setActiveTab] = useState<string>("section_ac");
   const [availableStaff, setAvailableStaff] = useState<string[]>([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -51,7 +51,6 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     defaultValues: defaultVals
   });
 
-  // Watch and persist technician name (Doer)
   const currentDoer = watch("nguoi_thuc_hien");
   useEffect(() => {
     if (currentDoer) {
@@ -59,7 +58,6 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
     }
   }, [currentDoer]);
 
-  // Sync prefilledData to form if it changes
   useEffect(() => {
     if (prefilledData && Object.keys(prefilledData).length > 0) {
       Object.keys(prefilledData).forEach(key => {
@@ -85,23 +83,10 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   const [isCompleting, setIsCompleting] = useState(false);
 
   const activeSections = useMemo(() => {
-    switch (activeTab) {
-      case "don_vi": return surveySchema.filter(s => ["A", "B", "C"].includes(s.id));
-      case "ha_tang": return surveySchema.filter(s => ["D", "E", "F", "G", "H", "I"].includes(s.id));
-      case "bao_mat": return surveySchema.filter(s => ["K", "L", "P"].includes(s.id));
-      case "quan_ly": return surveySchema.filter(s => ["Q", "R", "S"].includes(s.id));
-      case "hinh_anh": return surveySchema.filter(s => ["M", "T", "N", "BC"].includes(s.id));
-      default: return [];
-    }
+    return surveySchema.filter(s => s.id === activeTab);
   }, [activeTab]);
 
-  const calculateProgress = () => {
-    const result = validateSurvey(formData);
-    const totalRequired = 85; // Heuristic
-    const missingCount = result.missingFields.length;
-    const percent = Math.min(100, Math.round(((totalRequired - missingCount) / totalRequired) * 100));
-    return { percent, missing: missingCount };
-  };
+  const validation = useMemo(() => validateSurvey(formData), [formData]);
 
   const triggerExport = (type: "phieu" | "hsdx" | "baocao") => {
     const currentData = getValues();
@@ -223,7 +208,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           />
         ))}
 
-        {activeTab === "hinh_anh" && (
+        {activeTab === "section_mt" && (
           <div className="section-card">
             <h2 className="section-title">
               <span className="section-badge bg-emerald-500">Diagram</span> Sơ đồ mạng Logic
@@ -239,10 +224,10 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           <div className="flex items-center gap-8 hidden xl:flex">
              <div className="text-right">
                 <div className="text-[10px] text-indigo-400 uppercase font-black tracking-widest">Tiến độ</div>
-                <div className="text-2xl font-black text-white">{calculateProgress().percent}%</div>
+                <div className={`text-2xl font-black ${validation.progress.color}`}>{validation.progress.percent}%</div>
              </div>
              <div className="w-48 h-3 bg-black/40 rounded-full overflow-hidden border border-white/5">
-                <div className="h-full bg-indigo-600 transition-all duration-1000" style={{ width: `${calculateProgress().percent}%` }} />
+                <div className={`h-full transition-all duration-1000 ${validation.progress.color.replace('text-', 'bg-')}`} style={{ width: `${validation.progress.percent}%` }} />
              </div>
           </div>
 
