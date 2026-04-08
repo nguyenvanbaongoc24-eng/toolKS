@@ -702,21 +702,21 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                      ))}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-2">
                      <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
-                        <label className="text-[9px] text-gray-500 block uppercase">Tủ Rack? (T3.1)</label>
-                        <div className="flex gap-1">
+                        <label className="text-[9px] text-gray-500 block uppercase mb-1">Tủ Rack? (T3.1)</label>
+                        <div className="flex gap-2">
                            <select {...register("T3_1_co_rack")} className="form-input h-11 text-xs bg-gray-800 flex-1">
                               <option value="Không">K</option><option value="Có">Có</option>
                            </select>
                            {watch("T3_1_co_rack") === "Có" && (
-                              <div className="flex gap-1 w-full mt-1">
+                              <div className="flex gap-1 w-full flex-1">
                                  <input {...register("T3_1_rack_u")} placeholder="U" className="form-input h-11 text-xs w-10 text-center" />
                                  <input {...register("T3_1_rack_vi_tri")} placeholder="Vị trí tủ" className="form-input h-11 text-xs flex-1" />
                               </div>
                            )}
+                        </div>
                      </div>
-
                   </div>
                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
                      <label className="text-[9px] text-gray-500 block uppercase mb-2">Thông tin cáp kết nối (T4)</label>
