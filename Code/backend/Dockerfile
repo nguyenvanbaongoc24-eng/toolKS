@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tesseract-ocr-vie \
     libgl1 \
     libglib2.0-0 \
+    libfontconfig1 \
+    fonts-dejavu \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Cài đặt thư viện Python (Thực hiện trước khi copy code để tận dụng cache)
@@ -23,8 +25,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Sao chép mã nguồn Backend vào VM
 COPY . .
 
-# Mở cổng mặc định của Render là 8000
-EXPOSE 8000
-
-# Khởi chạy máy chủ FastAPI
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Khởi chạy máy chủ FastAPI (Sử dụng cổng linh hoạt cho Render)
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
