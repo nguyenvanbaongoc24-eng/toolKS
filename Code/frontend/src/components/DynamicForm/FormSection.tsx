@@ -24,7 +24,7 @@ export const FormSection: React.FC<Props> = ({ section, register, control, watch
   return (
     <div className="section-card">
       <h2 className="section-title">
-        <span className="section-badge bg-indigo-500">{section.id}</span> {section.label}
+        {section.label}
       </h2>
       
       <div className="space-y-8">

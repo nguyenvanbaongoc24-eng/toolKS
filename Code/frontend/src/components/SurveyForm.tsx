@@ -167,7 +167,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
       alert("Lưu thành công!");
       window.location.href = "/";
     } catch (err) {
-      alert("Lỗi kết nối máy chủ.");
+      alert("Lỗi kết nối máy chủ (Backend). \nLưu ý: Nếu đây là lần truy cập đầu tiên, máy chủ Render có thể mất 1-2 phút để khởi động lại.");
     } finally {
       setIsSaving(false);
     }

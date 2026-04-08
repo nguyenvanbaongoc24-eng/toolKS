@@ -125,7 +125,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
       alert("Đã lưu!");
       window.location.href = "/";
     } catch (err) {
-      alert("Lỗi kết nối.");
+      alert("Lỗi kết nối máy chủ (Backend). \nLưu ý: Nếu đây là lần truy cập đầu tiên, máy chủ Render có thể mất 1-2 phút để khởi động lại.");
     }
   };
 
