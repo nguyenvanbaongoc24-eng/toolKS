@@ -13,7 +13,7 @@ out/
 backend/generated_docs/
 *.png
 *.docx
-!Code/templates/*.docx
+!backend/templates/*.docx
 
 # Python
 __pycache__/

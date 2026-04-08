@@ -29,7 +29,9 @@ def test_full_export():
             {"ten_may_chu": "SRV-01", "hang_san_xuat": "Dell", "model": "R740", "so_serial": "SRV111", "os": "Windows Server 2019", "ghi_chu": "AD"}
         ],
         "thiet_bi_mang": [
-            {"ten_thiet_bi": "Core Switch", "hang_san_xuat": "Cisco", "model": "C9200", "so_serial": "SW111", "vi_tri": "Tầng 1"}
+            {"loai_thiet_bi": "Router", "hang_san_xuat": "Cisco", "model": "C9200", "so_serial": "SW111", "vi_tri": "Tầng 1", "nam_mua": "2021", "ghi_chu": "Core"},
+            {"loai_thiet_bi": "Switch", "hang_san_xuat": "HP", "model": "Aruba", "so_serial": "SW222", "vi_tri": "Tầng 2", "nam_mua": "2022", "ghi_chu": "Access"},
+            {"loai_thiet_bi": "Firewall", "hang_san_xuat": "Fortinet", "model": "FG-100F", "so_serial": "FW333", "vi_tri": "Tầng 1", "nam_mua": "2023", "ghi_chu": "Edge"}
         ],
         "ung_dung": [
             {"ten_ung_dung": "Web Portal", "phien_ban": "1.0", "ngon_ngu": "PHP", "nha_phat_trien": "Nội bộ", "ghi_chu": "Public"}
@@ -38,7 +40,8 @@ def test_full_export():
             {"nha_cung_cap": "VNPT", "bang_thong": "1Gbps", "loai_thue_bao": "Kênh thuê riêng (Leased Line)"}
         ],
         "camera": [
-            {"hang_san_xuat": "Hikvision", "model": "Dome", "so_serial": "CAM1", "do_phan_giai": "2MP", "vi_tri": "Cổng", "ghi_chu": ""}
+            {"hang_san_xuat": "Hikvision", "model": "Dome", "so_serial": "CAM1", "do_phan_giai": "2MP", "vi_tri": "Cổng", "ghi_chu": ""},
+            {"hang_san_xuat": "Dahua", "model": "Bullet", "so_serial": "CAM2", "do_phan_giai": "4MP", "vi_tri": "Hành lang", "ghi_chu": ""}
         ],
         "ip_tinh": [
             {"ten_thiet_bi": "Printer-1", "ip_tinh": "192.168.1.100", "ghi_chu": "Phòng kế toán"}

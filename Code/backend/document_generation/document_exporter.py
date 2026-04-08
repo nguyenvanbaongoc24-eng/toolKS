@@ -345,7 +345,7 @@ class DocumentExporter:
         for key in ['ten_don_vi', 'dia_chi', 'he_thong_thong_tin', 'so_dien_thoai', 'email', 
                      'A6_ho_ten_thu_truong', 'D2_router_modem', 'nguoi_khao_sat']:
             logger.info(f"  {key} = {context.get(key, '(NOT SET)')}")
-        logger.info(f"  Tables: may_chu={len(context.get('may_chu', []))}, thiet_bi_mang={len(context.get('thiet_bi_mang', []))}, ung_dung={len(context.get('ung_dung', []))}")
+        logger.info(f"  Tables: can_bo={len(context.get('B_can_bo', []))}, thiet_bi={len(context.get('E1_thiet_bi_mang', []))}, may_chu={len(context.get('F2_may_chu', []))}, camera={len(context.get('G1_camera', []))}")
         logger.info(f"  Template: {template_path}")
         
         output_filename = f"Phieu_Khao_Sat_{data.get('ten_don_vi', 'NoName')}.docx"
