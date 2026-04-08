@@ -313,10 +313,20 @@ class DocumentExporter:
         }))
 
         # Section T
+        context.update(self._map_checkboxes(data.get('T1_1_co_dmz'), {"Có": "T1_1_dmz_co", "Không": "T1_1_dmz_khong"}))
         context.update(self._map_checkboxes(data.get('T1_2_wifi_tach_rieng'), {
             "Tách riêng VLAN": "T1_wifi_vlan",
             "Có": "T1_wifi_yes", 
             "Không có WiFi": "T1_wifi_none"
+        }))
+        context.update(self._map_checkboxes(data.get('T1_4_camera_vlan_has'), {
+            "Có - VLAN tách biệt": "T1_4_camera_vlan",
+            "Không - Dùng chung LAN": "T1_4_camera_lan"
+        }))
+        context.update(self._map_checkboxes(data.get('T4_1_loai_cap'), {
+            "Cáp đồng (Cat5e/Cat6)": "T4_1_cap_dong",
+            "Cáp quang (Fiber)": "T4_1_cap_quang",
+            "Hỗn hợp": "T4_1_hon_hop"
         }))
 
         # Photos M1-M14 - Standardized for the new template

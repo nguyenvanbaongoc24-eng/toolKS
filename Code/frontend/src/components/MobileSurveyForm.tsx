@@ -662,17 +662,17 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                      <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
                         <label className="text-[9px] text-gray-500 block uppercase">Tách VLAN Camera? (T1.4) (*)</label>
                         <select {...register("T1_4_camera_vlan_has")} className="form-input h-11 text-xs bg-gray-800">
-                           <option value="Có - VLAN tách biệt">Có tách VLAN</option>
                            <option value="Không - Dùng chung LAN">Dùng chung LAN</option>
+                           <option value="Có - VLAN tách biệt">Có tách VLAN</option>
                         </select>
                      </div>
                   </div>
                   <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
                      <label className="text-[9px] text-gray-500 block uppercase mb-1">Mạng WiFi (T1.2 & T1.3) (*)</label>
                      <select {...register("T1_2_wifi_tach_rieng")} className="form-input h-11 text-xs bg-gray-800 mb-2">
-                        <option value="Không có WiFi">K.có WiFi</option>
-                        <option value="Có - VLAN/Subnet tách riêng">Có tách VLAN riêng</option>
-                        <option value="Không - Dùng chung IP LAN">Dùng chung IP LAN</option>
+                        <option value="Không có WiFi">Không có WiFi</option>
+                        <option value="Có">Có WiFi</option>
+                        <option value="Tách riêng VLAN">VLAN tách riêng</option>
                      </select>
                      {watch("T1_2_wifi_tach_rieng") !== "Không có WiFi" && (
                         <div className="grid grid-cols-2 gap-2">
@@ -709,14 +709,20 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
                            <select {...register("T3_1_co_rack")} className="form-input h-11 text-xs bg-gray-800 flex-1">
                               <option value="Không">K</option><option value="Có">Có</option>
                            </select>
-                           {watch("T3_1_co_rack") === "Có" && <input {...register("T3_1_rack_u")} placeholder="U" className="form-input h-11 text-xs w-10 text-center" />}
+                           {watch("T3_1_co_rack") === "Có" && (
+                              <div className="flex gap-1 w-full mt-1">
+                                 <input {...register("T3_1_rack_u")} placeholder="U" className="form-input h-11 text-xs w-10 text-center" />
+                                 <input {...register("T3_1_rack_vi_tri")} placeholder="Vị trí tủ" className="form-input h-11 text-xs flex-1" />
+                              </div>
+                           )}
                         </div>
                      </div>
                      <div className="p-3 bg-white/5 rounded border border-white/5 text-white">
                         <label className="text-[9px] text-gray-500 block uppercase">Loại cáp (T4.1)</label>
                         <select {...register("T4_1_loai_cap")} className="form-input h-11 text-xs bg-gray-800">
-                           <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng</option>
-                           <option value="Cáp quang">Cáp quang</option>
+                           <option value="Cáp đồng (Cat5e/Cat6)">Cáp đồng (Cat5e/Cat6)</option>
+                           <option value="Cáp quang (Fiber)">Cáp quang (Fiber)</option>
+                           <option value="Hỗn hợp">Hỗn hợp</option>
                         </select>
                      </div>
                   </div>

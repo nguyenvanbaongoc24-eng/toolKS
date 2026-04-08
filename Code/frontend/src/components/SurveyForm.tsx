@@ -1309,11 +1309,11 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                   <div className="grid grid-cols-5 gap-2">
                     <div className="col-span-2">
                        <label className="text-[9px] text-gray-500 uppercase block mb-1">Kích thước</label>
-                       <input {...register("T3_rack_u")} className="form-input text-xs h-10" placeholder="Số U (VD: 12U)" />
+                       <input {...register("T3_1_rack_u")} className="form-input text-xs h-10" placeholder="Số U (VD: 12U)" />
                     </div>
                     <div className="col-span-3">
                        <label className="text-[9px] text-gray-500 uppercase block mb-1">Vị trí lắp đặt</label>
-                       <input {...register("T3_rack_vi_tri")} className="form-input text-xs h-10" placeholder="Tầng/Phòng lắp đặt" />
+                       <input {...register("T3_1_rack_vi_tri")} className="form-input text-xs h-10" placeholder="Tầng/Phòng lắp đặt" />
                     </div>
                   </div>
                 </div>
