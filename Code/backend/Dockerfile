@@ -15,8 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 \
     libglib2.0-0 \
     libfontconfig1 \
-    fonts-dejavu \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    fonts-dejavu && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Cài đặt thư viện Python (Thực hiện trước khi copy code để tận dụng cache)
 COPY requirements.txt .
