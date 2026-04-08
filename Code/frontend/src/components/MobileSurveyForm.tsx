@@ -139,7 +139,7 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
 
   return (
     <div className="min-h-screen bg-gray-950 text-white pb-32">
-      <form onSubmit={handleSubmit(handleAction)} className="p-2 space-y-2">
+      <form onSubmit={handleSubmit((data) => handleAction(data))} className="p-2 space-y-2">
         {/* Progress Header */}
         <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-md -mx-2 px-4 py-2 border-b border-indigo-500/30 flex items-center justify-between shadow-lg">
            <div className="flex-1 mr-4">
