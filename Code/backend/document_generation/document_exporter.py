@@ -22,12 +22,11 @@ class DocumentExporter:
     def _map_checkboxes(self, value, mapping):
         """
         Maps a form value to multiple Word placeholders for checkboxes.
-        Example: mapping = {"yes": "l5_log_yes", "no": "l5_log_no"}
-        If value == "yes", context will be {"l5_log_yes": "☒", "l5_log_no": "☐"}
+        Uses 'V' (checkmark) instead of '☒'.
         """
         context = {}
         for option, placeholder in mapping.items():
-            context[placeholder] = "☒" if str(value).lower() == str(option).lower() else "☐"
+            context[placeholder] = "V" if str(value).lower() == str(option).lower() else "☐"
         return context
 
     def _get_hsdx_logic(self, data):
@@ -198,9 +197,9 @@ class DocumentExporter:
             'K7_bien_ban_kiem_tra': data.get('K7_bien_ban_kiem_tra', ''),
 
             # Mục N: Chữ ký
-            'N_nguoi_dien_ho_ten': data.get('n_nguoi_lap', ''),
-            'N_nguoi_dien_chuc_vu': data.get('n_chuc_vu_lap', ''),
-            'N_ngay_dien': data.get('n_ngay_lap', ''),
+            'n_nguoi_lap': data.get('n_nguoi_lap', ''),
+            'n_chuc_vu_lap': data.get('n_chuc_vu_lap', ''),
+            'n_ngay_lap': data.get('n_ngay_lap', ''),
             'N_nguoi_kiem_tra_ho_ten': data.get('N_nguoi_kiem_tra_ho_ten', ''),
             'N_nguoi_kiem_tra_chuc_vu': data.get('N_nguoi_kiem_tra_chuc_vu', ''),
             'N_ngay_kiem_tra': data.get('N_ngay_kiem_tra', ''),
@@ -215,24 +214,35 @@ class DocumentExporter:
             'BC_don_vi_thuc_hien': data.get('BC_don_vi_thuc_hien', ''),
             'BC_ten_tinh': data.get('BC_ten_tinh', ''),
             
-            # Tables (Iterables)
-            'B_can_bo': data.get('can_bo_phu_trach', []),
-            'D1_duong_truyen': data.get('ket_noi_internet', []),
-            'E1_thiet_bi_mang': data.get('thiet_bi_mang', []),
-            'F2_may_chu': data.get('may_chu', []),
-            'G1_camera': data.get('camera', []),
-            'H5_ip_tinh': data.get('ip_tinh', []),
-            'I1_ung_dung': data.get('ung_dung', []),
-            'R1_dao_tao': data.get('dao_tao', []),
-            'S1_kiem_tra': data.get('kiem_tra_attt', []),
+            # Tables (Iterables) - Adding idx to each row for the template
+            'B_can_bo': [{'idx': i+1, **row} for i, row in enumerate(data.get('can_bo_phu_trach', []))],
+            'D1_duong_truyen': [{'idx': i+1, **row} for i, row in enumerate(data.get('ket_noi_internet', []))],
+            'E1_thiet_bi_mang': [{'idx': i+1, **row} for i, row in enumerate(data.get('thiet_bi_mang', []))],
+            'F2_may_chu': [{'idx': i+1, **row} for i, row in enumerate(data.get('may_chu', []))],
+            'G1_camera': [{'idx': i+1, **row} for i, row in enumerate(data.get('camera', []))],
+            'H5_ip_tinh': [{'idx': i+1, **row} for i, row in enumerate(data.get('ip_tinh', []))],
+            'I1_ung_dung': [{'idx': i+1, **row} for i, row in enumerate(data.get('ung_dung', []))],
+            'R1_dao_tao': [{'idx': i+1, **row} for i, row in enumerate(data.get('dao_tao', []))],
+            'S1_kiem_tra': [{'idx': i+1, **row} for i, row in enumerate(data.get('kiem_tra_attt', []))],
             'T2_port_mapping': data.get('port_switch', []),
             'T5_vi_tri': data.get('T5_vi_tri', []),
+            
+            # Additional keys for Table 21 (Legal docs)
+            'K_van_ban': [
+                {'idx': 1, 'loai': 'Quy chế ATTT', 'so': data.get('k1_quy_che', '')},
+                {'idx': 2, 'loai': 'Kế hoạch HT', 'so': data.get('k2_ke_hoach_ht', '')},
+                {'idx': 3, 'loai': 'Kế hoạch TR', 'so': data.get('k3_ke_hoach_tr', '')},
+                {'idx': 4, 'loai': 'QĐ Cán bộ', 'so': data.get('k4_qd_can_bo', '')},
+                {'idx': 5, 'loai': 'QĐ Phê duyệt HTTT', 'so': data.get('K5_qd_phe_duyet_httt', '')},
+                {'idx': 6, 'loai': 'Quy trình ứng phó', 'so': data.get('K6_ung_pho_su_co', '')},
+                {'idx': 7, 'loai': 'Biên bản kiểm tra', 'so': data.get('K7_bien_ban_kiem_tra', '')},
+            ],
             
             # Current time context
             'nam_hien_tai': '2026',
         }
 
-        # Checkbox Logic: Mapping ☐ to ☒ based on choices
+        # Checkbox Logic: Mapping ☐ to V based on choices
         # Section C4
         context.update(self._map_checkboxes(data.get('C4_du_lieu_type'), {
             "Cá nhân thông thường": "C4_du_lieu_ca_nhan_thuong",
@@ -309,10 +319,10 @@ class DocumentExporter:
             "Không có WiFi": "T1_wifi_none"
         }))
 
-        # Photos M1-M14
+        # Photos M1-M14 - Standardized for the new template
         for i in range(1, 15):
             val = data.get(f"M{i}_status")
-            context[f"M{i}_status_ok"] = "☒ Đã có" if val else "☐ Chưa có"
+            context[f"M{i}_status_ok"] = "V Đã có" if val else "☐ Chưa có"
 
         # Specialized logic for HSDX and Report
         context.update(self._get_hsdx_logic(data))
@@ -341,7 +351,6 @@ class DocumentExporter:
         output_filename = f"Phieu_Khao_Sat_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         try:
-            # docxtpl automatically handles row loops for standard {% for %} tags if they occupy table rows
             doc.render(context)
             doc.save(output_path)
             logger.info(f"  Output: {output_path}")
@@ -349,13 +358,10 @@ class DocumentExporter:
             return output_path
         except Exception as e:
             logger.error(f"Render error in Phieu Khao Sat: {str(e)}")
-            # If a Jinja error occurs, it often points to a specific tag or missing data
-            if "Encountered unknown tag" in str(e):
-                logger.error("  CRITICAL: Found an unsupported Jinja tag in document. Verify template structure.")
             traceback.print_exc()
             raise Exception(f"Phieu Export Error: {str(e)}")
 
-    def generate_hsdx(self, data, diagram_path=None):
+    def generate_hsdx(self, data):
         template_path = os.path.join(self.template_dir, 'hsdx_template.docx')
         if not os.path.exists(template_path):
             raise FileNotFoundError(f"Template not found: {template_path}")
@@ -363,31 +369,29 @@ class DocumentExporter:
         doc = DocxTemplate(template_path)
         context = self._get_context(data)
         
-        # Automatically generate diagram if not provided
-        if not diagram_path:
-            try:
-                dg = DiagramGenerator(output_dir=self.output_dir)
-                diagram_filename = f"network_{data.get('ten_don_vi', 'Unknown').replace(' ', '_')}.png"
-                diagram_path = dg.generate_network_topology(data, diagram_filename)
-            except Exception as e:
-                logger.error(f"Failed to generate network diagram: {e}")
-                diagram_path = None
-        
-        if diagram_path and os.path.exists(diagram_path):
-            context['network_diagram'] = InlineImage(doc, diagram_path, width=Mm(150))
-        else:
+        # Generate both Diagrams
+        try:
+            dg = DiagramGenerator(output_dir=self.output_dir)
+            
+            # 1. Logical Diagram
+            logic_filename = f"logic_{data.get('ten_don_vi', 'Unknown').replace(' ', '_')}.png"
+            logic_path = dg.generate_logical_diagram(data, logic_filename)
+            context['logical_diagram'] = InlineImage(doc, logic_path, width=Mm(150))
+            
+            # 2. Physical Diagram
+            phys_filename = f"phys_{data.get('ten_don_vi', 'Unknown').replace(' ', '_')}.png"
+            phys_path = dg.generate_physical_diagram(data, phys_filename)
+            context['physical_diagram'] = InlineImage(doc, phys_path, width=Mm(150))
+            
+            # Backward compatibility for templates using 'network_diagram'
+            context['network_diagram'] = context['logical_diagram']
+            
+        except Exception as e:
+            logger.error(f"Failed to generate network diagrams: {e}")
+            context['logical_diagram'] = ""
+            context['physical_diagram'] = ""
             context['network_diagram'] = ""
         
-        # Debug: Log key context values
-        logger.info("="*60)
-        logger.info("EXPORTING: Hồ Sơ Đề Xuất Cấp Độ")
-        logger.info("="*60)
-        for key in ['ten_don_vi', 'dia_chi', 'he_thong_thong_tin', 'so_dien_thoai', 'email',
-                     'A6_ho_ten_thu_truong', 'H1_dai_ip_lan', 'H2_ip_gateway', 'nguoi_khao_sat']:
-            logger.info(f"  {key} = {context.get(key, '(NOT SET)')}")
-        logger.info(f"  Network diagram: {'YES' if diagram_path else 'NO'}")
-        logger.info(f"  Template: {template_path}")
-            
         output_filename = f"HSDX_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         try:
@@ -408,7 +412,7 @@ class DocumentExporter:
         doc = DocxTemplate(template_path)
         context = self._get_context(data)
         
-        # Override hardcoded logic with intelligent RAG analysis
+        # Override with AI Analysis if available
         try:
             analyzer = SecurityAnalyzer()
             ai_results = analyzer.analyze_survey(data)
@@ -417,18 +421,6 @@ class DocumentExporter:
         except Exception as e:
             logger.warning(f"Could not perform Intelligent Security Analysis: {e}")
             
-        # Debug: Log key context values
-        logger.info("="*60)
-        logger.info("EXPORTING: Báo Cáo Khảo Sát")
-        logger.info("="*60)
-        for key in ['ten_don_vi', 'dia_chi', 'he_thong_thong_tin', 'BC_so_bao_cao',
-                     'BC_don_vi_thuc_hien', 'BC_ten_tinh', 'problems', 'solutions']:
-            val = context.get(key, '(NOT SET)')
-            if isinstance(val, str) and len(val) > 100:
-                val = val[:100] + '...'
-            logger.info(f"  {key} = {val}")
-        logger.info(f"  Template: {template_path}")
-        
         output_filename = f"Bao_Cao_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         try:

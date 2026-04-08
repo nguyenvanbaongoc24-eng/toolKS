@@ -5,6 +5,16 @@ out/
 !.env.example
 .vercel/
 
+# Temporary Office Files
+~$*
+*~
+
+# Generated Documents
+backend/generated_docs/
+*.png
+*.docx
+!Code/templates/*.docx
+
 # Python
 __pycache__/
 *.py[cod]

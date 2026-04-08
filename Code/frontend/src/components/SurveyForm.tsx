@@ -383,14 +383,24 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
   };
 
   const handleComplete = async () => {
-    if (!formData.ten_don_vi || !formData.he_thong_thong_tin) {
+    const currentData = getValues();
+    if (!currentData.ten_don_vi || !currentData.he_thong_thong_tin) {
       setShowValidationModal(true);
       setActiveTab("don_vi");
       return;
     }
+    
+    // Validate Section M (Mandatory attachments)
+    const missingPhotos = Array.from({ length: 14 }, (_, i) => i + 1).filter(i => !currentData[`M${i}_status`]);
+    if (missingPhotos.length > 0) {
+      alert(`Vui lòng xác nhận đã chụp đủ 14 hạng mục ảnh tại Mục M (Thiếu ${missingPhotos.length} ảnh).`);
+      setActiveTab("hinh_anh");
+      return;
+    }
+
     if (confirm("Xác nhận hoàn thành hồ sơ này? Sau khi hoàn thành, trạng thái sẽ chuyển sang 'Hoàn thành'.")) {
       setIsCompleting(true);
-      await handleAction(formData, "completed");
+      await handleAction(currentData, "completed");
       setIsCompleting(false);
     }
   };
@@ -840,12 +850,12 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                 {ipTinhFields.fields.map((field, idx) => (
                   <div key={field.id} className="flex gap-2 items-center bg-black/20 p-2 rounded-lg border border-white/5">
                     <input {...register(`ip_tinh.${idx}.ten_thiet_bi`)} className="form-input text-xs flex-1" placeholder="Thiết bị/Người dùng" />
-                    <input {...register(`ip_tinh.${idx}.dia_chi_ip`)} className="form-input text-xs flex-1" placeholder="IP Tĩnh" />
+                    <input {...register(`ip_tinh.${idx}.ip_tinh`)} className="form-input text-xs flex-1" placeholder="IP Tĩnh" />
                     <input {...register(`ip_tinh.${idx}.ghi_chu`)} className="form-input text-xs flex-1" placeholder="Ghi chú" />
                     <button type="button" onClick={() => ipTinhFields.remove(idx)} className="text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                 ))}
-                <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", dia_chi_ip: "", ghi_chu: "" })} className="text-[10px] text-indigo-400 hover:underline">+ Thêm IP tĩnh</button>
+                <button type="button" onClick={() => ipTinhFields.append({ ten_thiet_bi: "", ip_tinh: "", ghi_chu: "" })} className="text-[10px] text-indigo-400 hover:underline">+ Thêm IP tĩnh</button>
               </div>
             </div>
           </div>
@@ -1175,7 +1185,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* MỤC M: DANH MỤC ẢNH CHỤP */}
             <div className="section-card">
-              <h2 className="section-title"><span className="section-badge bg-emerald-600">M</span> Mục M. Hồ sơ ảnh chụp (Checklist)</h2>
+              <h2 className="section-title"><span className="section-badge bg-emerald-600">M</span> Mục M. Hồ sơ ảnh chụp (Bắt buộc) <Indicator name="M1_status" required /></h2>
               <div className="grid grid-cols-1 gap-1">
                 {[
                   "1. Ảnh chụp Modem/Router (Mặt trước/sau)",
@@ -1193,9 +1203,9 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                   "13. Ảnh chụp Cáp mạng/Hệ thống dây",
                   "14. Ảnh chụp Tổng quan phòng máy"
                 ].map((text, i) => (
-                  <label key={i} className="flex items-center space-x-3 p-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
-                    <input type="checkbox" {...register(`M${i+1}_status`)} className="w-4 h-4 rounded border-gray-700 bg-gray-800 text-emerald-500" />
-                    <span className="text-xs text-gray-300">{text}</span>
+                  <label key={i} className="flex items-center space-x-3 p-2 hover:bg-white/5 rounded cursor-pointer transition-colors group">
+                    <input type="checkbox" {...register(`M${i+1}_status`)} className="w-4 h-4 rounded border-gray-700 bg-gray-800 text-emerald-500 checked:bg-emerald-500" />
+                    <span className="text-xs text-gray-300 group-hover:text-white">{text} (*)</span>
                   </label>
                 ))}
               </div>
