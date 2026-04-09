@@ -22,7 +22,7 @@ export interface SurveyQuestion {
   // Metadata for complex mapping
   checkboxMap?: Record<string, string>; // Value -> Placeholder
   // For fieldArray
-  columns?: Array<{ id: string; label: string; type: 'text' | 'number' | 'select'; options?: string[] }>;
+  columns?: Array<{ id: string; label: string; type: 'text' | 'number' | 'select' | 'textarea'; options?: string[] }>;
 }
 
 export interface SurveySection {
