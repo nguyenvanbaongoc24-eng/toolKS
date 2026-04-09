@@ -17,7 +17,7 @@ import { validateSurvey, ValidationResult } from "@/utils/validation";
 
 const TABS = [
   { id: "section_ac", label: "A-C. Đơn vị & Hệ thống", icon: Building },
-  { id: "section_di", label: "D-I. Hạ tượng & Mạng", icon: Router },
+  { id: "section_di", label: "D-I. Hạ tầng & Mạng", icon: Router },
   { id: "section_kp", label: "K-P. An toàn Bảo mật", icon: ShieldAlert },
   { id: "section_qs", label: "Q-S. Quản lý & Đào tạo", icon: GraduationCap },
   { id: "section_mt", label: "M-T. Xác nhận & Sơ đồ", icon: LayoutPanelLeft }

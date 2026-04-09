@@ -159,27 +159,67 @@ class DocumentExporter:
             'l1_phys_key': {
                 "Có khóa cửa": "L1_khoa_cua_thuong",
                 "Có khóa cửa (chìa khóa thường)": "L1_khoa_cua_thuong",
+                "Có khóa + Camera": "L1_khoa_camera",
                 "Có thẻ từ / kiểm soát điện tử": "L1_the_tu",
                 "Thẻ từ / Kiểm soát điện tử": "L1_the_tu",
                 "Không có kiểm soát": "L1_khong_kiem_soat"
             },
+            'L2_admin_su_dung': {
+                "Mỗi cán bộ có tài khoản riêng": "L2_admin_rieng",
+                "Dùng chung một tài khoản admin": "L2_admin_chung",
+                "Cả hai hình thức": "L2_admin_ca_hai"
+            },
+            'l4_bak_has': {
+                "Hàng ngày / Tuần / Tháng": "L4_co_tan_suat",
+                "Thủ công khi nhớ": "L4_thu_cong",
+                "Không sao lưu": "L4_khong"
+            },
+            'L5_ghi_log': {
+                "Có": "L5_co",
+                "Không biết / Chưa kiểm tra": "L5_chua_kiem_tra",
+                "Không": "L5_khong"
+            },
+            'L6_su_co': {
+                "Không có sự cố nào": "L6_khong_su_co",
+                "Có sự cố": "L6_co_su_co",
+                "Không biết / Không ghi nhận": "L6_khong_biet"
+            },
             'l7_type': {
                 "Phần cứng chuyên dụng": "L7_1_phan_cung",
                 "Router SPI": "L7_1_router_spi",
-                "Phần mềm": "L7_1_phan_mem"
+                "Phần mềm": "L7_1_phan_mem",
+                "Không có": "L7_1_khong"
+            },
+            'L7_2_chinh_sach': {
+                "Chặn tất cả (Default Deny)": "L7_2_default_deny",
+                "Cho phép tất cả (Default Allow)": "L7_2_default_allow",
+                "Chưa cấu hình / Không biết": "L7_2_chua_cau_hinh"
+            },
+            'L7_3_remote_access': {
+                "Có - qua VPN": "L7_3_vpn",
+                "Có - qua RDP/Teamviewer/Anydesk": "L7_3_rdp",
+                "Không": "L7_3_khong"
+            },
+            'P2_loai_vpn': {
+                "SSL VPN": "P2_loai_ssl",
+                "IPSec VPN": "P2_loai_ipsec",
+                "Khác": "P2_loai_khac"
             },
             'p1_protocol': {
                 "HTTPS (chứng chỉ SSL/TLS)": "P1_giao_thuc_web_https",
-                "HTTP (không mã hóa)": "P1_giao_thuc_web_http"
+                "HTTP (không mã hóa)": "P1_giao_thuc_web_http",
+                "Cả hai": "P1_giao_thuc_web_both"
             },
             'P3_ket_noi_cap_tren_type': {
                 "VPN chuyên dụng": "P3_vpn_chuyen_dung",
                 "Internet (HTTPS)": "P3_internet_https",
-                "MPLS": "P3_mpls"
+                "MPLS": "P3_mpls",
+                "Không kết nối": "P3_khong_ket_noi"
             },
             'T1_2_wifi_tach_rieng': {
                 "Tách VLAN": "T1_wifi_vlan",
-                "Có": "T1_wifi_yes"
+                "Có": "T1_wifi_yes",
+                "Không": "T1_wifi_no"
             }
         }
 
