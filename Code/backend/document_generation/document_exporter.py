@@ -160,90 +160,32 @@ class DocumentExporter:
             key = f"M{i}_status"
             context[f"{key}_ok"] = "V Đã có" if data.get(key) else "☐ Chưa có"
 
-        # 5. Checkbox Logic - Mapping 'V' or '☐'
-        checkbox_mappings = {
-            'C4_du_lieu_type': {
-                "Cá nhân thông thường": "C4_du_lieu_ca_nhan_thuong",
-                "Cá nhân nhạy cảm": "C4_du_lieu_ca_nhan_nhay_cam",
-                "Dữ liệu công": "C4_du_lieu_cong",
-                "Không xác định": "C4_khong_xac_dinh"
-            },
-            'E2_firewall_type': {
-                "Có (phần cứng chuyên dụng)": "E2_co_firewall",
-                "Dùng Firewall tích hợp": "E2_router_tich_hop",
-                "Dùng phần mềm Firewall": "E2_phan_mem"
-            },
-            'l1_phys_key': {
-                "Có khóa cửa": "L1_khoa_cua_thuong",
-                "Có khóa cửa (chìa khóa thường)": "L1_khoa_cua_thuong",
-                "Có khóa + Camera": "L1_khoa_camera",
-                "Có thẻ từ / kiểm soát điện tử": "L1_the_tu",
-                "Thẻ từ / Kiểm soát điện tử": "L1_the_tu",
-                "Không có kiểm soát": "L1_khong_kiem_soat"
-            },
-            'L2_admin_su_dung': {
-                "Mỗi cán bộ có tài khoản riêng": "L2_admin_rieng",
-                "Dùng chung một tài khoản admin": "L2_admin_chung",
-                "Cả hai hình thức": "L2_admin_ca_hai"
-            },
-            'l4_bak_has': {
-                "Hàng ngày / Tuần / Tháng": "L4_co_tan_suat",
-                "Thủ công khi nhớ": "L4_thu_cong",
-                "Không sao lưu": "L4_khong"
-            },
-            'L5_ghi_log': {
-                "Có": "L5_co",
-                "Không biết / Chưa kiểm tra": "L5_chua_kiem_tra",
-                "Không": "L5_khong"
-            },
-            'L6_su_co': {
-                "Không có sự cố nào": "L6_khong_su_co",
-                "Có sự cố": "L6_co_su_co",
-                "Không biết / Không ghi nhận": "L6_khong_biet"
-            },
-            'l7_type': {
-                "Phần cứng chuyên dụng": "L7_1_phan_cung",
-                "Router SPI": "L7_1_router_spi",
-                "Phần mềm": "L7_1_phan_mem",
-                "Không có": "L7_1_khong"
-            },
-            'L7_2_chinh_sach': {
-                "Chặn tất cả (Default Deny)": "L7_2_default_deny",
-                "Cho phép tất cả (Default Allow)": "L7_2_default_allow",
-                "Chưa cấu hình / Không biết": "L7_2_chua_cau_hinh"
-            },
-            'L7_3_remote_access': {
-                "Có - qua VPN": "L7_3_vpn",
-                "Có - qua RDP/Teamviewer/Anydesk": "L7_3_rdp",
-                "Không": "L7_3_khong"
-            },
-            'P2_loai_vpn': {
-                "SSL VPN": "P2_loai_ssl",
-                "IPSec VPN": "P2_loai_ipsec",
-                "Khác": "P2_loai_khac"
-            },
-            'p1_protocol': {
-                "HTTPS (chứng chỉ SSL/TLS)": "P1_giao_thuc_web_https",
-                "HTTP (không mã hóa)": "P1_giao_thuc_web_http",
-                "Cả hai": "P1_giao_thuc_web_both"
-            },
-            'P3_ket_noi_cap_tren_type': {
-                "VPN chuyên dụng": "P3_vpn_chuyen_dung",
-                "Internet (HTTPS)": "P3_internet_https",
-                "MPLS": "P3_mpls",
-                "Không kết nối": "P3_khong_ket_noi"
-            },
-            'T1_2_wifi_tach_rieng': {
-                "Tách VLAN": "T1_wifi_vlan",
-                "Có": "T1_wifi_yes",
-                "Không": "T1_wifi_no"
-            }
-        }
+        # 5. Checkbox Logic - Mapping '☑' or '☐' based on surveySchema
+        # This makes the exporter truly dynamic and schema-driven
+        from src.schemas.surveySchema import surveySchema
+        for section in surveySchema:
+            for q in section.get('questions', []):
+                if 'checkboxMap' in q:
+                    val = data.get(q['id'])
+                    # Handle both single value (radio) and list (checkbox)
+                    for label, placeholder in q['checkboxMap'].items():
+                        is_checked = False
+                        if isinstance(val, list):
+                            is_checked = label in val
+                        else:
+                            is_checked = val == label
+                        context[placeholder] = "☑" if is_checked else "☐"
 
-        for field_id, mapping in checkbox_mappings.items():
-            context.update(self._map_checkboxes(data.get(field_id), mapping))
+        # 6. Contact & Personnel Aliases
+        context.update({
+            'so_dien_thoai_co_quan': data.get('A4_so_dien_thoai') or '...',
+            'email_co_quan': data.get('A5_email') or '...',
+            'nguoi_khao_sat': data.get('N_nguoi_dien_ho_ten') or data.get('BC_nguoi_thuc_hien', '...'),
+            'N_ngay_dien': data.get('N_ngay_dien') or data.get('BC_ngay_bao_cao', '...'),
+            'ngay_lap_phieu': data.get('N_ngay_dien') or '...',
+        })
 
-        # 6. Specialized Logic
+        # 7. Specialized Logic
         context.update(self._get_hsdx_logic(data))
         context.update(self._get_report_logic(data))
 

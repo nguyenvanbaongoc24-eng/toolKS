@@ -1,0 +1,58 @@
+Table 0: 📋 HƯỚNG DẪN SỬ DỤNG PHIẾU KHẢO SÁT
+
+① Người điền là cán bộ phụ trách CNTT hoặc người có thẩm quyền tại đơn vị.
+
+② Các mục có dấu (*) là BẮT BUỘC – thiếu thông tin sẽ phải khảo sát lại.
+
+③ Điền đúng tên đầy đủ của thiết bị (hãng sản xuất, model, số serial) – chụp ảnh nhãn thiết bị nếu không rõ.
+
+④ Với mục có bảng: điền một thiết bị / ứng dụng trên một hàng; thêm hàng nếu cần.
+
+⑤ Gửi phiếu đã điền kèm theo ảnh chụp thiết bị (mục M) về cán bộ lập hồ sơ.
+Table 1: 💡 Điền đúng tên đầy đủ của cơ quan theo quyết định thành lập (không viết tắt). Tên xuất hiện trong hồ sơ pháp lý nên cần chính xác.
+Table 2: 💡 Liệt kê TẤT CẢ cán bộ có liên quan đến vận hành CNTT. Thông tin này dùng để hoàn thiện phần nhân sự trong hồ sơ và liên lạc khi cần bổ sung.
+⚠️ Bắt buộc ghi rõ trình độ học vấn, chuyên ngành đào tạo và chứng chỉ ATTT (nếu có).
+Table 3: STT
+Table 4: 💡 Mô tả ngắn gọn, súc tích. Trả lời đủ 3 ý: (1) Hệ thống phục vụ nghiệp vụ gì? (2) Ai sử dụng? (3) Dữ liệu quan trọng nhất là gì?
+Table 5: 💡 Điền TỪNG đường truyền riêng biệt. Phân biệt rõ đường CHÍNH và đường DỰ PHÒNG. Thông tin này ảnh hưởng trực tiếp đến đánh giá kiểm soát truy cập.
+⚠️ Không bỏ trống cột 'Vai trò'. Nếu chỉ có 1 đường truyền, ghi 'Đường chính (duy nhất)'.
+Table 6: STT
+Table 7: 💡 Liệt kê TẤT CẢ thiết bị mạng. Mỗi thiết bị một hàng. Số serial (S/N) BẮT BUỘC – nếu không nhớ, chụp ảnh nhãn thiết bị gửi kèm.
+📍 Vị trí: ghi rõ TẦNG + PHÒNG. VD: 'Tầng 1 – Phòng CNTT (phòng 101)' không được ghi chung chung là 'phòng làm việc'.
+⚠️ Thiếu S/N hoặc vị trí cụ thể → hồ sơ bị trả lại để bổ sung.
+Table 8: STT
+Table 9: 💡 Điền số lượng tổng hợp theo loại thiết bị. Không cần liệt kê từng máy riêng lẻ, trừ MÁY CHỦ – máy chủ phải liệt kê chi tiết từng chiếc.
+Table 10: STT
+Table 11: ⚠️ Nếu đơn vị KHÔNG có máy chủ vật lý, ghi rõ 'Không có' và cho biết dữ liệu được lưu ở đâu (máy tính cá nhân, cloud, NAS, máy chủ của cơ quan cấp trên…).
+Table 12: STT
+Table 13: 💡 Liệt kê từng camera riêng lẻ (hoặc theo nhóm cùng model). Thông tin camera ảnh hưởng đến đánh giá kiểm soát vật lý trong hồ sơ.
+📍 Vị trí lắp đặt phải ghi rõ: tầng + khu vực. VD: 'Tầng 1 – cửa ra vào chính'.
+Table 14: STT
+Table 15: 💡 Cung cấp thông tin dải IP đang sử dụng. Nếu đơn vị không biết chính xác, liên hệ cán bộ CNTT để kiểm tra cài đặt Router.
+Table 16: STT
+Table 17: 💡 Liệt kê TẤT CẢ phần mềm, ứng dụng đang sử dụng – kể cả phần mềm do cấp trên cung cấp (tỉnh/bộ) hay phần mềm mua ngoài.
+⚠️ Ghi rõ ứng dụng có kết nối Internet hay không (quan trọng để đánh giá vùng DMZ).
+Table 18: STT
+Table 19: 💡 Cung cấp số văn bản, ngày ban hành. Nếu chưa có văn bản, ghi rõ 'Chưa ban hành' để cán bộ lập hồ sơ biết cần bổ sung.
+⚠️ Thiếu số văn bản → hồ sơ không thể hoàn thiện phần cơ sở pháp lý.
+Table 20: STT
+Table 21: 💡 Trả lời thực tế – không cần trả lời 'đáp ứng' nếu thực tế chưa có. Thông tin trung thực giúp hồ sơ phản ánh đúng và đề xuất biện pháp phù hợp.
+Table 22: 💡 Mục này cần để viết thuyết minh biện pháp 'Tường lửa' trong Phụ lục II TT 12/2022. Trả lời theo thực tế cấu hình – không cần chuyên sâu, mô tả đơn giản là được.
+Table 23: 💡 Mã hóa là một trong 13 biện pháp bắt buộc của Phụ lục II TT 12/2022 (Cấp độ 2). Thông tin này dùng để viết mục 'Bảo vệ dữ liệu' trong thuyết minh kỹ thuật.
+⚠️ Nếu đơn vị sử dụng ứng dụng web (DVCTT, email…) qua HTTPS → đã có mã hóa truyền tải cơ bản.
+Table 24: 💡 Thông tin này dùng để viết biện pháp 'Quản lý lỗ hổng' trong Phụ lục II. Cấp độ 2 yêu cầu đơn vị có quy trình theo dõi và vá lỗi định kỳ.
+Table 25: 💡 TT 12/2022 yêu cầu đơn vị cấp độ 2 có hoạt động đào tạo/nâng cao nhận thức ATTT. Ghi đầy đủ để hồ sơ thể hiện đúng thực trạng.
+Table 26: STT
+Table 27: 💡 Cấp độ 2 yêu cầu kiểm tra, đánh giá ATTT ít nhất 1 lần/năm (Điều 12 TT 12/2022). Ghi lại lịch sử đã kiểm tra và kế hoạch sắp tới.
+Table 28: STT
+Table 29: 🗺️ Mục này chuyên dùng để vẽ SƠ ĐỒ KẾT NỐI LOGIC và SƠ ĐỒ KẾT NỐI VẬT LÝ. Không cần kiến thức kỹ thuật sâu – chỉ cần mô tả thực tế đang dùng.
+💡 Nếu không biết chắc, có thể chụp ảnh tủ mạng/bảng đấu nối gửi kèm – cán bộ kỹ thuật sẽ xác nhận lại.
+Table 30: ⚠️ Đây là thông tin hay bị bỏ sót nhất trong khảo sát. Nếu không nhớ, hãy nhìn vào dây cắm trên switch và ghi theo thứ tự cổng từ trái sang phải.
+Table 31: Tên Switch (*)
+Table 32: 📍 Mô tả vị trí của từng thiết bị quan trọng trong tòa nhà. Thông tin này giúp vẽ sơ đồ vật lý chính xác theo thực tế bố trí.
+Table 33: Tên thiết bị / Nhóm thiết bị (*)
+Table 34: 📎 Gửi kèm các tài liệu sau cùng phiếu khảo sát đã điền. Ảnh chụp cần rõ nét, đọc được nhãn thiết bị.
+⚠️ Thiếu ảnh thiết bị là nguyên nhân phổ biến nhất phải khảo sát bổ sung lần 2, lần 3.
+Table 35: STT
+Table 36: Người điền phiếu
+(Cán bộ CNTT / phụ trách)
