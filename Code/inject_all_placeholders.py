@@ -134,7 +134,7 @@ def inject_phieu(src_path, out_path):
     inject_table_loop(doc, 26, "dao_tao", ["{{item.idx}}", "{{item.hinh_thuc}}", "{{item.don_vi_to_chuc}}", "{{item.thoi_gian}}", "{{item.so_can_bo}}", "{{item.chung_chi_so_vb}}"])
     inject_table_loop(doc, 28, "kiem_tra_attt", ["{{item.idx}}", "{{item.loai_kiem_tra}}", "{{item.don_vi_thuc_hien}}", "{{item.thoi_gian}}", "{{item.ket_qua_so_vb}}"])
     inject_table_loop(doc, 31, "port_switch", ["{{item.ten_switch}}", "{{item.so_cong}}", "{{item.cong_su_dung}}", "{{item.ghi_chu}}"])
-    inject_table_loop(doc, 33, "T5_vi_tri", ["{{item.idx}}", "{{item.thiet_bi}}", "{{item.tang}}", "{{item.phong}}", "{{item.ghi_chu}}"])
+    inject_table_loop(doc, 33, "T5_vi_tri", ["{{item.thiet_bi}}", "{{item.tang}}", "{{item.phong}}", "{{item.ghi_chu}}"])
     doc.save(out_path)
     logger.info(f"  Saved Phieu template to: {out_path}")
 
@@ -142,6 +142,6 @@ if __name__ == "__main__":
     src_dir = "d:/ToolKS/Code"
     out_dir = "d:/ToolKS/Code/backend/templates"
     os.makedirs(out_dir, exist_ok=True)
-    phieu_src = os.path.join(src_dir, "Phieu_Khao_Sat_ATTT_Mau_1.docx.docx")
+    phieu_src = os.path.join(src_dir, "Mẫu phiếu khảo sát.docx")
     if os.path.exists(phieu_src): inject_phieu(phieu_src, os.path.join(out_dir, "phieu_khao_sat_template.docx"))
     logger.info("=== Template injection complete! ===")
