@@ -192,10 +192,10 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         <div className="fixed bottom-0 left-0 right-0 h-[56px] bg-gray-900/90 backdrop-blur-lg border-t border-white/10 px-2 flex items-center z-50">
           <div className="flex gap-2 flex-1 h-full py-1.5">
             <button type="submit" className="flex-1 bg-white/5 hover:bg-white/10 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 border border-white/10 text-sm">
-              <Save className="w-4 h-4" /> 💾 Lưu
+              <Save className="w-4 h-4" /> Lưu
             </button>
             <button type="button" onClick={() => handleAction(watch(), "completed")} className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 text-sm">
-              <CheckCircle2 className="w-4 h-4" /> ✔ Xong
+              <CheckCircle2 className="w-4 h-4" /> Xong
             </button>
           </div>
           <div className="flex gap-3 px-3 h-full items-center border-l border-white/10 ml-2">
