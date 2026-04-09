@@ -94,11 +94,25 @@ class DocumentExporter:
 
     def _get_context(self, data):
         """
-        Dynamically builds the context mapping based on input data.
+        Dynamically builds the context mapping based on input data with Smart Mapping.
         """
         # 1. Start with raw data
         context = {k: v for k, v in data.items() if not isinstance(v, (list, dict))}
         
+        # 1.1 SMART MAPPING: Support both prefixed and unprefixed keys for Word templates
+        # Example: 'A1_ten_don_vi' -> also provide 'ten_don_vi'
+        items_to_add = {}
+        for k, v in context.items():
+            if '_' in k:
+                parts = k.split('_', 1)
+                prefix = parts[0]
+                # Check if prefix is alphanumeric (like A1, L7, BC)
+                if any(char.isdigit() for char in prefix) or len(prefix) <= 2:
+                    plain_key = parts[1]
+                    if plain_key not in context:
+                        items_to_add[plain_key] = v
+        context.update(items_to_add)
+
         # Apply defaults to ensure placeholders are replaced
         default_context = {
             'ten_don_vi': '...', 'dia_chi': '...', 'so_dien_thoai': '...', 'email': '...',
@@ -135,6 +149,9 @@ class DocumentExporter:
             rows = data.get(data_key, [])
             if isinstance(rows, list):
                 context[template_key] = [{'idx': i+1, **row} for i, row in enumerate(rows)]
+                # Also provide the data_key itself for older templates
+                if data_key not in context:
+                    context[data_key] = context[template_key]
             else:
                 context[template_key] = []
 

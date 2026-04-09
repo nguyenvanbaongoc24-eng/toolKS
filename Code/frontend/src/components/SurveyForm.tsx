@@ -212,7 +212,7 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
         {activeTab === "section_mt" && (
           <div className="section-card">
             <h2 className="section-title">
-              <span className="section-badge bg-emerald-500">Diagram</span> Sơ đồ mạng Logic
+              Sơ đồ mạng Logic
             </h2>
             <NetworkDiagram data={watch()} />
           </div>
@@ -309,6 +309,25 @@ export default function SurveyForm({ prefilledData }: { prefilledData?: any }) {
                         Vẫn xuất file
                     </button>
                 )}
+            </div>
+          </div>
+        </div>
+      )}
+      {/* PROGRESS MODAL */}
+      {isExporting && (
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+          <div className="bg-gray-900 border border-white/10 p-8 rounded-3xl shadow-2xl max-w-sm w-full">
+            <Loader2 className="w-12 h-12 text-indigo-500 animate-spin mx-auto mb-6" />
+            <h2 className="text-xl font-bold mb-2">Đang tạo văn bản...</h2>
+            <p className="text-gray-400 text-sm mb-6">Vui lòng chờ trong giây lát</p>
+            <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-indigo-500 transition-all duration-300 shadow-[0_0_10px_rgba(99,102,241,0.5)]" 
+                style={{ width: `${exportProgress}%` }} 
+              />
+            </div>
+            <div className="mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest">
+              {exportProgress}% hoàn thành
             </div>
           </div>
         </div>

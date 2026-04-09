@@ -263,12 +263,22 @@ export default function MobileSurveyForm({ prefilledData }: { prefilledData?: an
         </div>
       )}
 
+      {/* PROGRESS MODAL */}
       {isExporting && (
-        <div className="fixed inset-0 z-[100] bg-black/90 flex flex-col items-center justify-center p-6 text-center">
-          <Loader2 className="w-12 h-12 text-indigo-500 animate-spin mb-4" />
-          <h2 className="text-xl font-bold mb-2">Đang tạo văn bản...</h2>
-          <div className="w-full max-w-xs h-2 bg-gray-800 rounded-full mt-4 overflow-hidden">
-            <div className="h-full bg-indigo-500 transition-all" style={{ width: `${exportProgress}%` }} />
+        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center animate-fade-in">
+          <div className="bg-gray-900 border border-white/10 p-8 rounded-3xl shadow-2xl w-full max-w-xs">
+            <Loader2 className="w-12 h-12 text-indigo-500 animate-spin mx-auto mb-6" />
+            <h2 className="text-lg font-bold mb-2">Đang tạo văn bản...</h2>
+            <p className="text-gray-400 text-xs mb-6">Hệ thống đang xử lý dữ liệu</p>
+            <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-indigo-500 transition-all duration-300 shadow-[0_0_8px_rgba(99,102,241,0.6)]" 
+                style={{ width: `${exportProgress}%` }} 
+              />
+            </div>
+            <div className="mt-3 text-[9px] text-gray-500 font-black uppercase tracking-[0.2em]">
+              {exportProgress}%
+            </div>
           </div>
         </div>
       )}
