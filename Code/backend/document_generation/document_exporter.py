@@ -160,21 +160,18 @@ class DocumentExporter:
             key = f"M{i}_status"
             context[f"{key}_ok"] = "V Đã có" if data.get(key) else "☐ Chưa có"
 
-        # 5. Checkbox Logic - Mapping '☑' or '☐' based on surveySchema
-        # This makes the exporter truly dynamic and schema-driven
-        from src.schemas.surveySchema import surveySchema
-        for section in surveySchema:
-            for q in section.get('questions', []):
-                if 'checkboxMap' in q:
-                    val = data.get(q['id'])
-                    # Handle both single value (radio) and list (checkbox)
-                    for label, placeholder in q['checkboxMap'].items():
-                        is_checked = False
-                        if isinstance(val, list):
-                            is_checked = label in val
-                        else:
-                            is_checked = val == label
-                        context[placeholder] = "☑" if is_checked else "☐"
+        # 5. Checkbox Logic - Mapping '☑' or '☐' based on schema_mappings.py
+        # This makes the exporter truly dynamic and Python-native
+        from .schema_mappings import CHECKBOX_MAPPINGS
+        for field_id, mapping in CHECKBOX_MAPPINGS.items():
+            val = data.get(field_id)
+            for label, placeholder in mapping.items():
+                is_checked = False
+                if isinstance(val, list):
+                    is_checked = label in val
+                else:
+                    is_checked = val == label
+                context[placeholder] = "☑" if is_checked else "☐"
 
         # 6. Contact & Personnel Aliases
         context.update({
