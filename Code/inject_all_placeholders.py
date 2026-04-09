@@ -44,33 +44,38 @@ def inject_table_loop(doc, table_index, loop_var, row_placeholders):
     sample_row = table.rows[1]
     
     # 2. Insert helper row BEFORE for the 'start' tag
-    # docxtpl {%tr ... %} will strip the entire row it's in
     start_row = table.add_row()
-    # Move it to before sample_row
     sample_row._element.addprevious(start_row._element)
     start_row.cells[0].paragraphs[0].text = f"{{%tr for item in {loop_var} %}}"
     
     # 3. Insert helper row AFTER for the 'end' tag
     end_row = table.add_row()
-    # Move it to after sample_row
     sample_row._element.addnext(end_row._element)
     end_row.cells[0].paragraphs[0].text = "{%tr endfor %}"
     
-    # 4. Inject placeholders into the sample row (now Row 2 essentially)
+    # 4. Inject placeholders into the sample row
     last_idx = min(len(sample_row.cells), len(row_placeholders)) - 1
     for i in range(last_idx + 1):
         cell = sample_row.cells[i]
         placeholder = row_placeholders[i]
-        
-        # Cleanup paragraphs
         for p_idx in range(len(cell.paragraphs) - 1, 0, -1):
             p_xml = cell.paragraphs[p_idx]._element
             p_xml.getparent().remove(p_xml)
-            
         p = cell.paragraphs[0]
         p.text = placeholder
+    
+    # 5. SURGICAL CLEANUP: Delete all other rows (all sample data rows)
+    # We now have: Header(0), StartRow(1), SampleRow(2), EndRow(3) + PreviousRows
+    # So we need to delete everything from index 4 onwards.
+    # Wait, addprevious/addnext changes the indices? Yes.
+    # Actually, it's safer to delete rows by identifying them.
+    # Let's just delete by index repeatedly.
+    while len(table.rows) > 4:
+        # Delete the last row until only 4 remain
+        row_to_del = table.rows[-1]
+        row_to_del._element.getparent().remove(row_to_del._element)
             
-    logger.info(f"  Tagged Table {table_index} with Triple-Row loop: {loop_var}")
+    logger.info(f"  Tagged Table {table_index} with Triple-Row loop and stripped sample data")
     return True
 
 def get_replacements():
