@@ -75,6 +75,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'bang_thong', label: 'Băng thông', type: 'text' },
           { id: 'vai_tro', label: 'Vai trò (Chính/Dự phòng)', type: 'select', options: ['Chính', 'Dự phòng', 'Chính (duy nhất)'] },
           { id: 'ip_wan', label: 'Loại IP WAN', type: 'select', options: ['Tĩnh', 'Động'] },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
       { id: 'D2_router_modem', label: 'D2. Thiết bị Router/Modem Gateway (Hãng, Model, IP)', type: 'text', required: true, sectionId: 'section_di' },
@@ -93,6 +94,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'so_serial', label: 'Số Serial (S/N)', type: 'text' },
           { id: 'vi_tri', label: 'Vị trí lắp đặt', type: 'text' },
           { id: 'nam_mua', label: 'Năm mua/lắp', type: 'number' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
       { 
@@ -132,6 +134,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'o_cung_tb', label: 'Ổ cứng (TB)', type: 'number' },
           { id: 'he_dieu_hanh', label: 'Hệ điều hành', type: 'text' },
           { id: 'vi_tri', label: 'Vị trí đặt', type: 'text' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
       { id: 'F3_cloud_has', label: 'F3. Sử dụng dịch vụ điện toán đám mây (Cloud)', type: 'radio', options: ['Có', 'Không'], sectionId: 'section_di' },
@@ -149,6 +152,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'so_serial', label: 'Số Serial', type: 'text' },
           { id: 'do_phan_giai', label: 'Độ phân giải', type: 'text' },
           { id: 'vi_tri', label: 'Vị trí lắp đặt', type: 'text' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
       { id: 'G2_dau_ghi_nvr', label: 'G2. Đầu ghi NVR/DVR (Hãng, Model, S/N, Vị trí)', type: 'text', required: true, sectionId: 'section_di' },
@@ -185,6 +189,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'don_vi_cung_cap', label: 'Đơn vị cung cấp', type: 'text' },
           { id: 'phien_ban', label: 'Phiên bản', type: 'text' },
           { id: 'ket_noi_internet', label: 'Kết nối Internet', type: 'select', options: ['Có', 'Không'] },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
     ]
@@ -355,6 +360,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'thoi_gian', label: 'Thời gian thực hiện', type: 'text' },
           { id: 'so_can_bo', label: 'Số Cán bộ tham gia', type: 'number' },
           { id: 'chung_chi_so_vb', label: 'Chứng chỉ / Số hồ sơ chứng minh', type: 'text' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
       { id: 'R2_co_tuyen_truyen', label: 'R2. Có tổ chức phổ biến, tuyên truyền ATTT nội bộ', type: 'radio', options: ['Có', 'Không'], sectionId: 'section_qs' },
@@ -371,6 +377,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'don_vi_thuc_hien', label: 'Đơn vị thực hiện', type: 'text' },
           { id: 'thoi_gian', label: 'Tầng suất/Thời gian', type: 'text' },
           { id: 'ket_qua_so_vb', label: 'Kết quả / Số văn bản báo cáo', type: 'text' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
       { id: 'S2_ke_hoach_tiep_theo', label: 'S2. Kế hoạch hoặc thời gian dự kiến kiểm tra tiếp theo', type: 'text', sectionId: 'section_qs' },
@@ -380,22 +387,6 @@ export const surveySchema: SurveySection[] = [
     id: 'section_mt',
     label: 'M-T. Xác nhận & Sơ đồ',
     questions: [
-      // Mục M
-      { id: 'M1_status', label: 'M1. Ảnh nhãn thiết bị Router / Modem', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M2_status', label: 'M2. Ảnh nhãn thiết bị Switch', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M3_status', label: 'M3. Ảnh nhãn các thiết bị Camera', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M4_status', label: 'M4. Ảnh nhãn đầu ghi NVR / DVR', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M5_status', label: 'M5. Ảnh nhãn Máy chủ (Server)', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M6_status', label: 'M6. Ảnh hiện trạng toàn cảnh tủ mạng / giá Rack', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M7_status', label: 'M7. Ảnh chụp danh sách cấp DHCP/ARP trên Router', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M8_status', label: 'M8. Sơ đồ mặt bằng vị trí lắp đặt (nếu có)', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M9_status', label: 'M9. Bản Scan QĐ ban hành Quy chế ATTT', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M10_status', label: 'M10. Bản Scan Kế hoạch ATTT định kỳ', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M11_status', label: 'M11. Bản Scan QĐ phân công cán bộ chuyên trách', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M12_status', label: 'M12. Bản Scan các Biên bản kiểm tra ATTT', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M13_status', label: 'M13. Bản Scan các Chứng chỉ / Văn bằng đào tạo', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      { id: 'M14_status', label: 'M14. Bản Scan Hợp đồng đường truyền / Bảo trì', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
-      
       // Mục T
       { id: 'T1_1_co_dmz', label: 'T1.1. Có phân vùng mạng DMZ (vùng chứa máy chủ)', type: 'radio', options: ['Có', 'Không'], sectionId: 'section_mt', subsectionId: 'T' },
       { id: 'T1_1_may_chu_dmz', label: 'T1.1.1. Danh sách các máy chủ nằm trong vùng DMZ', type: 'text', sectionId: 'section_mt', subsectionId: 'T' },
@@ -413,6 +404,7 @@ export const surveySchema: SurveySection[] = [
           { id: 'ten_switch', label: 'Tên thiết bị Switch', type: 'text' },
           { id: 'so_cong', label: 'Tổng số cổng', type: 'number' },
           { id: 'cong_su_dung', label: 'Số Port -> Thiết bị đầu cuối tương ứng', type: 'textarea' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'textarea' },
         ]
       },
       { id: 'T3_1_co_rack', label: 'T3. Có sử dụng tủ mạng chuyên dụng (Tủ Rack)', type: 'radio', options: ['Có', 'Không'], sectionId: 'section_mt', subsectionId: 'T' },
@@ -429,8 +421,25 @@ export const surveySchema: SurveySection[] = [
           { id: 'tang', label: 'Vị trí Tầng', type: 'text' },
           { id: 'phong', label: 'Vị trí Phòng', type: 'text' },
           { id: 'thiet_bi', label: 'Danh sách thiết bị (PC/Laptop/AP...)', type: 'text' },
+          { id: 'ghi_chu', label: 'Ghi chú', type: 'text' },
         ]
       },
+
+      // Mục M
+      { id: 'M1_status', label: 'M1. Ảnh nhãn thiết bị Router / Modem', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M2_status', label: 'M2. Ảnh nhãn thiết bị Switch', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M3_status', label: 'M3. Ảnh nhãn các thiết bị Camera', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M4_status', label: 'M4. Ảnh nhãn đầu ghi NVR / DVR', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M5_status', label: 'M5. Ảnh nhãn Máy chủ (Server)', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M6_status', label: 'M6. Ảnh hiện trạng toàn cảnh tủ mạng / giá Rack', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M7_status', label: 'M7. Ảnh chụp danh sách cấp DHCP/ARP trên Router', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M8_status', label: 'M8. Sơ đồ mặt bằng vị trí lắp đặt (nếu có)', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M9_status', label: 'M9. Bản Scan QĐ ban hành Quy chế ATTT', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M10_status', label: 'M10. Bản Scan Kế hoạch ATTT định kỳ', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M11_status', label: 'M11. Bản Scan QĐ phân công cán bộ chuyên trách', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M12_status', label: 'M12. Bản Scan các Biên bản kiểm tra ATTT', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M13_status', label: 'M13. Bản Scan các Chứng chỉ / Văn bằng đào tạo', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
+      { id: 'M14_status', label: 'M14. Bản Scan Hợp đồng đường truyền / Bảo trì', type: 'checkbox', sectionId: 'section_mt', subsectionId: 'M' },
 
       // Mục N
       { id: 'N_nguoi_dien_ho_ten', label: 'N1. Họ tên Cán bộ thực hiện điền phiếu', type: 'text', required: true, sectionId: 'section_mt', subsectionId: 'N' },

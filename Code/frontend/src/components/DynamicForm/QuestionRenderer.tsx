@@ -113,6 +113,12 @@ const FieldArrayRenderer: React.FC<{ id: string; columns: any[]; control: Contro
                     <option value="">-- Chọn --</option>
                     {col.options?.map((opt: string) => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
+                ) : col.type === 'textarea' ? (
+                  <textarea
+                    {...register(`${id}.${index}.${col.id}`)}
+                    className="form-input text-[11px] min-h-[60px] bg-gray-950 border-white/10 py-2"
+                    placeholder={col.label}
+                  />
                 ) : (
                   <input
                     type={col.type}
