@@ -43,8 +43,8 @@ def inject_table_loop(doc, table_index, loop_var, row_placeholders):
     last_idx = min(len(row.cells), len(row_placeholders)) - 1
     for i in range(last_idx + 1):
         cell_text = row_placeholders[i]
-        if i == 0: cell_text = f"{{% tr for item in {loop_var} %}}" + cell_text
-        if i == last_idx: cell_text = cell_text + "{% tr endfor %}"
+        if i == 0: cell_text = f"{{% for item in {loop_var} %}}" + cell_text
+        if i == last_idx: cell_text = cell_text + "{% endfor %}"
         p = row.cells[i].paragraphs[0]
         p.text = cell_text
         for p_extra in row.cells[i].paragraphs[1:]: p_extra.text = ""
