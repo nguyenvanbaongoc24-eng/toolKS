@@ -154,11 +154,13 @@ def get_full_replacements():
     # Generate all variations for glyphs
     for glyph in ["☐", "☒", "☑", "x"]:
         for label, var in glyph_map.items():
-            # Clean label context hints
+            # Clean label context hints (e.g., "Không (L5.1)" -> "Không")
             clean_label = label
-            if '(' in label and ')' in label:
-                # Basic context removal if needed, but here labels are mostly unique
-                pass
-            r[f"{glyph} {clean_label}"] = f"{{{{ {var} }}}} {glyph} {clean_label}"
+            if ' (' in label:
+                clean_label = label.split(' (')[0]
+            
+            # Key: the exact text in the Word doc (e.g., "☐ Không")
+            # Value: the replacement with placeholder (e.g., "{{ L5_1_log_router_khong }} Không")
+            r[f"{glyph} {clean_label}"] = f"{{{{ {var} }}}} {clean_label}"
             
     return r

@@ -21,7 +21,30 @@ def replace_text_preserving_format(paragraph, old_text, new_text):
 
 def replace_in_document(doc, replacements):
     count = 0
-    # First, handle unique/unambiguous replacements
+    
+    # MANUAL FIX FOR NON-UNIQUE CHECKBOXES (L5.1 vs L5.3 etc) - DO THIS FIRST
+    # We do this first so the context-aware tagging takes precedence over global replacements
+    for p_idx, p in enumerate(doc.paragraphs):
+        txt = p.text.strip()
+        # L5.1 'Không'
+        if "Thiết bị mạng (Router/Switch) có bật tính năng ghi log" in txt:
+            for next_p in doc.paragraphs[p_idx+1:p_idx+5]:
+                if any(g in next_p.text for g in ["☐", "☒"]) and "Không" in next_p.text and "biết" not in next_p.text:
+                    for g in ["☐", "☒"]:
+                        if next_p.text.strip() == f"{g} Không":
+                             replace_text_preserving_format(next_p, f"{g} Không", "{{ L5_1_log_router_khong }} Không")
+                             count += 1
+                             break
+        # L5.3 'Không'
+        if "giám sát tập trung" in txt:
+             for next_p in doc.paragraphs[p_idx+1:p_idx+5]:
+                if any(g in next_p.text for g in ["☐", "☒"]) and next_p.text.strip() in [f"{g} Không" for g in ["☐", "☒", "☑"]]:
+                     g = next_p.text.strip()[0]
+                     replace_text_preserving_format(next_p, f"{g} Không", "{{ L5_3_siem_khong }} Không")
+                     count += 1
+                     break
+    
+    # Next, handle unique/unambiguous replacements
     sorted_old_texts = sorted(replacements.keys(), key=len, reverse=True)
     
     # Track which paragraphs we've processed for non-unique ones
@@ -43,28 +66,6 @@ def replace_in_document(doc, replacements):
                         if old_text in get_full_text_from_runs(paragraph.runs):
                             if replace_text_preserving_format(paragraph, old_text, new_text):
                                 count += 1
-    
-    # MANUAL FIX FOR NON-UNIQUE CHECKBOXES (L5.1 vs L5.3 etc)
-    # This is more stable than complex regex for a one-off document structure
-    for p_idx, p in enumerate(doc.paragraphs):
-        txt = p.text.strip()
-        # L5.1 'Không'
-        if "Thiết bị mạng (Router/Switch) có bật tính năng ghi log" in txt:
-            for next_p in doc.paragraphs[p_idx+1:p_idx+5]:
-                if any(g in next_p.text for g in ["☐", "☒"]) and "Không" in next_p.text and "biết" not in next_p.text:
-                    for g in ["☐", "☒"]:
-                        if next_p.text.strip() == f"{g} Không":
-                             next_p.runs[0].text = f"{{{{ L5_1_log_router_khong }}}} {g} Không"
-                             count += 1
-                             break
-        # L5.3 'Không'
-        if "Có hệ thống giám sát tập trung" in txt:
-             for next_p in doc.paragraphs[p_idx+1:p_idx+5]:
-                if any(g in next_p.text for g in ["☐", "☒"]) and next_p.text.strip() in [f"{g} Không" for g in ["☐", "☒", "☑"]]:
-                     g = next_p.text.strip()[0]
-                     next_p.runs[0].text = f"{{{{ L5_3_siem_khong }}}} {g} Không"
-                     count += 1
-                     break
     return count
 
 def inject_table_loop(doc, table_index, loop_var, row_placeholders):
