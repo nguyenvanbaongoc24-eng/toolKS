@@ -39,37 +39,38 @@ def inject_table_loop(doc, table_index, loop_var, row_placeholders):
     if table_index >= len(doc.tables): return False
     table = doc.tables[table_index]
     if len(table.rows) < 2: return False
-    row = table.rows[1]
     
-    # Ensure table has autofit behavior to prevent squishing
-    table.autofit = True
+    # 1. Identify the sample row (original Row 1)
+    sample_row = table.rows[1]
     
-    last_idx = min(len(row.cells), len(row_placeholders)) - 1
+    # 2. Insert helper row BEFORE for the 'start' tag
+    # docxtpl {%tr ... %} will strip the entire row it's in
+    start_row = table.add_row()
+    # Move it to before sample_row
+    sample_row._element.addprevious(start_row._element)
+    start_row.cells[0].paragraphs[0].text = f"{{%tr for item in {loop_var} %}}"
     
+    # 3. Insert helper row AFTER for the 'end' tag
+    end_row = table.add_row()
+    # Move it to after sample_row
+    sample_row._element.addnext(end_row._element)
+    end_row.cells[0].paragraphs[0].text = "{%tr endfor %}"
+    
+    # 4. Inject placeholders into the sample row (now Row 2 essentially)
+    last_idx = min(len(sample_row.cells), len(row_placeholders)) - 1
     for i in range(last_idx + 1):
-        cell = row.cells[i]
+        cell = sample_row.cells[i]
         placeholder = row_placeholders[i]
         
-        # Cleanup extra paragraphs for clean structure
+        # Cleanup paragraphs
         for p_idx in range(len(cell.paragraphs) - 1, 0, -1):
             p_xml = cell.paragraphs[p_idx]._element
             p_xml.getparent().remove(p_xml)
             
         p = cell.paragraphs[0]
-        # Clear existing text but keep the paragraph object
-        for run in p.runs: run.text = ""
-        
-        # Inject standard loop tags in DEDICATED runs
-        # This isolates them from content and ensures correct row-level parsing
-        if i == 0:
-            p.add_run(f"{{% for item in {loop_var} %}}")
-        
-        p.add_run(placeholder)
-        
-        if i == last_idx:
-            p.add_run("{% endfor %}")
+        p.text = placeholder
             
-    logger.info(f"  Tagged Table {table_index} with isolated ROW loop: {loop_var}")
+    logger.info(f"  Tagged Table {table_index} with Triple-Row loop: {loop_var}")
     return True
 
 def get_replacements():
