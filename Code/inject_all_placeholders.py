@@ -21,18 +21,50 @@ def replace_text_preserving_format(paragraph, old_text, new_text):
 
 def replace_in_document(doc, replacements):
     count = 0
+    # First, handle unique/unambiguous replacements
     sorted_old_texts = sorted(replacements.keys(), key=len, reverse=True)
+    
+    # Track which paragraphs we've processed for non-unique ones
+    processed_paragraphs = set()
+
     for old_text in sorted_old_texts:
         new_text = replacements[old_text]
-        for paragraph in doc.paragraphs:
-            if old_text in get_full_text_from_runs(paragraph.runs):
-                if replace_text_preserving_format(paragraph, old_text, new_text): count += 1
+        # Paragraphs
+        for p_idx, paragraph in enumerate(doc.paragraphs):
+            full_text = get_full_text_from_runs(paragraph.runs)
+            if old_text in full_text:
+                if replace_text_preserving_format(paragraph, old_text, new_text):
+                    count += 1
+        # Tables
         for table in doc.tables:
             for row in table.rows:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
                         if old_text in get_full_text_from_runs(paragraph.runs):
-                            if replace_text_preserving_format(paragraph, old_text, new_text): count += 1
+                            if replace_text_preserving_format(paragraph, old_text, new_text):
+                                count += 1
+    
+    # MANUAL FIX FOR NON-UNIQUE CHECKBOXES (L5.1 vs L5.3 etc)
+    # This is more stable than complex regex for a one-off document structure
+    for p_idx, p in enumerate(doc.paragraphs):
+        txt = p.text.strip()
+        # L5.1 'Không'
+        if "Thiết bị mạng (Router/Switch) có bật tính năng ghi log" in txt:
+            for next_p in doc.paragraphs[p_idx+1:p_idx+5]:
+                if any(g in next_p.text for g in ["☐", "☒"]) and "Không" in next_p.text and "biết" not in next_p.text:
+                    for g in ["☐", "☒"]:
+                        if next_p.text.strip() == f"{g} Không":
+                             next_p.runs[0].text = f"{{{{ L5_1_log_router_khong }}}} {g} Không"
+                             count += 1
+                             break
+        # L5.3 'Không'
+        if "Có hệ thống giám sát tập trung" in txt:
+             for next_p in doc.paragraphs[p_idx+1:p_idx+5]:
+                if any(g in next_p.text for g in ["☐", "☒"]) and next_p.text.strip() in [f"{g} Không" for g in ["☐", "☒", "☑"]]:
+                     g = next_p.text.strip()[0]
+                     next_p.runs[0].text = f"{{{{ L5_3_siem_khong }}}} {g} Không"
+                     count += 1
+                     break
     return count
 
 def inject_table_loop(doc, table_index, loop_var, row_placeholders):
@@ -123,10 +155,12 @@ def get_replacements():
         r[f"{glyph} Có – Tên hệ thống:"] = "{{ C7_co }} Có – Tên hệ thống: {{ C7_ten_he_thong_cap_tren }}"
     return r
 
+from mappings import get_full_replacements
+
 def inject_phieu(src_path, out_path):
     logger.info(f"=== Processing Phieu: {src_path} ===")
     doc = Document(src_path)
-    replace_in_document(doc, get_replacements())
+    replace_in_document(doc, get_full_replacements())
     # Corrected indices based on all_headers.txt
     inject_table_loop(doc, 3, "can_bo_phu_trach", ["{{item.idx}}", "{{item.ho_ten}}", "{{item.chuc_vu}}", "{{item.so_dt}}", "{{item.email}}", "{{item.trinh_do}}", "{{item.chung_chi_attt}}"])
     inject_table_loop(doc, 6, "ket_noi_internet", ["{{item.idx}}", "{{item.isp}}", "{{item.loai_ket_noi}}", "{{item.bang_thong}}", "{{item.vai_tro}}", "{{item.ip_wan}}", "{{item.ghi_chu}}"])

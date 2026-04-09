@@ -1,0 +1,673 @@
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập – Tự do – Hạnh phúc
+PHIẾU KHẢO SÁT THÔNG TIN
+XÂY DỰNG HỒ SƠ ĐỀ XUẤT CẤP ĐỘ AN TOÀN THÔNG TIN (CẤP ĐỘ 2)
+(Theo Thông tư 12/2022/TT-BTTTT và Nghị định 13/2023/NĐ-CP)
+(*) Trường bắt buộc     (không dấu *) Trường khuyến nghị điền nếu có
+MỤC A. THÔNG TIN CƠ QUAN / CHỦ QUẢN HỆ THỐNG
+A1. Tên đơn vị chủ quản hệ thống thông tin (*)  Xã Nghi Kim, Tỉnh Nghệ An
+A2. Tên hệ thống thông tin cần phân loại (*)  Hệ thống thông tin phục vụ hoạt động của UBND xã Nghi Kim
+A3. Địa chỉ trụ sở chính (*)  Xóm 13B, Xã Nghi Kim. Nghệ An
+A4. Số điện thoại cơ quan: 0123 456 789
+A5. Email cơ quan: vanthu.lynhan.gov.nghean.vn
+A6. Họ tên người đứng đầu đơn vị (Chủ tịch UBND / Giám đốc) (*)
+Ông Ngọc Nguyễn – Chủ tịch Ủy Ban Nhân dân xã Nghi Kim
+A7. Số Quyết định giao nhiệm vụ quản lý hệ thống (nếu có): QĐ số 45/QĐ-UBND ngày 10/3/2024 của UBND xã Nghi Kim
+MỤC B. CÁN BỘ PHỤ TRÁCH CNTT / AN TOÀN THÔNG TIN
+B2. Đơn vị nào chịu trách nhiệm hỗ trợ kỹ thuật từ bên ngoài (nếu có)?:  Trung tâm CNTT & TT tỉnh Nghệ An – Hỗ trợ: 0252.xxxxxxx
+MỤC C. MÔ TẢ HỆ THỐNG THÔNG TIN
+C1. Mô tả chức năng chính của hệ thống (*):
+Hệ thống phục vụ hoạt động hành chính của UBND xã: xử lý hồ sơ một cửa (DVCTT), quản lý văn bản điều hành, lưu trữ dữ liệu dân cư, trao đổi email nội bộ
+C2. Đối tượng người dùng hệ thống (*):
+Cán bộ công chức xã (33 người), người dân đến giao dịch một cửa, UBND xã.
+C3. Loại dữ liệu được xử lý/lưu trữ trong hệ thống (*):
+Dữ liệu cá nhân (CMND, địa chỉ, số điện thoại); hồ sơ hộ tịch; hồ sơ đất đai; văn bản hành chính (không mật).
+C4. Hệ thống phân loại dữ liệu (theo Nghị định 13/2023) (*)
+☒ Dữ liệu cá nhân thông thường
+☐ Dữ liệu cá nhân nhạy cảm (sức khỏe, tôn giáo, tư pháp…)
+☐ Dữ liệu công (không bao gồm cá nhân)
+☐ Không xác định / Cần tư vấn
+C5. Số lượng người dùng hệ thống ước tính (*)  [Nội bộ và bên ngoài]
+Nội bộ: 33 cán bộ; Bên ngoài: ~200 lượt/tháng (người dân qua cổng DVCTT)
+C6. Hệ thống đã hoạt động từ năm nào?
+Năm 2025
+C7. Hệ thống có kết nối với hệ thống của cơ quan cấp trên không? (*):
+☒ Có – Tên hệ thống: ___________________________     ☐ Không
+C8. Hệ thống có xử lý thông tin bí mật nhà nước không? (*)
+☐ Không
+☒ Có – Độ mật: ___________  (Cần xin ý kiến riêng)
+MỤC D. THÔNG TIN KẾT NỐI INTERNET
+D2. Thiết bị định tuyến/modem tại điểm kết nối Internet (Router/Modem Gateway) (*):  iGate 10.66.138.209
+D3. Địa chỉ IP LAN của Router/Gateway chính (*):  10.66.138.210
+MỤC E. DANH MỤC THIẾT BỊ MẠNG (ROUTER, SWITCH, FIREWALL, AP…)
+E2. Đơn vị có trang bị Firewall phần cứng chuyên dụng không? (*)
+Có (đã liệt kê ở bảng trên)
+☐ Không – Sử dụng tính năng firewall tích hợp trên Router/Switch
+☐ Không – Sử dụng phần mềm firewall trên máy chủ
+MỤC F. THIẾT BỊ ĐẦU CUỐI (MÁY TÍNH, MÁY IN, MÁY CHỦ…)
+F1. Thống kê thiết bị đầu cuối (tổng hợp theo loại)
+F2. Danh sách máy chủ (Server) – chi tiết từng chiếc
+F3. Đơn vị có sử dụng dịch vụ điện toán đám mây không? (*):
+☐ Không
+Có – Tên dịch vụ / nhà cung cấp: _________________________
+MỤC G. HỆ THỐNG CAMERA GIÁM SÁT (CCTV / IP CAMERA)
+G2. Đầu ghi camera (NVR/DVR) (*):
+NVR Dahua Model NVR2108HS-8P-I2, S/N: 9Cxxxxxxxx, đặt tại Tầng 1 – Phòng CNTT (P.102)
+G3. Dữ liệu camera lưu bao nhiêu ngày? (*): 30 ngày (ổ cứng 4TB)
+MỤC H. QUY HOẠCH ĐỊA CHỈ IP NỘI BỘ (LAN)
+H1. Dải địa chỉ IP LAN đang sử dụng (*):192.168.1.0/24 (máy tính nhận IP từ DHCP: 192.168.1.100 – 192.168.1.200)
+H2. Địa chỉ IP Gateway/Router (*): 192.168.1.1
+H3. Máy chủ DNS sử dụng: 8.8.8.8 (Google) hoặc DNS của Viettel: 203.113.131.1
+H4. VLAN – Đơn vị có phân chia mạng theo VLAN không? (*)
+Không có VLAN (toàn bộ thiết bị cùng một mạng phẳng)
+☐ Có VLAN – Số lượng VLAN: ___   Mô tả: ___________________________
+H5. Thiết bị được gán IP tĩnh (cố định)
+MỤC I. ỨNG DỤNG VÀ DỊCH VỤ CÔNG NGHỆ THÔNG TIN
+MỤC K. VĂN BẢN PHÁP LÝ, KẾ HOẠCH ATTT CỦA ĐƠN VỊ
+MỤC L. HIỆN TRẠNG BẢO MẬT VÀ KIỂM SOÁT TRUY CẬP
+L1. Kiểm soát truy cập vật lý
+Khu vực đặt máy chủ/thiết bị mạng có kiểm soát ra vào không? (*)
+Có khóa cửa (chìa khóa thường)
+☐ Có khóa cửa + camera giám sát
+☐ Có thẻ từ / kiểm soát điện tử
+☐ Không có kiểm soát riêng
+Có bảng kiểm tra/ký tên vào ra phòng máy chủ không?
+☐ Có
+Không
+L2. Kiểm soát truy cập logic (tài khoản, mật khẩu)
+Đơn vị có chính sách đặt mật khẩu không? (*)
+☐ Có – Yêu cầu: độ dài tối thiểu _____ ký tự, đổi định kỳ _____ tháng
+☐ Không có chính sách thống nhất (mỗi người tự đặt)
+Tài khoản quản trị hệ thống (admin) được sử dụng như thế nào? (*)
+☐ Mỗi cán bộ có tài khoản riêng
+☐ Dùng chung một tài khoản admin
+☐ Cả hai hình thức
+Có sử dụng xác thực hai yếu tố (2FA) cho tài khoản nào không? (*)
+☐ Có – Áp dụng cho: ___________________________
+☐ Không
+L3. Phần mềm bảo vệ (Antivirus / Endpoint)
+Đơn vị có cài phần mềm diệt virus không? (*)
+☐ Có – Tên phần mềm: _______________  Bản quyền: Có / Không / Miễn phí
+☐ Không
+Phần mềm antivirus cập nhật định nghĩa virus thường xuyên không?:  [Tự động / Thủ công / Không cập nhật]
+L4. Sao lưu dữ liệu (Backup)
+Đơn vị có quy trình sao lưu dữ liệu định kỳ không? (*)
+☐ Có – Tần suất: Hàng ngày / Hàng tuần / Hàng tháng
+☐ Thực hiện thủ công khi nhớ
+☐ Không sao lưu
+Dữ liệu sao lưu lưu ở đâu? (*):
+Ổ cứng ngoài WD 2TB – cắm tại máy chủ, sao lưu mỗi thứ Sáu hàng tuần
+Dữ liệu backup có được lưu tại vị trí khác (off-site) không? (*)
+☐ Có – Địa điểm: ___________________________
+☐ Không – Cùng vị trí với máy chủ
+L5. Giám sát và ghi nhật ký hệ thống (Log)
+Thiết bị mạng (Router/Switch) có bật tính năng ghi log không? (*)
+☐ Có
+☐ Không biết / Chưa kiểm tra
+☐ Không
+Log được lưu bao lâu?
+☐ < 3 tháng
+☐ 3 – 6 tháng
+☐ > 6 tháng
+☐ Không lưu
+Có hệ thống giám sát tập trung (SIEM, syslog server…) không? (*)
+☐ Có – Tên/loại: ___________________________
+☐ Không
+L6. Lịch sử sự cố ATTT
+Trong 2 năm qua, đơn vị có gặp sự cố ATTT không? (*)
+☐ Không có sự cố nào
+☐ Có – Mô tả ngắn: ___________________________     ☐ Không biết / Không ghi nhận
+Nếu có sự cố, đơn vị xử lý bằng cách nào?:
+Gọi đơn vị ngoài
+L7. Tường lửa (Firewall) – chi tiết chính sách
+L7.1. Tường lửa đang sử dụng là loại nào? (*)
+☐ Tường lửa tích hợp trên Router (SPI – Stateful Packet Inspection)
+☐ Tường lửa phần cứng chuyên dụng (Firewall appliance)
+☐ Tường lửa phần mềm trên máy chủ (iptables, Windows Firewall…)
+L7.2. Chính sách mặc định của tường lửa là gì? (*)
+☐ Chặn tất cả, chỉ cho phép những gì được khai báo (Default Deny – Khuyến nghị)
+☐ Cho phép tất cả, chỉ chặn những gì bị cấm (Default Allow)
+☐ Không biết / Chưa cấu hình
+L7.3. Đơn vị có cho phép truy cập từ xa vào hệ thống không (Remote Access)? (*)
+☐ Có – qua VPN (SSL VPN / IPSec)
+☐ Có – qua Remote Desktop / TeamViewer / AnyDesk
+☐ Không
+L7.4. Liệt kê các cổng/dịch vụ đang được mở ra Internet (nếu biết):
+Cổng 443 mở để truy cập ứng dụng DVCTT; Cổng 37777 mở để xem camera từ xa (NVR Dahua)
+L8. An toàn vật lý phòng đặt thiết bị CNTT
+L8.1. Phòng đặt máy chủ / thiết bị mạng có trang bị UPS (bộ lưu điện) không? (*)
+☐ Có – Hãng/Model: _______________  Công suất: _______VA  Thời gian dự phòng: ~_____phút
+☐ Không có UPS
+L8.2. Phòng có hệ thống điều hòa nhiệt độ riêng không? (*)
+☐ Có – Điều hòa hoạt động 24/7
+☐ Có – Chỉ bật giờ hành chính
+☐ Không
+L8.3. Phòng có trang bị bình chữa cháy không? (*)
+☐ Có – Loại:
+☐ CO₂
+☐ Bột khô
+☐ Khác: ___________
+☐ Không
+L8.4. Mô tả phòng đặt máy chủ/tủ mạng (diện tích, số người có chìa khóa):
+Phòng CNTT khoảng 15m², có khóa cửa, 2 người có chìa: cán bộ CNTT và Chủ tịch UBND
+MỤC P. MÃ HÓA VÀ BẢO VỆ DỮ LIỆU (ENCRYPTION)
+P1. Ứng dụng web của đơn vị sử dụng giao thức nào? (*)
+☐ HTTPS (có chứng chỉ SSL/TLS) – Khuyến nghị
+☐ HTTP (không mã hóa)
+☐ Cả hai (một số dùng HTTPS, một số dùng HTTP)
+P2. Kết nối từ xa đến hệ thống có sử dụng VPN không? (*)
+☐ Có – Loại VPN:
+☐ SSL VPN
+☐ IPSec
+☐ Khác: _____________
+☐ Không có VPN
+P3. Kết nối lên cơ quan cấp trên (tỉnh/bộ) qua đường truyền nào? (*)
+☐ VPN chuyên dụng (do Sở TTTT/tỉnh cấp)
+☐ Internet thường (HTTPS)
+☐ Đường truyền số liệu chuyên dụng (MPLS/Leased Line)
+☐ Không kết nối trực tiếp
+P3.1. Tên hệ thống cấp trên kết nối đến và phương thức kết nối: Kết nối đến Cổng DVCTT tỉnh Bình Thuận qua HTTPS; Kết nối VPN đến Hệ thống quản lý văn bản eCabinet (SSL VPN do Sở TTTT cấp)
+P4. Dữ liệu lưu trữ trên máy chủ/NAS có được mã hóa không? (*)
+☐ Có – Phần mềm/phương pháp: ___________________________
+☐ Không mã hóa dữ liệu lưu trữ
+P5. Email công vụ sử dụng giao thức bảo mật không?
+☐ Có – TLS/SMTPS (qua email.gov.vn hoặc tương đương)
+☐ Không biết
+☐ Không
+MỤC Q. QUẢN LÝ LỖ HỔNG BẢO MẬT VÀ VÁ LỖI (PATCH MANAGEMENT)
+Q1. Đơn vị có quy trình cập nhật/vá lỗi hệ điều hành định kỳ không? (*)
+☐ Có – Tần suất:
+☐ Hàng tháng
+☐ Hàng quý
+☐ Khi có cảnh báo
+☐ Khác
+☐ Không có quy trình – Cập nhật tùy lúc
+☐ Không cập nhật
+Q2. Phần mềm ứng dụng (eCabinet, MISA, antivirus…) có được cập nhật không? (*)
+☐ Có – Tự động
+☐ Có – Thủ công (khi nhớ)
+☐ Không cập nhật
+Q3. Ai chịu trách nhiệm thực hiện cập nhật/vá lỗi? (*):
+Cán bộ CNTT xã tự cập nhật; đối với thiết bị mạng do Trung tâm CNTT&TT tỉnh hỗ trợ
+Q4. Thiết bị mạng (Router, Switch) có được cập nhật firmware không? (*)  [Thường xuyên / Thỉnh thoảng / Chưa bao giờ / Không biết]:
+Router Viettel: do Viettel bảo trì định kỳ 6 tháng/lần; Switch: chưa cập nhật firmware
+Q5. Đơn vị có theo dõi cảnh báo lỗ hổng bảo mật từ VNCERT/CC hoặc Sở TTTT không?
+☐ Có – Nhận cảnh báo qua email/văn bản và xử lý
+☐ Không theo dõi thường xuyên
+☐ Chưa biết kênh nhận cảnh báo
+MỤC R. ĐÀO TẠO VÀ NÂNG CAO NHẬN THỨC AN TOÀN THÔNG TIN
+R2. Đơn vị có tổ chức tuyên truyền ATTT nội bộ (email thông báo, họp, poster…) không?
+☐ Có – Hình thức: ___________________________
+☐ Không
+MỤC S. KIỂM TRA, ĐÁNH GIÁ AN TOÀN THÔNG TIN ĐỊNH KỲ
+S2. Kế hoạch kiểm tra ATTT tiếp theo (dự kiến): Quý IV/2025 – do Sở TTTT Bình Thuận thực hiện theo kế hoạch năm
+MỤC T. KẾT NỐI MẠNG – CHI TIẾT VẼ SƠ ĐỒ (LOGIC + VẬT LÝ)
+T1. Phân vùng mạng (Network Zones) – cho Sơ đồ Logic
+T1.1. Hệ thống có phân chia vùng mạng DMZ không? (*)
+☐ Có – Máy chủ trong DMZ: ___________________________
+☐ Không có DMZ – Tất cả thiết bị cùng 1 vùng LAN
+T1.2. Mạng WiFi có tách riêng khỏi mạng LAN có dây không? (*)
+☐ Có – WiFi trên VLAN riêng / Subnet riêng (không truy cập được LAN máy chủ)
+☐ Không – WiFi cùng dải IP với máy tính văn phòng
+☐ Không có WiFi
+T1.3. Thông tin WiFi: Tên mạng (SSID), chuẩn bảo mật, có mạng khách (Guest) không?:
+SSID: 'UBND-SongLuy' / Bảo mật: WPA2-PSK / Không có mạng khách riêng
+T1.4. Hệ thống Camera có nằm trên mạng riêng (VLAN/subnet camera) không? (*)
+☐ Có – Camera trên VLAN/subnet tách biệt khỏi mạng máy tính
+☐ Không – Camera cùng dải IP với máy tính văn phòng
+☐ Không biết
+T2. Kết nối vật lý Switch – Port Mapping (cho Sơ đồ Vật lý)
+→ Ví dụ: Switch Dahua 16 cổng | 16 cổng | Port 1 → Router Viettel GW240H-V2 (uplink); Port 2 → File Server Dell T40; Port 3 → NVR Camera Dahua; Port 4 → AP TP-Link EAP245 (tầng 1); Port 5 → AP TP-Link EAP245 (tầng 2); Port 6-15 → Máy tính cán bộ; Port 16 → Trống | Port 3 cấp nguồn PoE cho AP
+T3. Tủ mạng / Rack (cho Sơ đồ Vật lý)
+T3.1. Đơn vị có sử dụng tủ mạng (rack/tủ ODF) để chứa thiết bị không? (*)
+☐ Có – Kích thước rack: ___U  Vị trí: Tầng ___ – Phòng ___
+☐ Không – Thiết bị để trực tiếp trên bàn/giá đỡ
+T3.2. Liệt kê thiết bị bên trong tủ mạng (từ trên xuống dưới theo vị trí thực tế):
+Từ trên xuống: (1) Patch panel 24 cổng; (2) Switch Dahua 16P; (3) Router Viettel; (4) NVR Camera; (5) UPS APC 1500VA
+T4. Loại cáp mạng (cho Sơ đồ Vật lý)
+T4.1. Loại cáp kết nối chính trong tòa nhà là gì? (*)
+☐ Cáp đồng (UTP/STP Cat5e hoặc Cat6) – phổ biến nhất
+☐ Cáp quang nội bộ (Fiber – nếu khoảng cách > 100m)
+☐ Cả hai (cáp đồng trong phòng, cáp quang giữa tầng/tòa nhà)
+T4.2. Đường cáp từ nhà mạng (ISP) vào thiết bị đầu tiên là gì? (*):
+Cáp quang GPON từ cột điện vào ONU/Modem Viettel GW240H-V2 đặt tại Phòng CNTT tầng 1
+T5. Sơ đồ mặt bằng – Vị trí thiết bị (cho Sơ đồ Vật lý)
+MỤC M. TÀI LIỆU VÀ ẢNH CHỤP ĐÍNH KÈM
+MỤC N. XÁC NHẬN CỦA ĐƠN VỊ
+Tôi xác nhận các thông tin trên là trung thực và chịu trách nhiệm về tính chính xác của thông tin đã cung cấp. Đơn vị cam kết phối hợp bổ sung thông tin khi được yêu cầu.
+Phiếu khảo sát này được soạn thảo phục vụ xây dựng Hồ sơ đề xuất cấp độ An toàn thông tin theo quy định tại Thông tư 12/2022/TT-BTTTT của Bộ Thông tin và Truyền thông. Mọi thông tin được cung cấp được bảo mật và chỉ sử dụng cho mục đích lập hồ sơ cấp độ ATTT.
+[TABLE] 📋 HƯỚNG DẪN SỬ DỤNG PHIẾU KHẢO SÁT
+[TABLE] ① Người điền là cán bộ phụ trách CNTT hoặc người có thẩm quyền tại đơn vị.
+[TABLE] ② Các mục có dấu (*) là BẮT BUỘC – thiếu thông tin sẽ phải khảo sát lại.
+[TABLE] ③ Điền đúng tên đầy đủ của thiết bị (hãng sản xuất, model, số serial) – chụp ảnh nhãn thiết bị nếu không rõ.
+[TABLE] ④ Với mục có bảng: điền một thiết bị / ứng dụng trên một hàng; thêm hàng nếu cần.
+[TABLE] ⑤ Gửi phiếu đã điền kèm theo ảnh chụp thiết bị (mục M) về cán bộ lập hồ sơ.
+[TABLE] 💡 Điền đúng tên đầy đủ của cơ quan theo quyết định thành lập (không viết tắt). Tên xuất hiện trong hồ sơ pháp lý nên cần chính xác.
+[TABLE] 💡 Liệt kê TẤT CẢ cán bộ có liên quan đến vận hành CNTT. Thông tin này dùng để hoàn thiện phần nhân sự trong hồ sơ và liên lạc khi cần bổ sung.
+[TABLE] ⚠️ Bắt buộc ghi rõ trình độ học vấn, chuyên ngành đào tạo và chứng chỉ ATTT (nếu có).
+[TABLE] STT
+[TABLE] Họ và tên (*)
+[TABLE] Chức vụ (*)
+[TABLE] Số điện thoại (*)
+[TABLE] Email
+[TABLE] Trình độ/Chuyên ngành (*)
+[TABLE] Chứng chỉ ATTT (nếu có)
+[TABLE] 1
+[TABLE] Đỗ Vă
+[TABLE] Chuyên viên
+[TABLE] 0395469659
+[TABLE] handv.xalynhan@ninhbinh.gov.vn
+[TABLE] Quản lý văn hóa
+[TABLE] 2
+[TABLE] Trần Thị B
+[TABLE] Công chức Văn phòng – Thống kê (phụ trách CNTT)
+[TABLE] 0912.345.678
+[TABLE] tranb@binhthuan.gov.vn
+[TABLE] Đại học / Công nghệ thông tin
+[TABLE] Chứng chỉ An toàn thông tin cơ bản (Học viện BCVT – 2023)
+[TABLE] 3
+[TABLE] 4
+[TABLE] 💡 Mô tả ngắn gọn, súc tích. Trả lời đủ 3 ý: (1) Hệ thống phục vụ nghiệp vụ gì? (2) Ai sử dụng? (3) Dữ liệu quan trọng nhất là gì?
+[TABLE] 💡 Điền TỪNG đường truyền riêng biệt. Phân biệt rõ đường CHÍNH và đường DỰ PHÒNG. Thông tin này ảnh hưởng trực tiếp đến đánh giá kiểm soát truy cập.
+[TABLE] ⚠️ Không bỏ trống cột 'Vai trò'. Nếu chỉ có 1 đường truyền, ghi 'Đường chính (duy nhất)'.
+[TABLE] STT
+[TABLE] Nhà cung cấp (ISP) (*)
+[TABLE] Loại kết nối (*)
+[TABLE] Băng thông (*)
+[TABLE] Vai trò (*)
+(Chính / Dự phòng)
+[TABLE] IP WAN (*)
+(Tĩnh / Động)
+[TABLE] Ghi chú
+[TABLE] 1
+[TABLE] VNPT
+[TABLE] Cáp quang
+[TABLE] Băng thông rộng
+[TABLE] chính
+[TABLE] tĩnh
+[TABLE] 2
+[TABLE] Viettel Bình Thuận
+[TABLE] Cáp quang FTTH
+[TABLE] 100 Mbps / 50 Mbps
+[TABLE] Đường chính
+[TABLE] IP động (PPPoE)
+[TABLE] Hợp đồng số HĐ-VT-2021-xxx
+[TABLE] 3
+[TABLE] VNPT
+[TABLE] 4G/LTE (SIM dự phòng)
+[TABLE] 30 Mbps
+[TABLE] Đường dự phòng
+[TABLE] IP động
+[TABLE] Kích hoạt khi đứt đường chính
+[TABLE] 💡 Liệt kê TẤT CẢ thiết bị mạng. Mỗi thiết bị một hàng. Số serial (S/N) BẮT BUỘC – nếu không nhớ, chụp ảnh nhãn thiết bị gửi kèm.
+[TABLE] 📍 Vị trí: ghi rõ TẦNG + PHÒNG. VD: 'Tầng 1 – Phòng CNTT (phòng 101)' không được ghi chung chung là 'phòng làm việc'.
+[TABLE] ⚠️ Thiếu S/N hoặc vị trí cụ thể → hồ sơ bị trả lại để bổ sung.
+[TABLE] STT
+[TABLE] Loại thiết bị (*)
+[TABLE] Hãng sản xuất (*)
+[TABLE] Model (*)
+[TABLE] Số serial (S/N) (*)
+[TABLE] Vị trí lắp đặt (*)
+(Tầng – Phòng)
+[TABLE] Năm mua / Năm lắp
+[TABLE] Ghi chú
+[TABLE] 1
+[TABLE] Router (Gateway)
+[TABLE] Huawei
+[TABLE] GW240H-V2
+[TABLE] VT2024xxxxxxxx
+[TABLE] Tầng 1 – Phòng Văn thư (P.101)
+[TABLE] 2022
+[TABLE] Do Viettel cấp phát
+[TABLE] 2
+[TABLE] Switch (16 cổng)
+[TABLE] Dahua
+[TABLE] PFS3016-16GT
+[TABLE] 9Cxxxxxxxx
+[TABLE] Tầng 1 – Phòng CNTT (P.102)
+[TABLE] 2021
+[TABLE] Switch core nội bộ
+[TABLE] 3
+[TABLE] Access Point
+[TABLE] TP-Link
+[TABLE] EAP245
+[TABLE] 2C56DCxxxxxx
+[TABLE] Tầng 2 – Hội trường
+[TABLE] 2022
+[TABLE] WiFi cho cán bộ
+[TABLE] 4
+[TABLE] Firewall cứng
+[TABLE] (Không có)
+[TABLE] -
+[TABLE] -
+[TABLE] -
+[TABLE] -
+[TABLE] Không trang bị; sử dụng tường lửa mềm
+[TABLE] 5
+[TABLE] 6
+[TABLE] 7
+[TABLE] 💡 Điền số lượng tổng hợp theo loại thiết bị. Không cần liệt kê từng máy riêng lẻ, trừ MÁY CHỦ – máy chủ phải liệt kê chi tiết từng chiếc.
+[TABLE] STT
+[TABLE] Loại thiết bị
+[TABLE] Số lượng (*)
+[TABLE] Hệ điều hành chính
+[TABLE] Ghi chú
+[TABLE] 1
+[TABLE] Máy tính để bàn (PC)
+[TABLE] 23
+[TABLE] Windows 10 Pro
+[TABLE] Dùng cho cán bộ văn phòng, tư pháp, địa chính
+[TABLE] 2
+[TABLE] Máy tính xách tay (Laptop)
+[TABLE] 01
+[TABLE] Windows 10 Pro
+[TABLE] Dùng cho cán bộ văn phòng, tư pháp, địa chính
+[TABLE] 3
+[TABLE] Máy tính bảng (Tablet)
+[TABLE] 00
+[TABLE] Ios 17
+[TABLE] Dùng cho cán bộ văn phòng, tư pháp, địa chính
+[TABLE] 4
+[TABLE] Máy in / Máy scan / Máy fax
+[TABLE] 08
+[TABLE] Dùng cho cán bộ văn phòng, tư pháp, địa chính
+[TABLE] 5
+[TABLE] Điện thoại công vụ (VoIP/smartphone)
+[TABLE] ⚠️ Nếu đơn vị KHÔNG có máy chủ vật lý, ghi rõ 'Không có' và cho biết dữ liệu được lưu ở đâu (máy tính cá nhân, cloud, NAS, máy chủ của cơ quan cấp trên…).
+[TABLE] STT
+[TABLE] Vai trò (*)
+(File server, Web…)
+[TABLE] Hãng / Model (*)
+[TABLE] Số serial (S/N) (*)
+[TABLE] RAM (GB)
+[TABLE] Ổ cứng (TB)
+[TABLE] Hệ điều hành (*)
+[TABLE] Vị trí (*)
+(Tầng – Phòng)
+[TABLE] 1
+[TABLE] File Server / CSDL hộ tịch
+[TABLE] Dell PowerEdge T40
+[TABLE] 5453345345345
+[TABLE] 16
+[TABLE] 2
+[TABLE] Windows Server 2019
+[TABLE] Tầng 1 – Phòng CNTT (P.102)
+[TABLE] 2
+[TABLE] Không có máy chủ vật lý
+[TABLE] Dữ liệu lưu trên NAS QNAP TS-233 tại phòng CNTT'
+[TABLE] 3
+[TABLE] 💡 Liệt kê từng camera riêng lẻ (hoặc theo nhóm cùng model). Thông tin camera ảnh hưởng đến đánh giá kiểm soát vật lý trong hồ sơ.
+[TABLE] 📍 Vị trí lắp đặt phải ghi rõ: tầng + khu vực. VD: 'Tầng 1 – cửa ra vào chính'.
+[TABLE] STT
+[TABLE] Hãng sản xuất (*)
+[TABLE] Model (*)
+[TABLE] Số serial (S/N) (*)
+[TABLE] Độ phân giải
+[TABLE] Vị trí lắp đặt (*)
+[TABLE] Ghi chú (góc quay, ngoài trời…)
+[TABLE] 1
+[TABLE] Dahua
+[TABLE] IPC-HDW2849H-S-IL
+[TABLE] 2F02xxxxxxxx
+[TABLE] 8 MP (4K)
+[TABLE] Tầng 1 – Cửa ra vào chính
+[TABLE] Camera ngoài trời, góc rộng 110°
+[TABLE] 2
+[TABLE] Dahua
+[TABLE] IPC-HDW2849H-S-IL
+[TABLE] 2F02yyyyyyyy
+[TABLE] 8 MP (4K)
+[TABLE] Tầng 1 – Phòng tiếp dân
+[TABLE] Camera trong nhà
+[TABLE] 3
+[TABLE] 4
+[TABLE] 5
+[TABLE] 💡 Cung cấp thông tin dải IP đang sử dụng. Nếu đơn vị không biết chính xác, liên hệ cán bộ CNTT để kiểm tra cài đặt Router.
+[TABLE] STT
+[TABLE] Tên thiết bị / Vai trò
+[TABLE] Địa chỉ IP tĩnh
+[TABLE] Ghi chú
+[TABLE] 1
+[TABLE] Router Viettel GW240H-V2
+[TABLE] 192.168.1.1
+[TABLE] Gateway, quản lý DHCP
+[TABLE] 2
+[TABLE] File Server Dell T40
+[TABLE] 192.168.1.10
+[TABLE] Máy chủ dữ liệu nội bộ
+[TABLE] 3
+[TABLE] NVR Camera Dahua
+[TABLE] 192.168.1.20
+[TABLE] Đầu ghi hình camera
+[TABLE] 4
+[TABLE] 5
+[TABLE] 💡 Liệt kê TẤT CẢ phần mềm, ứng dụng đang sử dụng – kể cả phần mềm do cấp trên cung cấp (tỉnh/bộ) hay phần mềm mua ngoài.
+[TABLE] ⚠️ Ghi rõ ứng dụng có kết nối Internet hay không (quan trọng để đánh giá vùng DMZ).
+[TABLE] STT
+[TABLE] Tên ứng dụng / Dịch vụ (*)
+[TABLE] Chức năng chính (*)
+[TABLE] Đơn vị cung cấp / Phát triển
+[TABLE] Phiên bản
+[TABLE] Kết nối Internet? (*)
+[TABLE] Ghi chú (số người dùng, URL…)
+[TABLE] 1
+[TABLE] Cổng DVCTT tỉnh
+[TABLE] Tiếp nhận và trả kết quả hồ sơ trực tuyến
+[TABLE] Sở TTTT Bình Thuận
+[TABLE] v3.2
+[TABLE] Có (HTTPS)
+[TABLE] ~50 lượt/ngày; URL: dichvucong.binhthuan.gov.vn
+[TABLE] 2
+[TABLE] Hệ thống quản lý văn bản (eCabinet)
+[TABLE] Xử lý văn bản đến/đi, điều hành
+[TABLE] VNPT
+[TABLE] 2.1
+[TABLE] Có
+[TABLE] 15 người dùng nội bộ
+[TABLE] 3
+[TABLE] Phần mềm kế toán MISA
+[TABLE] Kế toán ngân sách
+[TABLE] MISA JSC
+[TABLE] MISA Mimosa 2023
+[TABLE] Không
+[TABLE] Chỉ dùng nội bộ
+[TABLE] 4
+[TABLE] Email công vụ
+[TABLE] Trao đổi email chính thức
+[TABLE] Bộ TTTT (email.gov.vn)
+[TABLE] -
+[TABLE] Có
+[TABLE] @binhthuan.gov.vn
+[TABLE] 5
+[TABLE] 6
+[TABLE] 7
+[TABLE] 💡 Cung cấp số văn bản, ngày ban hành. Nếu chưa có văn bản, ghi rõ 'Chưa ban hành' để cán bộ lập hồ sơ biết cần bổ sung.
+[TABLE] ⚠️ Thiếu số văn bản → hồ sơ không thể hoàn thiện phần cơ sở pháp lý.
+[TABLE] STT
+[TABLE] Loại văn bản
+[TABLE] Số văn bản / Ngày ban hành (*)
+[TABLE] Ghi chú
+[TABLE] 1
+[TABLE] Quyết định ban hành quy chế ATTT của đơn vị
+[TABLE] QĐ số 45/QĐ-UBND ngày 15/01/2024
+[TABLE] | Đính kèm bản scan
+[TABLE] 2
+[TABLE] Kế hoạch ATTT hàng năm (năm hiện tại)
+[TABLE] KH số 12/KH-UBND ngày 20/02/2024
+[TABLE] Đính kèm bản scan
+[TABLE] 3
+[TABLE] Kế hoạch ATTT hàng năm (năm trước)
+[TABLE] 'Chưa ban hành'
+[TABLE] 4
+[TABLE] Quyết định phân công cán bộ phụ trách ATTT
+[TABLE] 'Chưa ban hành'
+[TABLE] 5
+[TABLE] Quyết định/phê duyệt hệ thống thông tin (nếu có)
+[TABLE] 'Chưa ban hành'
+[TABLE] 6
+[TABLE] Văn bản ứng phó sự cố ATTT (quy trình xử lý sự cố)
+[TABLE] 'Chưa ban hành'
+[TABLE] 7
+[TABLE] Biên bản kiểm tra, đánh giá ATTT gần nhất (nếu có)
+[TABLE] 'Chưa ban hành'
+[TABLE] 💡 Trả lời thực tế – không cần trả lời 'đáp ứng' nếu thực tế chưa có. Thông tin trung thực giúp hồ sơ phản ánh đúng và đề xuất biện pháp phù hợp.
+[TABLE] 💡 Mục này cần để viết thuyết minh biện pháp 'Tường lửa' trong Phụ lục II TT 12/2022. Trả lời theo thực tế cấu hình – không cần chuyên sâu, mô tả đơn giản là được.
+[TABLE] 💡 Mã hóa là một trong 13 biện pháp bắt buộc của Phụ lục II TT 12/2022 (Cấp độ 2). Thông tin này dùng để viết mục 'Bảo vệ dữ liệu' trong thuyết minh kỹ thuật.
+[TABLE] ⚠️ Nếu đơn vị sử dụng ứng dụng web (DVCTT, email…) qua HTTPS → đã có mã hóa truyền tải cơ bản.
+[TABLE] 💡 Thông tin này dùng để viết biện pháp 'Quản lý lỗ hổng' trong Phụ lục II. Cấp độ 2 yêu cầu đơn vị có quy trình theo dõi và vá lỗi định kỳ.
+[TABLE] 💡 TT 12/2022 yêu cầu đơn vị cấp độ 2 có hoạt động đào tạo/nâng cao nhận thức ATTT. Ghi đầy đủ để hồ sơ thể hiện đúng thực trạng.
+[TABLE] STT
+[TABLE] Hình thức đào tạo
+(Khóa học / Tập huấn / Hội thảo)
+[TABLE] Đơn vị tổ chức
+[TABLE] Thời gian
+(Tháng/Năm)
+[TABLE] Số cán bộ tham gia
+[TABLE] Chứng chỉ / Số giấy xác nhận
+[TABLE] 1
+[TABLE] Tập huấn An toàn thông tin cơ bản
+[TABLE] Sở TTTT Bình Thuận
+[TABLE] 9/2023
+[TABLE] 3 cán bộ
+[TABLE] Giấy xác nhận số 15/GXN-STTTT ngày 20/9/2023
+[TABLE] 2
+[TABLE] 'Chưa tổ chức' – cán bộ lập hồ sơ sẽ đề xuất kế hoạch đào tạo
+[TABLE] 3
+[TABLE] 💡 Cấp độ 2 yêu cầu kiểm tra, đánh giá ATTT ít nhất 1 lần/năm (Điều 12 TT 12/2022). Ghi lại lịch sử đã kiểm tra và kế hoạch sắp tới.
+[TABLE] STT
+[TABLE] Loại kiểm tra
+(Pentest / Audit / Rà soát nội bộ)
+[TABLE] Đơn vị thực hiện
+[TABLE] Thời gian
+[TABLE] Kết quả / Số văn bản kết luận
+[TABLE] 1
+[TABLE] Kiểm tra ATTT theo KH 75
+[TABLE] Sở TTTT Bình Thuận
+[TABLE] 11/2023
+[TABLE] Biên bản số 75/BB-STTTT – 2 phát hiện nhỏ, đã khắc phục
+[TABLE] 2
+[TABLE] 'Chưa được kiểm tra'
+[TABLE] 3
+[TABLE] 🗺️ Mục này chuyên dùng để vẽ SƠ ĐỒ KẾT NỐI LOGIC và SƠ ĐỒ KẾT NỐI VẬT LÝ. Không cần kiến thức kỹ thuật sâu – chỉ cần mô tả thực tế đang dùng.
+[TABLE] 💡 Nếu không biết chắc, có thể chụp ảnh tủ mạng/bảng đấu nối gửi kèm – cán bộ kỹ thuật sẽ xác nhận lại.
+[TABLE] ⚠️ Đây là thông tin hay bị bỏ sót nhất trong khảo sát. Nếu không nhớ, hãy nhìn vào dây cắm trên switch và ghi theo thứ tự cổng từ trái sang phải.
+[TABLE] Tên Switch (*)
+[TABLE] Số cổng (Port)
+trên Switch (*)
+[TABLE] Cổng đang sử dụng
+(Port số → Thiết bị kết nối) (*)
+[TABLE] Ghi chú (uplink, trunk, PoE…)
+[TABLE] Switch Dahua 16 cổng
+[TABLE] 16 cổng
+[TABLE] Port 1 → Router Viettel GW240H-V2 (uplink); Port 2 → File Server Dell T40; Port 3 → NVR Camera Dahua; Port 4 → AP TP-Link EAP245 (tầng 1); Port 5 → AP TP-Link EAP245 (tầng 2); Port 6-15 → Máy tính cán bộ; Port 16 → Trống | Port 3 cấp nguồn PoE cho AP
+[TABLE] 📍 Mô tả vị trí của từng thiết bị quan trọng trong tòa nhà. Thông tin này giúp vẽ sơ đồ vật lý chính xác theo thực tế bố trí.
+[TABLE] Tên thiết bị / Nhóm thiết bị (*)
+[TABLE] Tầng (*)
+[TABLE] Phòng cụ thể (*)
+(tên phòng + số phòng nếu có)
+[TABLE] Ghi chú (đặt trên bàn / gắn tường / trong tủ rack)
+[TABLE] Router Viettel
+[TABLE] Tầng 1
+[TABLE] Phòng CNTT (Phòng 102)
+[TABLE] AP TP-Link AP1
+[TABLE] Tầng 1
+[TABLE] Hành lang chính
+[TABLE] Máy tính cán bộ
+[TABLE] Tầng 1
+[TABLE] Phòng làm việc chung (P.103), Phòng Tư pháp (P.104), Phòng Địa chính (P.105)
+[TABLE] NVR Camera
+[TABLE] Access Point (WiFi) – AP1
+[TABLE] Access Point (WiFi) – AP2
+[TABLE] Máy tính cán bộ (khu vực)
+[TABLE] 📎 Gửi kèm các tài liệu sau cùng phiếu khảo sát đã điền. Ảnh chụp cần rõ nét, đọc được nhãn thiết bị.
+[TABLE] ⚠️ Thiếu ảnh thiết bị là nguyên nhân phổ biến nhất phải khảo sát bổ sung lần 2, lần 3.
+[TABLE] STT
+[TABLE] Tài liệu / Ảnh cần cung cấp
+[TABLE] Bắt buộc?
+[TABLE] Trạng thái
+[TABLE] 1
+[TABLE] Ảnh chụp nhãn Router/Modem – thấy rõ hãng, model, S/N
+[TABLE] BẮT BUỘC
+[TABLE] Đã có
+☐ Chưa có
+[TABLE] 2
+[TABLE] Ảnh chụp nhãn Switch – thấy rõ hãng, model, S/N
+[TABLE] BẮT BUỘC
+[TABLE] ☐ Đã có
+ Chưa có
+[TABLE] 3
+[TABLE] Ảnh chụp nhãn từng Camera – thấy rõ hãng, model, S/N
+[TABLE] BẮT BUỘC
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 4
+[TABLE] Ảnh chụp nhãn NVR/DVR Camera – thấy rõ hãng, model, S/N
+[TABLE] BẮT BUỘC
+[TABLE] Đã có
+☐ Chưa có
+[TABLE] 5
+[TABLE] Ảnh chụp nhãn Máy chủ/Server (nếu có) – thấy rõ hãng, model, S/N
+[TABLE] BẮT BUỘC nếu có
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 6
+[TABLE] Ảnh chụp toàn cảnh tủ mạng / rack (thấy rõ các thiết bị và dây cắm)
+[TABLE] BẮT BUỘC nếu có tủ mạng
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 7
+[TABLE] Ảnh chụp màn hình cấu hình DHCP / danh sách IP tĩnh trên Router
+[TABLE] Khuyến nghị
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 8
+[TABLE] Sơ đồ mặt bằng tòa nhà (phác thảo tay cũng được) thể hiện vị trí các phòng
+[TABLE] Khuyến nghị
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 9
+[TABLE] Bản scan Quyết định ban hành quy chế ATTT
+[TABLE] BẮT BUỘC
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 10
+[TABLE] Bản scan Kế hoạch ATTT năm hiện tại và năm trước
+[TABLE] BẮT BUỘC
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 11
+[TABLE] Bản scan Quyết định phân công cán bộ CNTT/ATTT
+[TABLE] BẮT BUỘC
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 12
+[TABLE] Bản scan Biên bản kiểm tra ATTT gần nhất (nếu có)
+[TABLE] BẮT BUỘC nếu có
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 13
+[TABLE] Giấy xác nhận/chứng chỉ đào tạo ATTT của cán bộ (nếu có)
+[TABLE] BẮT BUỘC nếu có
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] 14
+[TABLE] Hợp đồng Internet / Hợp đồng VPN với nhà mạng (để xác minh ISP, băng thông)
+[TABLE] Khuyến nghị
+[TABLE] ☐ Đã có
+☐ Chưa có
+[TABLE] Người điền phiếu
+(Cán bộ CNTT / phụ trách)
+[TABLE] Người kiểm tra
+(Cán bộ lập hồ sơ)
+[TABLE] Thủ trưởng đơn vị
+(Ký tên, đóng dấu)
+[TABLE] Họ tên: ___________________
+[TABLE] Họ tên: ___________________
+[TABLE] Họ tên: ___________________
+[TABLE] Chức vụ: __________________
+[TABLE] Chức vụ: __________________
+[TABLE] Chức vụ: __________________
+[TABLE] SĐT: _____________________
+[TABLE] Ngày kiểm tra: ____________
+[TABLE] Ngày điền: ___/___/______
+[TABLE] Ngày ký: ___/___/______
