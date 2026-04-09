@@ -40,15 +40,36 @@ def inject_table_loop(doc, table_index, loop_var, row_placeholders):
     table = doc.tables[table_index]
     if len(table.rows) < 2: return False
     row = table.rows[1]
+    
+    # Ensure table has autofit behavior to prevent squishing
+    table.autofit = True
+    
     last_idx = min(len(row.cells), len(row_placeholders)) - 1
+    
     for i in range(last_idx + 1):
-        cell_text = row_placeholders[i]
-        if i == 0: cell_text = f"{{% for item in {loop_var} %}}" + cell_text
-        if i == last_idx: cell_text = cell_text + "{% endfor %}"
-        p = row.cells[i].paragraphs[0]
-        p.text = cell_text
-        for p_extra in row.cells[i].paragraphs[1:]: p_extra.text = ""
-    logger.info(f"  Tagged Table {table_index} loop: {loop_var}")
+        cell = row.cells[i]
+        placeholder = row_placeholders[i]
+        
+        # Cleanup extra paragraphs for clean structure
+        for p_idx in range(len(cell.paragraphs) - 1, 0, -1):
+            p_xml = cell.paragraphs[p_idx]._element
+            p_xml.getparent().remove(p_xml)
+            
+        p = cell.paragraphs[0]
+        # Clear existing text but keep the paragraph object
+        for run in p.runs: run.text = ""
+        
+        # Inject standard loop tags in DEDICATED runs
+        # This isolates them from content and ensures correct row-level parsing
+        if i == 0:
+            p.add_run(f"{{% for item in {loop_var} %}}")
+        
+        p.add_run(placeholder)
+        
+        if i == last_idx:
+            p.add_run("{% endfor %}")
+            
+    logger.info(f"  Tagged Table {table_index} with isolated ROW loop: {loop_var}")
     return True
 
 def get_replacements():
