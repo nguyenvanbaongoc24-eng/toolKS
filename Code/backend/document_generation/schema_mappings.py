@@ -9,9 +9,9 @@ CHECKBOX_MAPPINGS = {
         'Không xác định': 'C4_khong_xac_dinh'
     },
     'E2_firewall_type': {
-        'Có (phần cứng chuyên dụng)': 'E2_co_firewall',
-        'Dùng Firewall tích hợp': 'E2_router_tich_hop',
-        'Dùng phần mềm Firewall': 'E2_phan_mem'
+        'Có (phần cứng chuyên dụng)': 'E2_firewall_cung_co',
+        'Dùng Firewall tích hợp': 'E2_firewall_router',
+        'Dùng phần mềm Firewall': 'E2_firewall_phan_mem'
     },
     'l1_phys_key': {
         'Có khóa cửa': 'L1_khoa_cua_thuong',
@@ -54,6 +54,12 @@ CHECKBOX_MAPPINGS = {
         'Không biết': 'L5_1_log_router_khong_biet',
         'Không': 'L5_1_log_router_khong'
     },
+    'L5_log_bao_lau': {
+        '< 3 tháng': 'L5_2_thoi_gian_duoi_3',
+        '3-6 tháng': 'L5_2_thoi_gian_3_6',
+        '> 6 tháng': 'L5_2_thoi_gian_tren_6',
+        'Không lưu': 'L5_2_thoi_gian_khong'
+    },
     'L5_siem': {
         'Có': 'L5_3_siem_co',
         'Không': 'L5_3_siem_khong'
@@ -64,9 +70,9 @@ CHECKBOX_MAPPINGS = {
         'Không ghi nhận': 'L6_1_su_co_khong_biet'
     },
     'l7_type': {
-        'Router SPI': 'L7_1_router_spi',
-        'Phần cứng chuyên dụng': 'L7_1_phan_cung',
-        'Phần mềm': 'L7_1_phan_mem',
+        'Phần cứng chuyên dụng': 'L7_1_firewall_phanh_cung',
+        'Router SPI': 'L7_1_firewall_router',
+        'Phần mềm': 'L7_1_firewall_phan_mem',
         'Không có': 'L7_1_khong'
     },
     'L7_2_chinh_sach': {
@@ -110,5 +116,53 @@ CHECKBOX_MAPPINGS = {
         'Có': 'P5_email_sec_co',
         'Không': 'P5_email_sec_khong',
         'Không biết': 'P5_email_sec_khong_biet'
+    },
+    # Missing common section mappings
+    'C7_ket_noi_cap_tren_has': {
+        'Có': 'C7_co',
+        'Không': 'C7_khong'
+    },
+    'C8_bi_mat_nha_nuoc_has': {
+        'Có': 'C8_co',
+        'Không': 'C8_khong'
+    },
+    'H4_co_vlan': {
+        'Có': 'H4_vlan_co',
+        'Không': 'H4_vlan_khong'
+    },
+    'Q1_cap_nhat_os': {
+        'Hàng tháng': 'Q1_thang',
+        'Hàng quý': 'Q1_quy',
+        'Khi có cảnh báo': 'Q1_canh_bao',
+        'Tùy lúc': 'Q1_tuy_luc',
+        'Không cập nhật': 'Q1_khong_cap_nhat'
+    },
+    'Q2_cap_nhat_ung_dung': {
+        'Tự động': 'Q2_tu_dong',
+        'Thủ công': 'Q2_thu_cong',
+        'Không cập nhật': 'Q2_khong'
+    },
+    'Q5_theo_doi_canh_bao': {
+        'Có': 'Q5_canh_bao_co',
+        'Không': 'Q5_canh_bao_khong',
+        'Không biết': 'Q5_canh_bao_chua_biet'
+    },
+    'T1_1_co_dmz': {
+        'Có': 'T1_1_dmz_co',
+        'Không': 'T1_1_dmz_khong'
+    },
+    'T1_2_wifi_tach_rieng': {
+        'Có': 'T1_2_wifi_chung',  # Frontend says "Có", but mapping it to wifi_chung? Check schema
+        'Không': 'T1_2_wifi_khong',
+        'Tách VLAN': 'T1_2_wifi_tach_rieng'
+    },
+    'T1_4_camera_vlan': {
+        'Có': 'T1_4_camera_tach_rieng',
+        'Không': 'T4_camera_chung',
+        'Không biết': 'T1_4_camera_khong_biet'
+    },
+    'T3_1_co_rack': {
+        'Có': 'T3_1_rack_co',
+        'Không': 'T3_1_khong_rack'
     }
 }

@@ -50,6 +50,11 @@ def test_full_export():
             {"ho_ten": "Nguyễn Văn IT", "chuc_vu": "Trưởng phòng IT", "so_dien_thoai": "090123", "email": "it@abc.vn"}
         ],
         "E2_firewall_type": "Có (phần cứng chuyên dụng)",
+        "L5_log_bao_lau": "3-6 tháng",
+        "L5_ghi_log": "Có",
+        "L5_siem": "Không",
+        "L6_su_co": "Không có sự cố nào",
+        "l7_type": "Phần cứng chuyên dụng",
         "H1_dai_ip_lan": "192.168.1.0/24",
         "H2_ip_gateway": "192.168.1.1",
         "C5_noi_bo": 50,
@@ -77,21 +82,22 @@ def test_full_export():
     try:
         exporter = DocumentExporter()
         
-        print("\n--- TEST: PHIẾU KHẢO SÁT ---")
+        print("\n--- TEST: PHIEU KHAO SAT ---")
+        data['ten_don_vi'] = 'Test Don Vi'
         phieu_path = exporter.generate_phieu_khao_sat(data)
-        print(f"✅ Success: {phieu_path}")
+        print(f"Success: {phieu_path}")
         
         print("\n--- TEST: HSDC ---")
         hsdx_path = exporter.generate_hsdx(data)
-        print(f"✅ Success: {hsdx_path}")
+        print(f"Success: {hsdx_path}")
         
-        print("\n--- TEST: BÁO CÁO ---")
+        print("\n--- TEST: BAO CAO ---")
         bc_path = exporter.generate_bao_cao(data)
-        print(f"✅ Success: {bc_path}")
+        print(f"Success: {bc_path}")
         
-        print("\n🎉 ALL TESTS PASSED!")
+        print("\nALL TESTS PASSED!")
     except Exception as e:
-        print(f"\n❌ ERROR: {e}")
+        print(f"\nERROR: {str(e)}")
 
 if __name__ == "__main__":
     test_full_export()

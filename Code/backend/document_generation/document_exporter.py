@@ -1,5 +1,7 @@
 from docxtpl import DocxTemplate, InlineImage
-from docx.shared import Mm
+from docx.shared import Mm, Pt
+from docx.oxml.ns import qn
+from docx.enum.style import WD_STYLE_TYPE
 import os
 import logging
 import traceback
@@ -20,6 +22,49 @@ class DocumentExporter:
         
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir, exist_ok=True)
+
+    def _force_set_times_new_roman(self, doc):
+        """
+        Force Times New Roman font for all styles, paragraphs, and tables.
+        """
+        # 1. Set default document style
+        style = doc.styles['Normal']
+        font = style.font
+        font.name = 'Times New Roman'
+        font.size = Pt(12)
+        
+        # 2. For Asian/Complex scripts support in Word
+        rPr = font._element.get_or_add_rPr()
+        rFonts = rPr.get_or_add_rFonts()
+        rFonts.set(qn('w:ascii'), 'Times New Roman')
+        rFonts.set(qn('w:hAnsi'), 'Times New Roman')
+        rFonts.set(qn('w:cs'), 'Times New Roman')
+        rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+
+        # 3. Iterate through all paragraphs and set font explicitly for all runs
+        for paragraph in doc.paragraphs:
+            for run in paragraph.runs:
+                run.font.name = 'Times New Roman'
+                rPr = run._element.get_or_add_rPr()
+                rFonts = rPr.get_or_add_rFonts()
+                rFonts.set(qn('w:ascii'), 'Times New Roman')
+                rFonts.set(qn('w:hAnsi'), 'Times New Roman')
+                rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+                rFonts.set(qn('w:cs'), 'Times New Roman')
+
+        # 4. Iterate through all tables
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for paragraph in cell.paragraphs:
+                        for run in paragraph.runs:
+                            run.font.name = 'Times New Roman'
+                            rPr = run._element.get_or_add_rPr()
+                            rFonts = rPr.get_or_add_rFonts()
+                            rFonts.set(qn('w:ascii'), 'Times New Roman')
+                            rFonts.set(qn('w:hAnsi'), 'Times New Roman')
+                            rFonts.set(qn('w:eastAsia'), 'Times New Roman')
+                            rFonts.set(qn('w:cs'), 'Times New Roman')
 
     def _map_checkboxes(self, value, mapping):
         """
@@ -155,10 +200,34 @@ class DocumentExporter:
             else:
                 context[template_key] = []
 
-        # 4. Photos (M1-M11)
+        # 4. Photos (M1-M14) - Supporting both styles found in templates
         for i in range(1, 15):
             key = f"M{i}_status"
-            context[f"{key}_ok"] = "V Đã có" if data.get(key) else "☐ Chưa có"
+            is_present = data.get(key)
+            context[f"{key}_ok"] = "V Đã có" if is_present else "☐ Chưa có"
+            # Support more granular placeholders if they exist
+            context[f"{key}_da_co"] = "V" if is_present else ""
+            context[f"{key}_chua_co"] = "V" if not is_present else ""
+
+        # 4.1 Section K Table (K_van_ban)
+        k_mappings = [
+            ('Quy chế ATTT', 'k1_quy_che'),
+            ('Kế hoạch ATTT năm hiện tại', 'k2_ke_hoach_ht'),
+            ('Kế hoạch ATTT năm trước', 'k3_ke_hoach_tr'),
+            ('Quyết định phân công cán bộ', 'k4_qd_phan_cong_cb'),
+            ('Quyết định phê duyệt hệ thống', 'K5_qd_phe_duyet_httt'),
+            ('Quy trình ứng phó sự cố', 'K6_ung_pho_su_co'),
+            ('Biền bản kiểm tra ATTT gần nhất', 'K7_bien_ban_kiem_tra'),
+        ]
+        context['K_van_ban'] = []
+        for i, (label, key) in enumerate(k_mappings):
+            val = data.get(key)
+            context['K_van_ban'].append({
+                'idx': i + 1,
+                'loai': label,
+                'so_vb': val or 'Chưa ban hành',
+                'ghi_chu': 'Đã đính kèm' if val else 'Cần bổ sung'
+            })
 
         # 5. Checkbox Logic - Mapping '☑' or '☐' based on schema_mappings.py
         # This makes the exporter truly dynamic and Python-native
@@ -170,7 +239,7 @@ class DocumentExporter:
                 if isinstance(val, list):
                     is_checked = label in val
                 else:
-                    is_checked = val == label
+                    is_checked = str(val) == str(label)
                 context[placeholder] = "☑" if is_checked else "☐"
 
         # 6. Contact & Personnel Aliases
@@ -180,6 +249,7 @@ class DocumentExporter:
             'nguoi_khao_sat': data.get('N_nguoi_dien_ho_ten') or data.get('BC_nguoi_thuc_hien', '...'),
             'N_ngay_dien': data.get('N_ngay_dien') or data.get('BC_ngay_bao_cao', '...'),
             'ngay_lap_phieu': data.get('N_ngay_dien') or '...',
+            'n_ngay_lap': data.get('BC_ngay_bao_cao') or data.get('N_ngay_dien') or '...',
         })
 
         # 7. Specialized Logic
@@ -200,6 +270,7 @@ class DocumentExporter:
         output_path = os.path.join(self.output_dir, output_filename)
         try:
             doc.render(context)
+            self._force_set_times_new_roman(doc)
             doc.save(output_path)
             return output_path
         except Exception as e:
@@ -225,6 +296,7 @@ class DocumentExporter:
         output_filename = f"HSDX_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         doc.render(context)
+        self._force_set_times_new_roman(doc)
         doc.save(output_path)
         return output_path
 
@@ -239,5 +311,6 @@ class DocumentExporter:
         output_filename = f"Bao_Cao_{data.get('ten_don_vi', 'NoName')}.docx"
         output_path = os.path.join(self.output_dir, output_filename)
         doc.render(context)
+        self._force_set_times_new_roman(doc)
         doc.save(output_path)
         return output_path
