@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+supabase
+python-dotenv
+python-multipart
+pydantic
+openai
+python-docx
+docxtpl
+pytesseract
+Pillow
+httpx
+networkx
+matplotlib
+numpy
