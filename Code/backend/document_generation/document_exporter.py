@@ -244,6 +244,9 @@ class DocumentExporter:
 
         # 6. Contact & Personnel Aliases
         context.update({
+            'H2_gateway_ip': data.get('H2_ip_gateway') or '...',
+            'H2_ip_gateway': data.get('H2_ip_gateway') or '...',
+            'H3_dns_server': data.get('H3_dns') or '...',
             'so_dien_thoai_co_quan': data.get('A4_so_dien_thoai') or '...',
             'email_co_quan': data.get('A5_email') or '...',
             'nguoi_khao_sat': data.get('N_nguoi_dien_ho_ten') or data.get('BC_nguoi_thuc_hien', '...'),
@@ -252,6 +255,16 @@ class DocumentExporter:
             'n_ngay_lap': data.get('BC_ngay_bao_cao') or data.get('N_ngay_dien') or '...',
         })
 
+        # 6.1 Shared Placeholder Logic (e.g. R2_dao_tao_khong used in multiple places)
+        # Check if ANY of the relevant fields are "Không"
+        fields_sharing_no = [
+            'L1_bang_ky_ten', 'l3_av_has', 'L7_3_remote_access', 
+            'L8_2_dieu_hoa', 'L8_3_binh_chua_chay', 'R2_co_tuyen_truyen'
+        ]
+        is_generic_no = any(data.get(f) == 'Không' for f in fields_sharing_no)
+        if is_generic_no:
+            context['R2_dao_tao_khong'] = "☑"
+        
         # 7. Specialized Logic
         context.update(self._get_hsdx_logic(data))
         context.update(self._get_report_logic(data))

@@ -1,5 +1,5 @@
 # Native Python mapping for survey checkboxes
-# Derived from surveySchema.ts
+# Derived from surveySchema.ts and audited from phieu_khao_sat_template.docx
 
 CHECKBOX_MAPPINGS = {
     'C4_du_lieu_type': {
@@ -20,17 +20,17 @@ CHECKBOX_MAPPINGS = {
         'Không có kiểm soát': 'L1_khong_kiem_soat'
     },
     'L1_bang_ky_ten': {
-        'Có': 'L1_ky_ten_co',
-        'Không': 'L1_ky_ten_khong'
+        'Có': 'L1_2_ky_ten_co',
+        'Không': 'L1_2_ky_ten_khong'
     },
     'L2_pass_policy': {
         'Có': 'L2_pass_policy_co',
         'Không': 'L2_pass_policy_khong'
     },
     'L2_admin_su_dung': {
-        'Mỗi cán bộ có tài khoản riêng': 'L2_admin_rieng',
-        'Dùng chung một tài khoản admin': 'L2_admin_chung',
-        'Cả hai hình thức': 'L2_admin_ca_hai'
+        'Mỗi cán bộ có tài khoản riêng': 'L2_account_rieng',
+        'Dùng chung một tài khoản admin': 'L2_account_chung',
+        'Cả hai hình thức': 'L2_account_both'
     },
     'L2_xac_thuc_2fa': {
         'Có': 'L2_2fa_co',
@@ -41,9 +41,9 @@ CHECKBOX_MAPPINGS = {
         'Không': 'L3_antivirus_khong'
     },
     'l4_bak_has': {
-        'Hàng ngày / Tuần / Tháng': 'L4_co_tan_suat',
-        'Thủ công khi nhớ': 'L4_thu_cong',
-        'Không sao lưu': 'L4_khong'
+        'Hàng ngày / Tuần / Tháng': 'L4_1_tan_suat_co',
+        'Thủ công khi nhớ': 'L4_1_tan_suat_thu_cong',
+        'Không sao lưu': 'L4_1_tan_suat_khong'
     },
     'L4_off_site': {
         'Có': 'L4_3_khac_vi_tri',
@@ -76,13 +76,13 @@ CHECKBOX_MAPPINGS = {
         'Không có': 'L7_1_khong'
     },
     'L7_2_chinh_sach': {
-        'Chặn tất cả (Default Deny)': 'L7_2_default_deny',
-        'Cho phép tất cả (Default Allow)': 'L7_2_default_allow',
-        'Chưa cấu hình': 'L7_2_chua_cau_hinh'
+        'Chặn tất cả (Default Deny)': 'L7_2_policy_deny',
+        'Cho phép tất cả (Default Allow)': 'L7_2_policy_allow',
+        'Chưa cấu hình': 'L7_2_policy_khong_biet'
     },
     'L7_3_remote_access': {
-        'Có - qua VPN': 'L7_3_vpn',
-        'Có - qua Teamview/Anydesk': 'L7_3_rdp',
+        'Có - qua VPN': 'L7_3_remote_vpn',
+        'Có - qua Teamview/Anydesk': 'L7_3_remote_desktop',
         'Không': 'L7_3_khong'
     },
     'L8_1_co_ups': {
@@ -98,14 +98,19 @@ CHECKBOX_MAPPINGS = {
         'Có': 'L8_3_chua_chay_co',
         'Không': 'L8_3_chua_chay_khong'
     },
+    'p1_protocol': {
+        'HTTPS (chứng chỉ SSL/TLS)': 'P1_https',
+        'HTTP (không mã hóa)': 'P1_http',
+        'Cả hai': 'T4_1_both'
+    },
     'P2_vpn': {
         'Có': 'P2_ssl_vpn',
         'Không': 'P2_khong'
     },
     'P3_ket_noi_cap_tren_type': {
         'VPN chuyên dụng': 'P3_vpn_chuyen_dung',
-        'Internet (HTTPS)': 'P3_internet_https',
-        'MPLS': 'P3_mpls',
+        'Internet (HTTPS)': 'P3_internet_thuong',
+        'MPLS': 'P3_duong_truyen_so_lieu',
         'Không kết nối': 'P3_khong_ket_noi'
     },
     'P4_ma_hoa_luu_tru': {
@@ -117,7 +122,6 @@ CHECKBOX_MAPPINGS = {
         'Không': 'P5_email_sec_khong',
         'Không biết': 'P5_email_sec_khong_biet'
     },
-    # Missing common section mappings
     'C7_ket_noi_cap_tren_has': {
         'Có': 'C7_co',
         'Không': 'C7_khong'
@@ -130,7 +134,7 @@ CHECKBOX_MAPPINGS = {
         'Có': 'H4_vlan_co',
         'Không': 'H4_vlan_khong'
     },
-    'Q1_cap_nhat_os': {
+    'cap_nhat_he_dieu_hanh': {
         'Hàng tháng': 'Q1_thang',
         'Hàng quý': 'Q1_quy',
         'Khi có cảnh báo': 'Q1_canh_bao',
@@ -142,7 +146,7 @@ CHECKBOX_MAPPINGS = {
         'Thủ công': 'Q2_thu_cong',
         'Không cập nhật': 'Q2_khong'
     },
-    'Q5_theo_doi_canh_bao': {
+    'Q5_theo_doi_can_bao': {
         'Có': 'Q5_canh_bao_co',
         'Không': 'Q5_canh_bao_khong',
         'Không biết': 'Q5_canh_bao_chua_biet'
@@ -152,9 +156,9 @@ CHECKBOX_MAPPINGS = {
         'Không': 'T1_1_dmz_khong'
     },
     'T1_2_wifi_tach_rieng': {
-        'Có': 'T1_2_wifi_chung',  # Frontend says "Có", but mapping it to wifi_chung? Check schema
+        'Có': 'T1_2_wifi_tach_rieng',
         'Không': 'T1_2_wifi_khong',
-        'Tách VLAN': 'T1_2_wifi_tach_rieng'
+        'Tách VLAN': 'T1_2_wifi_chung'
     },
     'T1_4_camera_vlan': {
         'Có': 'T1_4_camera_tach_rieng',
@@ -164,5 +168,10 @@ CHECKBOX_MAPPINGS = {
     'T3_1_co_rack': {
         'Có': 'T3_1_rack_co',
         'Không': 'T3_1_khong_rack'
+    },
+    'T4_1_loai_cap': {
+        'Cáp quang': 'T4_1_cap_quang',
+        'Cáp đồng (CAT5e/6)': 'T4_1_cap_dong',
+        'Cả hai': 'T4_1_both'
     }
 }
