@@ -43,3 +43,12 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# Project Scratch & Utitily
+Code/scratch/
+Code/*.txt
+Code/*.png
+Code/*.py
+!Code/backend/
+!Code/frontend/
+!Code/backend/templates/*.docx
